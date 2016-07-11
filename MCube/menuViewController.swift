@@ -10,6 +10,13 @@ class menuViewController: UIViewController, UITableViewDelegate, UITableViewData
     var FilterOptions = [OptionsData]()
     
     @IBOutlet weak var myTableView: UITableView!
+   
+    
+//    override func viewDidLayoutSubviews() {
+//        super.viewDidLayoutSubviews()
+//        self.tableView.contentInset = UIEdgeInsets(top: 108, left: 0, bottom: 0, right: 0)
+//    }
+    
     
     override func viewWillAppear(animated: Bool) {
       self.preferredContentSize=myTableView.contentSize;    }
@@ -49,6 +56,8 @@ class menuViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        myTableView.tableFooterView = UIView()
+        //self.automaticallyAdjustsScrollViewInsets = false
     }
 
     override func didReceiveMemoryWarning() {
