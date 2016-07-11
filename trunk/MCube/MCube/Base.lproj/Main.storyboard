@@ -799,7 +799,7 @@
         <!--Menu View Controller-->
         <scene sceneID="jlg-rx-Ddg">
             <objects>
-                <viewController id="R2D-x5-5Ev" customClass="menuViewController" customModule="MCube" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="R2D-x5-5Ev" customClass="menuViewController" customModule="MCube" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="zrf-qU-DOW"/>
                         <viewControllerLayoutGuide type="bottom" id="Qbs-l6-gkn"/>
