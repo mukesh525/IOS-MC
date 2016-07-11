@@ -1,15 +1,9 @@
 PODS:
   - Alamofire (3.4.1)
-  - AZDropdownMenu (1.1.1)
-  - DropDown (1.0.1)
-  - Dropper (2.6)
   - SwiftValidator (3.0.1)
 
 DEPENDENCIES:
   - Alamofire (~> 3.4)
-  - AZDropdownMenu
-  - DropDown
-  - Dropper
   - SwiftValidator (from `https://github.com/jpotts18/SwiftValidator.git`, tag `4.0.0`)
 
 EXTERNAL SOURCES:
@@ -24,11 +18,8 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   Alamofire: 01a82e2f6c0f860ade35534c8dd88be61bdef40c
-  AZDropdownMenu: 0ba09d5f7b1b8dc795824ec281c4dde8515f4498
-  DropDown: 335df9e9547e97a861a60aed8448821e239d3513
-  Dropper: e3055818a93e147794f1d6410876c7aa958b9441
   SwiftValidator: 461a2c00173f001287a8fa1f12704b87ec8a6bc4
 
-PODFILE CHECKSUM: 74de93dfbae06570cb42482e79353abf2c126f4f
+PODFILE CHECKSUM: bc2585e2766b0b39ecd96b5f541f2e4dbde5cfab
 
 COCOAPODS: 1.0.1

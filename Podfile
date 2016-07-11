@@ -8,9 +8,7 @@ target 'MCube' do
   # Pods for MCube
   pod 'Alamofire', '~> 3.4'
   pod 'SwiftValidator', :git => 'https://github.com/jpotts18/SwiftValidator.git', :tag => '4.0.0'
-  pod 'DropDown'
-  pod "Dropper"
-  pod 'AZDropdownMenu'
+  
 
   target 'MCubeTests' do
     inherit! :search_paths
