@@ -1,0 +1,25 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "d9fe211c-c3a4-45e4-9331-6c46727caf4a++505",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+    "d9fe211c-c3a4-45e4-9331-6c46727caf4a++505" : {
+
+    }
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "d9fe211c-c3a4-45e4-9331-6c46727caf4a++505" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "9FB31A2B-5BF5-4FFC-BF37-F2D316C86A94",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "d9fe211c-c3a4-45e4-9331-6c46727caf4a++505" : "MCube-IOS\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "MCube",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "MCube.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/mcube.vmc.in\/app\/iphone",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Subversion",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "d9fe211c-c3a4-45e4-9331-6c46727caf4a++505"
+    }
+  ]
+}
