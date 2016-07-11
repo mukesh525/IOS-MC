@@ -4,27 +4,7 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>AZDropdownMenu-AZDropdownMenu.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>AZDropdownMenu.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>Alamofire.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>DropDown.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>Dropper.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -52,17 +32,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>336B93337DFC5EE58B564606FF93F15D</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>37BA548A065CEDB82A46BB598D8044AC</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>5D71132139A1E1855313CBD9F229AC7A</key>
+		<key>67DD261C19E04BE26C5224E8E877E018</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -72,17 +42,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>9F766ADB76A46AB732825D44C4BAAABF</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>CED333847FA03E38B9AE2459AC7C4530</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>F999300B29D673145ED035C2E63E9CA5</key>
+		<key>9C10E6C5044AF924BA82DBB28EE31C39</key>
 		<dict>
 			<key>primary</key>
 			<true/>

@@ -9,7 +9,7 @@
 import UIKit
 import Alamofire
 import AVFoundation
-import AZDropdownMenu
+
 
 
 class FollowUpViewController: UITableViewController,UIPopoverPresentationControllerDelegate,FilterSelectedDelegate {
@@ -29,13 +29,15 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
     
     override func viewDidLoad() {
         super.viewDidLoad()
+      //  self.mytableview.tableFooterView = UIView(frame: CGRectZero)
+      //  self.mytableview.tableHeaderView = UIView(frame: CGRectZero)
         NSUserDefaults.standardUserDefaults().setInteger(1, forKey: "select")
         NSUserDefaults.standardUserDefaults().synchronize()
         tableView.allowsSelection = false;
         mytableview.backgroundView = UIImageView(image: UIImage(named: "background_port.jpg"))
         if let authkey = NSUserDefaults.standardUserDefaults().stringForKey("authkey") {
             print(authkey)
-            LoadData()
+            LoadData(false)
         }
         
         refreshControl = UIRefreshControl()
@@ -62,7 +64,7 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
     
     func refresh(sender:AnyObject) {
         // Code to refresh table view
-        LoadData();
+        LoadData(false);
         
     }
     
@@ -115,7 +117,12 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
          }
         
          cell.callfrom.text=data.callFrom
-         cell.callername.text=data.callerName
+         cell.callername.text=(data.callerName?.isEmpty) != nil && NSString(string: data.callerName!).length > 0 ?  data.callerName : "UNKNOWN"
+        
+        
+        
+        
+        
          cell.Group.text=data.groupName
          cell.date.text=self.convertDate(data.callTimeString!)
          cell.time.text=self.convertTime(data.callTimeString!)
@@ -163,7 +170,7 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
     
    
     
-    func LoadData(){
+    func LoadData(filter:Bool){
         var callId:String?
         var callFrom:String?
         var callerName:String?
@@ -249,8 +256,12 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
                 
                 }
                 
-                
-            self.mytableview.reloadData()
+                if(self.result.count == 0 && filter){
+                    self.filteralert()
+                 }
+                else{
+                    self.mytableview.reloadData()
+                }
                 if((self.refreshControl?.beginRefreshing()) != nil){
                    self.refreshControl!.endRefreshing()
                 }
@@ -260,29 +271,9 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
                 if (error.code == -1009) {
                     self.showAlert("No Internet Conncetion")
                 }
-                
-                
                 }
-                
-                
-                print("result sidze \(self.result.count))")
-//                if(self.code=="401"||self.code=="400"){
-//                    if(self.message != nil){
-//                        self.showAlert(self.message!)
-//                    }
-//                }
-//                if(self.code=="200"){
-//                    if(self.message != nil){
-//                        NSUserDefaults.standardUserDefaults().setObject(self.empName, forKey: "name")
-//                        NSUserDefaults.standardUserDefaults().setObject(self.empEmail, forKey: "email")
-//                        NSUserDefaults.standardUserDefaults().setObject(self.authkey, forKey: "authkey")
-//                        NSUserDefaults.standardUserDefaults().synchronize()
-//                        if let myLoadedString = NSUserDefaults.standardUserDefaults().stringForKey("name") {
-//                            print(myLoadedString) // "Hello World"
-//                        }
-//                        self.performSegueWithIdentifier("Login", sender: nil)
-//                        //self.showAlert(self.message!)
-//                    }
+                 print("result sidze \(self.result.count))")
+
                 }
                 
         }
@@ -354,12 +345,17 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
                     
                 }
                 
-                
-                self.mytableview.reloadData()
-                self.isNewDataLoading=false;
+               self.mytableview.reloadData()
+               self.isNewDataLoading=false;
                 if((self.refreshControl?.beginRefreshing()) != nil){
                     self.refreshControl!.endRefreshing()
                 }
+                
+              
+                
+                
+                
+                
                 
             case .Failure(let error):
                 print("Request failed with error: \(error)")
@@ -372,24 +368,7 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
                 
                 
                 print("result sidze \(self.result.count))")
-                //                if(self.code=="401"||self.code=="400"){
-                //                    if(self.message != nil){
-                //                        self.showAlert(self.message!)
-                //                    }
-                //                }
-                //                if(self.code=="200"){
-                //                    if(self.message != nil){
-                //                        NSUserDefaults.standardUserDefaults().setObject(self.empName, forKey: "name")
-                //                        NSUserDefaults.standardUserDefaults().setObject(self.empEmail, forKey: "email")
-                //                        NSUserDefaults.standardUserDefaults().setObject(self.authkey, forKey: "authkey")
-                //                        NSUserDefaults.standardUserDefaults().synchronize()
-                //                        if let myLoadedString = NSUserDefaults.standardUserDefaults().stringForKey("name") {
-                //                            print(myLoadedString) // "Hello World"
-                //                        }
-                //                        self.performSegueWithIdentifier("Login", sender: nil)
-                //                        //self.showAlert(self.message!)
-                //                    }
-        }
+              }
         
     }
 
@@ -481,14 +460,24 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
         self.SeletedFilterpos=position;
         let option: OptionsData = self.options[position]
         self.gid=option.id!;
-        LoadData();
+        LoadData(true);
         
     }
     
-    
-    
-    
-    
-    
+    func filteralert (){
+        let option: OptionsData = self.options[SeletedFilterpos];
+        let alertController = UIAlertController(title: "MCube", message:
+            "No Records available for Group : \(option.value!)", preferredStyle: .Alert)
+        let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default) {
+            UIAlertAction in
+           self.SeletedFilterpos=0;
+           self.gid="0";
+           self.LoadData(false)
+        }
+
+        alertController.addAction(okAction)
+        self.presentViewController(alertController, animated: true, completion: nil)
+  
+    }
 
 }
