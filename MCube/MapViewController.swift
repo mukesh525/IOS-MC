@@ -13,6 +13,8 @@ class MapViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        NSUserDefaults.standardUserDefaults().removeObjectForKey("select")
+        NSUserDefaults.standardUserDefaults().synchronize()
 
         if revealViewController() != nil {
             menuButton.target = revealViewController()

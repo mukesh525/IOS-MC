@@ -13,9 +13,6 @@ import AZDropdownMenu
 
 
 class FollowUpViewController: UITableViewController,UIPopoverPresentationControllerDelegate,FilterSelectedDelegate {
-    
-   
-
     @IBOutlet var mytableview: UITableView!
     @IBOutlet var extraButton: UIBarButtonItem!
     @IBOutlet var menubutton: UIBarButtonItem!
@@ -32,7 +29,8 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        NSUserDefaults.standardUserDefaults().setInteger(1, forKey: "select")
+        NSUserDefaults.standardUserDefaults().synchronize()
         tableView.allowsSelection = false;
         mytableview.backgroundView = UIImageView(image: UIImage(named: "background_port.jpg"))
         if let authkey = NSUserDefaults.standardUserDefaults().stringForKey("authkey") {
@@ -68,9 +66,7 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
         
     }
     
-    
-    
-    
+   
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

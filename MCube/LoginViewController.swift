@@ -144,6 +144,7 @@ class LoginViewController: UIViewController,ValidationDelegate ,UITextFieldDeleg
                        NSUserDefaults.standardUserDefaults().setObject(self.empName, forKey: "name")
                        NSUserDefaults.standardUserDefaults().setObject(self.empEmail, forKey: "email")
                        NSUserDefaults.standardUserDefaults().setObject(self.authkey, forKey: "authkey")
+                      // NSUserDefaults.standardUserDefaults().setInteger(1, forKey: "select")
                        NSUserDefaults.standardUserDefaults().synchronize()
                         if let myLoadedString = NSUserDefaults.standardUserDefaults().stringForKey("name") {
                             print(myLoadedString) // "Hello World"
