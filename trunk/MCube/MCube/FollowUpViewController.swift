@@ -1,10 +1,18 @@
-//mukesh
-//  FollowUpViewController.swift
-//  MCube
+
+//followup
+//track
+//lead
+//x
+//ivrs
+//mtracker
 //
+
+
 //  Created by Mukesh Jha on 03/07/16.
 //  Copyright © 2016 AppCoda. All rights reserved.
 //
+
+
 
 import UIKit
 import Alamofire
@@ -23,16 +31,18 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
     var options = [OptionsData]()
     var limit = 0;
     var gid:String="0";
+    var type:String="track"
     var isNewDataLoading:Bool=false;
     var player = AVPlayer()
+    var CurrentTitle:String="Track"
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-      //  self.mytableview.tableFooterView = UIView(frame: CGRectZero)
-      //  self.mytableview.tableHeaderView = UIView(frame: CGRectZero)
-        NSUserDefaults.standardUserDefaults().setInteger(1, forKey: "select")
-        NSUserDefaults.standardUserDefaults().synchronize()
+       
+        self.navigationItem.title = CurrentTitle;
+//        NSUserDefaults.standardUserDefaults().setInteger(1, forKey: "select")
+//        NSUserDefaults.standardUserDefaults().synchronize()
         tableView.allowsSelection = false;
         mytableview.backgroundView = UIImageView(image: UIImage(named: "background_port.jpg"))
         if let authkey = NSUserDefaults.standardUserDefaults().stringForKey("authkey") {
@@ -124,8 +134,19 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
         
         
          cell.Group.text=data.groupName
+        
+        
+        if((data.callTimeString?.isEmpty) != nil && NSString(string: data.callTimeString!).length > 0){
          cell.date.text=self.convertDate(data.callTimeString!)
          cell.time.text=self.convertTime(data.callTimeString!)
+        }
+        else
+        {
+         cell.date.text=self.convertDate(data.startTime!)
+         cell.time.text=self.convertTime(data.startTime!)
+        
+        
+        }
          cell.status.text=data.status
          return cell
     }
@@ -182,7 +203,7 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
          limit=0
         let authkey = NSUserDefaults.standardUserDefaults().stringForKey("authkey")
         Alamofire.request(.POST, "https://mcube.vmc.in/mobapp/getList", parameters:
-        ["authKey":authkey!, "limit":"10","gid": gid,"ofset":limit,"type":"track"])
+        ["authKey":authkey!, "limit":"10","gid": gid,"ofset":limit,"type":type])
         .validate().responseJSON
             {response in switch response.result {
                 
@@ -244,6 +265,13 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
                             data.callTimeString=callTimeString;
                             data.callTime=self.convertDateFormater(callTimeString!) as? NSDate
                         }
+                        else if((record.objectForKey("starttime")) != nil){
+                            callTimeString=record.objectForKey("starttime") as? String
+                            data.startTime=callTimeString;
+                            
+                        }
+                        
+                        
                         if((record.objectForKey("filename")) != nil){
                             audioLink=record.objectForKey("filename") as? String
                             data.audioLink=audioLink;
@@ -292,7 +320,7 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
         
         let authkey = NSUserDefaults.standardUserDefaults().stringForKey("authkey")
         Alamofire.request(.POST, "https://mcube.vmc.in/mobapp/getList", parameters:
-            ["authKey":authkey!, "limit":"10","gid": gid,"ofset":self.limit,"type":"track"])
+            ["authKey":authkey!, "limit":"10","gid": gid,"ofset":self.limit,"type":type])
             .validate().responseJSON
             {response in switch response.result {
                 
@@ -334,6 +362,13 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
                             data.callTimeString=callTimeString;
                             data.callTime=self.convertDateFormater(callTimeString!)as?NSDate
                         }
+                        else if((record.objectForKey("starttime")) != nil){
+                            callTimeString=record.objectForKey("starttime") as? String
+                            data.startTime=callTimeString;
+                            
+                        }
+                        
+                        
                         if((record.objectForKey("filename")) != nil){
                             audioLink=record.objectForKey("filename") as? String
                             data.audioLink=audioLink;
