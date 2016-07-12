@@ -20,6 +20,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().barTintColor = UIColor(red: 255.0/255.0, green: 87.0/255.0, blue: 34.0/255.0, alpha: 1.0)
         UINavigationBar.appearance().tintColor = UIColor.whiteColor()
         UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
+        
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        
+        
+        
+        if NSUserDefaults.standardUserDefaults().stringForKey("authkey") != nil {
+           let vc = storyboard.instantiateViewControllerWithIdentifier("Home") as!SWRevealViewController
+       //    let followupController = vc.topViewController as! FollowUpViewController
+           self.window!.rootViewController = vc;
+        }
+        else
+        {
+           let vc = storyboard.instantiateViewControllerWithIdentifier("loginController") as! LoginViewController
+           self.window!.rootViewController = vc;
+        }
+        
+        
         return true
     }
 

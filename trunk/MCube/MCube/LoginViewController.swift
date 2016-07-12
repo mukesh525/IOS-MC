@@ -12,6 +12,7 @@ import Alamofire
 
 class LoginViewController: UIViewController,ValidationDelegate ,UITextFieldDelegate{
     
+    @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var passworderror: UILabel!
     @IBOutlet weak var password: UITextField!
     @IBOutlet weak var emailerror: UILabel!
@@ -29,6 +30,9 @@ class LoginViewController: UIViewController,ValidationDelegate ,UITextFieldDeleg
     var mtracker:String?
     var pbx:String?
     var track:String?
+    var rememberMe:Bool=false
+    @IBOutlet weak var checkBox: CheckBox!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         validator.registerField(email, errorLabel: emailerror, rules: [RequiredRule(), EmailRule(message: "Invalid email")])
@@ -36,17 +40,35 @@ class LoginViewController: UIViewController,ValidationDelegate ,UITextFieldDeleg
         validator.registerField(password,errorLabel: passworderror, rules: [RequiredRule(), MinLengthRule(length: 5)])
         self.email.delegate = self;
         self.password.delegate = self;
-   
+        //checkBox.selected=true
+        
+         if NSUserDefaults.standardUserDefaults().stringForKey("emailfield") != nil
+            && NSUserDefaults.standardUserDefaults().stringForKey("passfield") != nil
+        {
+           email.text=NSUserDefaults.standardUserDefaults().stringForKey("emailfield")
+           password.text=NSUserDefaults.standardUserDefaults().stringForKey("passfield")
+            
+            
+        }
        
     }
-    override func viewDidAppear(animated: Bool) {
-    if NSUserDefaults.standardUserDefaults().stringForKey("authkey") != nil {
-            self.performSegueWithIdentifier("login", sender: self)
+
+    
+    
+    
+    @IBAction func CheckBoxClick(sender: AnyObject) {
+        
+        if(rememberMe){
+            rememberMe=false
         }
+         else{
+         rememberMe=true
+        }
+      
     }
     
     
-    override func didReceiveMemoryWarning() {
+  override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
@@ -154,6 +176,25 @@ class LoginViewController: UIViewController,ValidationDelegate ,UITextFieldDeleg
                         if let myLoadedString = NSUserDefaults.standardUserDefaults().stringForKey("name") {
                             print(myLoadedString) // "Hello World"
                         }
+                        
+                        if(self.rememberMe){
+                            NSUserDefaults.standardUserDefaults().setObject(self.email.text, forKey: "emailfield")
+                            NSUserDefaults.standardUserDefaults().setObject(self.password.text, forKey: "passfield")
+                            NSUserDefaults.standardUserDefaults().synchronize()
+                        }
+                        else{
+                            if NSUserDefaults.standardUserDefaults().stringForKey("emailfield") != nil
+                            && NSUserDefaults.standardUserDefaults().stringForKey("passfield") != nil
+                         {
+                            NSUserDefaults.standardUserDefaults().removeObjectForKey("emailfield")
+                            NSUserDefaults.standardUserDefaults().removeObjectForKey("passfield")
+                            NSUserDefaults.standardUserDefaults().synchronize()
+
+                         }
+                        }
+                        
+                        
+                        
                         
                         self.performSegueWithIdentifier("login", sender: self)                       
                         //self.showAlert(self.message!)

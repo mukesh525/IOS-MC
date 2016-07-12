@@ -47,9 +47,8 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
         super.viewDidLoad()
         
         if(isLogout){
-        
-         
-        
+         isLogout=false;
+         LogoutAlert()
         }
         
          
