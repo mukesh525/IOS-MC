@@ -17,6 +17,7 @@ class FollowupTableViewCell: UITableViewCell {
         }
     }
 
+    @IBOutlet weak var groupLabel: UILabel!
     @IBOutlet weak var status: UILabel!
     @IBOutlet weak var time: UILabel!
     @IBOutlet weak var date: UILabel!

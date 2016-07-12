@@ -35,11 +35,24 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
     var isNewDataLoading:Bool=false;
     var player = AVPlayer()
     var CurrentTitle:String="Track"
+    var isLogout:Bool=false;
     
     
+    @IBAction func LogoutTap(sender: UIBarButtonItem) {
+        
+        LogoutAlert()
+        
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        if(isLogout){
+        
+         
+        
+        }
+        
+         
         self.navigationItem.title = CurrentTitle;
         //        NSUserDefaults.standardUserDefaults().setInteger(1, forKey: "select")
         //        NSUserDefaults.standardUserDefaults().synchronize()
@@ -129,17 +142,12 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
         cell.callfrom.text=data.callFrom
         cell.callername.text=(data.callerName?.isEmpty) != nil && NSString(string: data.callerName!).length > 0 ?  data.callerName : "UNKNOWN"
         
-        
-        
-        
-        
-        cell.Group.text=data.groupName
-        
-        
         if((data.callTimeString?.isEmpty) != nil && NSString(string: data.callTimeString!).length > 0){
             cell.date.text=self.convertDate(data.callTimeString!)
             cell.time.text=self.convertTime(data.callTimeString!)
             cell.status.text=(data.status?.isEmpty) != nil && NSString(string: data.status!).length > 0 ?  data.status : "UNKNOWN"
+            cell.Group.text=data.groupName
+            cell.groupLabel.text="Group"
             
         }
         else
@@ -149,19 +157,12 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
             if((data.status?.isEmpty) != nil && NSString(string: data.status!).length > 0){
                 cell.status.text=data.status == "0" ? "MISSED": data.status == "1" ? "INBOUND" : "OUTBOND"
             }
-            
-            
-            
-            
-            
+            cell.Group.text=data.empName
+            cell.groupLabel.text="Employee"
         }
         let image = UIImage(named: "play")?.imageWithRenderingMode(.AlwaysTemplate)
         cell.playButton.setImage(image, forState: .Normal)
         cell.playButton.tintColor = UIColor(red: 255.0/255.0, green: 87.0/255.0, blue: 34.0/255.0, alpha: 1.0)
-        
-        
-        
-        
         return cell
     }
     
@@ -214,6 +215,7 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
         var dataId:String?
         var audioLink:String?
         var callTimeString:String?
+        var empName:String?
         limit=0
         let authkey = NSUserDefaults.standardUserDefaults().stringForKey("authkey")
         Alamofire.request(.POST, "https://mcube.vmc.in/mobapp/getList", parameters:
@@ -285,6 +287,19 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
                             
                         }
                         
+                        if((record.objectForKey("empName")) != nil){
+                            empName=record.objectForKey("empName") as? String
+                            data.empName=empName;
+                            
+                        }
+                        if((record.objectForKey("name")) != nil){
+                            callerName=record.objectForKey("name") as? String
+                            data.callerName=callerName;
+                            
+                        }
+                        
+
+                        
                         
                         if((record.objectForKey("filename")) != nil){
                             audioLink=record.objectForKey("filename") as? String
@@ -329,6 +344,7 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
         var dataId:String?
         var audioLink:String?
         var callTimeString:String?
+        var EmpName:String?
         self.limit += 10
         
         
@@ -381,7 +397,11 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
                             data.startTime=callTimeString;
                             
                         }
-                        
+                        if((record.objectForKey("empname")) != nil){
+                            EmpName=record.objectForKey("empname") as? String
+                            data.empName=EmpName;
+                            
+                        }
                         
                         if((record.objectForKey("filename")) != nil){
                             audioLink=record.objectForKey("filename") as? String
@@ -526,6 +546,25 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
         
         alertController.addAction(okAction)
         self.presentViewController(alertController, animated: true, completion: nil)
+        
+    }
+    func LogoutAlert (){
+                let alertController = UIAlertController(title: "Logout Alert", message:
+            "Do you want to logout?", preferredStyle: .Alert)
+        let okAction = UIAlertAction(title: "Logout", style: UIAlertActionStyle.Default) {
+            UIAlertAction in
+            NSUserDefaults.standardUserDefaults().removeObjectForKey("authkey")
+            NSUserDefaults.standardUserDefaults().synchronize()
+            self.performSegueWithIdentifier("GoLogin", sender: self)  
+           
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default) {
+            UIAlertAction in
+            
+        }
+        alertController.addAction(cancelAction)
+        alertController.addAction(okAction)
+        self.presentViewController(alertController, animated: false, completion: nil)
         
     }
     
