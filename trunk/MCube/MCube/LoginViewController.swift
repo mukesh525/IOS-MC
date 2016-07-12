@@ -36,8 +36,13 @@ class LoginViewController: UIViewController,ValidationDelegate ,UITextFieldDeleg
         validator.registerField(password,errorLabel: passworderror, rules: [RequiredRule(), MinLengthRule(length: 5)])
         self.email.delegate = self;
         self.password.delegate = self;
-        
-        // Do any additional setup after loading the view.
+   
+       
+    }
+    override func viewDidAppear(animated: Bool) {
+    if NSUserDefaults.standardUserDefaults().stringForKey("authkey") != nil {
+            self.performSegueWithIdentifier("login", sender: self)
+        }
     }
     
     

@@ -19,6 +19,7 @@ class Data: NSObject {
     var audioLink:String?
     var callTimeString:String?
     var startTime:String?
+    var empName:String?
     
     override init() {
         

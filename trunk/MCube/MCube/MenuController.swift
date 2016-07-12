@@ -106,6 +106,12 @@ class MenuController: UITableViewController {
 
             
         }
+        else if(segue.identifier == "logout"){
+            followupController.isLogout = true;
+          
+            
+            
+        }
         mytableview.selectRowAtIndexPath(path, animated: false, scrollPosition: UITableViewScrollPosition.None)
         
         

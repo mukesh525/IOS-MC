@@ -16,6 +16,7 @@
 		8BAD4E441D2769E400A64393 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BAD4E431D2769E400A64393 /* Default.png */; };
 		8BAD4E461D2769F300A64393 /* background_port.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8BAD4E451D2769F300A64393 /* background_port.jpg */; };
 		8BAD4E781D278C9B00A64393 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BAD4E771D278C9B00A64393 /* LoginViewController.swift */; };
+		8BB16D391D35078E0060B841 /* PushNoAnimationSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB16D381D35078E0060B841 /* PushNoAnimationSegue.swift */; };
 		8BBFE0B91D28D99C00435723 /* FollowUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBFE0B81D28D99C00435723 /* FollowUpViewController.swift */; };
 		8BBFE0BB1D28E25900435723 /* FollowupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBFE0BA1D28E25900435723 /* FollowupTableViewCell.swift */; };
 		8BE66F741D2A7B950073CFE5 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE66F731D2A7B950073CFE5 /* Data.swift */; };
@@ -131,6 +132,7 @@
 		8BAD4E4A1D276B2800A64393 /* Alamofire.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Alamofire.xcodeproj; path = "../../../Downloads/Alamofire-master/Alamofire.xcodeproj"; sourceTree = "<group>"; };
 		8BAD4E651D276B7E00A64393 /* Validator.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Validator.xcodeproj; path = "../../SwiftValidator-master/Validator.xcodeproj"; sourceTree = "<group>"; };
 		8BAD4E771D278C9B00A64393 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		8BB16D381D35078E0060B841 /* PushNoAnimationSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushNoAnimationSegue.swift; sourceTree = "<group>"; };
 		8BBFE0B81D28D99C00435723 /* FollowUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowUpViewController.swift; sourceTree = "<group>"; };
 		8BBFE0BA1D28E25900435723 /* FollowupTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowupTableViewCell.swift; sourceTree = "<group>"; };
 		8BE66F731D2A7B950073CFE5 /* Data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
@@ -242,6 +244,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		8BB16D371D3507650060B841 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				8BB16D381D35078E0060B841 /* PushNoAnimationSegue.swift */,
+			);
+			name = Utils;
+			sourceTree = "<group>";
+		};
 		F47029E71A7F27DB00E30A3C = {
 			isa = PBXGroup;
 			children = (
@@ -268,6 +278,7 @@
 		F47029F21A7F27DB00E30A3C /* MCube */ = {
 			isa = PBXGroup;
 			children = (
+				8BB16D371D3507650060B841 /* Utils */,
 				8BAD4E491D276ACD00A64393 /* Libs */,
 				8BAD4E481D276ABE00A64393 /* Models */,
 				8BAD4E471D276AB100A64393 /* Controllers */,
@@ -631,6 +642,7 @@
 				8BBFE0B91D28D99C00435723 /* FollowUpViewController.swift in Sources */,
 				8BBFE0BB1D28E25900435723 /* FollowupTableViewCell.swift in Sources */,
 				8BE66F741D2A7B950073CFE5 /* Data.swift in Sources */,
+				8BB16D391D35078E0060B841 /* PushNoAnimationSegue.swift in Sources */,
 				8B1A6D0E1D2CD2C800A9AFFD /* OptionsData.swift in Sources */,
 				F491E7551A7F7E010026528E /* PhotoViewController.swift in Sources */,
 				8B1A6D031D2CD0E600A9AFFD /* FilterCell.swift in Sources */,

@@ -6,6 +6,7 @@
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
     </dependencies>
     <scenes>
         <!--Login-->
@@ -17,11 +18,11 @@
                         <viewControllerLayoutGuide type="bottom" id="VTR-6C-Klp"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Pqa-6u-1H1">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9t7-Lq-Nxz">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="75"/>
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9t7-Lq-Nxz">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="76"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Login" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2jU-IL-32u">
                                         <rect key="frame" x="270" y="27" width="60" height="22"/>
@@ -37,8 +38,8 @@
                                     <constraint firstAttribute="width" secondItem="9t7-Lq-Nxz" secondAttribute="height" multiplier="8:1" id="ZDX-kf-SD8"/>
                                 </constraints>
                             </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background_port.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="6u8-uF-Zau">
-                                <rect key="frame" x="0.0" y="76" width="600" height="524"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="background_port.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="6u8-uF-Zau">
+                                <rect key="frame" x="0.0" y="75" width="414" height="683"/>
                             </imageView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="email@example.com" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TWd-Jn-sOa">
                                 <rect key="frame" x="210" y="244" width="182" height="30"/>
@@ -135,18 +136,19 @@
                             <constraint firstItem="fDc-Ma-dVM" firstAttribute="top" secondItem="TWd-Jn-sOa" secondAttribute="bottom" constant="20" id="vfc-Fj-GnU"/>
                         </constraints>
                     </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                     <connections>
                         <outlet property="email" destination="TWd-Jn-sOa" id="BQp-Hx-gS7"/>
                         <outlet property="emailerror" destination="dgx-SK-0Vn" id="LLb-V9-YAw"/>
                         <outlet property="loginClick" destination="GJ8-Za-7N8" id="wAU-Lr-TUZ"/>
                         <outlet property="password" destination="Zgj-pC-VaO" id="CEf-N9-gty"/>
                         <outlet property="passworderror" destination="Lf6-Iz-aMP" id="amh-dV-xQq"/>
-                        <segue destination="vXZ-lx-hvc" kind="show" identifier="login" id="9Lf-ih-Dgm"/>
+                        <segue destination="vXZ-lx-hvc" kind="showDetail" identifier="login" animates="NO" action="showViewController:sender:" id="9Lf-ih-Dgm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sAR-my-Fig" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="213" y="-976"/>
+            <point key="canvasLocation" x="263" y="-1158"/>
         </scene>
         <!--Reveal View Controller-->
         <scene sceneID="ufC-wZ-h7g">
@@ -376,6 +378,7 @@
                                     <outlet property="callername" destination="YvN-h5-acN" id="fbQ-5e-xMb"/>
                                     <outlet property="callfrom" destination="cuk-G3-nNv" id="eI3-RN-ucW"/>
                                     <outlet property="date" destination="TYu-pi-hq8" id="ko0-Z3-Pfq"/>
+                                    <outlet property="groupLabel" destination="tbj-gk-UWX" id="2Gk-Id-GIX"/>
                                     <outlet property="playButton" destination="YLv-jn-vph" id="i2F-C0-7rV"/>
                                     <outlet property="status" destination="Wcb-cm-CDO" id="UyN-M2-qrx"/>
                                     <outlet property="time" destination="c1i-Fa-VEg" id="Km6-Da-Vgi"/>
@@ -391,14 +394,22 @@
                         <barButtonItem key="leftBarButtonItem" image="menu" id="I2I-1R-o5E">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" image="filtericon" id="nbv-nO-mLl">
-                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <connections>
-                                <segue destination="R2D-x5-5Ev" kind="popoverPresentation" identifier="popoverSegue" popoverAnchorBarButtonItem="nbv-nO-mLl" id="zlh-vZ-MLk">
-                                    <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
-                                </segue>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem image="filtericon" id="nbv-nO-mLl">
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <segue destination="R2D-x5-5Ev" kind="popoverPresentation" identifier="popoverSegue" popoverAnchorBarButtonItem="nbv-nO-mLl" id="zlh-vZ-MLk">
+                                        <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                    </segue>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem image="Logout" style="plain" id="Qmx-LO-IZx">
+                                <color key="tintColor" red="0.98994391029999995" green="0.98994391029999995" blue="0.98994391029999995" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <action selector="LogoutTap:" destination="xgo-gk-e34" id="lJg-bs-fU8"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="tiY-eG-7Jy">
                         <autoresizingMask key="autoresizingMask"/>
@@ -407,11 +418,12 @@
                         <outlet property="extraButton" destination="nbv-nO-mLl" id="n5x-iy-1b1"/>
                         <outlet property="menubutton" destination="I2I-1R-o5E" id="PZl-dP-Zaj"/>
                         <outlet property="mytableview" destination="viH-VJ-IwR" id="Ptm-Bb-AjY"/>
+                        <segue destination="Yha-vR-JXf" kind="showDetail" identifier="GoLogin" customClass="PushNoAnimationSegue" customModule="MCube" customModuleProvider="target" animates="NO" id="XKh-ri-qFI"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3lr-rC-eUW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1708" y="-992"/>
+            <point key="canvasLocation" x="1622" y="-1018"/>
         </scene>
         <!--Menu Controller-->
         <scene sceneID="WvI-gM-KFV">
@@ -652,6 +664,9 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.94085192679999996" green="0.94903725390000004" blue="0.95307987930000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <connections>
+                                            <segue destination="dXH-rC-dKS" kind="show" identifier="logout" id="Thf-eX-MVI"/>
+                                        </connections>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -824,7 +839,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vcf-7z-8jx">
                                                     <rect key="frame" x="8" y="8" width="150" height="27"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -858,6 +873,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Logout" width="22" height="22"/>
         <image name="background_port.jpg" width="1080" height="1920"/>
         <image name="backhead" width="500" height="326"/>
         <image name="filtericon" width="22" height="22"/>
@@ -871,6 +887,6 @@
         <image name="wishlist" width="1024" height="1024"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="LbS-ZV-zfe"/>
+        <segue reference="Thf-eX-MVI"/>
     </inferredMetricsTieBreakers>
 </document>
