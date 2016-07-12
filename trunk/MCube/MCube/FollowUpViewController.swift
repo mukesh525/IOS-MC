@@ -35,14 +35,14 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
     var isNewDataLoading:Bool=false;
     var player = AVPlayer()
     var CurrentTitle:String="Track"
-
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       
+        
         self.navigationItem.title = CurrentTitle;
-//        NSUserDefaults.standardUserDefaults().setInteger(1, forKey: "select")
-//        NSUserDefaults.standardUserDefaults().synchronize()
+        //        NSUserDefaults.standardUserDefaults().setInteger(1, forKey: "select")
+        //        NSUserDefaults.standardUserDefaults().synchronize()
         tableView.allowsSelection = false;
         mytableview.backgroundView = UIImageView(image: UIImage(named: "background_port.jpg"))
         if let authkey = NSUserDefaults.standardUserDefaults().stringForKey("authkey") {
@@ -55,7 +55,7 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
         refreshControl!.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
         
         
-      
+        
         if revealViewController() != nil {
             //revealViewController().rearViewRevealWidth = 62
             menubutton.target = revealViewController()
@@ -63,7 +63,7 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
             
             revealViewController().rightViewRevealWidth = 150
             //extraButton.target = revealViewController()
-           // extraButton.action = #selector(SWRevealViewController.rightRevealToggle(_:))
+            // extraButton.action = #selector(SWRevealViewController.rightRevealToggle(_:))
             
             view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
             
@@ -78,7 +78,7 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
         
     }
     
-   
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -101,54 +101,68 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
         return result.count
     }
     
-   override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-       return cellSpacingHeight
+    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return cellSpacingHeight
     }
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as!FollowupTableViewCell
-          let data: Data = self.result[indexPath.row] as! Data
-          cell.layer.cornerRadius=15
-          cell.layer.borderColor = UIColor.orangeColor().CGColor
-          cell.layer.borderWidth = 2
+        let data: Data = self.result[indexPath.row] as! Data
+        cell.layer.cornerRadius=15
+        cell.layer.borderColor = UIColor.orangeColor().CGColor
+        cell.layer.borderWidth = 2
         
-          cell.onButtonTapped = {
+        cell.onButtonTapped = {
             if((data.audioLink?.isEmpty) != nil && NSString(string: data.audioLink!).length > 5){
-            self.configurePlay(data.audioLink!)
+                self.configurePlay(data.audioLink!)
             }else{
-            self.showAlert("You clicked Play button \(indexPath.row)")
+                self.showAlert("You clicked Play button \(indexPath.row)")
             }
             
         }
-         cell.backgroundColor = UIColor.clearColor()
-         if((data.audioLink?.isEmpty) != nil && NSString(string: data.audioLink!).length > 5){
-           cell.playButton.hidden=false
-         }else{
-           cell.playButton.hidden=true
-         }
+        cell.backgroundColor = UIColor.clearColor()
+        if((data.audioLink?.isEmpty) != nil && NSString(string: data.audioLink!).length > 5){
+            cell.playButton.hidden=false
+        }else{
+            cell.playButton.hidden=true
+        }
         
-         cell.callfrom.text=data.callFrom
-         cell.callername.text=(data.callerName?.isEmpty) != nil && NSString(string: data.callerName!).length > 0 ?  data.callerName : "UNKNOWN"
-        
-        
+        cell.callfrom.text=data.callFrom
+        cell.callername.text=(data.callerName?.isEmpty) != nil && NSString(string: data.callerName!).length > 0 ?  data.callerName : "UNKNOWN"
         
         
         
-         cell.Group.text=data.groupName
+        
+        
+        cell.Group.text=data.groupName
         
         
         if((data.callTimeString?.isEmpty) != nil && NSString(string: data.callTimeString!).length > 0){
-         cell.date.text=self.convertDate(data.callTimeString!)
-         cell.time.text=self.convertTime(data.callTimeString!)
+            cell.date.text=self.convertDate(data.callTimeString!)
+            cell.time.text=self.convertTime(data.callTimeString!)
+            cell.status.text=(data.status?.isEmpty) != nil && NSString(string: data.status!).length > 0 ?  data.status : "UNKNOWN"
+            
         }
         else
         {
-         cell.date.text=self.convertDate(data.startTime!)
-         cell.time.text=self.convertTime(data.startTime!)
-        
-        
+            cell.date.text=self.convertDate(data.startTime!)
+            cell.time.text=self.convertTime(data.startTime!)
+            if((data.status?.isEmpty) != nil && NSString(string: data.status!).length > 0){
+                cell.status.text=data.status == "0" ? "MISSED": data.status == "1" ? "INBOUND" : "OUTBOND"
+            }
+            
+            
+            
+            
+            
         }
-         cell.status.text=data.status
-         return cell
+        let image = UIImage(named: "play")?.imageWithRenderingMode(.AlwaysTemplate)
+        cell.playButton.setImage(image, forState: .Normal)
+        cell.playButton.tintColor = UIColor(red: 255.0/255.0, green: 87.0/255.0, blue: 34.0/255.0, alpha: 1.0)
+        
+        
+        
+        
+        return cell
     }
     
     
@@ -172,7 +186,7 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
         return 153;
     }
     
-   override func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+    override func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         
         //Bottom Refresh
         
@@ -181,15 +195,15 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
             if ((scrollView.contentOffset.y + scrollView.frame.size.height) >= scrollView.contentSize.height)
             {
                 if !isNewDataLoading{
-                     isNewDataLoading = true
-                        LoadMoreData()
+                    isNewDataLoading = true
+                    LoadMoreData()
                     
                 }
             }
         }
     }
     
-   
+    
     
     func LoadData(filter:Bool){
         var callId:String?
@@ -200,18 +214,18 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
         var dataId:String?
         var audioLink:String?
         var callTimeString:String?
-         limit=0
+        limit=0
         let authkey = NSUserDefaults.standardUserDefaults().stringForKey("authkey")
         Alamofire.request(.POST, "https://mcube.vmc.in/mobapp/getList", parameters:
-        ["authKey":authkey!, "limit":"10","gid": gid,"ofset":limit,"type":type])
-        .validate().responseJSON
+            ["authKey":authkey!, "limit":"10","gid": gid,"ofset":limit,"type":type])
+            .validate().responseJSON
             {response in switch response.result {
                 
             case .Success(let JSON):
                 print("Success with JSON: \(JSON)")
-               
+                
                 self.result=NSMutableArray();
-               // self.options=NSMutableArray();
+                // self.options=NSMutableArray();
                 self.options=[OptionsData]();
                 let response = JSON as! NSDictionary
                 
@@ -232,18 +246,18 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
                     
                 }
                 if(response.objectForKey("records") != nil){
-                let records = response.objectForKey("records") as! NSArray?
-                      for record in records!{
+                    let records = response.objectForKey("records") as! NSArray?
+                    for record in records!{
                         let data=Data();
                         if((record.objectForKey("callid")) != nil){
                             callId=record.objectForKey("callid") as? String
                             data.callId=callId;
-                         }
+                        }
                         if((record.objectForKey("callfrom")) != nil){
                             callFrom=record.objectForKey("callfrom") as? String
                             data.callFrom=callFrom;
                         }
-
+                        
                         if((record.objectForKey("callid")) != nil){
                             callId=record.objectForKey("callid") as? String
                             data.callId=callId;
@@ -276,22 +290,22 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
                             audioLink=record.objectForKey("filename") as? String
                             data.audioLink=audioLink;
                         }
-                       
+                        
                         self.result.addObject(data)
-                     }
+                    }
                     
-                 
-                
+                    
+                    
                 }
                 
                 if(self.result.count == 0 && filter){
                     self.filteralert()
-                 }
+                }
                 else{
                     self.mytableview.reloadData()
                 }
                 if((self.refreshControl?.beginRefreshing()) != nil){
-                   self.refreshControl!.endRefreshing()
+                    self.refreshControl!.endRefreshing()
                 }
                 
             case .Failure(let error):
@@ -300,11 +314,11 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
                     self.showAlert("No Internet Conncetion")
                 }
                 }
-                 print("result sidze \(self.result.count))")
-
-                }
+                print("result sidze \(self.result.count))")
                 
         }
+        
+    }
     
     func LoadMoreData(){
         var callId:String?
@@ -380,13 +394,13 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
                     
                 }
                 
-               self.mytableview.reloadData()
-               self.isNewDataLoading=false;
+                self.mytableview.reloadData()
+                self.isNewDataLoading=false;
                 if((self.refreshControl?.beginRefreshing()) != nil){
                     self.refreshControl!.endRefreshing()
                 }
                 
-              
+                
                 
                 
                 
@@ -403,20 +417,20 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
                 
                 
                 print("result sidze \(self.result.count))")
-              }
+        }
         
     }
-
     
     
-  
-        
-        func showAlert(mesage :String){
-            //dismissViewControllerAnimated(true, completion: nil)
-            let alertView = UIAlertController(title: "MCube", message: mesage, preferredStyle: .Alert)
-            alertView.addAction(UIAlertAction(title: "Ok", style: .Default, handler: nil))
-            presentViewController(alertView, animated: true, completion: nil)
-        }
+    
+    
+    
+    func showAlert(mesage :String){
+        //dismissViewControllerAnimated(true, completion: nil)
+        let alertView = UIAlertController(title: "MCube", message: mesage, preferredStyle: .Alert)
+        alertView.addAction(UIAlertAction(title: "Ok", style: .Default, handler: nil))
+        presentViewController(alertView, animated: true, completion: nil)
+    }
     
     
     func convertDateFormater(date: String) -> String {
@@ -479,12 +493,12 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
             let popoverViewController = segue.destinationViewController as! menuViewController
             popoverViewController.FilterOptions=options;
             popoverViewController.SeletedFilter=SeletedFilterpos;
-           // popoverViewController.preferredContentSize = CGSize(width: 150, height: 400)
+            // popoverViewController.preferredContentSize = CGSize(width: 150, height: 400)
             popoverViewController.modalPresentationStyle = UIModalPresentationStyle.Popover
             popoverViewController.popoverPresentationController!.delegate = self
             popoverViewController.delegate = self
         }
-  
+        
     }
     func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
         return UIModalPresentationStyle.None
@@ -505,14 +519,14 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
             "No Records available for Group : \(option.value!)", preferredStyle: .Alert)
         let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default) {
             UIAlertAction in
-           self.SeletedFilterpos=0;
-           self.gid="0";
-           self.LoadData(false)
+            self.SeletedFilterpos=0;
+            self.gid="0";
+            self.LoadData(false)
         }
-
+        
         alertController.addAction(okAction)
         self.presentViewController(alertController, animated: true, completion: nil)
-  
+        
     }
-
+    
 }

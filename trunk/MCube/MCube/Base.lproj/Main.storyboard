@@ -307,13 +307,15 @@
                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YLv-jn-vph">
-                                            <rect key="frame" x="137" y="54" width="46" height="46"/>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YLv-jn-vph">
+                                            <rect key="frame" x="123" y="41" width="60" height="60"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="46" id="CWh-Pm-cI2"/>
-                                                <constraint firstAttribute="height" constant="46" id="Rsw-4t-n90"/>
+                                                <constraint firstAttribute="width" constant="60" id="CWh-Pm-cI2"/>
+                                                <constraint firstAttribute="height" constant="60" id="Rsw-4t-n90"/>
                                             </constraints>
-                                            <state key="normal" backgroundImage="play"/>
+                                            <color key="tintColor" red="1" green="0.3411764706" blue="0.1333333333" alpha="1" colorSpace="calibratedRGB"/>
+                                            <state key="normal" image="play"/>
                                             <connections>
                                                 <action selector="playClicked:" destination="m7N-Q8-5h6" eventType="touchUpInside" id="Tjv-cY-edZ"/>
                                             </connections>
@@ -337,9 +339,9 @@
                                         <constraint firstAttribute="bottomMargin" secondItem="EBU-xV-rc7" secondAttribute="bottom" constant="5" id="IKC-NW-cvr"/>
                                         <constraint firstItem="bk2-Vo-WgC" firstAttribute="trailing" secondItem="TYu-pi-hq8" secondAttribute="trailing" id="Jqc-37-7Yh"/>
                                         <constraint firstItem="TYu-pi-hq8" firstAttribute="leading" secondItem="c1i-Fa-VEg" secondAttribute="leading" id="Jrv-IW-gBA"/>
-                                        <constraint firstItem="YLv-jn-vph" firstAttribute="centerX" secondItem="uxv-3b-FYp" secondAttribute="centerX" id="Jzf-w9-L8A"/>
+                                        <constraint firstItem="YLv-jn-vph" firstAttribute="centerX" secondItem="uxv-3b-FYp" secondAttribute="centerX" constant="-7" id="Jzf-w9-L8A"/>
                                         <constraint firstItem="tbj-gk-UWX" firstAttribute="top" secondItem="8S2-Q2-2AC" secondAttribute="bottom" constant="25" id="NLI-bp-yfS"/>
-                                        <constraint firstItem="YLv-jn-vph" firstAttribute="centerY" secondItem="uxv-3b-FYp" secondAttribute="centerY" constant="1" id="Nvt-Gu-dHu"/>
+                                        <constraint firstItem="YLv-jn-vph" firstAttribute="centerY" secondItem="uxv-3b-FYp" secondAttribute="centerY" constant="-5" id="Nvt-Gu-dHu"/>
                                         <constraint firstItem="c1i-Fa-VEg" firstAttribute="trailing" secondItem="hr1-u9-MsU" secondAttribute="trailing" id="Op5-sY-Ph3"/>
                                         <constraint firstItem="EBU-xV-rc7" firstAttribute="baseline" secondItem="Wcb-cm-CDO" secondAttribute="baseline" id="P9i-xi-W6t"/>
                                         <constraint firstItem="gWv-wQ-DZa" firstAttribute="leading" secondItem="cuk-G3-nNv" secondAttribute="leading" id="RcY-KB-Fyn"/>
@@ -864,7 +866,7 @@
         <image name="map" width="1024" height="1024"/>
         <image name="menu" width="22" height="22"/>
         <image name="news" width="1024" height="1024"/>
-        <image name="play" width="225" height="225"/>
+        <image name="play" width="205" height="205"/>
         <image name="tag" width="1024" height="1024"/>
         <image name="wishlist" width="1024" height="1024"/>
     </resources>
