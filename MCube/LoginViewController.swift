@@ -1,10 +1,5 @@
-//
-//  LoginViewController.swift
-//  MCube
-//
 //  Created by Mukesh Jha on 02/07/16.
 //  Copyright © 2016 AppCoda. All rights reserved.
-//
 
 import UIKit
 import SwiftValidator
@@ -35,12 +30,12 @@ class LoginViewController: UIViewController,ValidationDelegate ,UITextFieldDeleg
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //loginButton.layer.cornerRadius = 10
         validator.registerField(email, errorLabel: emailerror, rules: [RequiredRule(), EmailRule(message: "Invalid email")])
         
         validator.registerField(password,errorLabel: passworderror, rules: [RequiredRule(), MinLengthRule(length: 5)])
         self.email.delegate = self;
         self.password.delegate = self;
-        //checkBox.selected=true
         
          if NSUserDefaults.standardUserDefaults().stringForKey("emailfield") != nil
             && NSUserDefaults.standardUserDefaults().stringForKey("passfield") != nil

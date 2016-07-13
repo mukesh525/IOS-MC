@@ -20,6 +20,7 @@ import AVFoundation
 
 
 
+
 class FollowUpViewController: UITableViewController,UIPopoverPresentationControllerDelegate,FilterSelectedDelegate {
     @IBOutlet var mytableview: UITableView!
     @IBOutlet var extraButton: UIBarButtonItem!
@@ -33,7 +34,7 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
     var gid:String="0";
     var type:String="track"
     var isNewDataLoading:Bool=false;
-    var player = AVPlayer()
+    var player:AVPlayer!
     var CurrentTitle:String="Track"
     var isLogout:Bool=false;
     
@@ -45,7 +46,7 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+      
         if(isLogout){
          isLogout=false;
          LogoutAlert()
@@ -169,11 +170,28 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
     
     
     func configurePlay(filename:String) {
-        let url = "http://mcube.vmctechnologies.com/sounds/\(filename)"
-        let playerItem = AVPlayerItem( URL:NSURL( string:url )! )
-        player = AVPlayer(playerItem:playerItem)
-        player.rate = 1.0;
-        player.play()
+         let url = "http://mcube.vmctechnologies.com/sounds/\(filename)"
+//        let playerItem = AVPlayerItem( URL:NSURL( string:url )! )
+//        player = AVPlayer(playerItem:playerItem)
+//        player.rate = 1.0;
+//        print("About to play...")
+//        player.play()
+//        print("...and we're playing!")
+        
+        print(url)
+        let linkString = "http://m.mp3.zing.vn/xml/song-load/MjAxNSUyRjA4JTJGMDQlMkY3JTJGYiUyRjdiNTI4YTc0YWU2MGExYWJjMDZlYzA5NmE5MzFjMjliLm1wMyU3QzEz"
+        let link = NSURL(string: url)!
+        player = AVPlayer(URL: link)
+        
+        do{
+            player.play()
+        }
+        catch {
+            
+            print("Something bad happened. Try catching specific errors to narrow things down")
+        }
+
+       
         
     }
     
@@ -314,6 +332,10 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
                 
                 if(self.result.count == 0 && filter){
                     self.filteralert()
+                }
+                else if(self.result.count == 0 && !filter){
+                    self.NoDataAlert()
+                    
                 }
                 else{
                     self.mytableview.reloadData()
@@ -566,5 +588,22 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
         self.presentViewController(alertController, animated: false, completion: nil)
         
     }
+    func NoDataAlert (){
+        let alertController = UIAlertController(title: "MCube", message:
+            "No records available", preferredStyle: .Alert)
+        let okAction = UIAlertAction(title: "Retry", style: UIAlertActionStyle.Default) {
+            UIAlertAction in
+            self.LoadData(false);
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default) {
+            UIAlertAction in
+            
+        }
+        alertController.addAction(cancelAction)
+        alertController.addAction(okAction)
+        self.presentViewController(alertController, animated: false, completion: nil)
+        
+    }
+
     
 }
