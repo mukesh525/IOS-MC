@@ -61,7 +61,7 @@
                                     <color key="titleColor" red="0.98994391029999995" green="0.98994391029999995" blue="0.98994391029999995" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="keyPath">
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                         <integer key="value" value="10"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
@@ -82,16 +82,6 @@
                                 <rect key="frame" x="116" y="260" width="182" height="19"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" red="0.85006816279999997" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i7v-Np-M7u">
-                                <rect key="frame" x="116" y="197" width="89" height="21"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="21" id="OqR-Re-g2U"/>
-                                    <constraint firstAttribute="width" constant="89" id="Qhy-KT-MB8"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lf6-Iz-aMP">
@@ -119,6 +109,16 @@
                                     <constraint firstAttribute="width" constant="153" id="Kp6-0r-ogy"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i7v-Np-M7u">
+                                <rect key="frame" x="116" y="203" width="89" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="OqR-Re-g2U"/>
+                                    <constraint firstAttribute="width" constant="89" id="Qhy-KT-MB8"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -156,7 +156,7 @@
                             <constraint firstItem="GJ8-Za-7N8" firstAttribute="top" secondItem="gRo-yM-adD" secondAttribute="bottom" constant="8" id="ocq-2m-kck"/>
                             <constraint firstItem="Zgj-pC-VaO" firstAttribute="top" secondItem="fDc-Ma-dVM" secondAttribute="bottom" constant="8" symbolic="YES" id="p5L-rB-rKm"/>
                             <constraint firstItem="6u8-uF-Zau" firstAttribute="top" secondItem="9t7-Lq-Nxz" secondAttribute="bottom" constant="-1" id="pPO-bG-bjN"/>
-                            <constraint firstItem="TWd-Jn-sOa" firstAttribute="top" secondItem="i7v-Np-M7u" secondAttribute="bottom" constant="14" id="uS1-D9-xoE"/>
+                            <constraint firstItem="TWd-Jn-sOa" firstAttribute="top" secondItem="i7v-Np-M7u" secondAttribute="bottom" constant="8" id="uS1-D9-xoE"/>
                             <constraint firstItem="fDc-Ma-dVM" firstAttribute="top" secondItem="TWd-Jn-sOa" secondAttribute="bottom" constant="20" id="vfc-Fj-GnU"/>
                         </constraints>
                     </view>
