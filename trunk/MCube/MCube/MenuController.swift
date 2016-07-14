@@ -54,15 +54,18 @@ class MenuController: UITableViewController {
         
     }
     
-    //followup
-    //track
-    //lead
-    //x
-    //ivrs
-    //mtracker
+
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         let nav = segue.destinationViewController as! UINavigationController
+        
+        if(segue.identifier == "settings")   {
+            let settings = nav.topViewController as! SettingsViewController
+ 
+        
+        }
+        else{
+         
         let followupController = nav.topViewController as! FollowUpViewController
         var path = NSIndexPath(forRow: 0 , inSection: 0)
         
@@ -108,14 +111,12 @@ class MenuController: UITableViewController {
         }
         else if(segue.identifier == "logout"){
             followupController.isLogout = true;
-          
-            
-            
+    
         }
         mytableview.selectRowAtIndexPath(path, animated: false, scrollPosition: UITableViewScrollPosition.None)
         
-        
-    }
+    }
+  }
     
     
     
