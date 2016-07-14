@@ -128,6 +128,7 @@
 		8B1A6D021D2CD0E500A9AFFD /* FilterCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterCell.swift; sourceTree = "<group>"; };
 		8B1A6D0D1D2CD2C800A9AFFD /* OptionsData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionsData.swift; sourceTree = "<group>"; };
 		8B8DB3631D361659008A5EA6 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		8B8DB3801D36771E008A5EA6 /* MobileVLCKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileVLCKit.framework; path = "Pods/MobileVLCKit/MobileVLCKit-binary/MobileVLCKit.framework"; sourceTree = "<group>"; };
 		8BAD4E401D27682200A64393 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
 		8BAD4E421D27683200A64393 /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
 		8BAD4E431D2769E400A64393 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
@@ -189,6 +190,15 @@
 				17CF1E19AE850B22FDD7A13F /* Pods-MCubeTests.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		8B8DB3741D367231008A5EA6 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				8BAD4E431D2769E400A64393 /* Default.png */,
+				8BAD4E451D2769F300A64393 /* background_port.jpg */,
+			);
+			name = Images;
 			sourceTree = "<group>";
 		};
 		8BAD4E471D276AB100A64393 /* Controllers */ = {
@@ -261,8 +271,7 @@
 		F47029E71A7F27DB00E30A3C = {
 			isa = PBXGroup;
 			children = (
-				8BAD4E451D2769F300A64393 /* background_port.jpg */,
-				8BAD4E431D2769E400A64393 /* Default.png */,
+				8B8DB3741D367231008A5EA6 /* Images */,
 				F4702A151A7F342F00E30A3C /* MapKit.framework */,
 				F47029F21A7F27DB00E30A3C /* MCube */,
 				F4702A081A7F27DC00E30A3C /* MCubeTests */,
@@ -336,6 +345,7 @@
 		F9A7F3D913E3376316710D12 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8B8DB3801D36771E008A5EA6 /* MobileVLCKit.framework */,
 				8B8DB3631D361659008A5EA6 /* AVFoundation.framework */,
 				62DB466F8A2C7F040C953684 /* Pods_MCube.framework */,
 				A7A91B9CEBF16E4C81519E21 /* Pods_MCubeTests.framework */,
@@ -779,6 +789,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Pods/MobileVLCKit/MobileVLCKit-binary",
+				);
 				INFOPLIST_FILE = MCube/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.vmc.mcube;
@@ -794,6 +808,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Pods/MobileVLCKit/MobileVLCKit-binary",
+				);
 				INFOPLIST_FILE = MCube/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.vmc.mcube;
