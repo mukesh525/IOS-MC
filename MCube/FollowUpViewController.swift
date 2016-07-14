@@ -1,11 +1,6 @@
-
-
 //  Created by Mukesh Jha on 03/07/16.
 //  Copyright © 2016 AppCoda. All rights reserved.
 //
-
-
-
 import UIKit
 import Alamofire
 import AVFoundation
