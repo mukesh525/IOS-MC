@@ -1,11 +1,9 @@
 PODS:
   - Alamofire (3.4.1)
-  - StreamingKit (0.1.29)
   - SwiftValidator (3.0.1)
 
 DEPENDENCIES:
   - Alamofire (~> 3.4)
-  - StreamingKit
   - SwiftValidator (from `https://github.com/jpotts18/SwiftValidator.git`, tag `4.0.0`)
 
 EXTERNAL SOURCES:
@@ -20,9 +18,8 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   Alamofire: 01a82e2f6c0f860ade35534c8dd88be61bdef40c
-  StreamingKit: c329785aaef3ac142d4ae388345bfe1ed23cfd45
   SwiftValidator: 461a2c00173f001287a8fa1f12704b87ec8a6bc4
 
-PODFILE CHECKSUM: 27897056137d2471cf45c323cf95b5853be4b19b
+PODFILE CHECKSUM: 5c34d63c8a0d7670594290f18b2b481520bed94f
 
 COCOAPODS: 1.0.1

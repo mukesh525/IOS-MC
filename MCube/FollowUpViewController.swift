@@ -1,12 +1,4 @@
 
-//followup
-//track
-//lead
-//x
-//ivrs
-//mtracker
-//
-
 
 //  Created by Mukesh Jha on 03/07/16.
 //  Copyright © 2016 AppCoda. All rights reserved.
@@ -17,8 +9,6 @@
 import UIKit
 import Alamofire
 import AVFoundation
-
-
 
 
 class FollowUpViewController: UITableViewController,UIPopoverPresentationControllerDelegate,FilterSelectedDelegate {
@@ -37,7 +27,7 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
     var player:AVPlayer!
     var CurrentTitle:String="Track"
     var isLogout:Bool=false;
-    
+    //var mediaPlayer = VLCMediaPlayer()
     
     @IBAction func LogoutTap(sender: UIBarButtonItem) {
         
@@ -171,27 +161,20 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
     
     func configurePlay(filename:String) {
          let url = "http://mcube.vmctechnologies.com/sounds/\(filename)"
-//        let playerItem = AVPlayerItem( URL:NSURL( string:url )! )
-//        player = AVPlayer(playerItem:playerItem)
-//        player.rate = 1.0;
-//        print("About to play...")
-//        player.play()
-//        print("...and we're playing!")
-        
-        print(url)
-        let linkString = "http://m.mp3.zing.vn/xml/song-load/MjAxNSUyRjA4JTJGMDQlMkY3JTJGYiUyRjdiNTI4YTc0YWU2MGExYWJjMDZlYzA5NmE5MzFjMjliLm1wMyU3QzEz"
+          print(url)
+       // let linkString = "http://m.mp3.zing.vn/xml/song-load/MjAxNSUyRjA4JTJGMDQlMkY3JTJGYiUyRjdiNTI4YTc0YWU2MGExYWJjMDZlYzA5NmE5MzFjMjliLm1wMyU3QzEz"
         let link = NSURL(string: url)!
         player = AVPlayer(URL: link)
         
         do{
             player.play()
+            self.PlayAlert(filename)
         }
         catch {
             
             print("Something bad happened. Try catching specific errors to narrow things down")
         }
 
-       
         
     }
     
@@ -602,6 +585,45 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
         alertController.addAction(cancelAction)
         alertController.addAction(okAction)
         self.presentViewController(alertController, animated: false, completion: nil)
+        
+    }
+    
+
+    func PlayAlert (name:String){
+        let alertController = UIAlertController(title: "Playing", message:
+            name, preferredStyle: .Alert)
+        
+        let button = UIButton(frame: CGRect(x: 100, y: 100, width: 100, height: 50))
+        button.backgroundColor = .greenColor()
+        button.setTitle("Pause", forState: .Normal)
+        button.addTarget(self, action: #selector(buttonAction), forControlEvents: .TouchUpInside)
+        alertController.view.addSubview(button)
+
+//        
+//        let okAction = UIAlertAction(title: "Pause/Play", style: UIAlertActionStyle.Default) {
+//            UIAlertAction in
+//             if ((self.player.rate != 0) && (self.player.error == nil)) {
+//                // player is playing
+//                self.player.pause()
+//                self.PlayAlert(name)
+//            }
+//             else {
+//                self.player.play()
+//               self.PlayAlert(name)
+//            }
+//            
+//        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default) {
+            UIAlertAction in
+            self.player = nil;
+        }
+        alertController.addAction(cancelAction)
+       // alertController.addAction(okAction)
+        self.presentViewController(alertController, animated: false, completion: nil)
+        
+    }
+    func buttonAction(sender: UIButton!) {
+        print("Button tapped")
         
     }
 

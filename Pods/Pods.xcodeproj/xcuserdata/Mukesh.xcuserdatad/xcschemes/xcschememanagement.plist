@@ -19,11 +19,6 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>StreamingKit.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>SwiftValidator.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -37,12 +32,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>47B0C08A4DD7CADB752092FA5F3C2B02</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>75C2F688720BE759009FAE78F439A2CA</key>
+		<key>67DD261C19E04BE26C5224E8E877E018</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -52,7 +42,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>B17DE1629E9FB0650CFE2B32FD0E98F9</key>
+		<key>9C10E6C5044AF924BA82DBB28EE31C39</key>
 		<dict>
 			<key>primary</key>
 			<true/>
