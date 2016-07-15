@@ -12,10 +12,7 @@ class menuViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var myTableView: UITableView!
    
     
-//    override func viewDidLayoutSubviews() {
-//        super.viewDidLayoutSubviews()
-//        self.tableView.contentInset = UIEdgeInsets(top: 108, left: 0, bottom: 0, right: 0)
-//    }
+
     
     
     override func viewWillAppear(animated: Bool) {
@@ -41,7 +38,8 @@ class menuViewController: UIViewController, UITableViewDelegate, UITableViewData
         
       
         self.dismissViewControllerAnimated(true, completion: nil)
-        delegate?.filterSelected(indexPath.item)        }
+        delegate?.filterSelected(indexPath.item)
+    }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)

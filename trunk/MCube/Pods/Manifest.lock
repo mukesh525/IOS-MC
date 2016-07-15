@@ -1,10 +1,12 @@
 PODS:
   - Alamofire (3.4.1)
+  - BEMCheckBox (1.2.1)
   - SwiftValidator (3.0.1)
   - Toast-Swift (1.3.0)
 
 DEPENDENCIES:
   - Alamofire (~> 3.4)
+  - BEMCheckBox
   - SwiftValidator (from `https://github.com/jpotts18/SwiftValidator.git`, tag `4.0.0`)
   - Toast-Swift (~> 1.3.0)
 
@@ -20,9 +22,10 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   Alamofire: 01a82e2f6c0f860ade35534c8dd88be61bdef40c
+  BEMCheckBox: 264b8b72aa92adbfefa265cc58a0cdb86b207b9f
   SwiftValidator: 461a2c00173f001287a8fa1f12704b87ec8a6bc4
   Toast-Swift: 25c3d98db42dc70d9a77b5006ee000e0becb458e
 
-PODFILE CHECKSUM: c782d8c316445cd9a2e6759e0b206a1c04f5fb09
+PODFILE CHECKSUM: ada7bc92a97efd6152f10ee910241af7572820f2
 
 COCOAPODS: 1.0.1

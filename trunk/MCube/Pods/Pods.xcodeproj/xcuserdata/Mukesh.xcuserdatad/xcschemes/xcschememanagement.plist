@@ -9,6 +9,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>BEMCheckBox.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-MCube.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -37,12 +42,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>07DDEC06CEF1C11EAAA498984A458345</key>
+		<key>0652B65609242A99E0C454314E8C7F43</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>5EAA2735EC8310EB7DEE63E208689C33</key>
+		<key>566D684A68E09758048DBF71B5F34369</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -52,7 +57,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>FCB4E4E6791D5C753829C39E06FC5AFC</key>
+		<key>ABF4A4FD777434E18DFE5321BA4FC67B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>D84585EDAF02EBFF34D42696A10B2E50</key>
 		<dict>
 			<key>primary</key>
 			<true/>

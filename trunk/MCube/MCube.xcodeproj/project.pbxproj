@@ -12,6 +12,7 @@
 		8B1248D61D2FDCF600DCFFA6 /* menuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1248D51D2FDCF600DCFFA6 /* menuViewController.swift */; };
 		8B1A6D031D2CD0E600A9AFFD /* FilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1A6D021D2CD0E500A9AFFD /* FilterCell.swift */; };
 		8B1A6D0E1D2CD2C800A9AFFD /* OptionsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1A6D0D1D2CD2C800A9AFFD /* OptionsData.swift */; };
+		8B326D4B1D38D6F400022B33 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B326D4A1D38D6F400022B33 /* DetailViewController.swift */; };
 		8B8DB3641D36165A008A5EA6 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B8DB3631D361659008A5EA6 /* AVFoundation.framework */; };
 		8BAD4E411D27682200A64393 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BAD4E401D27682200A64393 /* SWRevealViewController.m */; };
 		8BAD4E441D2769E400A64393 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BAD4E431D2769E400A64393 /* Default.png */; };
@@ -127,6 +128,7 @@
 		8B1248D51D2FDCF600DCFFA6 /* menuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = menuViewController.swift; sourceTree = "<group>"; };
 		8B1A6D021D2CD0E500A9AFFD /* FilterCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterCell.swift; sourceTree = "<group>"; };
 		8B1A6D0D1D2CD2C800A9AFFD /* OptionsData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionsData.swift; sourceTree = "<group>"; };
+		8B326D4A1D38D6F400022B33 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		8B8DB3631D361659008A5EA6 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		8B8DB3801D36771E008A5EA6 /* MobileVLCKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileVLCKit.framework; path = "Pods/MobileVLCKit/MobileVLCKit-binary/MobileVLCKit.framework"; sourceTree = "<group>"; };
 		8BAD4E401D27682200A64393 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
@@ -192,6 +194,13 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		8B326D521D38F3E900022B33 /* CustomCell */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = CustomCell;
+			sourceTree = "<group>";
+		};
 		8B8DB3741D367231008A5EA6 /* Images */ = {
 			isa = PBXGroup;
 			children = (
@@ -212,6 +221,7 @@
 				8BBFE0BA1D28E25900435723 /* FollowupTableViewCell.swift */,
 				8B1A6D021D2CD0E500A9AFFD /* FilterCell.swift */,
 				8BF82F3F1D37B99000E1BA8D /* SettingsController.swift */,
+				8B326D4A1D38D6F400022B33 /* DetailViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -293,6 +303,7 @@
 		F47029F21A7F27DB00E30A3C /* MCube */ = {
 			isa = PBXGroup;
 			children = (
+				8B326D521D38F3E900022B33 /* CustomCell */,
 				8BB16D371D3507650060B841 /* Utils */,
 				8BAD4E491D276ACD00A64393 /* Libs */,
 				8BAD4E481D276ABE00A64393 /* Models */,
@@ -662,6 +673,7 @@
 				8BB16D391D35078E0060B841 /* PushNoAnimationSegue.swift in Sources */,
 				8BB16D3B1D3510F80060B841 /* CheckBox.swift in Sources */,
 				8B1A6D0E1D2CD2C800A9AFFD /* OptionsData.swift in Sources */,
+				8B326D4B1D38D6F400022B33 /* DetailViewController.swift in Sources */,
 				F491E7551A7F7E010026528E /* PhotoViewController.swift in Sources */,
 				8B1A6D031D2CD0E600A9AFFD /* FilterCell.swift in Sources */,
 			);
