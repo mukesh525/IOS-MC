@@ -12,7 +12,6 @@ class MenuController: UITableViewController {
     @IBOutlet var FilterTable: UITableView!
     @IBOutlet var filtertableview: UITableView!
     @IBOutlet var mytableview: UITableView!
-    //   @IBOutlet var mytableview: UITableView!
     @IBOutlet weak var username: UILabel!
     @IBOutlet weak var useremail: UILabel!
     var options:NSMutableArray=NSMutableArray();
@@ -48,6 +47,26 @@ class MenuController: UITableViewController {
       
         
     }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        print("menu clcked")
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     override func viewDidAppear(animated: Bool) {
         
         if NSUserDefaults.standardUserDefaults().objectForKey("launch") != nil{

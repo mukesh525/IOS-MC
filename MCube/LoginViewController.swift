@@ -26,6 +26,8 @@ class LoginViewController: UIViewController,ValidationDelegate ,UITextFieldDeleg
     var mtracker:String?
     var pbx:String?
     var track:String?
+    var businessName:String?
+    var empContact:String?
     var rememberMe:Bool=false
     @IBOutlet weak var checkBox: CheckBox!
     
@@ -150,6 +152,14 @@ class LoginViewController: UIViewController,ValidationDelegate ,UITextFieldDeleg
                     self.track = response.objectForKey("track")! as? String
                     
                 }
+                if((response.objectForKey("businessName")) != nil){
+                    self.businessName = response.objectForKey("businessName")! as? String
+                    
+                }
+                if((response.objectForKey("empContact")) != nil){
+                    self.empContact = response.objectForKey("empContact")! as? String
+                    
+                }
                 
                 
                 
@@ -176,6 +186,8 @@ class LoginViewController: UIViewController,ValidationDelegate ,UITextFieldDeleg
                        NSUserDefaults.standardUserDefaults().setObject(self.empName, forKey: "name")
                        NSUserDefaults.standardUserDefaults().setObject(self.empEmail, forKey: "email")
                        NSUserDefaults.standardUserDefaults().setObject(self.authkey, forKey: "authkey")
+                         NSUserDefaults.standardUserDefaults().setObject(self.empContact, forKey: "empContact")
+                         NSUserDefaults.standardUserDefaults().setObject(self.businessName, forKey: "businessName")
                       // NSUserDefaults.standardUserDefaults().setInteger(1, forKey: "select")
                        NSUserDefaults.standardUserDefaults().synchronize()
                         if let myLoadedString = NSUserDefaults.standardUserDefaults().stringForKey("name") {

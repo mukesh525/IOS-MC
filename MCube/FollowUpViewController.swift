@@ -32,19 +32,21 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-      
-      
+        
+         if let savedlimit = NSUserDefaults.standardUserDefaults().stringForKey("limit") {
+            self.limit=Int(savedlimit)!;
+        }
+        
+        
         if(isLogout){
          isLogout=false;
          LogoutAlert()
         }
-//        self.navigationController?.view.makeToast("This is a piece of toast with a title", duration: 2.0, position: .Center, title: "Toast Title", image: nil, style: nil, completion: nil)
-//        
         NSUserDefaults.standardUserDefaults().removeObjectForKey("select")
         NSUserDefaults.standardUserDefaults().synchronize()
         self.navigationItem.title = CurrentTitle;
       
-        tableView.allowsSelection = false;
+        tableView.allowsSelection = true;
         mytableview.backgroundView = UIImageView(image: UIImage(named: "background_port.jpg"))
         if let authkey = NSUserDefaults.standardUserDefaults().stringForKey("authkey") {
             print(authkey)
@@ -61,11 +63,7 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
             //revealViewController().rearViewRevealWidth = 62
             menubutton.target = revealViewController()
             menubutton.action = #selector(SWRevealViewController.revealToggle(_:))
-            
             revealViewController().rightViewRevealWidth = 150
-            //extraButton.target = revealViewController()
-            // extraButton.action = #selector(SWRevealViewController.rightRevealToggle(_:))
-            
             view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
             
         }
@@ -81,12 +79,7 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
     
     
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    // MARK: - Table view data source
-    // Make the background color show through
+    
     override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = UIView()
         headerView.backgroundColor = UIColor.clearColor()
@@ -101,6 +94,17 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
         // Return the number of rows in the section.
         return result.count
     }
+    
+    
+ 
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        //CODE TO BE RUN ON CELL TOUCH
+        print("selection get Called")
+        self.performSegueWithIdentifier("detailview", sender: self)
+        
+      //  self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
     
     override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return cellSpacingHeight
@@ -214,11 +218,12 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
         var audioLink:String?
         var callTimeString:String?
         var empName:String?
-        limit=0
         let authkey = NSUserDefaults.standardUserDefaults().stringForKey("authkey")
         self.showActivityIndicator()
+        print(self.limit)
+        
         Alamofire.request(.POST, "https://mcube.vmc.in/mobapp/getList", parameters:
-            ["authKey":authkey!, "limit":"10","gid": gid,"ofset":limit,"type":type])
+            ["authKey":authkey!, "limit":"10","gid": gid,"ofset":self.limit,"type":type])
             .validate().responseJSON
             {response in switch response.result {
                 
