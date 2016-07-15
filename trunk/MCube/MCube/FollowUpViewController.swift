@@ -23,7 +23,8 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
     var CurrentTitle:String="Track"
     var isLogout:Bool=false;
     //var mediaPlayer = VLCMediaPlayer()
-    
+    private var showingActivity = false
+
     @IBAction func LogoutTap(sender: UIBarButtonItem) {
         
         LogoutAlert()
@@ -32,15 +33,17 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
     override func viewDidLoad() {
         super.viewDidLoad()
       
+      
         if(isLogout){
          isLogout=false;
          LogoutAlert()
         }
-        
-         
+//        self.navigationController?.view.makeToast("This is a piece of toast with a title", duration: 2.0, position: .Center, title: "Toast Title", image: nil, style: nil, completion: nil)
+//        
+        NSUserDefaults.standardUserDefaults().removeObjectForKey("select")
+        NSUserDefaults.standardUserDefaults().synchronize()
         self.navigationItem.title = CurrentTitle;
-        //        NSUserDefaults.standardUserDefaults().setInteger(1, forKey: "select")
-        //        NSUserDefaults.standardUserDefaults().synchronize()
+      
         tableView.allowsSelection = false;
         mytableview.backgroundView = UIImageView(image: UIImage(named: "background_port.jpg"))
         if let authkey = NSUserDefaults.standardUserDefaults().stringForKey("authkey") {
@@ -213,6 +216,7 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
         var empName:String?
         limit=0
         let authkey = NSUserDefaults.standardUserDefaults().stringForKey("authkey")
+        self.showActivityIndicator()
         Alamofire.request(.POST, "https://mcube.vmc.in/mobapp/getList", parameters:
             ["authKey":authkey!, "limit":"10","gid": gid,"ofset":limit,"type":type])
             .validate().responseJSON
@@ -309,20 +313,25 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
                 }
                 
                 if(self.result.count == 0 && filter){
+                    self.showActivityIndicator()
                     self.filteralert()
                 }
                 else if(self.result.count == 0 && !filter){
+                    self.showActivityIndicator()
                     self.NoDataAlert()
                     
                 }
                 else{
+                    self.showActivityIndicator()
                     self.mytableview.reloadData()
                 }
                 if((self.refreshControl?.beginRefreshing()) != nil){
                     self.refreshControl!.endRefreshing()
                 }
                 
+                
             case .Failure(let error):
+                self.showActivityIndicator()
                 print("Request failed with error: \(error)")
                 if (error.code == -1009) {
                     self.showAlert("No Internet Conncetion")
@@ -619,6 +628,17 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
     }
     func buttonAction(sender: UIButton!) {
         print("Button tapped")
+        
+    }
+    
+    func showActivityIndicator(){
+        if !self.showingActivity {
+            self.navigationController?.view.makeToastActivity(.Center)
+        } else {
+            self.navigationController?.view.hideToastActivity()
+        }
+        
+        self.showingActivity = !self.showingActivity
         
     }
 

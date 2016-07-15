@@ -4,6 +4,7 @@
 import UIKit
 import SwiftValidator
 import Alamofire
+import Toast_Swift
 
 class LoginViewController: UIViewController,ValidationDelegate ,UITextFieldDelegate{
     
@@ -12,7 +13,7 @@ class LoginViewController: UIViewController,ValidationDelegate ,UITextFieldDeleg
     @IBOutlet weak var password: UITextField!
     @IBOutlet weak var emailerror: UILabel!
     @IBOutlet weak var email: UITextField!
-    
+    private var showingActivity = false
     let validator = Validator()
     var code:String?
     var authkey:String?
@@ -45,6 +46,10 @@ class LoginViewController: UIViewController,ValidationDelegate ,UITextFieldDeleg
             
             
         }
+      //  self.showActivityIndiavtor()
+        
+        
+       
        
     }
 
@@ -88,11 +93,13 @@ class LoginViewController: UIViewController,ValidationDelegate ,UITextFieldDeleg
     }
     @IBOutlet weak var loginClick: UIButton!
     
+    
+    
     func validationSuccessful() {
         loginClick.enabled=false
         emailerror.text="";
         passworderror.text="";
-        
+        self.showActivityIndicator()
         Alamofire.request(.POST, "https://mcube.vmc.in/mobapp/checkAuth", parameters: ["email":email.text!, "password":password.text!]).validate().responseJSON
             {response in switch response.result {
                 
@@ -155,14 +162,17 @@ class LoginViewController: UIViewController,ValidationDelegate ,UITextFieldDeleg
                 }
                 
                 self.loginClick.enabled=true;
+                self.showActivityIndicator()
                 }
                 if(self.code=="401"||self.code=="400"){
                     if(self.message != nil){
+                        self.showActivityIndicator()
                         self.showAlert(self.message!)
                     }
                 }
                 if(self.code=="200"){
                     if(self.message != nil){
+                       self.showActivityIndicator()
                        NSUserDefaults.standardUserDefaults().setObject(self.empName, forKey: "name")
                        NSUserDefaults.standardUserDefaults().setObject(self.empEmail, forKey: "email")
                        NSUserDefaults.standardUserDefaults().setObject(self.authkey, forKey: "authkey")
@@ -203,6 +213,19 @@ class LoginViewController: UIViewController,ValidationDelegate ,UITextFieldDeleg
         
     }
     
+    
+    
+    
+    func showActivityIndicator(){
+        if !self.showingActivity {
+            self.navigationController?.view.makeToastActivity(.Center)
+        } else {
+            self.navigationController?.view.hideToastActivity()
+        }
+        
+        self.showingActivity = !self.showingActivity
+        
+    }
     
     
     

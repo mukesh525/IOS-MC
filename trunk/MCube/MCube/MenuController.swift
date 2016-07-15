@@ -29,6 +29,7 @@ class MenuController: UITableViewController {
             
         }
         
+      //  self.mytableview.allowsSelection=true;
         if(username != nil && useremail != nil ){
             
             
@@ -40,28 +41,35 @@ class MenuController: UITableViewController {
             }
             
         }
-        // Uncomment the following line to preserve selection between presentations
-        self.clearsSelectionOnViewWillAppear = false
         
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-    }
-    override  func viewDidAppear(animated: Bool){
-//        if let select = NSUserDefaults.standardUserDefaults().objectForKey("select"){
-//            let myPath = NSIndexPath(forRow: select as! Int, inSection: 0)
-//            mytableview.selectRowAtIndexPath(myPath, animated: false, scrollPosition: UITableViewScrollPosition.None)
-//        }
+        //tableView.selectRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), animated: false, scrollPosition: .None)
+        self.clearsSelectionOnViewWillAppear = false;
+        
+      
         
     }
+    override func viewDidAppear(animated: Bool) {
+        
+        if NSUserDefaults.standardUserDefaults().objectForKey("launch") != nil{
+                        print("Loaded First")
+                        let myPath = NSIndexPath(forRow: 1, inSection: 0)
+                        self.mytableview.selectRowAtIndexPath(myPath, animated: false, scrollPosition: UITableViewScrollPosition.None)
+                        NSUserDefaults.standardUserDefaults().removeObjectForKey("launch")
+                        NSUserDefaults.standardUserDefaults().synchronize()
+                    }
+            }
     
 
+    
+
+    
+    
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         let nav = segue.destinationViewController as! UINavigationController
         
         if(segue.identifier == "settings")   {
-            let settings = nav.topViewController as! SettingsViewController
- 
+            
         
         }
         else{
