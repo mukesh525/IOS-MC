@@ -11,4 +11,5 @@ import UIKit
 class OptionsData: NSObject {
     var id:String?
     var value:String?
+    var isChecked:Bool=false
 }
