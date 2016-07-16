@@ -1090,26 +1090,29 @@
                                             <outlet property="label2" destination="kWh-nQ-Vdm" id="EUQ-hd-SQG"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="LP" rowHeight="79" id="8GV-0C-9TU" customClass="CustomeCell2" customModule="MCube" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="72" width="320" height="79"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="LP" rowHeight="100" id="8GV-0C-9TU" customClass="CustomeCell2" customModule="MCube" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="72" width="320" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="8GV-0C-9TU" id="pil-Nk-paj">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="78"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="99"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cfR-Ga-htP">
-                                                    <rect key="frame" x="143" y="14" width="169" height="53"/>
+                                                    <rect key="frame" x="128" y="0.0" width="184" height="99"/>
+                                                    <color key="backgroundColor" red="0.90588235289999997" green="0.90588235289999997" blue="0.90588235289999997" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="tintColor" red="1" green="0.3411764706" blue="0.1333333333" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="169" id="0cA-IM-KaT"/>
-                                                        <constraint firstAttribute="height" constant="53" id="Kh4-Fb-MG8"/>
+                                                        <constraint firstAttribute="width" constant="184" id="Tc3-5X-svo"/>
+                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="184" id="dMd-JX-JSe"/>
+                                                        <constraint firstAttribute="height" constant="99" id="so7-qf-jYX"/>
                                                     </constraints>
                                                 </pickerView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="default" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zbr-Is-Z8D">
                                                     <rect key="frame" x="8" y="30" width="127" height="21"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="127" id="Epj-fz-yD6"/>
-                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="127" id="n2V-k3-XTO"/>
-                                                        <constraint firstAttribute="height" constant="21" id="qxQ-Ev-9dY"/>
+                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="127" id="0Qj-ag-95b"/>
+                                                        <constraint firstAttribute="height" constant="21" id="1lg-Kh-NKv"/>
+                                                        <constraint firstAttribute="width" constant="127" id="3p5-sD-URN"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -1117,21 +1120,20 @@
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="bottomMargin" secondItem="cfR-Ga-htP" secondAttribute="bottom" constant="3" id="13D-xU-Y1Z"/>
-                                                <constraint firstItem="cfR-Ga-htP" firstAttribute="leading" secondItem="zbr-Is-Z8D" secondAttribute="trailing" constant="8" id="3fa-6J-BiU"/>
-                                                <constraint firstItem="cfR-Ga-htP" firstAttribute="leading" secondItem="zbr-Is-Z8D" secondAttribute="trailing" constant="8" id="9GN-R3-EW4"/>
-                                                <constraint firstItem="cfR-Ga-htP" firstAttribute="leading" secondItem="zbr-Is-Z8D" secondAttribute="trailing" constant="8" id="9n7-Xn-LRJ"/>
-                                                <constraint firstItem="cfR-Ga-htP" firstAttribute="trailing" secondItem="pil-Nk-paj" secondAttribute="trailingMargin" id="DqS-gP-a5I"/>
-                                                <constraint firstItem="zbr-Is-Z8D" firstAttribute="top" secondItem="pil-Nk-paj" secondAttribute="topMargin" constant="22" id="QFO-CM-EEC"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="zbr-Is-Z8D" secondAttribute="bottom" constant="19" id="UeW-gX-xEC"/>
-                                                <constraint firstItem="zbr-Is-Z8D" firstAttribute="leading" secondItem="pil-Nk-paj" secondAttribute="leadingMargin" id="YiP-FK-i64"/>
-                                                <constraint firstItem="zbr-Is-Z8D" firstAttribute="leading" secondItem="pil-Nk-paj" secondAttribute="leadingMargin" id="fsy-06-omj"/>
-                                                <constraint firstItem="zbr-Is-Z8D" firstAttribute="centerY" secondItem="cfR-Ga-htP" secondAttribute="centerY" id="h5N-eI-XvB"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="cfR-Ga-htP" secondAttribute="bottom" constant="3" id="m1e-VO-ik1"/>
-                                                <constraint firstItem="cfR-Ga-htP" firstAttribute="trailing" secondItem="pil-Nk-paj" secondAttribute="trailingMargin" id="nYX-YU-lRZ"/>
-                                                <constraint firstItem="cfR-Ga-htP" firstAttribute="top" secondItem="pil-Nk-paj" secondAttribute="topMargin" constant="6" id="sQ6-Xd-vKN"/>
-                                                <constraint firstItem="cfR-Ga-htP" firstAttribute="top" secondItem="pil-Nk-paj" secondAttribute="topMargin" constant="6" id="ult-9V-XM2"/>
-                                                <constraint firstItem="zbr-Is-Z8D" firstAttribute="top" secondItem="pil-Nk-paj" secondAttribute="topMargin" constant="22" id="xpn-ix-vKl"/>
+                                                <constraint firstAttribute="bottom" secondItem="cfR-Ga-htP" secondAttribute="bottom" id="0wp-qZ-pFh"/>
+                                                <constraint firstItem="cfR-Ga-htP" firstAttribute="trailing" secondItem="pil-Nk-paj" secondAttribute="trailingMargin" id="5su-yz-JEi"/>
+                                                <constraint firstItem="cfR-Ga-htP" firstAttribute="top" secondItem="pil-Nk-paj" secondAttribute="top" id="60R-KK-6qh"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="zbr-Is-Z8D" secondAttribute="bottom" constant="40" id="6RA-mv-pKZ"/>
+                                                <constraint firstItem="cfR-Ga-htP" firstAttribute="leading" secondItem="pil-Nk-paj" secondAttribute="leadingMargin" constant="120" id="Dpk-eo-jO9"/>
+                                                <constraint firstItem="zbr-Is-Z8D" firstAttribute="top" secondItem="pil-Nk-paj" secondAttribute="topMargin" constant="22" id="FxW-nb-cEp"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="zbr-Is-Z8D" secondAttribute="trailing" constant="177" id="IPS-Tw-avq"/>
+                                                <constraint firstItem="cfR-Ga-htP" firstAttribute="top" secondItem="pil-Nk-paj" secondAttribute="top" id="S4e-KS-1te"/>
+                                                <constraint firstItem="zbr-Is-Z8D" firstAttribute="top" secondItem="pil-Nk-paj" secondAttribute="topMargin" constant="22" id="W4b-M9-eCL"/>
+                                                <constraint firstAttribute="bottom" secondItem="cfR-Ga-htP" secondAttribute="bottom" id="WFy-cY-Waw"/>
+                                                <constraint firstItem="zbr-Is-Z8D" firstAttribute="leading" secondItem="pil-Nk-paj" secondAttribute="leadingMargin" id="l5h-lk-TPT"/>
+                                                <constraint firstItem="zbr-Is-Z8D" firstAttribute="leading" secondItem="pil-Nk-paj" secondAttribute="leadingMargin" id="nIp-uw-ndt"/>
+                                                <constraint firstAttribute="trailing" secondItem="cfR-Ga-htP" secondAttribute="trailing" constant="8" id="pA6-2g-EyU"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="zbr-Is-Z8D" secondAttribute="bottom" constant="40" id="sAe-w0-eei"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -1140,7 +1142,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="LT" id="Bos-Tv-pP8" customClass="CustomeCell3" customModule="MCube" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="151" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="172" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Bos-Tv-pP8" id="eBh-gy-bsO">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
@@ -1188,7 +1190,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Ltabel" rowHeight="88" id="mmC-ng-kC2" customClass="CustomeCell4" customModule="MCube" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="195" width="320" height="88"/>
+                                        <rect key="frame" x="0.0" y="216" width="320" height="88"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="mmC-ng-kC2" id="mYj-r4-pSq">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="87"/>

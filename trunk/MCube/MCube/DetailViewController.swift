@@ -81,6 +81,7 @@ class DetailViewController: UIViewController,UITableViewDataSource, UITableViewD
             let cell1 = tableView.dequeueReusableCellWithIdentifier("LL", forIndexPath: indexPath) as!CustomeCell1
             cell1.label1.text=detaildata.label
             cell1.label2.text=detaildata.value
+            
             return UITableViewCell()
             
         }
@@ -99,6 +100,7 @@ class DetailViewController: UIViewController,UITableViewDataSource, UITableViewD
             let cell3 = tableView.dequeueReusableCellWithIdentifier("LT", forIndexPath: indexPath) as!CustomeCell3
             cell3.label1.text=detaildata.label
             cell3.textfiled.text=detaildata.value
+            
             return cell3
             
             
@@ -106,8 +108,9 @@ class DetailViewController: UIViewController,UITableViewDataSource, UITableViewD
         else if (detaildata.Type=="dropdown" || detaildata.Type=="radio") {
             let cell2 = tableView.dequeueReusableCellWithIdentifier("LP", forIndexPath: indexPath) as!CustomeCell2
              cell2.label.text=detaildata.label
-           // cell2.uiPicker.text=detaildata.value
-            return cell2
+             cell2.Options=detaildata.Options
+             cell2.itemAtDefaultPosition=detaildata.value!
+             return cell2
             
             
         }
@@ -141,7 +144,7 @@ class DetailViewController: UIViewController,UITableViewDataSource, UITableViewD
         }
         else if (detaildata.Type=="dropdown" || detaildata.Type=="radio") {
         
-        return 88
+        return 100
         }
         else if (detaildata.Type == "checkbox"){
             return 88
