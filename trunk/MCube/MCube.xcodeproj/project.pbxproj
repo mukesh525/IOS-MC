@@ -209,11 +209,12 @@
 		8B326D521D38F3E900022B33 /* CustomCell */ = {
 			isa = PBXGroup;
 			children = (
+				8B326D631D3900E700022B33 /* ChekboxCell.swift */,
 				8B326D5A1D39005E00022B33 /* CustomeCell1.swift */,
 				8B326D5C1D39007200022B33 /* CustomeCell2.swift */,
 				8B326D5E1D39008300022B33 /* CustomeCell3.swift */,
 				8B326D601D39009400022B33 /* CustomeCell4.swift */,
-				8B326D631D3900E700022B33 /* ChekboxCell.swift */,
+				8BB16D371D3507650060B841 /* Utils */,
 			);
 			name = CustomCell;
 			sourceTree = "<group>";
@@ -322,7 +323,6 @@
 			isa = PBXGroup;
 			children = (
 				8B326D521D38F3E900022B33 /* CustomCell */,
-				8BB16D371D3507650060B841 /* Utils */,
 				8BAD4E491D276ACD00A64393 /* Libs */,
 				8BAD4E481D276ABE00A64393 /* Models */,
 				8BAD4E471D276AB100A64393 /* Controllers */,
