@@ -16,12 +16,14 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
     //var options:NSMutableArray=NSMutableArray();
     var options = [OptionsData]()
     var limit = 0;
+    var offset=0;
     var gid:String="0";
     var type:String="track"
     var isNewDataLoading:Bool=false;
     var player:AVPlayer!
     var CurrentTitle:String="Track"
     var isLogout:Bool=false;
+    var CurrentData:Data!
     //var mediaPlayer = VLCMediaPlayer()
     private var showingActivity = false
 
@@ -54,7 +56,10 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
         }
         
         refreshControl = UIRefreshControl()
-        refreshControl!.attributedTitle = NSAttributedString(string: "Pull to refresh")
+       // refreshControl!.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        refreshControl?.backgroundColor=UIColor.redColor()
+        refreshControl?.tintColor = UIColor.yellowColor()
+       // mytableview.addSubview(refreshControl!)
         refreshControl!.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
         
         
@@ -99,7 +104,9 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
  
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         //CODE TO BE RUN ON CELL TOUCH
-        print("selection get Called")
+        
+        self.CurrentData = self.result[indexPath.row] as! Data
+        
         self.performSegueWithIdentifier("detailview", sender: self)
         
       //  self.dismissViewControllerAnimated(true, completion: nil)
@@ -218,12 +225,13 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
         var audioLink:String?
         var callTimeString:String?
         var empName:String?
+        self.offset=0
         let authkey = NSUserDefaults.standardUserDefaults().stringForKey("authkey")
         self.showActivityIndicator()
         print(self.limit)
         
         Alamofire.request(.POST, "https://mcube.vmc.in/mobapp/getList", parameters:
-            ["authKey":authkey!, "limit":"10","gid": gid,"ofset":self.limit,"type":type])
+            ["authKey":authkey!, "limit":"10","gid": gid,"ofset":self.offset,"type":type])
             .validate().responseJSON
             {response in switch response.result {
                 
@@ -358,12 +366,10 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
         var audioLink:String?
         var callTimeString:String?
         var EmpName:String?
-        self.limit += 10
-        
-        
+        self.offset += self.limit
         let authkey = NSUserDefaults.standardUserDefaults().stringForKey("authkey")
         Alamofire.request(.POST, "https://mcube.vmc.in/mobapp/getList", parameters:
-            ["authKey":authkey!, "limit":"10","gid": gid,"ofset":self.limit,"type":type])
+            ["authKey":authkey!, "limit":"10","gid": gid,"ofset":self.offset,"type":type])
             .validate().responseJSON
             {response in switch response.result {
                 
@@ -530,6 +536,13 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
             popoverViewController.modalPresentationStyle = UIModalPresentationStyle.Popover
             popoverViewController.popoverPresentationController!.delegate = self
             popoverViewController.delegate = self
+        }
+        if segue.identifier == "detailview"{
+            
+            let detailview = segue.destinationViewController as! DetailViewController
+            detailview.currentData=CurrentData;
+            detailview.type=self.type
+            
         }
         
     }
