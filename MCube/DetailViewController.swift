@@ -20,7 +20,7 @@ class DetailViewController: UIViewController,UITableViewDataSource, UITableViewD
     var type:String?
     var ContactNo :String?
     var EmailId :String?
-    var refreshControl: UIRefreshControl!
+    var refreshControl = UIRefreshControl()
     @IBOutlet weak var mytableview: UITableView!
     
     
@@ -32,11 +32,14 @@ class DetailViewController: UIViewController,UITableViewDataSource, UITableViewD
         mytableview.delegate = self
         mytableview.dataSource = self
         mytableview.allowsSelection=false
-        refreshControl = UIRefreshControl()
-        refreshControl!.attributedTitle = NSAttributedString(string: "Pull to refresh")
-        refreshControl!.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
         mytableview.backgroundView = UIImageView(image: UIImage(named: "background_port.jpg"))
         loadDetaildata();
+        self.refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        self.refreshControl.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
+        self.mytableview?.addSubview(refreshControl)
+        if self.refreshControl.refreshing{
+            self.refreshControl.endRefreshing()
+        }
     }
 
     
@@ -162,16 +165,20 @@ class DetailViewController: UIViewController,UITableViewDataSource, UITableViewD
     
      
     func loadDetaildata() {
-        self.showActivityIndicator()
+        
+        if !self.refreshControl.refreshing{
+            self.showActivityIndicator()
+        }
+      
         Alamofire.request(.POST, "https://mcube.vmc.in//mobapp/getDetail",
-            parameters: ["authKey":self.authkey!,"type":self.type!, "callid": (currentData?.callId)!, "groupname":(currentData?.groupName)!]).validate().responseJSON
+            parameters: ["authKey":self.authkey!,"type":self.type!, "callid":currentData.callId!, "groupname":(currentData.groupName != nil ? currentData.groupName : currentData.empName)!]).validate().responseJSON
             {response in switch response.result {
                 
             case .Success(let JSON):
                 print("Success with JSON: \(JSON)")
                 let response = JSON as! NSDictionary
                 
-                 self.showActivityIndicator()
+                 //self.showActivityIndicator()
                 if((response.objectForKey("fields")) != nil){
                     self.DetailDataList=[DetailData]()
                     let fields = response.objectForKey("fields") as! NSArray?
@@ -254,8 +261,14 @@ class DetailViewController: UIViewController,UITableViewDataSource, UITableViewD
 
 
                 }
-                    
-                   self.mytableview.reloadData()
+                    if self.refreshControl.refreshing{
+                        self.refreshControl.endRefreshing()
+                    }
+                    else{
+                        self.showActivityIndicator()
+                    }
+
+                    self.mytableview.reloadData()
                     print(self.DetailDataList.count)
                     
             }
@@ -267,8 +280,13 @@ class DetailViewController: UIViewController,UITableViewDataSource, UITableViewD
                 if (error.code == -1009) {
                     self.showAlert("No Internet Conncetion")
                 }
-                
+                if self.refreshControl.refreshing{
+                    self.refreshControl.endRefreshing()
+                }
+                else{
                 self.showActivityIndicator()
+                }
+                
                 }
 //                if(self.code=="401"||self.code=="400"){
 //                    if(self.message != nil){
