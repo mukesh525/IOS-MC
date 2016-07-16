@@ -13,7 +13,6 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
     let cellSpacingHeight: CGFloat = 5
     var result:NSMutableArray=NSMutableArray();
     var SeletedFilterpos: Int=0;
-    //var options:NSMutableArray=NSMutableArray();
     var options = [OptionsData]()
     var limit = 0;
     var offset=0;
@@ -26,7 +25,7 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
     var CurrentData:Data!
     //var mediaPlayer = VLCMediaPlayer()
     private var showingActivity = false
-
+    var refreshControll = UIRefreshControl()
     @IBAction func LogoutTap(sender: UIBarButtonItem) {
         
         LogoutAlert()
@@ -55,13 +54,10 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
             LoadData(false)
         }
         
-        refreshControl = UIRefreshControl()
-       // refreshControl!.attributedTitle = NSAttributedString(string: "Pull to refresh")
-        refreshControl?.backgroundColor=UIColor.redColor()
-        refreshControl?.tintColor = UIColor.yellowColor()
-       // mytableview.addSubview(refreshControl!)
-        refreshControl!.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
-        
+        self.refreshControll.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        self.refreshControll.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
+        self.mytableview?.addSubview(refreshControll)
+       // self.tableView.backgroundView!.layer.zPosition -= 1;
         
         
         if revealViewController() != nil {
@@ -72,6 +68,11 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
             view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
             
         }
+        
+        if self.refreshControll.refreshing{
+            self.refreshControll.endRefreshing()
+        }
+
         // Do any additional setup after loading the view.
     }
     
@@ -82,7 +83,10 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
         
     }
     
-    
+    override func viewWillAppear(animated: Bool) {
+
+    self.tableView.reloadData()
+           }
     
     
     override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -104,10 +108,10 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
  
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         //CODE TO BE RUN ON CELL TOUCH
-        
+        self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
         self.CurrentData = self.result[indexPath.row] as! Data
         
-        self.performSegueWithIdentifier("detailview", sender: self)
+        self.performSegueWithIdentifier("detail", sender: self)
         
       //  self.dismissViewControllerAnimated(true, completion: nil)
     }
@@ -227,7 +231,9 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
         var empName:String?
         self.offset=0
         let authkey = NSUserDefaults.standardUserDefaults().stringForKey("authkey")
-        self.showActivityIndicator()
+        if !self.refreshControll.refreshing{
+          self.showActivityIndicator()
+        }
         print(self.limit)
         
         Alamofire.request(.POST, "https://mcube.vmc.in/mobapp/getList", parameters:
@@ -335,7 +341,12 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
                     
                 }
                 else{
-                    self.showActivityIndicator()
+                    if self.refreshControll.refreshing{
+                        self.refreshControll.endRefreshing()
+                    }else{
+                        self.showActivityIndicator()
+                    }
+
                     self.mytableview.reloadData()
                 }
                 if((self.refreshControl?.beginRefreshing()) != nil){
@@ -344,6 +355,12 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
                 
                 
             case .Failure(let error):
+                if self.refreshControll.refreshing{
+                    self.refreshControll.endRefreshing()
+                }else{
+                    self.showActivityIndicator()
+                }
+
                 self.showActivityIndicator()
                 print("Request failed with error: \(error)")
                 if (error.code == -1009) {
@@ -537,7 +554,7 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
             popoverViewController.popoverPresentationController!.delegate = self
             popoverViewController.delegate = self
         }
-        if segue.identifier == "detailview"{
+        if segue.identifier == "detail"{
             
             let detailview = segue.destinationViewController as! DetailViewController
             detailview.currentData=CurrentData;
