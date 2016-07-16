@@ -118,6 +118,7 @@ class DetailViewController: UIViewController,UITableViewDataSource, UITableViewD
        else if (detaildata.Type == "checkbox"){
        let cell4 = tableView.dequeueReusableCellWithIdentifier("Ltabel", forIndexPath: indexPath) as!CustomeCell4
            cell4.label1.text=detaildata.label
+           cell4.optionsList=detaildata.OptionList
           return cell4
             
        }
@@ -138,6 +139,8 @@ class DetailViewController: UIViewController,UITableViewDataSource, UITableViewD
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         let detaildata: DetailData = self.DetailDataList[indexPath.row]
+        let count=CGFloat(detaildata.OptionList.count);
+        let chekheight=CGFloat(44);
         if(detaildata.Type == "hidden"){
         
             return 0
@@ -147,7 +150,7 @@ class DetailViewController: UIViewController,UITableViewDataSource, UITableViewD
         return 100
         }
         else if (detaildata.Type == "checkbox"){
-            return 88
+            return chekheight * count
         }
         else{
             return 44
@@ -155,41 +158,6 @@ class DetailViewController: UIViewController,UITableViewDataSource, UITableViewD
         }
         
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
     
      

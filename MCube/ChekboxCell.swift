@@ -7,14 +7,18 @@
 //
 
 import UIKit
+import BEMCheckBox
 
-class ChekboxCell: UITableViewCell {
+class ChekboxCell: UITableViewCell{
 
-    @IBOutlet weak var checkLabel: UILabel!
-    @IBOutlet weak var checkbox: UIView!
+    @IBOutlet weak var checklabel: UILabel!
+    
+    @IBOutlet weak var Chekbox: BEMCheckBox!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
@@ -22,5 +26,7 @@ class ChekboxCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
+      
+    
 
 }

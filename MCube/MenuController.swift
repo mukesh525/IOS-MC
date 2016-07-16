@@ -99,12 +99,14 @@ class MenuController: UITableViewController {
         if(segue.identifier == "followup"){
             followupController.type = "followup"
             followupController.CurrentTitle="Follow Up"
+            followupController.offset=0
             path = NSIndexPath(forRow: 6 , inSection: 0)
             
         }
         else if(segue.identifier == "track"){
             followupController.type = "track"
             followupController.CurrentTitle="Track"
+             followupController.offset=0
             path = NSIndexPath(forRow: 1 , inSection: 0)
             
             
@@ -112,12 +114,14 @@ class MenuController: UITableViewController {
         else if(segue.identifier == "lead"){
             followupController.type = "lead"
             followupController.CurrentTitle="Lead"
+             followupController.offset=0
              path = NSIndexPath(forRow: 4 , inSection: 0)
             
         }
         else if(segue.identifier == "x"){
             followupController.type = "x"
             followupController.CurrentTitle="MCubeX"
+             followupController.offset=0
              path = NSIndexPath(forRow: 3 , inSection: 0)
 
             
@@ -125,6 +129,7 @@ class MenuController: UITableViewController {
         else if(segue.identifier == "ivrs"){
             followupController.type = "ivrs"
             followupController.CurrentTitle="IVRS"
+             followupController.offset=0
             path = NSIndexPath(forRow: 2 , inSection: 0)
 
             
@@ -132,6 +137,7 @@ class MenuController: UITableViewController {
         else if(segue.identifier == "mtracker"){
             followupController.type = "mtracker"
             followupController.CurrentTitle="Mtracker"
+             followupController.offset=0
             path = NSIndexPath(forRow: 5 , inSection: 0)
 
             
