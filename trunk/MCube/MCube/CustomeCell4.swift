@@ -45,6 +45,12 @@ class CustomeCell4: UITableViewCell ,UITableViewDataSource, UITableViewDelegate{
         let optdata: OptionsData = self.optionsList[indexPath.row]
         cell1.checklabel.text=optdata.value
         cell1.Chekbox.on = optdata.isChecked
+        cell1.DidTapCheckBox = { [unowned self] (checkbox) -> Void in
+        optdata.isChecked=checkbox.on
+            
+       
+        }
+        
         return cell1
             
         

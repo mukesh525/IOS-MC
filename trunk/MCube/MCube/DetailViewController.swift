@@ -9,7 +9,7 @@
 import UIKit
 import Alamofire
 
-class DetailViewController: UIViewController,UITableViewDataSource, UITableViewDelegate {
+class DetailViewController: UIViewController,UITableViewDataSource, UITableViewDelegate,CustomCellDelegate {
 
     var DetailDataList = [DetailData]()
     var optionsList = [OptionsData]()
@@ -50,6 +50,10 @@ class DetailViewController: UIViewController,UITableViewDataSource, UITableViewD
     }
 
     
+    @IBAction func UpdateClick(sender: AnyObject) {
+        
+        print(self.DetailDataList.count)
+    }
     
     
     //MARK: - Tableview Delegate & Datasource
@@ -93,7 +97,8 @@ class DetailViewController: UIViewController,UITableViewDataSource, UITableViewD
             let cell3 = tableView.dequeueReusableCellWithIdentifier("LT", forIndexPath: indexPath) as!CustomeCell3
             cell3.label1.text=detaildata.label
             cell3.textfiled.text=detaildata.value
-            
+            cell3.delegate=self
+
             return cell3
             
             
@@ -103,7 +108,7 @@ class DetailViewController: UIViewController,UITableViewDataSource, UITableViewD
             let cell3 = tableView.dequeueReusableCellWithIdentifier("LT", forIndexPath: indexPath) as!CustomeCell3
             cell3.label1.text=detaildata.label
             cell3.textfiled.text=detaildata.value
-            
+            cell3.delegate=self
             return cell3
             
             
@@ -113,8 +118,13 @@ class DetailViewController: UIViewController,UITableViewDataSource, UITableViewD
              cell2.label.text=detaildata.label
              cell2.Options=detaildata.Options
              cell2.itemAtDefaultPosition=detaildata.value!
-             return cell2
-            
+             cell2.pickerSelected = { [unowned self] (selectedRow) -> Void in
+                print("the selected item is \(selectedRow)")
+                print("the selected value is \(detaildata.Options[selectedRow])")
+                
+            }
+
+            return cell2
             
         }
         
@@ -122,6 +132,8 @@ class DetailViewController: UIViewController,UITableViewDataSource, UITableViewD
        let cell4 = tableView.dequeueReusableCellWithIdentifier("Ltabel", forIndexPath: indexPath) as!CustomeCell4
            cell4.label1.text=detaildata.label
            cell4.optionsList=detaildata.OptionList
+           cell4.chekboxTable.reloadData()
+            
           return cell4
             
        }
@@ -145,8 +157,7 @@ class DetailViewController: UIViewController,UITableViewDataSource, UITableViewD
         let count=CGFloat(detaildata.OptionList.count);
         let chekheight=CGFloat(44);
         if(detaildata.Type == "hidden"){
-        
-            return 0
+         return 0
         }
         else if (detaildata.Type=="dropdown" || detaildata.Type=="radio") {
         
@@ -162,6 +173,15 @@ class DetailViewController: UIViewController,UITableViewDataSource, UITableViewD
         
     }
     
+    
+    
+    
+    func cellTextChanged(cell: CustomeCell3) {
+        let indexPath = self.mytableview.indexPathForRowAtPoint(cell.center)!
+        print("index \(indexPath.row)  value  \(cell.textfiled.text!)")
+    }
+
+
     
      
     func loadDetaildata() {
