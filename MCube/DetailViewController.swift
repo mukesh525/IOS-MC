@@ -52,8 +52,66 @@ class DetailViewController: UIViewController,UITableViewDataSource, UITableViewD
     
     @IBAction func UpdateClick(sender: AnyObject) {
         
-        print(self.DetailDataList.count)
+       self.UpdateRecords()
+        
     }
+    
+    
+    func getParams()->[String: AnyObject]?{
+    
+        var parameters: [String: AnyObject]? = [:]
+        print(self.DetailDataList.count)
+        parameters!["authKey"]=self.authkey!
+        parameters!["type"]=self.type!
+        parameters!["groupname"]=(currentData.groupName != nil ? currentData.groupName : currentData.empName)!
+
+        for curentValue in  self.DetailDataList{
+            
+            if(curentValue.Type == "checkbox"){
+                var val=[String]()
+                for option in curentValue.OptionList{
+                    if(option.isChecked){
+                        val.append(option.id!)
+                    }
+                }
+                
+                if(val.count>0){
+                    let joined=val.joinWithSeparator(",")
+                    print("\(curentValue.Name!)  :   \(joined)")
+                    parameters![curentValue.Name!] = joined
+                    
+                }else{
+                    print("\(curentValue.Name!)  :  null")
+                    
+                    parameters![curentValue.Name!] = "null"
+                    
+                    
+                }
+                
+            }else if(curentValue.Type == "dropdown"){
+                print("\(curentValue.Name!)  :   \(curentValue.value!)")
+                parameters![curentValue.Name!] = curentValue.value!
+            } else {
+                print("\(curentValue.Name!)  :   \(curentValue.value!)")
+                parameters![curentValue.Name!] = curentValue.value!
+            }
+            
+        }
+        print(parameters!.keys.count) // 0
+        
+        return parameters
+   
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     //MARK: - Tableview Delegate & Datasource
@@ -119,6 +177,7 @@ class DetailViewController: UIViewController,UITableViewDataSource, UITableViewD
              cell2.Options=detaildata.Options
              cell2.itemAtDefaultPosition=detaildata.value!
              cell2.pickerSelected = { [unowned self] (selectedRow) -> Void in
+                detaildata.value=detaildata.OptionList[selectedRow].id
                 print("the selected item is \(selectedRow)")
                 print("the selected value is \(detaildata.Options[selectedRow])")
                 
@@ -178,6 +237,8 @@ class DetailViewController: UIViewController,UITableViewDataSource, UITableViewD
     
     func cellTextChanged(cell: CustomeCell3) {
         let indexPath = self.mytableview.indexPathForRowAtPoint(cell.center)!
+        let detaildata: DetailData = self.DetailDataList[indexPath.row]
+        detaildata.value=cell.textfiled.text!
         print("index \(indexPath.row)  value  \(cell.textfiled.text!)")
     }
 
@@ -190,7 +251,7 @@ class DetailViewController: UIViewController,UITableViewDataSource, UITableViewD
             self.showActivityIndicator()
         }
       
-        Alamofire.request(.POST, "https://mcube.vmc.in//mobapp/getDetail",
+        Alamofire.request(.POST, "https://mcube.vmc.in/mobapp/getDetail",
             parameters: ["authKey":self.authkey!,"type":self.type!, "callid":currentData.callId!, "groupname":(currentData.groupName != nil ? currentData.groupName : currentData.empName)!]).validate().responseJSON
             {response in switch response.result {
                 
@@ -306,58 +367,48 @@ class DetailViewController: UIViewController,UITableViewDataSource, UITableViewD
                 else{
                 self.showActivityIndicator()
                 }
-                
-                }
-//                if(self.code=="401"||self.code=="400"){
-//                    if(self.message != nil){
-//                        self.showActivityIndicator()
-//                        self.showAlert(self.message!)
-//                    }
-//                }
-//                if(self.code=="200"){
-//                    if(self.message != nil){
-//                        self.showActivityIndicator()
-//                        NSUserDefaults.standardUserDefaults().setObject(self.empName, forKey: "name")
-//                        NSUserDefaults.standardUserDefaults().setObject(self.empEmail, forKey: "email")
-//                        NSUserDefaults.standardUserDefaults().setObject(self.authkey, forKey: "authkey")
-//                        NSUserDefaults.standardUserDefaults().setObject(self.empContact, forKey: "empContact")
-//                        NSUserDefaults.standardUserDefaults().setObject(self.businessName, forKey: "businessName")
-//                        // NSUserDefaults.standardUserDefaults().setInteger(1, forKey: "select")
-//                        NSUserDefaults.standardUserDefaults().synchronize()
-//                        if let myLoadedString = NSUserDefaults.standardUserDefaults().stringForKey("name") {
-//                            print(myLoadedString) // "Hello World"
-//                        }
-//                        
-//                        if(self.rememberMe){
-//                            NSUserDefaults.standardUserDefaults().setObject(self.email.text, forKey: "emailfield")
-//                            NSUserDefaults.standardUserDefaults().setObject(self.password.text, forKey: "passfield")
-//                            NSUserDefaults.standardUserDefaults().synchronize()
-//                        }
-//                        else{
-//                            if NSUserDefaults.standardUserDefaults().stringForKey("emailfield") != nil
-//                                && NSUserDefaults.standardUserDefaults().stringForKey("passfield") != nil
-//                            {
-//                                NSUserDefaults.standardUserDefaults().removeObjectForKey("emailfield")
-//                                NSUserDefaults.standardUserDefaults().removeObjectForKey("passfield")
-//                                NSUserDefaults.standardUserDefaults().synchronize()
-//                                
-//                            }
-//                        }
-//                        
-//                        
-//                        
-//                        
-//                        self.performSegueWithIdentifier("login", sender: self)
-//                        //self.showAlert(self.message!)
-//                        
-//                        
-//                        
-//                    }
-//                }
-//                
-        }
+            }
+ }
 
     }
+    
+    func UpdateRecords() {
+        var code:String?
+        var msg:String?
+        self.showActivityIndicator()
+        Alamofire.request(.POST, "https://mcube.vmc.in/mobapp/postDetail",
+            parameters: self.getParams()).validate().responseJSON
+            {response in switch response.result {
+                
+            case .Success(let JSON):
+                print("Success with JSON: \(JSON)")
+                let response = JSON as! NSDictionary
+                if((response.objectForKey("code")) != nil){
+                   code=response.objectForKey("code") as? String
+                    
+                }
+                if((response.objectForKey("msg")) != nil){
+                    msg=response.objectForKey("msg") as? String
+                    
+                }
+                
+                self.showActivityIndicator()
+                if(code == "202" && msg != nil){
+                self.showAlert("Records Updates Successfully")
+                }else{
+                self.showAlert("Something went wrong try again")
+                 }
+            case .Failure(let error):
+                print("Request failed with error: \(error)")
+                self.showActivityIndicator()
+                if (error.code == -1009) {
+                    self.showAlert("No Internet Conncetion")
+                }
+               }
+        }
+    }
+    
+   
     func showActivityIndicator(){
         if !self.showingActivity {
             self.navigationController?.view.makeToastActivity(.Center)
