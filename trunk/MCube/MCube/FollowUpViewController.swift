@@ -14,6 +14,7 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
     var result:NSMutableArray=NSMutableArray();
     var SeletedFilterpos: Int=0;
     var options = [OptionsData]()
+    var playButtons=[UIButton]();
     var limit = 0;
     var offset=0;
     var gid:String="0";
@@ -126,10 +127,10 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
         cell.layer.cornerRadius=15
         cell.layer.borderColor = UIColor.orangeColor().CGColor
         cell.layer.borderWidth = 2
-        
+        cell.playButton.tag=indexPath.row
         cell.onButtonTapped = {
             if((data.audioLink?.isEmpty) != nil && NSString(string: data.audioLink!).length > 5){
-                self.configurePlay(data.audioLink!)
+                self.configurePlay(data.audioLink!,playbutton: cell.playButton)
             }else{
                 self.showAlert("You clicked Play button \(indexPath.row)")
             }
@@ -163,31 +164,62 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
             cell.Group.text=data.empName
             cell.groupLabel.text="Employee"
         }
+        
         let image = UIImage(named: "play")?.imageWithRenderingMode(.AlwaysTemplate)
         cell.playButton.setImage(image, forState: .Normal)
         cell.playButton.tintColor = UIColor(red: 255.0/255.0, green: 87.0/255.0, blue: 34.0/255.0, alpha: 1.0)
+        
+        self.playButtons.append(cell.playButton)
+        
+        
         return cell
     }
     
     
     
     
-    func configurePlay(filename:String) {
-         let url = "http://mcube.vmctechnologies.com/sounds/\(filename)"
-          print(url)
-       // let linkString = "http://m.mp3.zing.vn/xml/song-load/MjAxNSUyRjA4JTJGMDQlMkY3JTJGYiUyRjdiNTI4YTc0YWU2MGExYWJjMDZlYzA5NmE5MzFjMjliLm1wMyU3QzEz"
-        let link = NSURL(string: url)!
-        player = AVPlayer(URL: link)
+    func configurePlay(filename:String,playbutton:UIButton) {
         
-        do{
-            player.play()
-            self.PlayAlert(filename)
+          let url = "http://mcube.vmctechnologies.com/sounds/\(filename)"
+          let linkString = "http://m.mp3.zing.vn/xml/song-load/MjAxNSUyRjA4JTJGMDQlMkY3JTJGYiUyRjdiNTI4YTc0YWU2MGExYWJjMDZlYzA5NmE5MzFjMjliLm1wMyU3QzEz"
+          let link = NSURL(string: linkString)!
+          player = AVPlayer(URL: link)
+          for currentbutton in self.playButtons{
+          if(currentbutton.tag == playbutton.tag ){
+                var image:UIImage?
+                if ((player.rate != 0) && (player.error == nil)) {
+                    do{
+                        player.pause()
+                    }
+                    catch {
+                        print("Something bad happened. Try catching specific errors to narrow things down")
+                    }
+                    image = UIImage(named: "play")?.imageWithRenderingMode(.AlwaysTemplate)
+                }
+                else{
+                image = UIImage(named: "pause")?.imageWithRenderingMode(.AlwaysTemplate)
+                    do{
+                        player.play()
+                    }
+                    catch {
+                     print("Something bad happened. Try catching specific errors to narrow things down")
+                    }
+                }
+               
+                currentbutton.setImage(image, forState: .Normal)
+                currentbutton.tintColor = UIColor(red: 255.0/255.0, green: 87.0/255.0, blue: 34.0/255.0, alpha: 1.0)
+ 
         }
-        catch {
-            
-            print("Something bad happened. Try catching specific errors to narrow things down")
-        }
+        else{
+        
+            let image = UIImage(named: "play")?.imageWithRenderingMode(.AlwaysTemplate)
+            currentbutton.setImage(image, forState: .Normal)
+            currentbutton.tintColor = UIColor(red: 255.0/255.0, green: 87.0/255.0, blue: 34.0/255.0, alpha: 1.0)
 
+         }
+    }
+        
+    
         
     }
     
@@ -628,43 +660,28 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
     }
     
 
-    func PlayAlert (name:String){
-        let alertController = UIAlertController(title: "Playing", message:
-            name, preferredStyle: .Alert)
-        
-        let button = UIButton(frame: CGRect(x: 100, y: 100, width: 100, height: 50))
-        button.backgroundColor = .greenColor()
-        button.setTitle("Pause", forState: .Normal)
-        button.addTarget(self, action: #selector(buttonAction), forControlEvents: .TouchUpInside)
-        alertController.view.addSubview(button)
-
+//    func PlayAlert (name:String){
+//        let alertController = UIAlertController(title: "Playing", message:
+//            name, preferredStyle: .Alert)
 //        
-//        let okAction = UIAlertAction(title: "Pause/Play", style: UIAlertActionStyle.Default) {
+//        let button = UIButton(frame: CGRect(x: 100, y: 100, width: 100, height: 50))
+//        button.backgroundColor = .greenColor()
+//        button.setTitle("Pause", forState: .Normal)
+//        button.addTarget(self, action: #selector(buttonAction), forControlEvents: .TouchUpInside)
+//        alertController.view.addSubview(button)
+//         let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default) {
 //            UIAlertAction in
-//             if ((self.player.rate != 0) && (self.player.error == nil)) {
-//                // player is playing
-//                self.player.pause()
-//                self.PlayAlert(name)
-//            }
-//             else {
-//                self.player.play()
-//               self.PlayAlert(name)
-//            }
-//            
+//            self.player = nil;
 //        }
-        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default) {
-            UIAlertAction in
-            self.player = nil;
-        }
-        alertController.addAction(cancelAction)
-       // alertController.addAction(okAction)
-        self.presentViewController(alertController, animated: false, completion: nil)
-        
-    }
-    func buttonAction(sender: UIButton!) {
-        print("Button tapped")
-        
-    }
+//        alertController.addAction(cancelAction)
+//       // alertController.addAction(okAction)
+//        self.presentViewController(alertController, animated: false, completion: nil)
+//        
+//    }
+//    func buttonAction(sender: UIButton!) {
+//        print("Button tapped")
+//        
+//    }
     
     func showActivityIndicator(){
         if !self.showingActivity {

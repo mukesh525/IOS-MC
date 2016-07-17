@@ -501,10 +501,12 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YLv-jn-vph">
-                                            <rect key="frame" x="123" y="41" width="60" height="60"/>
+                                            <rect key="frame" x="123" y="42" width="60" height="60"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="60" id="CWh-Pm-cI2"/>
+                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="60" id="K5h-D5-iK0"/>
+                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="60" id="LMb-f1-y6o"/>
                                                 <constraint firstAttribute="height" constant="60" id="Rsw-4t-n90"/>
                                             </constraints>
                                             <color key="tintColor" red="1" green="0.3411764706" blue="0.1333333333" alpha="1" colorSpace="calibratedRGB"/>
@@ -1451,7 +1453,7 @@
         <image name="map" width="1024" height="1024"/>
         <image name="menu" width="22" height="22"/>
         <image name="news" width="1024" height="1024"/>
-        <image name="play" width="205" height="205"/>
+        <image name="play" width="103" height="103"/>
         <image name="tag" width="1024" height="1024"/>
         <image name="wishlist" width="1024" height="1024"/>
     </resources>
