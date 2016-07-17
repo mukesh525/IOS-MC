@@ -9,10 +9,10 @@
 import UIKit
 import BEMCheckBox
 
-class ChekboxCell: UITableViewCell{
+class ChekboxCell: UITableViewCell ,BEMCheckBoxDelegate{
 
     @IBOutlet weak var checklabel: UILabel!
-    
+    var DidTapCheckBox: ((BEMCheckBox) -> Void)?
     @IBOutlet weak var Chekbox: BEMCheckBox!
     
     override func awakeFromNib() {
@@ -26,7 +26,10 @@ class ChekboxCell: UITableViewCell{
 
         // Configure the view for the selected state
     }
-      
+    func didTapCheckBox(checkBox: BEMCheckBox) {
+        DidTapCheckBox?(checkBox)
+        
+    }
     
 
 }

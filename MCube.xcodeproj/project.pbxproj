@@ -209,6 +209,7 @@
 		8B326D521D38F3E900022B33 /* CustomCell */ = {
 			isa = PBXGroup;
 			children = (
+				8BBFE0BA1D28E25900435723 /* FollowupTableViewCell.swift */,
 				8B326D631D3900E700022B33 /* ChekboxCell.swift */,
 				8B326D5A1D39005E00022B33 /* CustomeCell1.swift */,
 				8B326D5C1D39007200022B33 /* CustomeCell2.swift */,
@@ -236,7 +237,6 @@
 				F4702A171A7F351C00E30A3C /* MenuController.swift */,
 				8BAD4E771D278C9B00A64393 /* LoginViewController.swift */,
 				8BBFE0B81D28D99C00435723 /* FollowUpViewController.swift */,
-				8BBFE0BA1D28E25900435723 /* FollowupTableViewCell.swift */,
 				8B1A6D021D2CD0E500A9AFFD /* FilterCell.swift */,
 				8BF82F3F1D37B99000E1BA8D /* SettingsController.swift */,
 				8B326D4A1D38D6F400022B33 /* DetailViewController.swift */,
