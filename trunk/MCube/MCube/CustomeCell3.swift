@@ -14,14 +14,17 @@ protocol CustomCellDelegate {
 }
 
 
-class CustomeCell3: UITableViewCell {
+class CustomeCell3: UITableViewCell{
     var delegate: CustomCellDelegate?
     @IBOutlet weak var textfiled: UITextField!
     @IBOutlet weak var label1: UILabel!
+    var tableview:UITableView!
     var onTextChanged :((CustomeCell3) -> Void)?
+    var onEditingBegin :((CustomeCell3) -> Void)?
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+     
         textfiled.addTarget(self, action: "textFieldDidChange:", forControlEvents: UIControlEvents.EditingChanged)
            }
 
@@ -35,6 +38,13 @@ class CustomeCell3: UITableViewCell {
         delegate?.cellTextChanged(self)
      
     }
+    @IBAction func textFieldDidBeginEditing(sender: AnyObject) {
+        onEditingBegin?(self)
+      
+      //  return true;
+
+    }
+   
    
 
 }

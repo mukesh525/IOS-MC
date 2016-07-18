@@ -9,7 +9,7 @@
 import UIKit
 import Alamofire
 
-class DetailViewController: UIViewController,UITableViewDataSource, UITableViewDelegate,CustomCellDelegate {
+class DetailViewController: UIViewController,UITableViewDataSource, UITableViewDelegate,CustomCellDelegate,UITextFieldDelegate {
 
     var DetailDataList = [DetailData]()
     var optionsList = [OptionsData]()
@@ -40,8 +40,22 @@ class DetailViewController: UIViewController,UITableViewDataSource, UITableViewD
         if self.refreshControl.refreshing{
             self.refreshControl.endRefreshing()
         }
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name:UIKeyboardWillShowNotification, object: nil);
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name:UIKeyboardWillHideNotification, object: nil);
     }
 
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self);
+    }
+    
+    func keyboardWillShow(sender: NSNotification) {
+        self.view.frame.origin.y = -110
+    }
+    
+    func keyboardWillHide(sender: NSNotification) {
+        self.view.frame.origin.y = 0
+    }
+    
     
     
     func refresh(sender:AnyObject) {
@@ -156,6 +170,7 @@ class DetailViewController: UIViewController,UITableViewDataSource, UITableViewD
             cell3.label1.text=detaildata.label
             cell3.textfiled.text=detaildata.value
             cell3.delegate=self
+            cell3.textfiled.delegate=self
 
             return cell3
             
@@ -167,6 +182,15 @@ class DetailViewController: UIViewController,UITableViewDataSource, UITableViewD
             cell3.label1.text=detaildata.label
             cell3.textfiled.text=detaildata.value
             cell3.delegate=self
+            cell3.onEditingBegin = {[unowned self] (selectedRow) -> Void in
+                var pointInTable:CGPoint = selectedRow.textfiled.superview!.convertPoint(selectedRow.textfiled.frame.origin, toView:tableView)
+                var contentOffset:CGPoint = tableView.contentOffset
+                contentOffset.y  = pointInTable.y
+                if let accessoryView = selectedRow.textfiled.inputAccessoryView {
+                    contentOffset.y -= accessoryView.frame.size.height
+                }
+                tableView.contentOffset = contentOffset
+            }
             return cell3
             
             
@@ -233,7 +257,10 @@ class DetailViewController: UIViewController,UITableViewDataSource, UITableViewD
     }
     
     
-    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
+    }
     
     func cellTextChanged(cell: CustomeCell3) {
         let indexPath = self.mytableview.indexPathForRowAtPoint(cell.center)!
@@ -422,7 +449,7 @@ class DetailViewController: UIViewController,UITableViewDataSource, UITableViewD
     
     
     
-    
+   
     
     func showAlert(mesage :String){
         //dismissViewControllerAnimated(true, completion: nil)
