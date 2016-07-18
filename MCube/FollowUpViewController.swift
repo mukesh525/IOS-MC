@@ -272,9 +272,8 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
     }
     
     deinit{
-        if(self.player != nil){
-        NSNotificationCenter.defaultCenter().removeObserver(self.player)
-        }
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+        
     
     }
     

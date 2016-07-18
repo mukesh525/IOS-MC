@@ -6,7 +6,7 @@ import SwiftValidator
 import Alamofire
 import Toast_Swift
 
-class LoginViewController: UIViewController,ValidationDelegate ,UITextFieldDelegate{
+class LoginViewController: UIViewController,ValidationDelegate ,UITextFieldDelegate {
     
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var passworderror: UILabel!
