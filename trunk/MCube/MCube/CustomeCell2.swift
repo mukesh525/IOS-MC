@@ -50,24 +50,7 @@ class CustomeCell2: UITableViewCell,UIPickerViewDelegate, UIPickerViewDataSource
        // print("selected uipickervalue \(selectedValue!)")
     }
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-
+ 
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 

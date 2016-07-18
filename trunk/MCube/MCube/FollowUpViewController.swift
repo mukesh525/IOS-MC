@@ -13,6 +13,7 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
     let cellSpacingHeight: CGFloat = 5
     var result:NSMutableArray=NSMutableArray();
     var SeletedFilterpos: Int=0;
+    var isDownloading:Bool = false;
     var options = [OptionsData]()
     var playButtons=[UIButton]();
     var limit = 0;
@@ -26,6 +27,7 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
     var CurrentData:Data!
     //var mediaPlayer = VLCMediaPlayer()
     private var showingActivity = false
+    var CurrentPlaying:Int?
     var refreshControll = UIRefreshControl()
     @IBAction func LogoutTap(sender: UIBarButtonItem) {
         
@@ -51,14 +53,17 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
         tableView.allowsSelection = true;
         mytableview.backgroundView = UIImageView(image: UIImage(named: "background_port.jpg"))
         if let authkey = NSUserDefaults.standardUserDefaults().stringForKey("authkey") {
-            print(authkey)
-            LoadData(false)
+           // print(authkey)
+            if(!self.isDownloading){
+                self.LoadData(false);
+            }
+           // LoadData(false)
         }
         
         self.refreshControll.attributedTitle = NSAttributedString(string: "Pull to refresh")
         self.refreshControll.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
         self.mytableview?.addSubview(refreshControll)
-       // self.tableView.backgroundView!.layer.zPosition -= 1;
+        //self.tableView.backgroundView!.layer.zPosition -= 1;
         
         
         if revealViewController() != nil {
@@ -80,8 +85,15 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
     
     func refresh(sender:AnyObject) {
         // Code to refresh table view
-        LoadData(false);
         
+        if(!self.isDownloading ){
+             self.LoadData(false);
+        }
+        else{
+          if self.refreshControll.refreshing{
+          self.refreshControll.endRefreshing()
+         }
+       }
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -102,7 +114,17 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // Return the number of rows in the section.
-        return result.count
+        if result.count == 0{
+            var emptyLabel = UILabel(frame: CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height))
+            emptyLabel.text = "No Data Pull Down To Refresh"
+            emptyLabel.textAlignment = NSTextAlignment.Center
+            self.tableView.backgroundView = emptyLabel
+            self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
+            return 0
+        } else {
+            self.tableView.backgroundView = UIImageView(image: UIImage(named: "background_port.jpg"))
+            return result.count
+        }
     }
     
     
@@ -182,12 +204,21 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
         
           let url = "http://mcube.vmctechnologies.com/sounds/\(filename)"
           let linkString = "http://m.mp3.zing.vn/xml/song-load/MjAxNSUyRjA4JTJGMDQlMkY3JTJGYiUyRjdiNTI4YTc0YWU2MGExYWJjMDZlYzA5NmE5MzFjMjliLm1wMyU3QzEz"
-          let link = NSURL(string: linkString)!
-          player = AVPlayer(URL: link)
-          for currentbutton in self.playButtons{
-          if(currentbutton.tag == playbutton.tag ){
+          let link = NSURL(string: url)!
+        
+        
+        for currentbutton in self.playButtons{
+            if(currentbutton.tag == playbutton.tag ){
                 var image:UIImage?
-                if ((player.rate != 0) && (player.error == nil)) {
+                if(self.CurrentPlaying != playbutton.tag){
+                    player = nil;
+                }
+
+                if(player == nil){
+                 player = AVPlayer(URL: link)
+                 NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(FollowUpViewController.playerDidFinishPlaying(_:)), name: AVPlayerItemDidPlayToEndTimeNotification, object:player.currentItem)
+                }
+               if ((player.rate != 0)) {
                     do{
                         player.pause()
                     }
@@ -199,6 +230,7 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
                 else{
                 image = UIImage(named: "pause")?.imageWithRenderingMode(.AlwaysTemplate)
                     do{
+                        self.CurrentPlaying=playbutton.tag;
                         player.play()
                     }
                     catch {
@@ -211,20 +243,40 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
  
         }
         else{
-        
+             
             let image = UIImage(named: "play")?.imageWithRenderingMode(.AlwaysTemplate)
             currentbutton.setImage(image, forState: .Normal)
             currentbutton.tintColor = UIColor(red: 255.0/255.0, green: 87.0/255.0, blue: 34.0/255.0, alpha: 1.0)
 
          }
-    }
-        
-    
-        
+     }
     }
     
+    func playerDidFinishPlaying(note: NSNotification) {
+       
+        print("Playing Finished")
+        
+        for button in self.playButtons{
+         if(self.CurrentPlaying == button.tag)
+         {
+            let image = UIImage(named: "play")?.imageWithRenderingMode(.AlwaysTemplate)
+            button.setImage(image, forState: .Normal)
+            button.tintColor = UIColor(red: 255.0/255.0, green: 87.0/255.0, blue: 34.0/255.0, alpha: 1.0)
+            self.player = nil;
+          }
+        
+        }
+        
+        
+        
+    }
     
+    deinit{
+        if(self.player != nil){
+        NSNotificationCenter.defaultCenter().removeObserver(self.player)
+        }
     
+    }
     
     
     
@@ -262,12 +314,16 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
         var callTimeString:String?
         var empName:String?
         self.offset=0
+        self.isDownloading=true;
         let authkey = NSUserDefaults.standardUserDefaults().stringForKey("authkey")
         if !self.refreshControll.refreshing{
           self.showActivityIndicator()
         }
-        print(self.limit)
-        
+        //print(self.limit)
+        if (self.player != nil && (self.player.error == nil) && (self.player.rate != 0) ) {
+            self.player.pause()
+            self.player = nil
+        }
         Alamofire.request(.POST, "https://mcube.vmc.in/mobapp/getList", parameters:
             ["authKey":authkey!, "limit":"10","gid": gid,"ofset":self.offset,"type":type])
             .validate().responseJSON
@@ -384,19 +440,25 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
                 if((self.refreshControl?.beginRefreshing()) != nil){
                     self.refreshControl!.endRefreshing()
                 }
-                
-                
-            case .Failure(let error):
+                self.isDownloading=false;
+         case .Failure(let error):
+                self.isDownloading=false;
+
                 if self.refreshControll.refreshing{
                     self.refreshControll.endRefreshing()
                 }else{
                     self.showActivityIndicator()
                 }
 
-                self.showActivityIndicator()
+                
+               // self.showActivityIndicator()
                 print("Request failed with error: \(error)")
                 if (error.code == -1009) {
                     self.showAlert("No Internet Conncetion")
+                }
+                else if(error.code == -1001){
+                    self.showAlert("No Internet Conncetion")
+                    //request timed out
                 }
                 }
                 print("result sidze \(self.result.count))")
@@ -499,7 +561,10 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
                 if (error.code == -1009) {
                     self.showAlert("No Internet Conncetion")
                 }
-                
+                else if(error.code == -1001){
+                   self.showAlert("No Internet Conncetion")
+                    //request timed out
+                }
                 
                 }
                 
