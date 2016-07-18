@@ -6,7 +6,7 @@ import Alamofire
 import AVFoundation
 
 
-class FollowUpViewController: UITableViewController,UIPopoverPresentationControllerDelegate,FilterSelectedDelegate {
+class FollowUpViewController: UITableViewController,UIPopoverPresentationControllerDelegate,FilterSelectedDelegate ,SWRevealViewControllerDelegate {
     @IBOutlet var mytableview: UITableView!
     @IBOutlet var extraButton: UIBarButtonItem!
     @IBOutlet var menubutton: UIBarButtonItem!
@@ -29,6 +29,7 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
     private var showingActivity = false
     var CurrentPlaying:Int?
     var refreshControll = UIRefreshControl()
+    var sidebarMenuOpen:Bool?
     @IBAction func LogoutTap(sender: UIBarButtonItem) {
         
         LogoutAlert()
@@ -40,9 +41,7 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
          if let savedlimit = NSUserDefaults.standardUserDefaults().stringForKey("limit") {
             self.limit=Int(savedlimit)!;
         }
-        
-        
-        if(isLogout){
+         if(isLogout){
          isLogout=false;
          LogoutAlert()
         }
@@ -74,7 +73,7 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
             view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
             
         }
-        
+        self.revealViewController().delegate = self
         if self.refreshControll.refreshing{
             self.refreshControll.endRefreshing()
         }
@@ -722,32 +721,7 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
         self.presentViewController(alertController, animated: false, completion: nil)
         
     }
-    
-
-//    func PlayAlert (name:String){
-//        let alertController = UIAlertController(title: "Playing", message:
-//            name, preferredStyle: .Alert)
-//        
-//        let button = UIButton(frame: CGRect(x: 100, y: 100, width: 100, height: 50))
-//        button.backgroundColor = .greenColor()
-//        button.setTitle("Pause", forState: .Normal)
-//        button.addTarget(self, action: #selector(buttonAction), forControlEvents: .TouchUpInside)
-//        alertController.view.addSubview(button)
-//         let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default) {
-//            UIAlertAction in
-//            self.player = nil;
-//        }
-//        alertController.addAction(cancelAction)
-//       // alertController.addAction(okAction)
-//        self.presentViewController(alertController, animated: false, completion: nil)
-//        
-//    }
-//    func buttonAction(sender: UIButton!) {
-//        print("Button tapped")
-//        
-//    }
-    
-    func showActivityIndicator(){
+   func showActivityIndicator(){
         if !self.showingActivity {
             self.navigationController?.view.makeToastActivity(.Center)
         } else {
@@ -756,6 +730,36 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
         
         self.showingActivity = !self.showingActivity
         
+    }
+    
+    
+    
+    func revealController(revealController: SWRevealViewController!,  willMoveToPosition position: FrontViewPosition){
+        if(position == FrontViewPosition.Left) {
+             self.mytableview.userInteractionEnabled = true
+            sidebarMenuOpen = false
+        } else {
+            self.mytableview.userInteractionEnabled = false
+            sidebarMenuOpen = true
+        }
+    }
+    
+    func revealController(revealController: SWRevealViewController!,  didMoveToPosition position: FrontViewPosition){
+        if(position == FrontViewPosition.Left) {
+             self.mytableview.userInteractionEnabled = true
+            sidebarMenuOpen = false
+        } else {
+            self.mytableview.userInteractionEnabled = false
+            sidebarMenuOpen = true
+        }
+    }
+    
+    override func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
+        if(sidebarMenuOpen == true){
+            return nil
+        } else {
+            return indexPath
+        }
     }
 
     
