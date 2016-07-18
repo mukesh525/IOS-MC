@@ -168,11 +168,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MCube/FollowUpViewController.swift"
-            timestampString = "490519023.591472"
+            timestampString = "490529808.956869"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "636"
-            endingLineNumber = "636"
+            startingLineNumber = "635"
+            endingLineNumber = "635"
             landmarkName = "convertTime(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -184,11 +184,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MCube/FollowUpViewController.swift"
-            timestampString = "490519023.591472"
+            timestampString = "490529808.956869"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "639"
-            endingLineNumber = "639"
+            startingLineNumber = "638"
+            endingLineNumber = "638"
             landmarkName = "FollowUpViewController"
             landmarkType = "3">
          </BreakpointContent>
@@ -200,11 +200,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MCube/FollowUpViewController.swift"
-            timestampString = "490519023.591472"
+            timestampString = "490529808.956869"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "633"
-            endingLineNumber = "633"
+            startingLineNumber = "632"
+            endingLineNumber = "632"
             landmarkName = "convertTime(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -232,11 +232,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MCube/FollowUpViewController.swift"
-            timestampString = "490519023.591472"
+            timestampString = "490529808.956869"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "394"
-            endingLineNumber = "394"
+            startingLineNumber = "393"
+            endingLineNumber = "393"
             landmarkName = "LoadData(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -248,11 +248,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MCube/FollowUpViewController.swift"
-            timestampString = "490519023.591472"
+            timestampString = "490529808.956869"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "631"
-            endingLineNumber = "631"
+            startingLineNumber = "630"
+            endingLineNumber = "630"
             landmarkName = "convertTime(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -264,11 +264,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MCube/FollowUpViewController.swift"
-            timestampString = "490519023.591472"
+            timestampString = "490529808.956869"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "635"
-            endingLineNumber = "635"
+            startingLineNumber = "634"
+            endingLineNumber = "634"
             landmarkName = "convertTime(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -280,11 +280,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MCube/FollowUpViewController.swift"
-            timestampString = "490519023.591472"
+            timestampString = "490529808.956869"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "667"
-            endingLineNumber = "667"
+            startingLineNumber = "666"
+            endingLineNumber = "666"
             landmarkName = "filterSelected(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -296,11 +296,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MCube/FollowUpViewController.swift"
-            timestampString = "490519023.591472"
+            timestampString = "490529808.956869"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "532"
-            endingLineNumber = "532"
+            startingLineNumber = "531"
+            endingLineNumber = "531"
             landmarkName = "LoadMoreData()"
             landmarkType = "5">
          </BreakpointContent>
@@ -312,11 +312,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MCube/FollowUpViewController.swift"
-            timestampString = "490514129.671977"
+            timestampString = "490529808.956869"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "183"
-            endingLineNumber = "183"
+            startingLineNumber = "182"
+            endingLineNumber = "182"
             landmarkName = "tableView(_:cellForRowAtIndexPath:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -328,11 +328,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MCube/FollowUpViewController.swift"
-            timestampString = "490519023.591472"
+            timestampString = "490529808.956869"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "533"
-            endingLineNumber = "533"
+            startingLineNumber = "532"
+            endingLineNumber = "532"
             landmarkName = "LoadMoreData()"
             landmarkType = "5">
          </BreakpointContent>
@@ -344,11 +344,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MCube/FollowUpViewController.swift"
-            timestampString = "490519023.591472"
+            timestampString = "490529808.956869"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "399"
-            endingLineNumber = "399"
+            startingLineNumber = "398"
+            endingLineNumber = "398"
             landmarkName = "LoadData(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -360,11 +360,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MCube/FollowUpViewController.swift"
-            timestampString = "490519023.591472"
+            timestampString = "490529808.956869"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "430"
-            endingLineNumber = "430"
+            startingLineNumber = "429"
+            endingLineNumber = "429"
             landmarkName = "LoadData(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -965,11 +965,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MCube/FollowUpViewController.swift"
-            timestampString = "490519023.591472"
+            timestampString = "490529808.956869"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "332"
-            endingLineNumber = "332"
+            startingLineNumber = "331"
+            endingLineNumber = "331"
             landmarkName = "LoadData(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -1237,11 +1237,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MCube/FollowUpViewController.swift"
-            timestampString = "490511601.643949"
+            timestampString = "490529808.956869"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "63"
-            endingLineNumber = "63"
+            startingLineNumber = "62"
+            endingLineNumber = "62"
             landmarkName = "viewDidLoad()"
             landmarkType = "5">
          </BreakpointContent>
@@ -1253,11 +1253,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MCube/FollowUpViewController.swift"
-            timestampString = "490511601.643949"
+            timestampString = "490529808.956869"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "65"
-            endingLineNumber = "65"
+            startingLineNumber = "64"
+            endingLineNumber = "64"
             landmarkName = "viewDidLoad()"
             landmarkType = "5">
          </BreakpointContent>
@@ -1269,11 +1269,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MCube/FollowUpViewController.swift"
-            timestampString = "490511601.643949"
+            timestampString = "490529808.956869"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "101"
-            endingLineNumber = "101"
+            startingLineNumber = "100"
+            endingLineNumber = "100"
             landmarkName = "viewWillAppear(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -1285,11 +1285,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MCube/FollowUpViewController.swift"
-            timestampString = "490511601.643949"
+            timestampString = "490529808.956869"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "39"
-            endingLineNumber = "39"
+            startingLineNumber = "40"
+            endingLineNumber = "40"
             landmarkName = "viewDidLoad()"
             landmarkType = "5">
          </BreakpointContent>
@@ -1445,11 +1445,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MCube/FollowUpViewController.swift"
-            timestampString = "490514129.671977"
+            timestampString = "490529808.956869"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "155"
-            endingLineNumber = "155"
+            startingLineNumber = "154"
+            endingLineNumber = "154"
             landmarkName = "tableView(_:cellForRowAtIndexPath:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -1461,11 +1461,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MCube/FollowUpViewController.swift"
-            timestampString = "490514129.671977"
+            timestampString = "490529808.956869"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "221"
-            endingLineNumber = "221"
+            startingLineNumber = "220"
+            endingLineNumber = "220"
             landmarkName = "configurePlay(_:playbutton:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -1477,23 +1477,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MCube/FollowUpViewController.swift"
-            timestampString = "490514129.671977"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "223"
-            endingLineNumber = "223"
-            landmarkName = "configurePlay(_:playbutton:)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "MCube/FollowUpViewController.swift"
-            timestampString = "490514129.671977"
+            timestampString = "490529808.956869"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "222"
@@ -1505,15 +1489,31 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MCube/FollowUpViewController.swift"
+            timestampString = "490529808.956869"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "221"
+            endingLineNumber = "221"
+            landmarkName = "configurePlay(_:playbutton:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MCube/FollowUpViewController.swift"
-            timestampString = "490519023.591472"
+            timestampString = "490529808.956869"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "444"
-            endingLineNumber = "444"
+            startingLineNumber = "443"
+            endingLineNumber = "443"
             landmarkName = "LoadData(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -1525,11 +1525,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MCube/FollowUpViewController.swift"
-            timestampString = "490514129.671977"
+            timestampString = "490529808.956869"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "217"
-            endingLineNumber = "217"
+            startingLineNumber = "216"
+            endingLineNumber = "216"
             landmarkName = "configurePlay(_:playbutton:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -1541,11 +1541,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MCube/FollowUpViewController.swift"
-            timestampString = "490514129.671977"
+            timestampString = "490529808.956869"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "213"
-            endingLineNumber = "213"
+            startingLineNumber = "212"
+            endingLineNumber = "212"
             landmarkName = "configurePlay(_:playbutton:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -1557,11 +1557,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MCube/FollowUpViewController.swift"
-            timestampString = "490514129.671977"
+            timestampString = "490529808.956869"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "269"
-            endingLineNumber = "269"
+            startingLineNumber = "268"
+            endingLineNumber = "268"
             landmarkName = "playerDidFinishPlaying(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -1573,11 +1573,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MCube/FollowUpViewController.swift"
-            timestampString = "490514129.671977"
+            timestampString = "490529808.956869"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "219"
-            endingLineNumber = "219"
+            startingLineNumber = "218"
+            endingLineNumber = "218"
             landmarkName = "configurePlay(_:playbutton:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -1589,11 +1589,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MCube/FollowUpViewController.swift"
-            timestampString = "490514412.695022"
+            timestampString = "490529808.956869"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "89"
-            endingLineNumber = "89"
+            startingLineNumber = "88"
+            endingLineNumber = "88"
             landmarkName = "refresh(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -1605,12 +1605,28 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MCube/FollowUpViewController.swift"
-            timestampString = "490519023.591472"
+            timestampString = "490529808.956869"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "547"
-            endingLineNumber = "547"
+            startingLineNumber = "546"
+            endingLineNumber = "546"
             landmarkName = "LoadMoreData()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MCube/FollowUpViewController.swift"
+            timestampString = "490529808.956869"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "76"
+            endingLineNumber = "76"
+            landmarkName = "viewDidLoad()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
