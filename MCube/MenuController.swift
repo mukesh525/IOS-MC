@@ -126,9 +126,7 @@ class MenuController: UITableViewController {
     }
     
     
-    
-    override func viewDidAppear(animated: Bool) {
-        
+  override func viewWillAppear(animated: Bool) {
         if NSUserDefaults.standardUserDefaults().objectForKey("launch") != nil{
             //  print("Loaded First")
             let myPath = NSIndexPath(forRow: self.setsection(), inSection: 0)
@@ -138,11 +136,11 @@ class MenuController: UITableViewController {
         }
     }
     
-    
-    
-    
-    
-    
+    override func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
+        if ( indexPath.row == 0 ){ return nil};
+        if ( indexPath.row == 7 ){ return nil};
+        return indexPath
+    }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         let nav = segue.destinationViewController as! UINavigationController
