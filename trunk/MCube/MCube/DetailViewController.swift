@@ -131,7 +131,18 @@ class DetailViewController: UIViewController,UITableViewDataSource, UITableViewD
     //MARK: - Tableview Delegate & Datasource
     func tableView(tableView:UITableView, numberOfRowsInSection section:Int) -> Int
     {
-        return DetailDataList.count
+        if DetailDataList.count == 0{
+            var emptyLabel = UILabel(frame: CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height))
+            emptyLabel.text = "No Data Pull Down To Refresh"
+            emptyLabel.textAlignment = NSTextAlignment.Center
+            tableView.backgroundView = emptyLabel
+            tableView.separatorStyle = UITableViewCellSeparatorStyle.None
+            return 0
+        } else {
+            tableView.backgroundView = UIImageView(image: UIImage(named: "background_port.jpg"))
+            return DetailDataList.count
+        }
+
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int

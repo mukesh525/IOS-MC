@@ -28,7 +28,7 @@ class MenuController: UITableViewController {
             
         }
         
-      //  self.mytableview.allowsSelection=true;
+        //  self.mytableview.allowsSelection=true;
         if(username != nil && useremail != nil ){
             
             
@@ -44,43 +44,103 @@ class MenuController: UITableViewController {
         //tableView.selectRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), animated: false, scrollPosition: .None)
         self.clearsSelectionOnViewWillAppear = false;
         
-      
+        
         
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        print("menu clcked")
+    
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        var height:CGFloat=40
+        switch indexPath.row {
+        case 0:
+            
+            return 208
+        case 1:
+            if let track = NSUserDefaults.standardUserDefaults().stringForKey("track") {
+                if(track == "0"){height = 0;}
+                else{height = 40;}
+            }
+            return height
+        case 2:
+            if let track = NSUserDefaults.standardUserDefaults().stringForKey("ivrs") {
+                if(track == "0"){height = 0;}
+                else{height = 40;}
+            }
+            return height
+        case 3:
+            if let track = NSUserDefaults.standardUserDefaults().stringForKey("pbx") {
+                if(track == "0"){height = 0;}
+                else{height = 40;}
+            }
+            return height
+        case 4:
+            if let track = NSUserDefaults.standardUserDefaults().stringForKey("lead") {
+                if(track == "0"){height = 0;}
+                else{height = 40;}
+            }
+            return height
+        case 5:
+            if let track = NSUserDefaults.standardUserDefaults().stringForKey("mtracker") {
+                if(track == "0"){height = 0;}
+                else{height = 40;}
+            }
+            return height
+            
+        case 6:
+            return 40;
+        default:
+            return height
+        }
+        
+        
+        
+        
     }
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+    func setsection() ->Int{
+        var select:Int=1
+        
+        if  NSUserDefaults.standardUserDefaults().stringForKey("track") == "1" {
+            select = 1;
+        }
+        else if  NSUserDefaults.standardUserDefaults().stringForKey("ivrs") == "1" {
+            select = 2;           }
+            
+        else if  NSUserDefaults.standardUserDefaults().stringForKey("pbx") == "1" {
+            select = 3;
+        }
+            
+        else if NSUserDefaults.standardUserDefaults().stringForKey("lead") == "1" {
+            select = 4;
+        }
+            
+        else if  NSUserDefaults.standardUserDefaults().stringForKey("mtracker") == "1" {
+            select = 5;
+        }
+        else{
+            select = 6
+        }
+        
+        return select
+        
+    }
     
     
     
     override func viewDidAppear(animated: Bool) {
         
         if NSUserDefaults.standardUserDefaults().objectForKey("launch") != nil{
-                        print("Loaded First")
-                        let myPath = NSIndexPath(forRow: 1, inSection: 0)
-                        self.mytableview.selectRowAtIndexPath(myPath, animated: false, scrollPosition: UITableViewScrollPosition.None)
-                        NSUserDefaults.standardUserDefaults().removeObjectForKey("launch")
-                        NSUserDefaults.standardUserDefaults().synchronize()
-                    }
-            }
+            //  print("Loaded First")
+            let myPath = NSIndexPath(forRow: self.setsection(), inSection: 0)
+            self.mytableview.selectRowAtIndexPath(myPath, animated: false, scrollPosition: UITableViewScrollPosition.None)
+            NSUserDefaults.standardUserDefaults().removeObjectForKey("launch")
+            NSUserDefaults.standardUserDefaults().synchronize()
+        }
+    }
     
-
     
-
+    
+    
     
     
     
@@ -89,67 +149,67 @@ class MenuController: UITableViewController {
         
         if(segue.identifier == "settings")   {
             
-        
+            
         }
         else{
-         
-        let followupController = nav.topViewController as! FollowUpViewController
-        var path = NSIndexPath(forRow: 0 , inSection: 0)
-        
-        if(segue.identifier == "followup"){
-            followupController.type = "followup"
-            followupController.CurrentTitle="Follow Up"
-            followupController.offset=0
-            path = NSIndexPath(forRow: 6 , inSection: 0)
+            
+            let followupController = nav.topViewController as! FollowUpViewController
+            var path = NSIndexPath(forRow: 0 , inSection: 0)
+            
+            if(segue.identifier == "followup"){
+                followupController.type = "followup"
+                followupController.CurrentTitle="Follow Up"
+                followupController.offset=0
+                path = NSIndexPath(forRow: 6 , inSection: 0)
+                
+            }
+            else if(segue.identifier == "track"){
+                followupController.type = "track"
+                followupController.CurrentTitle="Track"
+                followupController.offset=0
+                path = NSIndexPath(forRow: 1 , inSection: 0)
+                
+                
+            }
+            else if(segue.identifier == "lead"){
+                followupController.type = "lead"
+                followupController.CurrentTitle="Lead"
+                followupController.offset=0
+                path = NSIndexPath(forRow: 4 , inSection: 0)
+                
+            }
+            else if(segue.identifier == "x"){
+                followupController.type = "x"
+                followupController.CurrentTitle="MCubeX"
+                followupController.offset=0
+                path = NSIndexPath(forRow: 3 , inSection: 0)
+                
+                
+            }
+            else if(segue.identifier == "ivrs"){
+                followupController.type = "ivrs"
+                followupController.CurrentTitle="IVRS"
+                followupController.offset=0
+                path = NSIndexPath(forRow: 2 , inSection: 0)
+                
+                
+            }
+            else if(segue.identifier == "mtracker"){
+                followupController.type = "mtracker"
+                followupController.CurrentTitle="Mtracker"
+                followupController.offset=0
+                path = NSIndexPath(forRow: 5 , inSection: 0)
+                
+                
+            }
+            else if(segue.identifier == "logout"){
+                followupController.isLogout = true;
+                
+            }
+            mytableview.selectRowAtIndexPath(path, animated: false, scrollPosition: UITableViewScrollPosition.None)
             
         }
-        else if(segue.identifier == "track"){
-            followupController.type = "track"
-            followupController.CurrentTitle="Track"
-             followupController.offset=0
-            path = NSIndexPath(forRow: 1 , inSection: 0)
-            
-            
-        }
-        else if(segue.identifier == "lead"){
-            followupController.type = "lead"
-            followupController.CurrentTitle="Lead"
-             followupController.offset=0
-             path = NSIndexPath(forRow: 4 , inSection: 0)
-            
-        }
-        else if(segue.identifier == "x"){
-            followupController.type = "x"
-            followupController.CurrentTitle="MCubeX"
-             followupController.offset=0
-             path = NSIndexPath(forRow: 3 , inSection: 0)
-
-            
-        }
-        else if(segue.identifier == "ivrs"){
-            followupController.type = "ivrs"
-            followupController.CurrentTitle="IVRS"
-             followupController.offset=0
-            path = NSIndexPath(forRow: 2 , inSection: 0)
-
-            
-        }
-        else if(segue.identifier == "mtracker"){
-            followupController.type = "mtracker"
-            followupController.CurrentTitle="Mtracker"
-             followupController.offset=0
-            path = NSIndexPath(forRow: 5 , inSection: 0)
-
-            
-        }
-        else if(segue.identifier == "logout"){
-            followupController.isLogout = true;
-    
-        }
-        mytableview.selectRowAtIndexPath(path, animated: false, scrollPosition: UITableViewScrollPosition.None)
-        
-    }
-  }
+    }
     
     
     
