@@ -50,7 +50,7 @@ class Util: NSObject {
         }
     }
       else{
-          print("databse exist")
+         // print("databse exist")
         }
 }
     

@@ -40,21 +40,21 @@ class LoginViewController: UIViewController,ValidationDelegate ,UITextFieldDeleg
         self.email.delegate = self;
         self.password.delegate = self;
         
-         if NSUserDefaults.standardUserDefaults().stringForKey("emailfield") != nil
+        if NSUserDefaults.standardUserDefaults().stringForKey("emailfield") != nil
             && NSUserDefaults.standardUserDefaults().stringForKey("passfield") != nil
         {
-           email.text=NSUserDefaults.standardUserDefaults().stringForKey("emailfield")
-           password.text=NSUserDefaults.standardUserDefaults().stringForKey("passfield")
+            email.text=NSUserDefaults.standardUserDefaults().stringForKey("emailfield")
+            password.text=NSUserDefaults.standardUserDefaults().stringForKey("passfield")
             
             
         }
-      //  self.showActivityIndiavtor()
+        //  self.showActivityIndiavtor()
         
         
-       
-       
+        
+        
     }
-
+    
     
     
     
@@ -63,14 +63,14 @@ class LoginViewController: UIViewController,ValidationDelegate ,UITextFieldDeleg
         if(rememberMe){
             rememberMe=false
         }
-         else{
-         rememberMe=true
+        else{
+            rememberMe=true
         }
-      
+        
     }
     
     
-  override func didReceiveMemoryWarning() {
+    override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
@@ -86,10 +86,10 @@ class LoginViewController: UIViewController,ValidationDelegate ,UITextFieldDeleg
         }
         return true
     }
-
+    
     
     @IBAction func LoginTap(sender: AnyObject) {
-         validator.validate(self)
+        validator.validate(self)
         
         
     }
@@ -182,14 +182,25 @@ class LoginViewController: UIViewController,ValidationDelegate ,UITextFieldDeleg
                 }
                 if(self.code=="200"){
                     if(self.message != nil){
-                       self.showActivityIndicator()
-                       NSUserDefaults.standardUserDefaults().setObject(self.empName, forKey: "name")
-                       NSUserDefaults.standardUserDefaults().setObject(self.empEmail, forKey: "email")
-                       NSUserDefaults.standardUserDefaults().setObject(self.authkey, forKey: "authkey")
-                         NSUserDefaults.standardUserDefaults().setObject(self.empContact, forKey: "empContact")
-                         NSUserDefaults.standardUserDefaults().setObject(self.businessName, forKey: "businessName")
-                      // NSUserDefaults.standardUserDefaults().setInteger(1, forKey: "select")
-                       NSUserDefaults.standardUserDefaults().synchronize()
+                        self.showActivityIndicator()
+                        NSUserDefaults.standardUserDefaults().setObject(self.empName, forKey: "name")
+                        NSUserDefaults.standardUserDefaults().setObject(self.empEmail, forKey: "email")
+                        NSUserDefaults.standardUserDefaults().setObject(self.authkey, forKey: "authkey")
+                        NSUserDefaults.standardUserDefaults().setObject(self.empContact, forKey: "empContact")
+                        NSUserDefaults.standardUserDefaults().setObject(self.businessName, forKey: "businessName")
+                        
+                        NSUserDefaults.standardUserDefaults().setObject(self.track, forKey: "track")
+                        NSUserDefaults.standardUserDefaults().setObject(self.ivrs, forKey: "ivrs")
+                        NSUserDefaults.standardUserDefaults().setObject(self.lead, forKey: "lead")
+                        NSUserDefaults.standardUserDefaults().setObject(self.pbx, forKey: "pbx")
+                        NSUserDefaults.standardUserDefaults().setObject(self.mtracker, forKey: "mtracker")
+                        
+                        
+                        
+                        
+                        
+                        // NSUserDefaults.standardUserDefaults().setInteger(1, forKey: "select")
+                        NSUserDefaults.standardUserDefaults().synchronize()
                         if let myLoadedString = NSUserDefaults.standardUserDefaults().stringForKey("name") {
                             print(myLoadedString) // "Hello World"
                         }
@@ -201,19 +212,19 @@ class LoginViewController: UIViewController,ValidationDelegate ,UITextFieldDeleg
                         }
                         else{
                             if NSUserDefaults.standardUserDefaults().stringForKey("emailfield") != nil
-                            && NSUserDefaults.standardUserDefaults().stringForKey("passfield") != nil
-                         {
-                            NSUserDefaults.standardUserDefaults().removeObjectForKey("emailfield")
-                            NSUserDefaults.standardUserDefaults().removeObjectForKey("passfield")
-                            NSUserDefaults.standardUserDefaults().synchronize()
-
-                         }
+                                && NSUserDefaults.standardUserDefaults().stringForKey("passfield") != nil
+                            {
+                                NSUserDefaults.standardUserDefaults().removeObjectForKey("emailfield")
+                                NSUserDefaults.standardUserDefaults().removeObjectForKey("passfield")
+                                NSUserDefaults.standardUserDefaults().synchronize()
+                                
+                            }
                         }
                         
                         
                         
                         
-                        self.performSegueWithIdentifier("login", sender: self)                       
+                        self.performSegueWithIdentifier("login", sender: self)
                         //self.showAlert(self.message!)
                         
                         
@@ -263,6 +274,6 @@ class LoginViewController: UIViewController,ValidationDelegate ,UITextFieldDeleg
             error.errorLabel?.hidden = false
         }    }
     
-   
+    
     
 }

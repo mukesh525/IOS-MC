@@ -18,6 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
      
         NSUserDefaults.standardUserDefaults().setInteger(0,forKey: "launch")
+        NSUserDefaults.standardUserDefaults().setInteger(0,forKey: "launchview")
         NSUserDefaults.standardUserDefaults().synchronize()
          
         UINavigationBar.appearance().barTintColor = UIColor(red: 255.0/255.0, green: 87.0/255.0, blue: 34.0/255.0, alpha: 1.0)

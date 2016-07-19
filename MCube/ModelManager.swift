@@ -136,24 +136,50 @@ class ModelManager: NSObject {
         }
        sharedInstance.database!.close()
         return resultData
-
-    
-    
-    
-    
     }
+    
+        func deleteAllData(){
+        
+            sharedInstance.database!.open()
+            var sucess:Bool=false;
+            sucess=sharedInstance.database!.executeUpdate("DELETE FROM track",withArgumentsInArray: nil)
+            sucess=sharedInstance.database!.executeUpdate("DELETE FROM track_menu",withArgumentsInArray: nil)
+            
+            sucess=sharedInstance.database!.executeUpdate("DELETE FROM lead",withArgumentsInArray: nil)
+            sucess=sharedInstance.database!.executeUpdate("DELETE FROM lead_menu",withArgumentsInArray: nil)
+            
+            sucess=sharedInstance.database!.executeUpdate("DELETE FROM ivrs",withArgumentsInArray: nil)
+            sucess=sharedInstance.database!.executeUpdate("DELETE FROM ivrs_menu",withArgumentsInArray: nil)
+            
+            sucess=sharedInstance.database!.executeUpdate("DELETE FROM x",withArgumentsInArray: nil)
+            sucess=sharedInstance.database!.executeUpdate("DELETE FROM x_menu",withArgumentsInArray: nil)
+            
+            sucess=sharedInstance.database!.executeUpdate("DELETE FROM followup",withArgumentsInArray: nil)
+            sucess=sharedInstance.database!.executeUpdate("DELETE FROM followup_menu",withArgumentsInArray: nil)
+            
+            sucess=sharedInstance.database!.executeUpdate("DELETE FROM mtracker",withArgumentsInArray: nil)
+            sucess=sharedInstance.database!.executeUpdate("DELETE FROM mtracker_menu",withArgumentsInArray: nil)
+            sharedInstance.database!.close()
+            if(sucess){
+                print(" cleared sucessfullly")
+            }
+            
+        
+        
+        }
+  
     
     func deleteData(table:String){
         sharedInstance.database!.open()
         let sucess=sharedInstance.database!.executeUpdate("DELETE FROM \(table)",withArgumentsInArray: nil)
         let sucessmenu=sharedInstance.database!.executeUpdate("DELETE FROM \(table)_menu",withArgumentsInArray: nil)
         sharedInstance.database!.close()
-        if(sucess){
+        if(sucess && sucessmenu){
         print("\(table) cleared sucessfullly")
         }
-        if(sucessmenu){
-         print("\(table)_menu cleared sucessfullly")
-        }
+//        if(sucessmenu){
+//         print("\(table)_menu cleared sucessfullly")
+//        }
     
      }
    

@@ -38,29 +38,30 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
     override func viewDidLoad() {
         super.viewDidLoad()
         
-         if let savedlimit = NSUserDefaults.standardUserDefaults().stringForKey("limit") {
+        setsection()
+        if let savedlimit = NSUserDefaults.standardUserDefaults().stringForKey("limit") {
             self.limit=Int(savedlimit)!;
         }
-         if(isLogout){
-         isLogout=false;
-         LogoutAlert()
+        if(isLogout){
+            isLogout=false;
+            LogoutAlert()
         }
         NSUserDefaults.standardUserDefaults().removeObjectForKey("select")
         NSUserDefaults.standardUserDefaults().synchronize()
         self.navigationItem.title = CurrentTitle;
-      
+        
         tableView.allowsSelection = true;
         mytableview.backgroundView = UIImageView(image: UIImage(named: "background_port.jpg"))
         if let authkey = NSUserDefaults.standardUserDefaults().stringForKey("authkey") {
             result=ModelManager.getInstance().getData(type)
             options=ModelManager.getInstance().getMenuData(type)
             if(result.count>0 && options.count>0){
-            tableView.reloadData()
+                tableView.reloadData()
             }
             else if(!self.isDownloading){
                 self.LoadData(false);
             }
-        
+            
         }
         
         self.refreshControll.attributedTitle = NSAttributedString(string: "Pull to refresh")
@@ -81,7 +82,7 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
         if self.refreshControll.refreshing{
             self.refreshControll.endRefreshing()
         }
-
+        
         // Do any additional setup after loading the view.
     }
     
@@ -90,26 +91,26 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
         // Code to refresh table view
         
         if(!self.isDownloading ){
-             self.LoadData(false);
+            self.LoadData(false);
         }
         else{
-          if self.refreshControll.refreshing{
-          self.refreshControll.endRefreshing()
-         }
-       }
+            if self.refreshControll.refreshing{
+                self.refreshControll.endRefreshing()
+            }
+        }
     }
     
     override func viewWillAppear(animated: Bool) {
-
-    self.tableView.reloadData()
-           }
-    
-    
-    override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView = UIView()
-        headerView.backgroundColor = UIColor.clearColor()
-        return headerView
+        
+        self.tableView.reloadData()
     }
+    
+    
+    //    override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    //        let headerView = UIView()
+    //        headerView.backgroundColor = UIColor.clearColor()
+    //        return headerView
+    //    }
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // Return the number of sections.
         return 1
@@ -131,13 +132,13 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
     }
     
     
- 
+    
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-       
+        
         self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
         self.CurrentData = self.result[indexPath.row] as! Data
         self.performSegueWithIdentifier("detail", sender: self)
-  
+        
     }
     
     
@@ -203,9 +204,9 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
     
     func configurePlay(filename:String,playbutton:UIButton) {
         
-          let url = "http://mcube.vmctechnologies.com/sounds/\(filename)"
-          let linkString = "http://m.mp3.zing.vn/xml/song-load/MjAxNSUyRjA4JTJGMDQlMkY3JTJGYiUyRjdiNTI4YTc0YWU2MGExYWJjMDZlYzA5NmE5MzFjMjliLm1wMyU3QzEz"
-          let link = NSURL(string: url)!
+        let url = "http://mcube.vmctechnologies.com/sounds/\(filename)"
+        let linkString = "http://m.mp3.zing.vn/xml/song-load/MjAxNSUyRjA4JTJGMDQlMkY3JTJGYiUyRjdiNTI4YTc0YWU2MGExYWJjMDZlYzA5NmE5MzFjMjliLm1wMyU3QzEz"
+        let link = NSURL(string: url)!
         
         
         for currentbutton in self.playButtons{
@@ -214,12 +215,12 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
                 if(self.CurrentPlaying != playbutton.tag){
                     player = nil;
                 }
-
+                
                 if(player == nil){
-                 player = AVPlayer(URL: link)
-                 NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(FollowUpViewController.playerDidFinishPlaying(_:)), name: AVPlayerItemDidPlayToEndTimeNotification, object:player.currentItem)
+                    player = AVPlayer(URL: link)
+                    NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(FollowUpViewController.playerDidFinishPlaying(_:)), name: AVPlayerItemDidPlayToEndTimeNotification, object:player.currentItem)
                 }
-               if ((player.rate != 0)) {
+                if ((player.rate != 0)) {
                     do{
                         player.pause()
                     }
@@ -229,43 +230,43 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
                     image = UIImage(named: "play")?.imageWithRenderingMode(.AlwaysTemplate)
                 }
                 else{
-                image = UIImage(named: "pause")?.imageWithRenderingMode(.AlwaysTemplate)
+                    image = UIImage(named: "pause")?.imageWithRenderingMode(.AlwaysTemplate)
                     do{
                         self.CurrentPlaying=playbutton.tag;
                         player.play()
                     }
                     catch {
-                     print("Something bad happened. Try catching specific errors to narrow things down")
+                        print("Something bad happened. Try catching specific errors to narrow things down")
                     }
                 }
-               
+                
                 currentbutton.setImage(image, forState: .Normal)
                 currentbutton.tintColor = UIColor(red: 255.0/255.0, green: 87.0/255.0, blue: 34.0/255.0, alpha: 1.0)
- 
+                
+            }
+            else{
+                
+                let image = UIImage(named: "play")?.imageWithRenderingMode(.AlwaysTemplate)
+                currentbutton.setImage(image, forState: .Normal)
+                currentbutton.tintColor = UIColor(red: 255.0/255.0, green: 87.0/255.0, blue: 34.0/255.0, alpha: 1.0)
+                
+            }
         }
-        else{
-             
-            let image = UIImage(named: "play")?.imageWithRenderingMode(.AlwaysTemplate)
-            currentbutton.setImage(image, forState: .Normal)
-            currentbutton.tintColor = UIColor(red: 255.0/255.0, green: 87.0/255.0, blue: 34.0/255.0, alpha: 1.0)
-
-         }
-     }
     }
     
     func playerDidFinishPlaying(note: NSNotification) {
-       
+        
         print("Playing Finished")
         
         for button in self.playButtons{
-         if(self.CurrentPlaying == button.tag)
-         {
-            let image = UIImage(named: "play")?.imageWithRenderingMode(.AlwaysTemplate)
-            button.setImage(image, forState: .Normal)
-            button.tintColor = UIColor(red: 255.0/255.0, green: 87.0/255.0, blue: 34.0/255.0, alpha: 1.0)
-            self.player = nil;
-          }
-        
+            if(self.CurrentPlaying == button.tag)
+            {
+                let image = UIImage(named: "play")?.imageWithRenderingMode(.AlwaysTemplate)
+                button.setImage(image, forState: .Normal)
+                button.tintColor = UIColor(red: 255.0/255.0, green: 87.0/255.0, blue: 34.0/255.0, alpha: 1.0)
+                self.player = nil;
+            }
+            
         }
         
         
@@ -275,7 +276,7 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
     deinit{
         NSNotificationCenter.defaultCenter().removeObserver(self)
         
-    
+        
     }
     
     
@@ -317,7 +318,7 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
         self.isDownloading=true;
         let authkey = NSUserDefaults.standardUserDefaults().stringForKey("authkey")
         if !self.refreshControll.refreshing{
-          self.showActivityIndicator()
+            self.showActivityIndicator()
         }
         //print(self.limit)
         if (self.player != nil && (self.player.error == nil) && (self.player.rate != 0) ) {
@@ -404,7 +405,7 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
                             
                         }
                         
-
+                        
                         
                         
                         if((record.objectForKey("filename")) != nil){
@@ -434,7 +435,7 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
                     }else{
                         self.showActivityIndicator()
                     }
-
+                    
                     self.mytableview.reloadData()
                 }
                 if((self.refreshControl?.beginRefreshing()) != nil){
@@ -442,26 +443,26 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
                 }
                 self.isDownloading=false;
                 if(!filter){
-                let isUpdated = ModelManager.getInstance().insertData(self.type, isDelete: true, Datas: self.result)
-                _ = ModelManager.getInstance().insertMenu(self.type, Options: self.options)
-                 if isUpdated {
-                   // Util.invokeAlertMethod("", strBody: "Record updated successfully.", delegate: nil)
-                } else {
-                  //  Util.invokeAlertMethod("", strBody: "Error in updating record.", delegate: nil)
+                    let isUpdated = ModelManager.getInstance().insertData(self.type, isDelete: true, Datas: self.result)
+                    _ = ModelManager.getInstance().insertMenu(self.type, Options: self.options)
+                    if isUpdated {
+                        // Util.invokeAlertMethod("", strBody: "Record updated successfully.", delegate: nil)
+                    } else {
+                        //  Util.invokeAlertMethod("", strBody: "Error in updating record.", delegate: nil)
+                    }
                 }
-                }
-
-         case .Failure(let error):
+                
+            case .Failure(let error):
                 self.isDownloading=false;
-
+                
                 if self.refreshControll.refreshing{
                     self.refreshControll.endRefreshing()
                 }else{
                     self.showActivityIndicator()
                 }
-
                 
-               // self.showActivityIndicator()
+                
+                // self.showActivityIndicator()
                 print("Request failed with error: \(error)")
                 if (error.code == -1009) {
                     self.showAlert("No Internet Conncetion")
@@ -555,14 +556,14 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
                     
                 }
                 if(self.SeletedFilterpos == 0){
-                 _ = ModelManager.getInstance().insertData(self.type, isDelete: true, Datas: self.result)
+                    _ = ModelManager.getInstance().insertData(self.type, isDelete: true, Datas: self.result)
                 }
-//                if isUpdated {
-//                    Util.invokeAlertMethod("", strBody: "Record updated successfully.", delegate: nil)
-//                } else {
-//                    Util.invokeAlertMethod("", strBody: "Error in updating record.", delegate: nil)
-//                }
-
+                //                if isUpdated {
+                //                    Util.invokeAlertMethod("", strBody: "Record updated successfully.", delegate: nil)
+                //                } else {
+                //                    Util.invokeAlertMethod("", strBody: "Error in updating record.", delegate: nil)
+                //                }
+                
                 self.mytableview.reloadData()
                 self.isNewDataLoading=false;
                 if((self.refreshControl?.beginRefreshing()) != nil){
@@ -581,7 +582,7 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
                     self.showAlert("No Internet Conncetion")
                 }
                 else if(error.code == -1001){
-                   self.showAlert("No Internet Conncetion")
+                    self.showAlert("No Internet Conncetion")
                     //request timed out
                 }
                 
@@ -708,14 +709,15 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
         
     }
     func LogoutAlert (){
-                let alertController = UIAlertController(title: "Logout Alert", message:
+        let alertController = UIAlertController(title: "Logout Alert", message:
             "Do you want to logout?", preferredStyle: .Alert)
         let okAction = UIAlertAction(title: "Logout", style: UIAlertActionStyle.Default) {
             UIAlertAction in
             NSUserDefaults.standardUserDefaults().removeObjectForKey("authkey")
             NSUserDefaults.standardUserDefaults().synchronize()
-            self.performSegueWithIdentifier("GoLogin", sender: self)  
-           
+            ModelManager.getInstance().deleteAllData();
+            self.performSegueWithIdentifier("GoLogin", sender: self)
+            
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default) {
             UIAlertAction in
@@ -742,7 +744,7 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
         self.presentViewController(alertController, animated: false, completion: nil)
         
     }
-   func showActivityIndicator(){
+    func showActivityIndicator(){
         if !self.showingActivity {
             self.navigationController?.view.makeToastActivity(.Center)
         } else {
@@ -757,7 +759,7 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
     
     func revealController(revealController: SWRevealViewController!,  willMoveToPosition position: FrontViewPosition){
         if(position == FrontViewPosition.Left) {
-             self.mytableview.userInteractionEnabled = true
+            self.mytableview.userInteractionEnabled = true
             sidebarMenuOpen = false
         } else {
             self.mytableview.userInteractionEnabled = false
@@ -767,7 +769,7 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
     
     func revealController(revealController: SWRevealViewController!,  didMoveToPosition position: FrontViewPosition){
         if(position == FrontViewPosition.Left) {
-             self.mytableview.userInteractionEnabled = true
+            self.mytableview.userInteractionEnabled = true
             sidebarMenuOpen = false
         } else {
             self.mytableview.userInteractionEnabled = false
@@ -782,6 +784,45 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
             return indexPath
         }
     }
-
     
+    func setsection() {
+        
+        if NSUserDefaults.standardUserDefaults().objectForKey("launchview") != nil{
+            print("Loaded view")
+            NSUserDefaults.standardUserDefaults().removeObjectForKey("launchview")
+            NSUserDefaults.standardUserDefaults().synchronize()
+            
+            if  NSUserDefaults.standardUserDefaults().stringForKey("track") == "1" {
+                self.type="track"
+                self.CurrentTitle="Track"
+            }
+            else if NSUserDefaults.standardUserDefaults().stringForKey("ivrs")  == "1"{
+                self.type="ivrs"
+                self.CurrentTitle="Ivrs"
+            }
+                
+            else if NSUserDefaults.standardUserDefaults().stringForKey("pbx")  == "1"{
+                self.type="x"
+                self.CurrentTitle="MCubeX"
+            }
+                
+            else if NSUserDefaults.standardUserDefaults().stringForKey("lead") == "1" {
+                self.type="lead"
+                self.CurrentTitle="Lead"
+            }
+                
+            else if NSUserDefaults.standardUserDefaults().stringForKey("mtracker") == "1" {
+                self.type="mtracker"
+                self.CurrentTitle="MTracker"
+            }
+            else{
+                self.type="followup"
+                self.CurrentTitle="Followup"
+            }
+            
+            
+            
+        }
+        
+    }
 }
