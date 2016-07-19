@@ -39,7 +39,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
            let vc = storyboard.instantiateViewControllerWithIdentifier("loginController") as! LoginViewController
            self.window!.rootViewController = vc;
         }
-        
+        Util.copyFile("mcubeios")
         
         return true
     }
