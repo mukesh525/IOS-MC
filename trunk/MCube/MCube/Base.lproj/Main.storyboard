@@ -810,15 +810,15 @@
                                             <segue destination="dXH-rC-dKS" kind="show" identifier="followup" customClass="SWRevealViewControllerSeguePushController" id="zT3-n6-TaC"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="17" id="fgD-sI-4tY">
-                                        <rect key="frame" x="0.0" y="448" width="320" height="17"/>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="25" id="fgD-sI-4tY">
+                                        <rect key="frame" x="0.0" y="448" width="320" height="25"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fgD-sI-4tY" id="5jW-5y-x0c">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="17"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="25"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Prefrences" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GIb-Fc-70X">
-                                                    <rect key="frame" x="18" y="0.0" width="93" height="21"/>
+                                                    <rect key="frame" x="8" y="2" width="93" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
@@ -828,7 +828,7 @@
                                         <color key="backgroundColor" red="0.94085192679999996" green="0.94903725390000004" blue="0.95307987930000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="40" id="GGA-Q4-zmq">
-                                        <rect key="frame" x="0.0" y="465" width="320" height="40"/>
+                                        <rect key="frame" x="0.0" y="473" width="320" height="40"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="GGA-Q4-zmq" id="0ke-xj-nJu">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="40"/>
@@ -851,7 +851,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="40" id="4kg-kG-68a">
-                                        <rect key="frame" x="0.0" y="505" width="320" height="40"/>
+                                        <rect key="frame" x="0.0" y="513" width="320" height="40"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="4kg-kG-68a" id="Kca-cq-cHf">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="40"/>
