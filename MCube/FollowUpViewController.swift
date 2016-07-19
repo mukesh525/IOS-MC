@@ -14,7 +14,7 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
     var result:NSMutableArray=NSMutableArray();
     var SeletedFilterpos: Int=0;
     var isDownloading:Bool = false;
-    var options = [OptionsData]()
+    var options :Array<OptionsData> = Array<OptionsData>()
     var playButtons=[UIButton]();
     var limit = 0;
     var offset=0;
@@ -52,11 +52,15 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
         tableView.allowsSelection = true;
         mytableview.backgroundView = UIImageView(image: UIImage(named: "background_port.jpg"))
         if let authkey = NSUserDefaults.standardUserDefaults().stringForKey("authkey") {
-           // print(authkey)
-            if(!self.isDownloading){
+            result=ModelManager.getInstance().getData(type)
+            options=ModelManager.getInstance().getMenuData(type)
+            if(result.count>0 && options.count>0){
+            tableView.reloadData()
+            }
+            else if(!self.isDownloading){
                 self.LoadData(false);
             }
-           // LoadData(false)
+        
         }
         
         self.refreshControll.attributedTitle = NSAttributedString(string: "Pull to refresh")
@@ -129,13 +133,11 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
     
  
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        //CODE TO BE RUN ON CELL TOUCH
+       
         self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
         self.CurrentData = self.result[indexPath.row] as! Data
-        
         self.performSegueWithIdentifier("detail", sender: self)
-        
-      //  self.dismissViewControllerAnimated(true, completion: nil)
+  
     }
     
     
@@ -439,6 +441,16 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
                     self.refreshControl!.endRefreshing()
                 }
                 self.isDownloading=false;
+                if(!filter){
+                let isUpdated = ModelManager.getInstance().insertData(self.type, isDelete: true, Datas: self.result)
+                _ = ModelManager.getInstance().insertMenu(self.type, Options: self.options)
+                 if isUpdated {
+                   // Util.invokeAlertMethod("", strBody: "Record updated successfully.", delegate: nil)
+                } else {
+                  //  Util.invokeAlertMethod("", strBody: "Error in updating record.", delegate: nil)
+                }
+                }
+
          case .Failure(let error):
                 self.isDownloading=false;
 
@@ -474,7 +486,7 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
         var dataId:String?
         var audioLink:String?
         var callTimeString:String?
-        var EmpName:String?
+        var empName:String?
         self.offset += self.limit
         let authkey = NSUserDefaults.standardUserDefaults().stringForKey("authkey")
         Alamofire.request(.POST, "https://mcube.vmc.in/mobapp/getList", parameters:
@@ -525,9 +537,10 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
                             data.startTime=callTimeString;
                             
                         }
-                        if((record.objectForKey("empname")) != nil){
-                            EmpName=record.objectForKey("empname") as? String
-                            data.empName=EmpName;
+                        
+                        if((record.objectForKey("empName")) != nil){
+                            empName=record.objectForKey("empName") as? String
+                            data.empName=empName;
                             
                         }
                         
@@ -541,7 +554,15 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
                     }
                     
                 }
-                
+                if(self.SeletedFilterpos == 0){
+                 _ = ModelManager.getInstance().insertData(self.type, isDelete: true, Datas: self.result)
+                }
+//                if isUpdated {
+//                    Util.invokeAlertMethod("", strBody: "Record updated successfully.", delegate: nil)
+//                } else {
+//                    Util.invokeAlertMethod("", strBody: "Error in updating record.", delegate: nil)
+//                }
+
                 self.mytableview.reloadData()
                 self.isNewDataLoading=false;
                 if((self.refreshControl?.beginRefreshing()) != nil){
