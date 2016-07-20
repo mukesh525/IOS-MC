@@ -11,6 +11,7 @@ import Alamofire
 
 class DetailViewController: UIViewController,UITableViewDataSource, UITableViewDelegate,CustomCellDelegate,UITextFieldDelegate {
 
+    @IBOutlet weak var addfollowup: UIButton!
     var DetailDataList = [DetailData]()
     var optionsList = [OptionsData]()
     var OptionStringList=[String]()
@@ -32,14 +33,19 @@ class DetailViewController: UIViewController,UITableViewDataSource, UITableViewD
         mytableview.delegate = self
         mytableview.dataSource = self
         mytableview.allowsSelection=false
-        mytableview.backgroundView = UIImageView(image: UIImage(named: "background_port.jpg"))
+       // mytableview.backgroundView = UIImageView(image: UIImage(named: "background_port.jpg"))
         loadDetaildata();
         self.refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
-        self.refreshControl.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
+        self.refreshControl.addTarget(self, action: #selector(DetailViewController.refresh(_:)), forControlEvents: UIControlEvents.ValueChanged)
         self.mytableview?.addSubview(refreshControl)
         if self.refreshControl.refreshing{
             self.refreshControl.endRefreshing()
         }
+        
+        
+//        addfollowup.titleLabel!.numberOfLines = 1;
+//        addfollowup.titleLabel!.adjustsFontSizeToFitWidth = true;
+//        addfollowup.titleLabel.lineBreakMode = UILineBreakModeClip()
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name:UIKeyboardWillShowNotification, object: nil);
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name:UIKeyboardWillHideNotification, object: nil);
     }
@@ -118,16 +124,6 @@ class DetailViewController: UIViewController,UITableViewDataSource, UITableViewD
     }
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     //MARK: - Tableview Delegate & Datasource
     func tableView(tableView:UITableView, numberOfRowsInSection section:Int) -> Int
     {
@@ -139,7 +135,9 @@ class DetailViewController: UIViewController,UITableViewDataSource, UITableViewD
             tableView.separatorStyle = UITableViewCellSeparatorStyle.None
             return 0
         } else {
-            tableView.backgroundView = UIImageView(image: UIImage(named: "background_port.jpg"))
+            //tableView.backgroundView = UIImageView(image: UIImage(named: "background_port.jpg"))
+            tableView.backgroundView=UIView()
+            tableView.backgroundView?.backgroundColor = UIColor.clearColor()
             return DetailDataList.count
         }
 

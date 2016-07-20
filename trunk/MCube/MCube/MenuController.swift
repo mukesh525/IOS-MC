@@ -88,6 +88,8 @@ class MenuController: UITableViewController {
             
         case 6:
             return 40;
+        case 7:
+            return 20;
         default:
             return height
         }

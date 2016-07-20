@@ -825,4 +825,29 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
         }
         
     }
+    
+    
+    var time: NSDate?
+    
+    func fetch(completion: () -> Void) {
+        time = NSDate()
+        self.LoadData(false);
+        completion()
+    }
+    
+    func updateUI() {
+        if let time = time {
+            let formatter = NSDateFormatter()
+            formatter.dateStyle = .ShortStyle
+            formatter.timeStyle = .LongStyle
+            print("Updated \(formatter.stringFromDate(time))")
+          //  updateLabel?.text = formatter.stringFromDate(time)
+        }
+        else {
+          print("Not yet updated")
+        }
+    }
+    
+    
+    
 }

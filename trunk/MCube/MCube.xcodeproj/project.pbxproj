@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0FC07413E5A68EE61CF6127D /* Pods_MCubeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FD2DC71E87A5DE1A2F739AB /* Pods_MCubeTests.framework */; };
 		8B1248D61D2FDCF600DCFFA6 /* menuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1248D51D2FDCF600DCFFA6 /* menuViewController.swift */; };
 		8B1A6D031D2CD0E600A9AFFD /* FilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1A6D021D2CD0E500A9AFFD /* FilterCell.swift */; };
 		8B1A6D0E1D2CD2C800A9AFFD /* OptionsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1A6D0D1D2CD2C800A9AFFD /* OptionsData.swift */; };
@@ -38,6 +39,7 @@
 		8BD246EA1D3CEFA700480CFB /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BD246E61D3CEFA700480CFB /* FMResultSet.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		8BE66F741D2A7B950073CFE5 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE66F731D2A7B950073CFE5 /* Data.swift */; };
 		8BF82F401D37B99000E1BA8D /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF82F3F1D37B99000E1BA8D /* SettingsController.swift */; };
+		A3644A6EAF7FB7FE61FC4FC1 /* Pods_MCube.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28D981093F9C7ECF6917F6AA /* Pods_MCube.framework */; };
 		F47029F61A7F27DB00E30A3C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47029F51A7F27DB00E30A3C /* AppDelegate.swift */; };
 		F47029FB1A7F27DB00E30A3C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F47029F91A7F27DB00E30A3C /* Main.storyboard */; };
 		F47029FD1A7F27DB00E30A3C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F47029FC1A7F27DB00E30A3C /* Images.xcassets */; };
@@ -73,7 +75,9 @@
 
 /* Begin PBXFileReference section */
 		17CF1E19AE850B22FDD7A13F /* Pods-MCubeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MCubeTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MCubeTests/Pods-MCubeTests.release.xcconfig"; sourceTree = "<group>"; };
+		28D981093F9C7ECF6917F6AA /* Pods_MCube.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MCube.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		343F00C09A1E0BB317CDB94A /* Pods-MCube.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MCube.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MCube/Pods-MCube.debug.xcconfig"; sourceTree = "<group>"; };
+		6FD2DC71E87A5DE1A2F739AB /* Pods_MCubeTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MCubeTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B1248D51D2FDCF600DCFFA6 /* menuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = menuViewController.swift; sourceTree = "<group>"; };
 		8B1A6D021D2CD0E500A9AFFD /* FilterCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterCell.swift; sourceTree = "<group>"; };
 		8B1A6D0D1D2CD2C800A9AFFD /* OptionsData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionsData.swift; sourceTree = "<group>"; };
@@ -133,6 +137,7 @@
 				8BD246DB1D3CEE5B00480CFB /* libsqlite3.0.tbd in Frameworks */,
 				8B8DB3641D36165A008A5EA6 /* AVFoundation.framework in Frameworks */,
 				F4702A161A7F342F00E30A3C /* MapKit.framework in Frameworks */,
+				A3644A6EAF7FB7FE61FC4FC1 /* Pods_MCube.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -140,6 +145,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0FC07413E5A68EE61CF6127D /* Pods_MCubeTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -327,6 +333,8 @@
 			children = (
 				8BD246DA1D3CEE5B00480CFB /* libsqlite3.0.tbd */,
 				8B8DB3631D361659008A5EA6 /* AVFoundation.framework */,
+				28D981093F9C7ECF6917F6AA /* Pods_MCube.framework */,
+				6FD2DC71E87A5DE1A2F739AB /* Pods_MCubeTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -388,7 +396,11 @@
 				TargetAttributes = {
 					F47029EF1A7F27DB00E30A3C = {
 						CreatedOnToolsVersion = 6.1.1;
+						DevelopmentTeam = HMVM4SM8W5;
 						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
 							com.apple.Maps.iOS = {
 								enabled = 1;
 							};
@@ -693,6 +705,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Pods/MobileVLCKit/MobileVLCKit-binary",
@@ -700,8 +714,9 @@
 				INFOPLIST_FILE = MCube/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.vmc.mcube;
+				PRODUCT_BUNDLE_IDENTIFIER = com.vmctechnologies.mcube;
 				PRODUCT_NAME = MCube;
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "MCube/MCube-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -713,6 +728,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Pods/MobileVLCKit/MobileVLCKit-binary",
@@ -720,8 +737,9 @@
 				INFOPLIST_FILE = MCube/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.vmc.mcube;
+				PRODUCT_BUNDLE_IDENTIFIER = com.vmctechnologies.mcube;
 				PRODUCT_NAME = MCube;
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "MCube/MCube-Bridging-Header.h";
 			};
 			name = Release;
