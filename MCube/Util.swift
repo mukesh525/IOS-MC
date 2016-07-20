@@ -46,7 +46,7 @@ class Util: NSObject {
             }
             alert.delegate = nil
             alert.addButtonWithTitle("Ok")
-            alert.show()
+           // alert.show()
         }
     }
       else{

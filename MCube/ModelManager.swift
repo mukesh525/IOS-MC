@@ -45,7 +45,7 @@ class ModelManager: NSObject {
         if(isDelete){
         deleteData(tablename)
         }
-        var isInserted:Bool!
+        var isInserted:Bool=false;
         let empty:String="N/A"
         sharedInstance.database!.open()
         for i in 0 ..< Datas.count {
