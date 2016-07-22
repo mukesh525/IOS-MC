@@ -9,7 +9,7 @@
 import UIKit
 import Alamofire
 
-class DetailViewController: UIViewController,UITableViewDataSource, UITableViewDelegate,CustomCellDelegate,UITextFieldDelegate {
+class DetailViewController: UIViewController,UITableViewDataSource,UIPopoverPresentationControllerDelegate, UITableViewDelegate,CustomCellDelegate,UITextFieldDelegate {
 
     @IBOutlet weak var addfollowup: UIButton!
     var DetailDataList = [DetailData]()
@@ -42,12 +42,9 @@ class DetailViewController: UIViewController,UITableViewDataSource, UITableViewD
             self.refreshControl.endRefreshing()
         }
         
-        
-//        addfollowup.titleLabel!.numberOfLines = 1;
-//        addfollowup.titleLabel!.adjustsFontSizeToFitWidth = true;
-//        addfollowup.titleLabel.lineBreakMode = UILineBreakModeClip()
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name:UIKeyboardWillShowNotification, object: nil);
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name:UIKeyboardWillHideNotification, object: nil);
+        addLogOutButtonToNavigationBar("more");
+     NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name:UIKeyboardWillShowNotification, object: nil);
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(DetailViewController.keyboardWillHide(_:)), name:UIKeyboardWillHideNotification, object: nil);
     }
 
     deinit {
@@ -68,7 +65,32 @@ class DetailViewController: UIViewController,UITableViewDataSource, UITableViewD
         // Code to refresh table view
       loadDetaildata(); 
     }
-
+    func moreButtonClicked(sender:AnyObject) {
+        let popoverContent = (self.storyboard?.instantiateViewControllerWithIdentifier("more"))! as UIViewController
+        
+        popoverContent.modalPresentationStyle = .Popover
+        //var popover = popoverContent.popoverPresentationController
+        
+        if let popover = popoverContent.popoverPresentationController {
+            
+            let viewForSource = sender as! UIView
+            popover.sourceView = viewForSource
+            
+            // the position of the popover where it's showed
+            popover.sourceRect = viewForSource.bounds
+            
+            // the size you want to display
+            popoverContent.preferredContentSize = CGSizeMake(150,220)
+            popover.delegate = self
+        }
+        
+        self.presentViewController(popoverContent, animated: true, completion: nil)
+    }
+    
+    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
+        return .None
+    }
+    
     
     @IBAction func UpdateClick(sender: AnyObject) {
         
@@ -128,7 +150,7 @@ class DetailViewController: UIViewController,UITableViewDataSource, UITableViewD
     func tableView(tableView:UITableView, numberOfRowsInSection section:Int) -> Int
     {
         if DetailDataList.count == 0{
-            var emptyLabel = UILabel(frame: CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height))
+            let emptyLabel = UILabel(frame: CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height))
             emptyLabel.text = "No Data Pull Down To Refresh"
             emptyLabel.textAlignment = NSTextAlignment.Center
             tableView.backgroundView = emptyLabel
@@ -191,8 +213,8 @@ class DetailViewController: UIViewController,UITableViewDataSource, UITableViewD
             cell3.label1.text=detaildata.label
             cell3.textfiled.text=detaildata.value
             cell3.delegate=self
-            cell3.onEditingBegin = {[unowned self] (selectedRow) -> Void in
-                var pointInTable:CGPoint = selectedRow.textfiled.superview!.convertPoint(selectedRow.textfiled.frame.origin, toView:tableView)
+            cell3.onEditingBegin = {(selectedRow) -> Void in
+                let pointInTable:CGPoint = selectedRow.textfiled.superview!.convertPoint(selectedRow.textfiled.frame.origin, toView:tableView)
                 var contentOffset:CGPoint = tableView.contentOffset
                 contentOffset.y  = pointInTable.y
                 if let accessoryView = selectedRow.textfiled.inputAccessoryView {
@@ -209,7 +231,7 @@ class DetailViewController: UIViewController,UITableViewDataSource, UITableViewD
              cell2.label.text=detaildata.label
              cell2.Options=detaildata.Options
              cell2.itemAtDefaultPosition=detaildata.value!
-             cell2.pickerSelected = { [unowned self] (selectedRow) -> Void in
+             cell2.pickerSelected = { (selectedRow) -> Void in
                 detaildata.value=detaildata.OptionList[selectedRow].id
                 print("the selected item is \(selectedRow)")
                 print("the selected value is \(detaildata.Options[selectedRow])")
@@ -430,7 +452,7 @@ class DetailViewController: UIViewController,UITableViewDataSource, UITableViewD
                 
                 self.showActivityIndicator()
                 if(code == "202" && msg != nil){
-                self.showAlert("Records Updates Successfully")
+                self.showAlert("Records Updated Successfully")
                 }else{
                 self.showAlert("Something went wrong try again")
                  }
@@ -468,6 +490,17 @@ class DetailViewController: UIViewController,UITableViewDataSource, UITableViewD
     }
     
 
-
+    func addLogOutButtonToNavigationBar(triggerToMethodName: String)
+    {
+        let button: UIButton = UIButton()
+        button.setImage(UIImage(named: "more"), forState: .Normal)
+        button.frame = CGRectMake(20, 0, 30, 25)
+        button.contentEdgeInsets = UIEdgeInsets.init(top: 0, left: 10, bottom: 0, right: -10)
+        
+        button .addTarget(self, action:#selector(DetailViewController.moreButtonClicked(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        let rightItem:UIBarButtonItem = UIBarButtonItem()
+        rightItem.customView = button
+        self.navigationItem.rightBarButtonItem = rightItem
+    }
 
 }

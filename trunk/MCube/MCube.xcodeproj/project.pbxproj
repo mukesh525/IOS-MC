@@ -18,6 +18,7 @@
 		8B326D611D39009400022B33 /* CustomeCell4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B326D601D39009400022B33 /* CustomeCell4.swift */; };
 		8B326D641D3900E700022B33 /* ChekboxCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B326D631D3900E700022B33 /* ChekboxCell.swift */; };
 		8B326D661D39023A00022B33 /* DetailData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B326D651D39023A00022B33 /* DetailData.swift */; };
+		8B471D2A1D40B05F008BD625 /* MoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B471D291D40B05F008BD625 /* MoreViewController.swift */; };
 		8B64868A1D3E019D0071C76D /* mcubeios.db in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8B6486891D3E018A0071C76D /* mcubeios.db */; };
 		8B8DB3641D36165A008A5EA6 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B8DB3631D361659008A5EA6 /* AVFoundation.framework */; };
 		8BAD4E411D27682200A64393 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BAD4E401D27682200A64393 /* SWRevealViewController.m */; };
@@ -88,6 +89,7 @@
 		8B326D601D39009400022B33 /* CustomeCell4.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomeCell4.swift; sourceTree = "<group>"; };
 		8B326D631D3900E700022B33 /* ChekboxCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChekboxCell.swift; sourceTree = "<group>"; };
 		8B326D651D39023A00022B33 /* DetailData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailData.swift; sourceTree = "<group>"; };
+		8B471D291D40B05F008BD625 /* MoreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreViewController.swift; sourceTree = "<group>"; };
 		8B6486891D3E018A0071C76D /* mcubeios.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = mcubeios.db; sourceTree = "<group>"; };
 		8B8DB3631D361659008A5EA6 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		8BAD4E401D27682200A64393 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
@@ -286,6 +288,7 @@
 				F4D750141BD38E56009E1003 /* SWRevealViewController */,
 				F47029F51A7F27DB00E30A3C /* AppDelegate.swift */,
 				F47029F91A7F27DB00E30A3C /* Main.storyboard */,
+				8B471D291D40B05F008BD625 /* MoreViewController.swift */,
 				F47029FC1A7F27DB00E30A3C /* Images.xcassets */,
 				F47029FE1A7F27DB00E30A3C /* LaunchScreen.xib */,
 				F47029F31A7F27DB00E30A3C /* Supporting Files */,
@@ -574,6 +577,7 @@
 				8BB16D3B1D3510F80060B841 /* CheckBox.swift in Sources */,
 				8B1A6D0E1D2CD2C800A9AFFD /* OptionsData.swift in Sources */,
 				8B326D4B1D38D6F400022B33 /* DetailViewController.swift in Sources */,
+				8B471D2A1D40B05F008BD625 /* MoreViewController.swift in Sources */,
 				8BD246D71D3CED2500480CFB /* Util.swift in Sources */,
 				8BD246E81D3CEFA700480CFB /* FMDatabaseAdditions.m in Sources */,
 				F491E7551A7F7E010026528E /* PhotoViewController.swift in Sources */,
