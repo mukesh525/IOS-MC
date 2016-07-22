@@ -45,7 +45,6 @@ class MenuController: UITableViewController {
         self.clearsSelectionOnViewWillAppear = false;
         
         
-        
     }
     
     

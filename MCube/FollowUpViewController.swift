@@ -171,10 +171,11 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
         cell.callfrom.text=data.callFrom
         cell.callername.text=(data.callerName?.isEmpty) != nil && NSString(string: data.callerName!).length > 1 ?  data.callerName : "UNKNOWN"
         
-        if((data.callTimeString?.isEmpty) != nil && NSString(string: data.callTimeString!).length > 0){
+        if((data.callTimeString?.isEmpty) != nil && NSString(string: data.callTimeString!).length > 1){
             cell.date.text=self.convertDate(data.callTimeString!)
             cell.time.text=self.convertTime(data.callTimeString!)
             cell.status.text=(data.status?.isEmpty) != nil && NSString(string: data.status!).length > 1 ?  data.status : "UNKNOWN"
+            
             cell.Group.text=data.groupName
             cell.groupLabel.text="Group"
             

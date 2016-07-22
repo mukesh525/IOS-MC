@@ -20,6 +20,7 @@
 		8B326D661D39023A00022B33 /* DetailData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B326D651D39023A00022B33 /* DetailData.swift */; };
 		8B471D2A1D40B05F008BD625 /* MoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B471D291D40B05F008BD625 /* MoreViewController.swift */; };
 		8B64868A1D3E019D0071C76D /* mcubeios.db in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8B6486891D3E018A0071C76D /* mcubeios.db */; };
+		8B6584BB1D4203DD007D2C2D /* AddFollowupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6584BA1D4203DD007D2C2D /* AddFollowupViewController.swift */; };
 		8B8DB3641D36165A008A5EA6 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B8DB3631D361659008A5EA6 /* AVFoundation.framework */; };
 		8BAD4E411D27682200A64393 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BAD4E401D27682200A64393 /* SWRevealViewController.m */; };
 		8BAD4E441D2769E400A64393 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BAD4E431D2769E400A64393 /* Default.png */; };
@@ -91,6 +92,7 @@
 		8B326D651D39023A00022B33 /* DetailData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailData.swift; sourceTree = "<group>"; };
 		8B471D291D40B05F008BD625 /* MoreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreViewController.swift; sourceTree = "<group>"; };
 		8B6486891D3E018A0071C76D /* mcubeios.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = mcubeios.db; sourceTree = "<group>"; };
+		8B6584BA1D4203DD007D2C2D /* AddFollowupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddFollowupViewController.swift; sourceTree = "<group>"; };
 		8B8DB3631D361659008A5EA6 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		8BAD4E401D27682200A64393 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
 		8BAD4E421D27683200A64393 /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
@@ -199,6 +201,7 @@
 				8B1A6D021D2CD0E500A9AFFD /* FilterCell.swift */,
 				8BF82F3F1D37B99000E1BA8D /* SettingsController.swift */,
 				8B326D4A1D38D6F400022B33 /* DetailViewController.swift */,
+				8B6584BA1D4203DD007D2C2D /* AddFollowupViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -582,6 +585,7 @@
 				8BD246E81D3CEFA700480CFB /* FMDatabaseAdditions.m in Sources */,
 				F491E7551A7F7E010026528E /* PhotoViewController.swift in Sources */,
 				8B326D611D39009400022B33 /* CustomeCell4.swift in Sources */,
+				8B6584BB1D4203DD007D2C2D /* AddFollowupViewController.swift in Sources */,
 				8B326D5B1D39005E00022B33 /* CustomeCell1.swift in Sources */,
 				8B1A6D031D2CD0E600A9AFFD /* FilterCell.swift in Sources */,
 			);
