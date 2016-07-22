@@ -52,10 +52,11 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
         
         tableView.allowsSelection = true;
         mytableview.backgroundView = UIImageView(image: UIImage(named: "background_port.jpg"))
-        if let authkey = NSUserDefaults.standardUserDefaults().stringForKey("authkey") {
+        if NSUserDefaults.standardUserDefaults().stringForKey("authkey") != nil {
             result=ModelManager.getInstance().getData(type)
             options=ModelManager.getInstance().getMenuData(type)
             if(result.count>0 && options.count>0){
+                self.playButtons=[UIButton]()
                 tableView.reloadData()
             }
             else if(!self.isDownloading){
@@ -101,7 +102,7 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
     }
     
     override func viewWillAppear(animated: Bool) {
-        
+       self.playButtons=[UIButton]()
         self.tableView.reloadData()
     }
     
@@ -119,7 +120,7 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // Return the number of rows in the section.
         if result.count == 0{
-            var emptyLabel = UILabel(frame: CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height))
+            let emptyLabel = UILabel(frame: CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height))
             emptyLabel.text = "No Data Pull Down To Refresh"
             emptyLabel.textAlignment = NSTextAlignment.Center
             self.tableView.backgroundView = emptyLabel
@@ -168,12 +169,12 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
         }
         
         cell.callfrom.text=data.callFrom
-        cell.callername.text=(data.callerName?.isEmpty) != nil && NSString(string: data.callerName!).length > 0 ?  data.callerName : "UNKNOWN"
+        cell.callername.text=(data.callerName?.isEmpty) != nil && NSString(string: data.callerName!).length > 1 ?  data.callerName : "UNKNOWN"
         
         if((data.callTimeString?.isEmpty) != nil && NSString(string: data.callTimeString!).length > 0){
             cell.date.text=self.convertDate(data.callTimeString!)
             cell.time.text=self.convertTime(data.callTimeString!)
-            cell.status.text=(data.status?.isEmpty) != nil && NSString(string: data.status!).length > 0 ?  data.status : "UNKNOWN"
+            cell.status.text=(data.status?.isEmpty) != nil && NSString(string: data.status!).length > 1 ?  data.status : "UNKNOWN"
             cell.Group.text=data.groupName
             cell.groupLabel.text="Group"
             
@@ -193,6 +194,9 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
         cell.playButton.setImage(image, forState: .Normal)
         cell.playButton.tintColor = UIColor(red: 255.0/255.0, green: 87.0/255.0, blue: 34.0/255.0, alpha: 1.0)
         
+        if(indexPath.row == 0){
+           self.playButtons=[UIButton]()
+        }
         self.playButtons.append(cell.playButton)
         
         
@@ -221,23 +225,15 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
                     NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(FollowUpViewController.playerDidFinishPlaying(_:)), name: AVPlayerItemDidPlayToEndTimeNotification, object:player.currentItem)
                 }
                 if ((player.rate != 0)) {
-                    do{
-                        player.pause()
-                    }
-                    catch {
-                        print("Something bad happened. Try catching specific errors to narrow things down")
-                    }
+                    player.pause()
                     image = UIImage(named: "play")?.imageWithRenderingMode(.AlwaysTemplate)
                 }
                 else{
                     image = UIImage(named: "pause")?.imageWithRenderingMode(.AlwaysTemplate)
-                    do{
-                        self.CurrentPlaying=playbutton.tag;
-                        player.play()
-                    }
-                    catch {
-                        print("Something bad happened. Try catching specific errors to narrow things down")
-                    }
+                    self.CurrentPlaying=playbutton.tag;
+                    player.play()
+                   
+                   
                 }
                 
                 currentbutton.setImage(image, forState: .Normal)
@@ -435,7 +431,7 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
                     }else{
                         self.showActivityIndicator()
                     }
-                    
+                //    self.playButtons=[UIButton]()
                     self.mytableview.reloadData()
                 }
                 if((self.refreshControl?.beginRefreshing()) != nil){
@@ -443,12 +439,12 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
                 }
                 self.isDownloading=false;
                 if(!filter){
-                    let isUpdated = ModelManager.getInstance().insertData(self.type, isDelete: true, Datas: self.result)
-                    _ = ModelManager.getInstance().insertMenu(self.type, Options: self.options)
-                    if isUpdated {
-                        // Util.invokeAlertMethod("", strBody: "Record updated successfully.", delegate: nil)
+                    let isUpdated = ModelManager.getInstance().insertData(self.type, isDelete: true, Datas: self.result,isMore:false)
+                    let ismenu = ModelManager.getInstance().insertMenu(self.type, Options: self.options)
+                    if ismenu {
+                        // Util.invokeAlertMethod("", strBody: "Menu updated successfully.", delegate: nil)
                     } else {
-                        //  Util.invokeAlertMethod("", strBody: "Error in updating record.", delegate: nil)
+                         // Util.invokeAlertMethod("", strBody: "Error in updating Menu .", delegate: nil)
                     }
                 }
                 
@@ -488,7 +484,10 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
         var audioLink:String?
         var callTimeString:String?
         var empName:String?
-        self.offset += self.limit
+        //self.offset += self.limit
+        self.offset = self.result.count
+
+        
         let authkey = NSUserDefaults.standardUserDefaults().stringForKey("authkey")
         Alamofire.request(.POST, "https://mcube.vmc.in/mobapp/getList", parameters:
             ["authKey":authkey!, "limit":"10","gid": gid,"ofset":self.offset,"type":type])
@@ -556,14 +555,14 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
                     
                 }
                 if(self.SeletedFilterpos == 0){
-                    _ = ModelManager.getInstance().insertData(self.type, isDelete: true, Datas: self.result)
+                    _ = ModelManager.getInstance().insertData(self.type, isDelete: true, Datas: self.result,isMore:true)
                 }
                 //                if isUpdated {
                 //                    Util.invokeAlertMethod("", strBody: "Record updated successfully.", delegate: nil)
                 //                } else {
                 //                    Util.invokeAlertMethod("", strBody: "Error in updating record.", delegate: nil)
                 //                }
-                
+                //self.playButtons=[UIButton]()
                 self.mytableview.reloadData()
                 self.isNewDataLoading=false;
                 if((self.refreshControl?.beginRefreshing()) != nil){
@@ -577,6 +576,7 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
                 
                 
             case .Failure(let error):
+                self.isNewDataLoading=false;
                 print("Request failed with error: \(error)")
                 if (error.code == -1009) {
                     self.showAlert("No Internet Conncetion")
@@ -737,7 +737,14 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default) {
             UIAlertAction in
-            
+            if self.showingActivity {
+                self.navigationController?.view.hideToastActivity()
+                self.showingActivity = !self.showingActivity
+            }
+            if self.refreshControll.refreshing{
+                self.refreshControll.endRefreshing()
+            }
+
         }
         alertController.addAction(cancelAction)
         alertController.addAction(okAction)

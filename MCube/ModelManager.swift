@@ -40,10 +40,10 @@ class ModelManager: NSObject {
     
     
     
-    func insertData(tablename:String,isDelete:Bool,Datas:NSMutableArray) -> Bool
-    {   createTable(tablename)
+    func insertData(tablename:String,isDelete:Bool,Datas:NSMutableArray,isMore:Bool) -> Bool
+     {   createTable(tablename)
         if(isDelete){
-        deleteData(tablename)
+        deleteData(tablename,isMore: isMore)
         }
         var isInserted:Bool=false;
         let empty:String="N/A"
@@ -169,10 +169,13 @@ class ModelManager: NSObject {
         }
   
     
-    func deleteData(table:String){
+    func deleteData(table:String,isMore:Bool){
         sharedInstance.database!.open()
+        var sucessmenu:Bool=false;
         let sucess=sharedInstance.database!.executeUpdate("DELETE FROM \(table)",withArgumentsInArray: nil)
-        let sucessmenu=sharedInstance.database!.executeUpdate("DELETE FROM \(table)_menu",withArgumentsInArray: nil)
+        if(!isMore){
+         sucessmenu=sharedInstance.database!.executeUpdate("DELETE FROM \(table)_menu",withArgumentsInArray: nil)
+        }
         sharedInstance.database!.close()
         if(sucess && sucessmenu){
         print("\(table) cleared sucessfullly")
