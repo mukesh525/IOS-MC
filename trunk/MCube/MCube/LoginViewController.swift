@@ -5,9 +5,14 @@ import UIKit
 import SwiftValidator
 import Alamofire
 import Toast_Swift
+import BEMCheckBox
+
+
+
 
 class LoginViewController: UIViewController,ValidationDelegate ,UITextFieldDelegate {
     
+    @IBOutlet weak var rememberMe: BEMCheckBox!
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var passworderror: UILabel!
     @IBOutlet weak var password: UITextField!
@@ -28,7 +33,9 @@ class LoginViewController: UIViewController,ValidationDelegate ,UITextFieldDeleg
     var track:String?
     var businessName:String?
     var empContact:String?
-    var rememberMe:Bool=false
+    //var rememberMe:Bool=false
+    var showpassicon:UIImageView?
+    var iconClick : Bool!
     @IBOutlet weak var checkBox: CheckBox!
     
     override func viewDidLoad() {
@@ -39,7 +46,8 @@ class LoginViewController: UIViewController,ValidationDelegate ,UITextFieldDeleg
         validator.registerField(password,errorLabel: passworderror, rules: [RequiredRule(), MinLengthRule(length: 5)])
         self.email.delegate = self;
         self.password.delegate = self;
-        
+        iconClick = true
+        self.setShowHideIcon()
         if NSUserDefaults.standardUserDefaults().stringForKey("emailfield") != nil
             && NSUserDefaults.standardUserDefaults().stringForKey("passfield") != nil
         {
@@ -48,26 +56,36 @@ class LoginViewController: UIViewController,ValidationDelegate ,UITextFieldDeleg
             
             
         }
-        //  self.showActivityIndiavtor()
-        
-        
-        
         
     }
     
     
-    
-    
-    @IBAction func CheckBoxClick(sender: AnyObject) {
+    func imageTapped(img: AnyObject)
+    {
+        // Your action
+       
+        if(iconClick == true) {
+            password.secureTextEntry = false
+            iconClick = false
+            showpassicon = UIImageView(image:UIImage(named: "show")!.imageWithInsets(UIEdgeInsetsMake(0, 5, 0, 5)))
+            
+        } else {
+            password.secureTextEntry = true
+            iconClick = true
+            showpassicon = UIImageView(image:UIImage(named: "hide")!.imageWithInsets(UIEdgeInsetsMake(0, 5, 0, 5)))
+        }
         
-        if(rememberMe){
-            rememberMe=false
-        }
-        else{
-            rememberMe=true
-        }
+       
+        showpassicon!.userInteractionEnabled=true;
+        let tapGestureRecognizer = UITapGestureRecognizer(target:self, action:#selector(LoginViewController.imageTapped(_:)))
+        showpassicon!.addGestureRecognizer(tapGestureRecognizer)
+        password.rightViewMode = UITextFieldViewMode.Always
+        password.rightView = showpassicon
         
     }
+    
+
+    
     
     
     override func didReceiveMemoryWarning() {
@@ -205,7 +223,7 @@ class LoginViewController: UIViewController,ValidationDelegate ,UITextFieldDeleg
                             print(myLoadedString) // "Hello World"
                         }
                         
-                        if(self.rememberMe){
+                        if(self.rememberMe.on){
                             NSUserDefaults.standardUserDefaults().setObject(self.email.text, forKey: "emailfield")
                             NSUserDefaults.standardUserDefaults().setObject(self.password.text, forKey: "passfield")
                             NSUserDefaults.standardUserDefaults().synchronize()
@@ -273,7 +291,37 @@ class LoginViewController: UIViewController,ValidationDelegate ,UITextFieldDeleg
             error.errorLabel?.text = error.errorMessage // works if you added labels
             error.errorLabel?.hidden = false
         }    }
+
     
     
     
+    
+    
+    func setShowHideIcon(){
+        
+        
+        
+        let user:UIImage=UIImage(named: "user")!;
+        let usericon:UIImageView = UIImageView(image:user.imageWithInsets(UIEdgeInsetsMake(0, 5, 0, 5)))
+        email.leftViewMode = UITextFieldViewMode.Always
+        email.leftView = usericon
+        
+        let pass:UIImage=UIImage(named: "pass")!;
+        let passicon:UIImageView = UIImageView(image:pass.imageWithInsets(UIEdgeInsetsMake(0, 5, 0, 5)))
+        password.leftViewMode = UITextFieldViewMode.Always
+        password.leftView = passicon
+        
+        
+        //  let showpass:UIImage=UIImage(named: "show")!;
+        showpassicon = UIImageView(image:UIImage(named: "hide")!.imageWithInsets(UIEdgeInsetsMake(0, 5, 0, 5)))
+        showpassicon!.userInteractionEnabled=true;
+        let tapGestureRecognizer = UITapGestureRecognizer(target:self, action:#selector(LoginViewController.imageTapped(_:)))
+        showpassicon!.addGestureRecognizer(tapGestureRecognizer)
+        password.rightViewMode = UITextFieldViewMode.Always
+        password.rightView = showpassicon
+        
+    }
 }
+
+
+

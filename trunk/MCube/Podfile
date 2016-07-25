@@ -10,9 +10,9 @@ target 'MCube' do
   pod 'SwiftValidator', :git => 'https://github.com/jpotts18/SwiftValidator.git', :tag => '4.0.0'
   pod 'Toast-Swift', '~> 1.3.0'
   pod 'BEMCheckBox'
-  # pod 'MobileVLCKit-prod'
-
-  target 'MCubeTests' do
+  
+  
+   target 'MCubeTests' do
     inherit! :search_paths
     # Pods for testing
   end

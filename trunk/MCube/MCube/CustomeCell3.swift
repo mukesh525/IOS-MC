@@ -25,7 +25,7 @@ class CustomeCell3: UITableViewCell{
         super.awakeFromNib()
         // Initialization code
      
-        textfiled.addTarget(self, action: "textFieldDidChange:", forControlEvents: UIControlEvents.EditingChanged)
+        textfiled.addTarget(self, action: #selector(CustomeCell3.textFieldDidChange(_:)), forControlEvents: UIControlEvents.EditingChanged)
            }
 
     override func setSelected(selected: Bool, animated: Bool) {
