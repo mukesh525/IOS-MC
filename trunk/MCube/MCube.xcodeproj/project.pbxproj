@@ -51,7 +51,6 @@
 		F4702A0C1A7F27DC00E30A3C /* MCubeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4702A0B1A7F27DC00E30A3C /* MCubeTests.swift */; };
 		F4702A161A7F342F00E30A3C /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4702A151A7F342F00E30A3C /* MapKit.framework */; };
 		F4702A181A7F351C00E30A3C /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4702A171A7F351C00E30A3C /* MenuController.swift */; };
-		F491E7551A7F7E010026528E /* PhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F491E7541A7F7E010026528E /* PhotoViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -134,7 +133,6 @@
 		F4702A0B1A7F27DC00E30A3C /* MCubeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCubeTests.swift; sourceTree = "<group>"; };
 		F4702A151A7F342F00E30A3C /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		F4702A171A7F351C00E30A3C /* MenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuController.swift; sourceTree = "<group>"; };
-		F491E7541A7F7E010026528E /* PhotoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -208,7 +206,6 @@
 			children = (
 				8B471D291D40B05F008BD625 /* MoreViewController.swift */,
 				8B1248D51D2FDCF600DCFFA6 /* menuViewController.swift */,
-				F491E7541A7F7E010026528E /* PhotoViewController.swift */,
 				F4702A171A7F351C00E30A3C /* MenuController.swift */,
 				8BAD4E771D278C9B00A64393 /* LoginViewController.swift */,
 				8BBFE0B81D28D99C00435723 /* FollowUpViewController.swift */,
@@ -599,7 +596,6 @@
 				8B471D2A1D40B05F008BD625 /* MoreViewController.swift in Sources */,
 				8BD246D71D3CED2500480CFB /* Util.swift in Sources */,
 				8BD246E81D3CEFA700480CFB /* FMDatabaseAdditions.m in Sources */,
-				F491E7551A7F7E010026528E /* PhotoViewController.swift in Sources */,
 				8B326D611D39009400022B33 /* CustomeCell4.swift in Sources */,
 				8B6584BB1D4203DD007D2C2D /* AddFollowupViewController.swift in Sources */,
 				8B326D5B1D39005E00022B33 /* CustomeCell1.swift in Sources */,

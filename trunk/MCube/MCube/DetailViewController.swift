@@ -43,7 +43,7 @@ class DetailViewController: UIViewController,UITableViewDataSource,UIPopoverPres
         }
         
         addLogOutButtonToNavigationBar("more");
-     NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name:UIKeyboardWillShowNotification, object: nil);
+     NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(DetailViewController.keyboardWillShow(_:)), name:UIKeyboardWillShowNotification, object: nil);
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(DetailViewController.keyboardWillHide(_:)), name:UIKeyboardWillHideNotification, object: nil);
     }
 
@@ -491,6 +491,7 @@ class DetailViewController: UIViewController,UITableViewDataSource,UIPopoverPres
             
             let addfollowup = segue.destinationViewController as! AddFollowupViewController
             addfollowup.currentData=self.currentData;
+            addfollowup.authkey=self.authkey;
            
             
         }
