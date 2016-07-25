@@ -19,8 +19,10 @@
 		8B326D641D3900E700022B33 /* ChekboxCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B326D631D3900E700022B33 /* ChekboxCell.swift */; };
 		8B326D661D39023A00022B33 /* DetailData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B326D651D39023A00022B33 /* DetailData.swift */; };
 		8B471D2A1D40B05F008BD625 /* MoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B471D291D40B05F008BD625 /* MoreViewController.swift */; };
+		8B59B2251D45E25700AE9269 /* uiImage+Padding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B59B2241D45E25700AE9269 /* uiImage+Padding.swift */; };
 		8B64868A1D3E019D0071C76D /* mcubeios.db in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8B6486891D3E018A0071C76D /* mcubeios.db */; };
 		8B6584BB1D4203DD007D2C2D /* AddFollowupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6584BA1D4203DD007D2C2D /* AddFollowupViewController.swift */; };
+		8B804BA41D44A53E00D95629 /* CustomeCell5.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B804BA31D44A53E00D95629 /* CustomeCell5.swift */; };
 		8B8DB3641D36165A008A5EA6 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B8DB3631D361659008A5EA6 /* AVFoundation.framework */; };
 		8BAD4E411D27682200A64393 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BAD4E401D27682200A64393 /* SWRevealViewController.m */; };
 		8BAD4E441D2769E400A64393 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BAD4E431D2769E400A64393 /* Default.png */; };
@@ -91,8 +93,10 @@
 		8B326D631D3900E700022B33 /* ChekboxCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChekboxCell.swift; sourceTree = "<group>"; };
 		8B326D651D39023A00022B33 /* DetailData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailData.swift; sourceTree = "<group>"; };
 		8B471D291D40B05F008BD625 /* MoreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreViewController.swift; sourceTree = "<group>"; };
+		8B59B2241D45E25700AE9269 /* uiImage+Padding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "uiImage+Padding.swift"; sourceTree = "<group>"; };
 		8B6486891D3E018A0071C76D /* mcubeios.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = mcubeios.db; sourceTree = "<group>"; };
 		8B6584BA1D4203DD007D2C2D /* AddFollowupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddFollowupViewController.swift; sourceTree = "<group>"; };
+		8B804BA31D44A53E00D95629 /* CustomeCell5.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomeCell5.swift; sourceTree = "<group>"; };
 		8B8DB3631D361659008A5EA6 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		8BAD4E401D27682200A64393 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
 		8BAD4E421D27683200A64393 /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
@@ -170,6 +174,7 @@
 		8B326D521D38F3E900022B33 /* CustomCell */ = {
 			isa = PBXGroup;
 			children = (
+				8B804BA31D44A53E00D95629 /* CustomeCell5.swift */,
 				8BBFE0BA1D28E25900435723 /* FollowupTableViewCell.swift */,
 				8B326D631D3900E700022B33 /* ChekboxCell.swift */,
 				8B326D5A1D39005E00022B33 /* CustomeCell1.swift */,
@@ -179,6 +184,14 @@
 				8BB16D371D3507650060B841 /* Utils */,
 			);
 			name = CustomCell;
+			sourceTree = "<group>";
+		};
+		8B59B2211D45E1ED00AE9269 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				8B59B2241D45E25700AE9269 /* uiImage+Padding.swift */,
+			);
+			name = Extensions;
 			sourceTree = "<group>";
 		};
 		8B8DB3741D367231008A5EA6 /* Images */ = {
@@ -193,6 +206,7 @@
 		8BAD4E471D276AB100A64393 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				8B471D291D40B05F008BD625 /* MoreViewController.swift */,
 				8B1248D51D2FDCF600DCFFA6 /* menuViewController.swift */,
 				F491E7541A7F7E010026528E /* PhotoViewController.swift */,
 				F4702A171A7F351C00E30A3C /* MenuController.swift */,
@@ -283,6 +297,7 @@
 		F47029F21A7F27DB00E30A3C /* MCube */ = {
 			isa = PBXGroup;
 			children = (
+				8B59B2211D45E1ED00AE9269 /* Extensions */,
 				8BD246CF1D3CECB800480CFB /* Database */,
 				8B326D521D38F3E900022B33 /* CustomCell */,
 				8BAD4E491D276ACD00A64393 /* Libs */,
@@ -291,7 +306,6 @@
 				F4D750141BD38E56009E1003 /* SWRevealViewController */,
 				F47029F51A7F27DB00E30A3C /* AppDelegate.swift */,
 				F47029F91A7F27DB00E30A3C /* Main.storyboard */,
-				8B471D291D40B05F008BD625 /* MoreViewController.swift */,
 				F47029FC1A7F27DB00E30A3C /* Images.xcassets */,
 				F47029FE1A7F27DB00E30A3C /* LaunchScreen.xib */,
 				F47029F31A7F27DB00E30A3C /* Supporting Files */,
@@ -561,6 +575,7 @@
 			files = (
 				8BAD4E411D27682200A64393 /* SWRevealViewController.m in Sources */,
 				F4702A181A7F351C00E30A3C /* MenuController.swift in Sources */,
+				8B804BA41D44A53E00D95629 /* CustomeCell5.swift in Sources */,
 				8BD246D61D3CED2500480CFB /* StudentInfo.swift in Sources */,
 				F47029F61A7F27DB00E30A3C /* AppDelegate.swift in Sources */,
 				8B1248D61D2FDCF600DCFFA6 /* menuViewController.swift in Sources */,
@@ -572,6 +587,7 @@
 				8B326D641D3900E700022B33 /* ChekboxCell.swift in Sources */,
 				8BBFE0BB1D28E25900435723 /* FollowupTableViewCell.swift in Sources */,
 				8BF82F401D37B99000E1BA8D /* SettingsController.swift in Sources */,
+				8B59B2251D45E25700AE9269 /* uiImage+Padding.swift in Sources */,
 				8BD246E71D3CEFA700480CFB /* FMDatabase.m in Sources */,
 				8B326D661D39023A00022B33 /* DetailData.swift in Sources */,
 				8BD246EA1D3CEFA700480CFB /* FMResultSet.m in Sources */,
@@ -720,7 +736,7 @@
 					"$(PROJECT_DIR)/Pods/MobileVLCKit/MobileVLCKit-binary",
 				);
 				INFOPLIST_FILE = MCube/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.vmctechnologies.mcube;
 				PRODUCT_NAME = MCube;
@@ -743,7 +759,7 @@
 					"$(PROJECT_DIR)/Pods/MobileVLCKit/MobileVLCKit-binary",
 				);
 				INFOPLIST_FILE = MCube/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.vmctechnologies.mcube;
 				PRODUCT_NAME = MCube;

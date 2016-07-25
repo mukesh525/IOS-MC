@@ -196,36 +196,21 @@ class DetailViewController: UIViewController,UITableViewDataSource,UIPopoverPres
             
         }
         
-        else if (detaildata.Type=="text") {
+        else if (detaildata.Type=="text" || detaildata.Type=="textarea") {
             let cell3 = tableView.dequeueReusableCellWithIdentifier("LT", forIndexPath: indexPath) as!CustomeCell3
             cell3.label1.text=detaildata.label
-            cell3.textfiled.text=detaildata.value
+            if (NSString(string: detaildata.value!).length > 1){
+            cell3.textfiled.text=detaildata.value}
             cell3.delegate=self
+            cell3.textfiled.placeholder = detaildata.label!
             cell3.textfiled.delegate=self
+         //   cell3.onEditingBegin = {(selectedRow) -> Void in   }
 
             return cell3
             
             
         }
         
-        else if (detaildata.Type=="textarea") {
-            let cell3 = tableView.dequeueReusableCellWithIdentifier("LT", forIndexPath: indexPath) as!CustomeCell3
-            cell3.label1.text=detaildata.label
-            cell3.textfiled.text=detaildata.value
-            cell3.delegate=self
-            cell3.onEditingBegin = {(selectedRow) -> Void in
-                let pointInTable:CGPoint = selectedRow.textfiled.superview!.convertPoint(selectedRow.textfiled.frame.origin, toView:tableView)
-                var contentOffset:CGPoint = tableView.contentOffset
-                contentOffset.y  = pointInTable.y
-                if let accessoryView = selectedRow.textfiled.inputAccessoryView {
-                    contentOffset.y -= accessoryView.frame.size.height
-                }
-                tableView.contentOffset = contentOffset
-            }
-            return cell3
-            
-            
-        }
         else if (detaildata.Type=="dropdown" || detaildata.Type=="radio") {
             let cell2 = tableView.dequeueReusableCellWithIdentifier("LP", forIndexPath: indexPath) as!CustomeCell2
              cell2.label.text=detaildata.label
@@ -478,11 +463,7 @@ class DetailViewController: UIViewController,UITableViewDataSource,UIPopoverPres
         
     }
     
-    
-    
-   
-    
-    func showAlert(mesage :String){
+     func showAlert(mesage :String){
         //dismissViewControllerAnimated(true, completion: nil)
         let alertView = UIAlertController(title: "MCube", message: mesage, preferredStyle: .Alert)
         alertView.addAction(UIAlertAction(title: "Ok", style: .Default, handler: nil))
@@ -502,5 +483,34 @@ class DetailViewController: UIViewController,UITableViewDataSource,UIPopoverPres
         rightItem.customView = button
         self.navigationItem.rightBarButtonItem = rightItem
     }
+    
+    
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "addfollowup"{
+            
+            let addfollowup = segue.destinationViewController as! AddFollowupViewController
+            addfollowup.currentData=self.currentData;
+           
+            
+        }
+        
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
 }
