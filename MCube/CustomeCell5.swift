@@ -10,8 +10,9 @@ import UIKit
 
 class CustomeCell5: UITableViewCell {
 
+    @IBOutlet weak var label: UILabel!
     @IBOutlet weak var dateTimePicker: UIDatePicker!
-    @IBOutlet weak var label: UIView!
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -23,4 +24,8 @@ class CustomeCell5: UITableViewCell {
         // Configure the view for the selected state
     }
 
+    @IBAction func ValueChanged(sender: UIDatePicker) {
+        
+        
+    }
 }
