@@ -13,23 +13,14 @@ class CustomeCell2: UITableViewCell,UIPickerViewDelegate, UIPickerViewDataSource
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var uiPicker: UIPickerView!
     var pickerSelected: ((Int) -> Void)?
-
-   // var data = ["cat", "bird", "frog"]
     var Options = [String]()
-    var itemAtDefaultPosition: String="" //Set through another ViewController
-    
-  
+    var itemAtDefaultPosition: String=""
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
         self.uiPicker.dataSource = self
         self.uiPicker.delegate = self
-        
-        
-        
-        
-        
-     }
+      }
     override func layoutSubviews() {
         super.layoutSubviews()
         uiPicker.reloadAllComponents()
@@ -40,14 +31,10 @@ class CustomeCell2: UITableViewCell,UIPickerViewDelegate, UIPickerViewDataSource
     }
     
     
-    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int)
-    {
-       // var selectedValue = pickerViewContent[pickerView.selectedRowInComponent(0)]
-        // use the row to get the selected row from the picker view
-        // using the row extract the value from your datasource (array[row])
+    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int){
+      
         pickerSelected?(row)
-     //   print("selected uipickervalue \(Options[row])")
-       // print("selected uipickervalue \(selectedValue!)")
+  
     }
     
  

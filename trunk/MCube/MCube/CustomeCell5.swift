@@ -12,7 +12,7 @@ class CustomeCell5: UITableViewCell {
 
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var dateTimePicker: UIDatePicker!
-
+    var onDateChnaged :((CustomeCell5) -> Void)?
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -25,7 +25,6 @@ class CustomeCell5: UITableViewCell {
     }
 
     @IBAction func ValueChanged(sender: UIDatePicker) {
-        
-        
+         onDateChnaged?(self)     
     }
 }

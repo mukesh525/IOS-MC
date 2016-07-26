@@ -19,160 +19,169 @@ class AddFollowupViewController: UIViewController,CustomCellDelegate,UITextField
     var EmailId :String?
     @IBOutlet weak var mytableView: UITableView!
     private var showingActivity = false
-     var refreshControl = UIRefreshControl()
+    var refreshControl = UIRefreshControl()
     override func viewDidLoad() {
         super.viewDidLoad()
         self.refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
         self.refreshControl.addTarget(self, action: #selector(DetailViewController.refresh(_:)), forControlEvents: UIControlEvents.ValueChanged)
-       // self.mytableview?.addSubview(refreshControl)
+        self.mytableView?.addSubview(refreshControl)
         if self.refreshControl.refreshing{
             self.refreshControl.endRefreshing()
         }
-
+        
         loadDetaildata();
-       
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(DetailViewController.keyboardWillShow(_:)), name:UIKeyboardWillShowNotification, object: nil);
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(DetailViewController.keyboardWillHide(_:)), name:UIKeyboardWillHideNotification, object: nil);
     }
-
+    
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self);
+    }
+    
+    func keyboardWillShow(sender: NSNotification) {
+        self.view.frame.origin.y = -170
+    }
+    
+    func keyboardWillHide(sender: NSNotification) {
+        self.view.frame.origin.y = 0
+    }
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
     @IBAction func SubmitClick(sender: UIButton) {
         
         
         
     }
-
-   
-   
+    
+    
+    
     func loadDetaildata() {
-    
-    if !self.refreshControl.refreshing{
-    self.showActivityIndicator()
+        
+        if !self.refreshControl.refreshing{
+            self.showActivityIndicator()
+        }
+        
+        Alamofire.request(.POST, "https://mcube.vmc.in//mobapp/followupFrm",
+            parameters: ["authKey":authkey!]).validate().responseJSON
+            {response in switch response.result {
+                
+            case .Success(let JSON):
+                print("Success with JSON: \(JSON)")
+                let response = JSON as! NSDictionary
+                
+                //self.showActivityIndicator()
+                if((response.objectForKey("fields")) != nil){
+                    self.DetailDataList=[DetailData]()
+                    let fields = response.objectForKey("fields") as! NSArray?
+                    
+                    for field in fields!{
+                        let detailData=DetailData();
+                        if((field.objectForKey("name")) != nil){
+                            detailData.Name=field.objectForKey("name") as? String
+                            
+                        }
+                        if((field.objectForKey("label")) != nil){
+                            detailData.label=field.objectForKey("label") as? String
+                            
+                        }
+                        
+                        if((field.objectForKey("type")) != nil){
+                            detailData.Type=field.objectForKey("type") as? String
+                            
+                        }
+                        if((field.objectForKey("value")) != nil){
+                            detailData.value=field.objectForKey("value") as? String
+                            
+                        }
+                        
+                        let optionsLabel = ["dropdown", "radio","checkbox"]
+                        // print(detailData.Type!)
+                        let contained = optionsLabel.contains(detailData.Type!)
+                        if(contained){
+                            let Options = field.objectForKey("options") as! NSDictionary?
+                            self.optionsList=[OptionsData]()
+                            self.OptionStringList=[String]()
+                            print("Data items count: \(Options!.count)")
+                            for (key, value) in Options! {
+                                let mOptionsData = OptionsData();
+                                mOptionsData.id=key as? String
+                                mOptionsData.value=value as? String
+                                if(key as? String == detailData.value){
+                                    detailData.value=value as? String
+                                }
+                                
+                                if (detailData.Type!.containsString("checkbox") && !detailData.value!.containsString("")) {
+                                    let newString = detailData.value!.stringByReplacingOccurrencesOfString("\"", withString: "")
+                                    let toArray = newString.componentsSeparatedByString(",")
+                                    for curentValue in toArray  {
+                                        if (key as! String==curentValue) {
+                                            mOptionsData.isChecked=true
+                                            print(" \(curentValue) is cheked")
+                                        }
+                                        print(curentValue)
+                                    }
+                                }
+                                self.OptionStringList.append(value as! String)
+                                self.optionsList.append(mOptionsData)
+                            }
+                            detailData.OptionList=self.optionsList;
+                            
+                            
+                        }
+                        else {
+                            self.optionsList=[OptionsData]()
+                            self.OptionStringList=[String]()
+                            
+                        }
+                        
+                        detailData.OptionList=self.optionsList
+                        detailData.Options=self.OptionStringList
+                        
+                        if (detailData.Name == "callfrom") {
+                            self.ContactNo = detailData.value;
+                        } else if (detailData.Name == "callfrom") {
+                            self.EmailId = detailData.value;
+                        }
+                        
+                        self.DetailDataList.append(detailData);
+                        
+                        
+                    }
+                    if self.refreshControl.refreshing{
+                        self.refreshControl.endRefreshing()
+                    }
+                    else{
+                        self.showActivityIndicator()
+                    }
+                    
+                    self.mytableView.reloadData()
+                    print(self.DetailDataList.count)
+                    
+                }
+                
+                
+                
+            case .Failure(let error):
+                print("Request failed with error: \(error)")
+                if (error.code == -1009) {
+                    self.showAlert("No Internet Conncetion")
+                }
+                if self.refreshControl.refreshing{
+                    self.refreshControl.endRefreshing()
+                }
+                else{
+                    self.showActivityIndicator()
+                }
+                }
+        }
+        
     }
     
-    Alamofire.request(.POST, "https://mcube.vmc.in//mobapp/followupFrm",
-    parameters: ["authKey":authkey!]).validate().responseJSON
-    {response in switch response.result {
-    
-    case .Success(let JSON):
-    print("Success with JSON: \(JSON)")
-    let response = JSON as! NSDictionary
-    
-    //self.showActivityIndicator()
-    if((response.objectForKey("fields")) != nil){
-    self.DetailDataList=[DetailData]()
-    let fields = response.objectForKey("fields") as! NSArray?
-    
-    for field in fields!{
-    let detailData=DetailData();
-    if((field.objectForKey("name")) != nil){
-    detailData.Name=field.objectForKey("name") as? String
-    
-    }
-    if((field.objectForKey("label")) != nil){
-    detailData.label=field.objectForKey("label") as? String
-    
-    }
-    
-    if((field.objectForKey("type")) != nil){
-    detailData.Type=field.objectForKey("type") as? String
-    
-    }
-    if((field.objectForKey("value")) != nil){
-    detailData.value=field.objectForKey("value") as? String
-    
-    }
-    
-    let optionsLabel = ["dropdown", "radio","checkbox"]
-     // print(detailData.Type!)
-    let contained = optionsLabel.contains(detailData.Type!)
-    if(contained){
-    let Options = field.objectForKey("options") as! NSDictionary?
-     self.optionsList=[OptionsData]()
-     self.OptionStringList=[String]()
-    print("Data items count: \(Options!.count)")
-    for (key, value) in Options! {
-    let mOptionsData = OptionsData();
-    mOptionsData.id=key as? String
-    mOptionsData.value=value as? String
-    if(key as? String == detailData.value){
-    detailData.value=value as? String
-    }
-    
-    if (detailData.Type!.containsString("checkbox") && !detailData.value!.containsString("")) {
-    //   value = "check1,check3";
-    let newString = detailData.value!.stringByReplacingOccurrencesOfString("\"", withString: "")
-    let toArray = newString.componentsSeparatedByString(",")
-   // print(newString)
-    for curentValue in toArray  {
-    if (key as! String==curentValue) {
-    mOptionsData.isChecked=true
-    print(" \(curentValue) is cheked")
-    }
-    print(curentValue)
-    }
-    }
-    
-    
-    self.OptionStringList.append(value as! String)
-    self.optionsList.append(mOptionsData)
-    //print("Property: \"\(key as! String)\"")
-    }
-    detailData.OptionList=self.optionsList;
-    
-    
-    }
-    else {
-    self.optionsList=[OptionsData]()
-    self.OptionStringList=[String]()
-    
-    }
-    
-    detailData.OptionList=self.optionsList
-    detailData.Options=self.OptionStringList
-    
-    if (detailData.Name == "callfrom") {
-    self.ContactNo = detailData.value;
-    } else if (detailData.Name == "callfrom") {
-    self.EmailId = detailData.value;
-    }
-    
-    self.DetailDataList.append(detailData);
-    
-    
-    }
-    if self.refreshControl.refreshing{
-    self.refreshControl.endRefreshing()
-    }
-    else{
-    self.showActivityIndicator()
-    }
-    
-    self.mytableView.reloadData()
-    print(self.DetailDataList.count)
-    
-    }
-    
-    
-    
-    case .Failure(let error):
-    print("Request failed with error: \(error)")
-    if (error.code == -1009) {
-      self.showAlert("No Internet Conncetion")
-     }
-    if self.refreshControl.refreshing{
-    self.refreshControl.endRefreshing()
-     }
-    else{
-    self.showActivityIndicator()
-       }
-      }
-    }
-    
-    }
- 
     func showAlert(mesage :String){
         //dismissViewControllerAnimated(true, completion: nil)
         let alertView = UIAlertController(title: "MCube", message: mesage, preferredStyle: .Alert)
@@ -185,12 +194,15 @@ class AddFollowupViewController: UIViewController,CustomCellDelegate,UITextField
         } else {
             self.navigationController?.view.hideToastActivity()
         }
-    
+        
         self.showingActivity = !self.showingActivity
-    
+        
     }
     
-    
+    func refresh(sender:AnyObject) {
+        // Code to refresh table view
+        loadDetaildata();
+    }
     
     
     //MARK: - Tableview Delegate & Datasource
@@ -262,11 +274,16 @@ class AddFollowupViewController: UIViewController,CustomCellDelegate,UITextField
             let cell2 = tableView.dequeueReusableCellWithIdentifier("LP1", forIndexPath: indexPath) as!CustomeCell2
             cell2.label.text=detaildata.label
             cell2.Options=detaildata.Options
-            cell2.itemAtDefaultPosition=detaildata.value!
-            cell2.pickerSelected = { (selectedRow) -> Void in
+               if (NSString(string: detaildata.value!).length > 1){
+                cell2.itemAtDefaultPosition=detaildata.value!}
+              else{
+                cell2.itemAtDefaultPosition = detaildata.OptionList[0].value!
+                detaildata.value=detaildata.OptionList[0].id!
+               }
+            
+             cell2.pickerSelected = { (selectedRow) -> Void in
                 detaildata.value=detaildata.OptionList[selectedRow].id
-                print("the selected item is \(selectedRow)")
-                print("the selected value is \(detaildata.Options[selectedRow])")
+           
                 
             }
             return cell2
@@ -285,10 +302,14 @@ class AddFollowupViewController: UIViewController,CustomCellDelegate,UITextField
         else if (detaildata.Type == "datetime"){
             let cell5 = tableView.dequeueReusableCellWithIdentifier("LD1", forIndexPath: indexPath) as!CustomeCell5
             cell5.label.text = detaildata.label
+            detaildata.value=cell5.dateTimePicker.getStringValue();
+            cell5.onDateChnaged = { (selectedRow) -> Void in
+                detaildata.value=cell5.dateTimePicker.getStringValue();
+            }
             return cell5
             
         }
-           
+            
         else {
             let cell1 = tableView.dequeueReusableCellWithIdentifier("LL1", forIndexPath: indexPath) as!CustomeCell1
             cell1.label1.text=detaildata.label
@@ -298,7 +319,7 @@ class AddFollowupViewController: UIViewController,CustomCellDelegate,UITextField
         
     }
     
- 
+    
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         let detaildata: DetailData = self.DetailDataList[indexPath.row]
@@ -337,7 +358,7 @@ class AddFollowupViewController: UIViewController,CustomCellDelegate,UITextField
         print("index \(indexPath.row)  value  \(cell.textfiled.text!)")
     }
     
-  
-
-
+    
+    
+    
 }
