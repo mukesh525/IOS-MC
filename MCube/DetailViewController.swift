@@ -215,7 +215,12 @@ class DetailViewController: UIViewController,UITableViewDataSource,UIPopoverPres
             let cell2 = tableView.dequeueReusableCellWithIdentifier("LP", forIndexPath: indexPath) as!CustomeCell2
              cell2.label.text=detaildata.label
              cell2.Options=detaildata.Options
-             cell2.itemAtDefaultPosition=detaildata.value!
+            if (NSString(string: detaildata.value!).length > 1){
+                cell2.itemAtDefaultPosition=detaildata.value!}
+            else{
+                cell2.itemAtDefaultPosition = detaildata.OptionList[0].value!
+                detaildata.value=detaildata.OptionList[0].id!
+             }
              cell2.pickerSelected = { (selectedRow) -> Void in
                 detaildata.value=detaildata.OptionList[selectedRow].id
                 print("the selected item is \(selectedRow)")
@@ -226,6 +231,17 @@ class DetailViewController: UIViewController,UITableViewDataSource,UIPopoverPres
             return cell2
             
         }
+        else if (detaildata.Type == "datetime"){
+            let cell5 = tableView.dequeueReusableCellWithIdentifier("LD", forIndexPath: indexPath) as!CustomeCell5
+            cell5.label.text = detaildata.label
+            detaildata.value=cell5.dateTimePicker.getStringValue();
+            cell5.onDateChnaged = { (selectedRow) -> Void in
+                detaildata.value=cell5.dateTimePicker.getStringValue();
+            }
+            return cell5
+            
+          }
+
         
        else if (detaildata.Type == "checkbox"){
        let cell4 = tableView.dequeueReusableCellWithIdentifier("Ltabel", forIndexPath: indexPath) as!CustomeCell4
@@ -264,6 +280,9 @@ class DetailViewController: UIViewController,UITableViewDataSource,UIPopoverPres
         }
         else if (detaildata.Type == "checkbox"){
             return chekheight * count
+        }
+        else if (detaildata.Type == "datetime"){
+            return 150
         }
         else{
             return 44

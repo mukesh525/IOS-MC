@@ -6,7 +6,7 @@ import Alamofire
 import AVFoundation
 
 
-class FollowUpViewController: UITableViewController,UIPopoverPresentationControllerDelegate,FilterSelectedDelegate ,SWRevealViewControllerDelegate {
+class FollowUpViewController: UITableViewController,UIPopoverPresentationControllerDelegate,FilterSelectedDelegate ,SWRevealViewControllerDelegate,ReportDownload {
     @IBOutlet var mytableview: UITableView!
     @IBOutlet var extraButton: UIBarButtonItem!
     @IBOutlet var menubutton: UIBarButtonItem!
@@ -16,7 +16,7 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
     var isDownloading:Bool = false;
     var options :Array<OptionsData> = Array<OptionsData>()
     var playButtons=[UIButton]();
-    var limit = 0;
+    var limit = 10;
     var offset=0;
     var gid:String="0";
     var type:String="track"
@@ -31,17 +31,15 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
     var refreshControll = UIRefreshControl()
     var sidebarMenuOpen:Bool?
     @IBAction func LogoutTap(sender: UIBarButtonItem) {
-        
         LogoutAlert()
-        
     }
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setsection()
         if let savedlimit = NSUserDefaults.standardUserDefaults().stringForKey("limit") {
-            self.limit=Int(savedlimit)!;
-        }
+            self.limit = Int(savedlimit)!;
+        }else {self.limit=10}
         if(isLogout){
             isLogout=false;
             LogoutAlert()
@@ -49,7 +47,6 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
         NSUserDefaults.standardUserDefaults().removeObjectForKey("select")
         NSUserDefaults.standardUserDefaults().synchronize()
         self.navigationItem.title = CurrentTitle;
-        
         tableView.allowsSelection = true;
         mytableview.backgroundView = UIImageView(image: UIImage(named: "background_port.jpg"))
         if NSUserDefaults.standardUserDefaults().stringForKey("authkey") != nil {
@@ -60,19 +57,19 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
                 tableView.reloadData()
             }
             else if(!self.isDownloading){
-                self.LoadData(false);
+              
+                let param=Params(Limit: self.limit,gid:self.gid,offset:self.offset,type:self.type,isfilter:false,isMore: false,isSync:false,filterpos: self.SeletedFilterpos)
+                self.isDownloading=true;
+                self.showActivityIndicator()
+                Report(param: param, delegate: self).LoadData();
             }
             
         }
         
         self.refreshControll.attributedTitle = NSAttributedString(string: "Pull to refresh")
-        self.refreshControll.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
+        self.refreshControll.addTarget(self, action: #selector(FollowUpViewController.refresh(_:)), forControlEvents: UIControlEvents.ValueChanged)
         self.mytableview?.addSubview(refreshControll)
-        //self.tableView.backgroundView!.layer.zPosition -= 1;
-        
-        
         if revealViewController() != nil {
-            //revealViewController().rearViewRevealWidth = 62
             menubutton.target = revealViewController()
             menubutton.action = #selector(SWRevealViewController.revealToggle(_:))
             revealViewController().rightViewRevealWidth = 150
@@ -84,15 +81,72 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
             self.refreshControll.endRefreshing()
         }
         
-        // Do any additional setup after loading the view.
+       
     }
     
     
-    func refresh(sender:AnyObject) {
+    func OnFinishDownload(result: NSMutableArray,param:Params) {
+       self.isNewDataLoading = false
+       if(param.isMore == true){
+        self.result.addObjectsFromArray(result as [AnyObject])
+        }else{
+          self.result=result;
+        }
+        
+        if(self.result.count == 0 && param.isfilter == true){
+            self.showActivityIndicator()
+            self.filteralert()
+        }
+        else if(self.result.count == 0 && param.isfilter == false){
+            self.showActivityIndicator()
+            self.NoDataAlert()
+            
+        }
+        else{
+            if self.refreshControll.refreshing{
+                self.refreshControll.endRefreshing()
+            }
+            
+            else{
+                if(param.isMore==false){
+                self.showActivityIndicator()
+                }
+            }
+            self.mytableview.reloadData()
+        }
+           self.isDownloading=false;
+       
+        }
+
+    
+    
+    
+    func OnError(error: NSError) {
+        self.isDownloading=false;
+        self.isNewDataLoading=false;
+        if self.refreshControll.refreshing{
+            self.refreshControll.endRefreshing()
+        }else{
+            self.showActivityIndicator()
+        }
+        print("Request failed with error: \(error)")
+        if (error.code == -1009) {
+            self.showAlert("No Internet Conncetion")
+        }
+        else if(error.code == -1001){
+            self.showAlert("No Internet Conncetion")
+        }
+    }
+    
+
+   func refresh(sender:AnyObject) {
         // Code to refresh table view
         
-        if(!self.isDownloading ){
-            self.LoadData(false);
+        if(!self.isDownloading){
+            let param=Params(Limit: self.limit,gid:self.gid,offset:self.offset,type:self.type,isfilter:false,isMore: false,isSync:false,filterpos: self.SeletedFilterpos)
+            self.isDownloading=true;
+            Report(param: param, delegate: self).LoadData();
+
         }
         else{
             if self.refreshControll.refreshing{
@@ -106,14 +160,8 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
         self.tableView.reloadData()
     }
     
-    
-    //    override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-    //        let headerView = UIView()
-    //        headerView.backgroundColor = UIColor.clearColor()
-    //        return headerView
-    //    }
+
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // Return the number of sections.
         return 1
     }
     
@@ -172,8 +220,8 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
         cell.callername.text=(data.callerName?.isEmpty) != nil && NSString(string: data.callerName!).length > 1 ?  data.callerName : "UNKNOWN"
         
         if((data.callTimeString?.isEmpty) != nil && NSString(string: data.callTimeString!).length > 1){
-            cell.date.text=self.convertDate(data.callTimeString!)
-            cell.time.text=self.convertTime(data.callTimeString!)
+            cell.date.text=data.callTimeString!.getDateFromString()
+            cell.time.text=data.callTimeString!.getTimeFromString()
             cell.status.text=(data.status?.isEmpty) != nil && NSString(string: data.status!).length > 1 ?  data.status : "UNKNOWN"
             
             cell.Group.text=data.groupName
@@ -182,8 +230,8 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
         }
         else
         {
-            cell.date.text=self.convertDate(data.startTime!)
-            cell.time.text=self.convertTime(data.startTime!)
+            cell.date.text=data.startTime!.getDateFromString()
+            cell.time.text=data.startTime!.getTimeFromString()
             if((data.status?.isEmpty) != nil && NSString(string: data.status!).length > 0){
                 cell.status.text=data.status == "0" ? "MISSED": data.status == "1" ? "INBOUND" : "OUTBOND"
             }
@@ -283,382 +331,27 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
     }
     
     override func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        
-        //Bottom Refresh
-        
         if scrollView == tableView{
             
             if ((scrollView.contentOffset.y + scrollView.frame.size.height) >= scrollView.contentSize.height)
             {
                 if !isNewDataLoading{
                     isNewDataLoading = true
-                    LoadMoreData()
+                    let param=Params(Limit:self.limit,gid:self.gid,offset:self.result.count,type:self.type,isfilter:false,isMore: true,isSync:false,filterpos: self.SeletedFilterpos)
+                    Report(param: param, delegate: self).LoadData();
                     
                 }
             }
         }
     }
     
-    
-    
-    func LoadData(filter:Bool){
-        var callId:String?
-        var callFrom:String?
-        var callerName:String?
-        var groupName:String?
-        var status:String?
-        var dataId:String?
-        var audioLink:String?
-        var callTimeString:String?
-        var empName:String?
-        self.offset=0
-        self.isDownloading=true;
-        let authkey = NSUserDefaults.standardUserDefaults().stringForKey("authkey")
-        if !self.refreshControll.refreshing{
-            self.showActivityIndicator()
-        }
-        //print(self.limit)
-        if (self.player != nil && (self.player.error == nil) && (self.player.rate != 0) ) {
-            self.player.pause()
-            self.player = nil
-        }
-        Alamofire.request(.POST, "https://mcube.vmc.in/mobapp/getList", parameters:
-            ["authKey":authkey!, "limit":"10","gid": gid,"ofset":self.offset,"type":type])
-            .validate().responseJSON
-            {response in switch response.result {
-                
-            case .Success(let JSON):
-                print("Success with JSON: \(JSON)")
-                
-                self.result=NSMutableArray();
-                // self.options=NSMutableArray();
-                self.options=[OptionsData]();
-                let response = JSON as! NSDictionary
-                
-                if(response.objectForKey("groups") != nil){
-                    let groups = response.objectForKey("groups") as! NSArray?
-                    for group in groups!{
-                        let options=OptionsData();
-                        if((group.objectForKey("key")) != nil){
-                            options.id=group.objectForKey("key") as? String
-                        }
-                        if((group.objectForKey("val")) != nil){
-                            options.value=group.objectForKey("val") as? String
-                        }
-                        self.options.append(options)
-                    }
-                    
-                    
-                    
-                }
-                if(response.objectForKey("records") != nil){
-                    let records = response.objectForKey("records") as! NSArray?
-                    for record in records!{
-                        let data=Data();
-                        if((record.objectForKey("callid")) != nil){
-                            callId=record.objectForKey("callid") as? String
-                            data.callId=callId;
-                        }
-                        if((record.objectForKey("callfrom")) != nil){
-                            callFrom=record.objectForKey("callfrom") as? String
-                            data.callFrom=callFrom;
-                        }
-                        
-                        if((record.objectForKey("callid")) != nil){
-                            callId=record.objectForKey("callid") as? String
-                            data.callId=callId;
-                        }
-                        if((record.objectForKey("status")) != nil){
-                            status=record.objectForKey("status") as? String
-                            data.status=status;
-                        }
-                        if((record.objectForKey("callername")) != nil){
-                            callerName=record.objectForKey("callername") as? String
-                            data.callerName=callerName;
-                        }
-                        if((record.objectForKey("groupname")) != nil){
-                            groupName=record.objectForKey("groupname") as? String
-                            data.groupName=groupName;
-                        }
-                        if((record.objectForKey("calltime")) != nil){
-                            callTimeString=record.objectForKey("calltime") as? String
-                            data.callTimeString=callTimeString;
-                            data.callTime=self.convertDateFormater(callTimeString!) as? NSDate
-                        }
-                        else if((record.objectForKey("starttime")) != nil){
-                            callTimeString=record.objectForKey("starttime") as? String
-                            data.startTime=callTimeString;
-                            
-                        }
-                        
-                        if((record.objectForKey("empName")) != nil){
-                            empName=record.objectForKey("empName") as? String
-                            data.empName=empName;
-                            
-                        }
-                        if((record.objectForKey("name")) != nil){
-                            callerName=record.objectForKey("name") as? String
-                            data.callerName=callerName;
-                            
-                        }
-                        
-                        
-                        
-                        
-                        if((record.objectForKey("filename")) != nil){
-                            audioLink=record.objectForKey("filename") as? String
-                            data.audioLink=audioLink;
-                        }
-                        
-                        self.result.addObject(data)
-                    }
-                    
-                    
-                    
-                }
-                
-                if(self.result.count == 0 && filter){
-                    self.showActivityIndicator()
-                    self.filteralert()
-                }
-                else if(self.result.count == 0 && !filter){
-                    self.showActivityIndicator()
-                    self.NoDataAlert()
-                    
-                }
-                else{
-                    if self.refreshControll.refreshing{
-                        self.refreshControll.endRefreshing()
-                    }else{
-                        self.showActivityIndicator()
-                    }
-                //    self.playButtons=[UIButton]()
-                    self.mytableview.reloadData()
-                }
-                if((self.refreshControl?.beginRefreshing()) != nil){
-                    self.refreshControl!.endRefreshing()
-                }
-                self.isDownloading=false;
-                if(!filter){
-                    let isUpdated = ModelManager.getInstance().insertData(self.type, isDelete: true, Datas: self.result,isMore:false)
-                    let ismenu = ModelManager.getInstance().insertMenu(self.type, Options: self.options)
-                    if ismenu {
-                        // Util.invokeAlertMethod("", strBody: "Menu updated successfully.", delegate: nil)
-                    } else {
-                         // Util.invokeAlertMethod("", strBody: "Error in updating Menu .", delegate: nil)
-                    }
-                }
-                
-            case .Failure(let error):
-                self.isDownloading=false;
-                
-                if self.refreshControll.refreshing{
-                    self.refreshControll.endRefreshing()
-                }else{
-                    self.showActivityIndicator()
-                }
-                
-                
-                // self.showActivityIndicator()
-                print("Request failed with error: \(error)")
-                if (error.code == -1009) {
-                    self.showAlert("No Internet Conncetion")
-                }
-                else if(error.code == -1001){
-                    self.showAlert("No Internet Conncetion")
-                    //request timed out
-                }
-                }
-                print("result sidze \(self.result.count))")
-                
-        }
-        
-    }
-    
-    func LoadMoreData(){
-        var callId:String?
-        var callFrom:String?
-        var callerName:String?
-        var groupName:String?
-        var status:String?
-        var dataId:String?
-        var audioLink:String?
-        var callTimeString:String?
-        var empName:String?
-        //self.offset += self.limit
-        self.offset = self.result.count
-
-        
-        let authkey = NSUserDefaults.standardUserDefaults().stringForKey("authkey")
-        Alamofire.request(.POST, "https://mcube.vmc.in/mobapp/getList", parameters:
-            ["authKey":authkey!, "limit":"10","gid": gid,"ofset":self.offset,"type":type])
-            .validate().responseJSON
-            {response in switch response.result {
-                
-            case .Success(let JSON):
-                print("Success with JSON: \(JSON)")
-                
-                //self.result=NSMutableArray();
-                let response = JSON as! NSDictionary
-                if(response.objectForKey("records") != nil){
-                    let records = response.objectForKey("records") as! NSArray?
-                    for record in records!{
-                        let data=Data();
-                        if((record.objectForKey("callid")) != nil){
-                            callId=record.objectForKey("callid") as? String
-                            data.callId=callId;
-                        }
-                        if((record.objectForKey("callfrom")) != nil){
-                            callFrom=record.objectForKey("callfrom") as? String
-                            data.callFrom=callFrom;
-                        }
-                        if((record.objectForKey("callid")) != nil){
-                            callId=record.objectForKey("callid") as? String
-                            data.callId=callId;
-                        }
-                        if((record.objectForKey("status")) != nil){
-                            status=record.objectForKey("status") as? String
-                            data.status=status;
-                        }
-                        if((record.objectForKey("callername")) != nil){
-                            callerName=record.objectForKey("callername") as? String
-                            data.callerName=callerName;
-                        }
-                        if((record.objectForKey("groupname")) != nil){
-                            groupName=record.objectForKey("groupname") as? String
-                            data.groupName=groupName;
-                        }
-                        if((record.objectForKey("calltime")) != nil){
-                            callTimeString=record.objectForKey("calltime") as? String
-                            data.callTimeString=callTimeString;
-                            data.callTime=self.convertDateFormater(callTimeString!)as?NSDate
-                        }
-                        else if((record.objectForKey("starttime")) != nil){
-                            callTimeString=record.objectForKey("starttime") as? String
-                            data.startTime=callTimeString;
-                            
-                        }
-                        
-                        if((record.objectForKey("empName")) != nil){
-                            empName=record.objectForKey("empName") as? String
-                            data.empName=empName;
-                            
-                        }
-                        
-                        if((record.objectForKey("filename")) != nil){
-                            audioLink=record.objectForKey("filename") as? String
-                            data.audioLink=audioLink;
-                        }
-                        
-                        self.result.addObject(data)
-                        
-                    }
-                    
-                }
-                if(self.SeletedFilterpos == 0){
-                    _ = ModelManager.getInstance().insertData(self.type, isDelete: true, Datas: self.result,isMore:true)
-                }
-                //                if isUpdated {
-                //                    Util.invokeAlertMethod("", strBody: "Record updated successfully.", delegate: nil)
-                //                } else {
-                //                    Util.invokeAlertMethod("", strBody: "Error in updating record.", delegate: nil)
-                //                }
-                //self.playButtons=[UIButton]()
-                self.mytableview.reloadData()
-                self.isNewDataLoading=false;
-                if((self.refreshControl?.beginRefreshing()) != nil){
-                    self.refreshControl!.endRefreshing()
-                }
-                
-                
-                
-                
-                
-                
-                
-            case .Failure(let error):
-                self.isNewDataLoading=false;
-                print("Request failed with error: \(error)")
-                if (error.code == -1009) {
-                    self.showAlert("No Internet Conncetion")
-                }
-                else if(error.code == -1001){
-                    self.showAlert("No Internet Conncetion")
-                    //request timed out
-                }
-                
-                }
-                
-                
-                print("result sidze \(self.result.count))")
-        }
-        
-    }
-    
-    
-    
-    
-    
+   
     func showAlert(mesage :String){
-        //dismissViewControllerAnimated(true, completion: nil)
         let alertView = UIAlertController(title: "MCube", message: mesage, preferredStyle: .Alert)
         alertView.addAction(UIAlertAction(title: "Ok", style: .Default, handler: nil))
         presentViewController(alertView, animated: true, completion: nil)
     }
-    
-    
-    func convertDateFormater(date: String) -> String {
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        dateFormatter.timeZone = NSTimeZone(name: "UTC")
-        
-        guard let date = dateFormatter.dateFromString(date) else {
-            assert(false, "no date from string")
-            return ""
-        }
-        
-        dateFormatter.dateFormat = "yyyy MMM EEEE HH:mm"
-        dateFormatter.timeZone = NSTimeZone(name: "UTC")
-        let timeStamp = dateFormatter.stringFromDate(date)
-        
-        return timeStamp
-    }
-    
-    func convertDate(date: String) -> String {
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        dateFormatter.timeZone = NSTimeZone(name: "UTC")
-        
-        guard let date = dateFormatter.dateFromString(date) else {
-            assert(false, "no date from string")
-            return ""
-        }
-        
-        dateFormatter.dateFormat = "dd-MM-yyyy"
-        dateFormatter.timeZone = NSTimeZone(name: "UTC")
-        let timeStamp = dateFormatter.stringFromDate(date)
-        
-        return timeStamp
-    }
-    func convertTime(date: String) -> String {
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        dateFormatter.timeZone = NSTimeZone(name: "UTC")
-        
-        guard let date = dateFormatter.dateFromString(date) else {
-            assert(false, "no date from string")
-            return ""
-        }
-        
-        dateFormatter.dateFormat = "HH:mm a"
-        dateFormatter.timeZone = NSTimeZone(name: "UTC")
-        let timeStamp = dateFormatter.stringFromDate(date)
-        
-        return timeStamp
-    }
-    
-    
-    
+
     
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -667,7 +360,6 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
             let popoverViewController = segue.destinationViewController as! menuViewController
             popoverViewController.FilterOptions=options;
             popoverViewController.SeletedFilter=SeletedFilterpos;
-            // popoverViewController.preferredContentSize = CGSize(width: 150, height: 400)
             popoverViewController.modalPresentationStyle = UIModalPresentationStyle.Popover
             popoverViewController.popoverPresentationController!.delegate = self
             popoverViewController.delegate = self
@@ -690,7 +382,11 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
         self.SeletedFilterpos=position;
         let option: OptionsData = self.options[position]
         self.gid=option.id!;
-        LoadData(true);
+        let param=Params(Limit: self.limit,gid:self.gid,offset:self.offset,type:self.type,isfilter:true,isMore: false,isSync:false,filterpos: self.SeletedFilterpos)
+        self.isDownloading=true;
+        self.showActivityIndicator()
+        Report(param: param, delegate: self).LoadData();
+
         
     }
     
@@ -702,7 +398,10 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
             UIAlertAction in
             self.SeletedFilterpos=0;
             self.gid="0";
-            self.LoadData(false)
+            let param=Params(Limit: self.limit,gid:self.gid,offset:self.offset,type:self.type,isfilter:false,isMore: false,isSync:false,filterpos: self.SeletedFilterpos)
+            self.isDownloading=true;
+            Report(param: param, delegate: self).LoadData();
+
         }
         
         alertController.addAction(okAction)
@@ -734,7 +433,10 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
             "No records available", preferredStyle: .Alert)
         let okAction = UIAlertAction(title: "Retry", style: UIAlertActionStyle.Default) {
             UIAlertAction in
-            self.LoadData(false);
+            let param=Params(Limit: self.limit,gid:self.gid,offset:self.offset,type:self.type,isfilter:false,isMore: false,isSync:false,filterpos: self.SeletedFilterpos)
+            self.isDownloading=true;
+            Report(param: param, delegate: self).LoadData();
+
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default) {
             UIAlertAction in
@@ -839,7 +541,7 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
     
     func fetch(completion: () -> Void) {
         time = NSDate()
-        self.LoadData(false);
+       // self.LoadData(false);
         completion()
     }
     
