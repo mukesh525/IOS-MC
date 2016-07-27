@@ -12,8 +12,8 @@ import Alamofire
 class DetailViewController: UIViewController,UITableViewDataSource,UIPopoverPresentationControllerDelegate, UITableViewDelegate,CustomCellDelegate,UITextFieldDelegate {
 
     @IBOutlet weak var addfollowup: UIButton!
-    var DetailDataList = [DetailData]()
-    var optionsList = [OptionsData]()
+    var DetailDataList = Array<DetailData>();
+    var optionsList = Array<OptionsData>();
     var OptionStringList=[String]()
     var currentData:Data!
     private var showingActivity = false
@@ -42,7 +42,7 @@ class DetailViewController: UIViewController,UITableViewDataSource,UIPopoverPres
         }
         
         addLogOutButtonToNavigationBar("more");
-     NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(DetailViewController.keyboardWillShow(_:)), name:UIKeyboardWillShowNotification, object: nil);
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(DetailViewController.keyboardWillShow(_:)), name:UIKeyboardWillShowNotification, object: nil);
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(DetailViewController.keyboardWillHide(_:)), name:UIKeyboardWillHideNotification, object: nil);
     }
 
@@ -58,27 +58,18 @@ class DetailViewController: UIViewController,UITableViewDataSource,UIPopoverPres
         self.view.frame.origin.y = 0
     }
     
-    
-    
-    func refresh(sender:AnyObject) {
-        // Code to refresh table view
-      loadDetaildata(); 
+     func refresh(sender:AnyObject) {
+      loadDetaildata();
     }
     func moreButtonClicked(sender:AnyObject) {
         let popoverContent = (self.storyboard?.instantiateViewControllerWithIdentifier("more"))! as UIViewController
         
         popoverContent.modalPresentationStyle = .Popover
-        //var popover = popoverContent.popoverPresentationController
-        
         if let popover = popoverContent.popoverPresentationController {
             
             let viewForSource = sender as! UIView
             popover.sourceView = viewForSource
-            
-            // the position of the popover where it's showed
             popover.sourceRect = viewForSource.bounds
-            
-            // the size you want to display
             popoverContent.preferredContentSize = CGSizeMake(150,220)
             popover.delegate = self
         }
@@ -97,55 +88,6 @@ class DetailViewController: UIViewController,UITableViewDataSource,UIPopoverPres
         
     }
     
-    
-    func getParams()->[String: AnyObject]?{
-    
-        var parameters: [String: AnyObject]? = [:]
-        print(self.DetailDataList.count)
-        parameters![AUTHKEY]=self.authkey!
-        parameters![TYPE]=self.type!
-        parameters![GROUP_NAME]=(currentData.groupName != nil ? currentData.groupName : currentData.empName)!
-
-        for curentValue in  self.DetailDataList{
-            
-            if(curentValue.Type == CHECKBOX){
-                var val=[String]()
-                for option in curentValue.OptionList{
-                    if(option.isChecked){
-                        val.append(option.id!)
-                    }
-                }
-                
-                if(val.count>0){
-                    let joined=val.joinWithSeparator(",")
-                    print("\(curentValue.Name!)  :   \(joined)")
-                    parameters![curentValue.Name!] = joined
-                    
-                }else{
-                    print("\(curentValue.Name!)  :  null")
-                    
-                    parameters![curentValue.Name!] = "null"
-                    
-                    
-                }
-                
-            }else if(curentValue.Type == DROPDOWN){
-                print("\(curentValue.Name!)  :   \(curentValue.value!)")
-                parameters![curentValue.Name!] = curentValue.value!
-            } else {
-                print("\(curentValue.Name!)  :   \(curentValue.value!)")
-                parameters![curentValue.Name!] = curentValue.value!
-            }
-            
-        }
-        print(parameters!.keys.count) // 0
-        
-        return parameters
-   
-    }
-    
-    
-    //MARK: - Tableview Delegate & Datasource
     func tableView(tableView:UITableView, numberOfRowsInSection section:Int) -> Int
     {
         if DetailDataList.count == 0{
@@ -261,10 +203,7 @@ class DetailViewController: UIViewController,UITableViewDataSource,UIPopoverPres
 
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
-    {
-        
-    }
+ 
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         let detaildata: DetailData = self.DetailDataList[indexPath.row]
@@ -438,7 +377,7 @@ class DetailViewController: UIViewController,UITableViewDataSource,UIPopoverPres
         var msg:String?
         self.showActivityIndicator()
         Alamofire.request(.POST, POST_DETAIL,
-            parameters: self.getParams()).validate().responseJSON
+            parameters: self.DetailDataList.getParams(self.currentData,type:self.type!)).validate().responseJSON
             {response in switch response.result {
                 
             case .Success(let JSON):

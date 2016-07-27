@@ -23,6 +23,57 @@ extension UIDatePicker {
     }
 }
 
+extension _ArrayType where Generator.Element == DetailData {
+
+    func getParams(currentData:Data,type:String)->[String: AnyObject]?{
+        let authkey = NSUserDefaults.standardUserDefaults().stringForKey(AUTHKEY)
+        var parameters: [String: AnyObject]? = [:]
+        print(self.count)
+        parameters![AUTHKEY]=authkey
+        parameters![TYPE]=type
+        parameters![GROUP_NAME]=(currentData.groupName != nil ? currentData.groupName : currentData.empName)!
+        
+        for curentValue in  self{
+            
+            if(curentValue.Type == CHECKBOX){
+                var val=[String]()
+                for option in curentValue.OptionList{
+                    if(option.isChecked){
+                        val.append(option.id!)
+                    }
+                }
+                
+                if(val.count>0){
+                    let joined=val.joinWithSeparator(",")
+                    print("\(curentValue.Name!)  :   \(joined)")
+                    parameters![curentValue.Name!] = joined
+                    
+                }else{
+                    print("\(curentValue.Name!)  :  null")
+                    
+                    parameters![curentValue.Name!] = "null"
+                    
+                    
+                }
+                
+            }else if(curentValue.Type == DROPDOWN){
+                print("\(curentValue.Name!)  :   \(curentValue.value!)")
+                parameters![curentValue.Name!] = curentValue.value!
+            } else {
+                print("\(curentValue.Name!)  :   \(curentValue.value!)")
+                parameters![curentValue.Name!] = curentValue.value!
+            }
+            
+        }
+        print(parameters!.keys.count) // 0
+        
+        return parameters
+        
+    }
+  
+
+}
+
 extension String {
 
 func getDateFromString() -> String {
