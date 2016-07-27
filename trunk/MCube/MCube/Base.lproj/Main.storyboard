@@ -413,7 +413,7 @@
         <!--FollowUp-->
         <scene sceneID="wVo-jy-G7E">
             <objects>
-                <tableViewController storyboardIdentifier="followup" id="xgo-gk-e34" customClass="FollowUpViewController" customModule="MCube" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="followup" id="xgo-gk-e34" customClass="ReportViewController" customModule="MCube" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="53" sectionHeaderHeight="28" sectionFooterHeight="28" id="viH-VJ-IwR">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1238,7 +1238,7 @@
                                         <rect key="frame" x="0.0" y="304" width="343" height="150"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="G0a-d2-k27" id="NEg-vx-G46">
-                                            <rect key="frame" x="0.0" y="0.0" width="343" height="149"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="150"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="new Folloup date" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="5gH-HZ-Icq">
@@ -1354,10 +1354,10 @@
             </objects>
             <point key="canvasLocation" x="2129.5" y="-1193.5"/>
         </scene>
-        <!--Add Followup View Controller-->
+        <!--Add Followup Controller-->
         <scene sceneID="uF6-Hd-VDl">
             <objects>
-                <viewController id="aUO-IC-RTG" customClass="AddFollowupViewController" customModule="MCube" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="aUO-IC-RTG" customClass="AddFollowupController" customModule="MCube" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="W0O-MT-Tg8"/>
                         <viewControllerLayoutGuide type="bottom" id="n2f-Sn-HuS"/>
@@ -1703,10 +1703,10 @@
             </objects>
             <point key="canvasLocation" x="2628.5" y="-1159.5"/>
         </scene>
-        <!--Menu View Controller-->
+        <!--Filter Controller-->
         <scene sceneID="jlg-rx-Ddg">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="R2D-x5-5Ev" customClass="menuViewController" customModule="MCube" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="R2D-x5-5Ev" customClass="FilterController" customModule="MCube" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="zrf-qU-DOW"/>
                         <viewControllerLayoutGuide type="bottom" id="Qbs-l6-gkn"/>

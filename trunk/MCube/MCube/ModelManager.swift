@@ -68,7 +68,7 @@ class ModelManager: NSObject {
      {
         createTable(tablename)
        // deleteData(tablename)
-        var isInserted:Bool!
+        var isInserted:Bool=false
         let empty:String="N/A"
         sharedInstance.database!.open()
         for option in Options {

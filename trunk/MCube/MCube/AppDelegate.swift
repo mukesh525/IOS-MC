@@ -17,8 +17,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
      
-        NSUserDefaults.standardUserDefaults().setInteger(0,forKey: "launch")
-        NSUserDefaults.standardUserDefaults().setInteger(0,forKey: "launchview")
+        NSUserDefaults.standardUserDefaults().setInteger(0,forKey: LAUNCH)
+        NSUserDefaults.standardUserDefaults().setInteger(0,forKey: LAUNCHVIEW)
         NSUserDefaults.standardUserDefaults().synchronize()
          
         UINavigationBar.appearance().barTintColor = UIColor(red: 255.0/255.0, green: 87.0/255.0, blue: 34.0/255.0, alpha: 1.0)
@@ -26,13 +26,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
         
         
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        
-        
-        
-        if NSUserDefaults.standardUserDefaults().stringForKey("authkey") != nil {
+         let storyboard = UIStoryboard(name: "Main", bundle: nil)
+         if NSUserDefaults.standardUserDefaults().stringForKey(AUTHKEY) != nil {
            let vc = storyboard.instantiateViewControllerWithIdentifier("Home") as!SWRevealViewController
-       //    let followupController = vc.topViewController as! FollowUpViewController
            self.window!.rootViewController = vc;
         }
         else
@@ -40,7 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
            let vc = storyboard.instantiateViewControllerWithIdentifier("loginController") as! LoginViewController
            self.window!.rootViewController = vc;
         }
-        Util.copyFile("mcubeios")
+          Util.copyFile("mcubeios")
         
         
         UIApplication.sharedApplication().setMinimumBackgroundFetchInterval(UIApplicationBackgroundFetchIntervalMinimum)
@@ -58,7 +54,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
        if let nav = window?.rootViewController as? UINavigationController,
             viewControllers = nav.viewControllers as? [UITableViewController] {
             for viewController in viewControllers {
-                if let fetchViewController = viewController as? FollowUpViewController {
+                if let fetchViewController = viewController as? ReportViewController {
                     fetchViewController.fetch {
                         fetchViewController.updateUI()
                         completionHandler(.NewData)
@@ -68,21 +64,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+ 
     func applicationWillResignActive(application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
