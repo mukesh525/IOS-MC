@@ -373,7 +373,7 @@ func getDateFromString() -> String {
         assert(false, "no date from string")
         return ""
     }
-    dateFormatter.dateFormat = DATETIMEFOEMAT
+    dateFormatter.dateFormat = "dd-MM-yyyy"
     let timeStamp = dateFormatter.stringFromDate(date)
     return timeStamp
    }
