@@ -27,13 +27,12 @@ class DetailViewController: UIViewController,UITableViewDataSource,UIPopoverPres
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if let authkey = NSUserDefaults.standardUserDefaults().stringForKey("authkey") {
+        if let authkey = NSUserDefaults.standardUserDefaults().stringForKey(AUTHKEY) {
             self.authkey=authkey;
         }
         mytableview.delegate = self
         mytableview.dataSource = self
         mytableview.allowsSelection=false
-       // mytableview.backgroundView = UIImageView(image: UIImage(named: "background_port.jpg"))
         loadDetaildata();
         self.refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
         self.refreshControl.addTarget(self, action: #selector(DetailViewController.refresh(_:)), forControlEvents: UIControlEvents.ValueChanged)
@@ -103,13 +102,13 @@ class DetailViewController: UIViewController,UITableViewDataSource,UIPopoverPres
     
         var parameters: [String: AnyObject]? = [:]
         print(self.DetailDataList.count)
-        parameters!["authKey"]=self.authkey!
-        parameters!["type"]=self.type!
-        parameters!["groupname"]=(currentData.groupName != nil ? currentData.groupName : currentData.empName)!
+        parameters![AUTHKEY]=self.authkey!
+        parameters![TYPE]=self.type!
+        parameters![GROUP_NAME]=(currentData.groupName != nil ? currentData.groupName : currentData.empName)!
 
         for curentValue in  self.DetailDataList{
             
-            if(curentValue.Type == "checkbox"){
+            if(curentValue.Type == CHECKBOX){
                 var val=[String]()
                 for option in curentValue.OptionList{
                     if(option.isChecked){
@@ -130,7 +129,7 @@ class DetailViewController: UIViewController,UITableViewDataSource,UIPopoverPres
                     
                 }
                 
-            }else if(curentValue.Type == "dropdown"){
+            }else if(curentValue.Type == DROPDOWN){
                 print("\(curentValue.Name!)  :   \(curentValue.value!)")
                 parameters![curentValue.Name!] = curentValue.value!
             } else {
@@ -177,7 +176,7 @@ class DetailViewController: UIViewController,UITableViewDataSource,UIPopoverPres
         let detaildata: DetailData = self.DetailDataList[indexPath.row] 
         
        
-          if(detaildata.Type == "label")
+          if(detaildata.Type == LABEL)
         {
             let cell1 = tableView.dequeueReusableCellWithIdentifier("LL", forIndexPath: indexPath) as!CustomeCell1
             cell1.label1.text=detaildata.label
@@ -186,7 +185,7 @@ class DetailViewController: UIViewController,UITableViewDataSource,UIPopoverPres
         
         }
         
-        else if(detaildata.Type == "hidden")
+        else if(detaildata.Type == HIDDEN)
           {
             let cell1 = tableView.dequeueReusableCellWithIdentifier("LL", forIndexPath: indexPath) as!CustomeCell1
             cell1.label1.text=detaildata.label
@@ -196,7 +195,7 @@ class DetailViewController: UIViewController,UITableViewDataSource,UIPopoverPres
             
         }
         
-        else if (detaildata.Type=="text" || detaildata.Type=="textarea") {
+        else if (detaildata.Type==TEXT || detaildata.Type==TEXTAREA) {
             let cell3 = tableView.dequeueReusableCellWithIdentifier("LT", forIndexPath: indexPath) as!CustomeCell3
             cell3.label1.text=detaildata.label
             if (NSString(string: detaildata.value!).length > 1){
@@ -211,7 +210,7 @@ class DetailViewController: UIViewController,UITableViewDataSource,UIPopoverPres
             
         }
         
-        else if (detaildata.Type=="dropdown" || detaildata.Type=="radio") {
+        else if (detaildata.Type==DROPDOWN || detaildata.Type==RADIO) {
             let cell2 = tableView.dequeueReusableCellWithIdentifier("LP", forIndexPath: indexPath) as!CustomeCell2
              cell2.label.text=detaildata.label
              cell2.Options=detaildata.Options
@@ -231,7 +230,7 @@ class DetailViewController: UIViewController,UITableViewDataSource,UIPopoverPres
             return cell2
             
         }
-        else if (detaildata.Type == "datetime"){
+        else if (detaildata.Type == DATE_TIME){
             let cell5 = tableView.dequeueReusableCellWithIdentifier("LD", forIndexPath: indexPath) as!CustomeCell5
             cell5.label.text = detaildata.label
             detaildata.value=cell5.dateTimePicker.getStringValue();
@@ -243,7 +242,7 @@ class DetailViewController: UIViewController,UITableViewDataSource,UIPopoverPres
           }
 
         
-       else if (detaildata.Type == "checkbox"){
+       else if (detaildata.Type == CHECKBOX){
        let cell4 = tableView.dequeueReusableCellWithIdentifier("Ltabel", forIndexPath: indexPath) as!CustomeCell4
            cell4.label1.text=detaildata.label
            cell4.optionsList=detaildata.OptionList
@@ -271,17 +270,17 @@ class DetailViewController: UIViewController,UITableViewDataSource,UIPopoverPres
         let detaildata: DetailData = self.DetailDataList[indexPath.row]
         let count=CGFloat(detaildata.OptionList.count);
         let chekheight=CGFloat(44);
-        if(detaildata.Type == "hidden"){
+        if(detaildata.Type == HIDDEN){
          return 0
         }
-        else if (detaildata.Type=="dropdown" || detaildata.Type=="radio") {
+        else if (detaildata.Type==DROPDOWN || detaildata.Type==RADIO) {
         
         return 100
         }
-        else if (detaildata.Type == "checkbox"){
+        else if (detaildata.Type == CHECKBOX){
             return chekheight * count
         }
-        else if (detaildata.Type == "datetime"){
+        else if (detaildata.Type == DATE_TIME){
             return 150
         }
         else{
@@ -313,8 +312,8 @@ class DetailViewController: UIViewController,UITableViewDataSource,UIPopoverPres
             self.showActivityIndicator()
         }
       
-        Alamofire.request(.POST, "https://mcube.vmc.in/mobapp/getDetail",
-            parameters: ["authKey":self.authkey!,"type":self.type!, "callid":currentData.callId!, "groupname":(currentData.groupName != nil ? currentData.groupName : currentData.empName)!]).validate().responseJSON
+        Alamofire.request(.POST, GET_DETAIL_URL,
+            parameters: [AUTHKEY:self.authkey!,TYPE:self.type!, CALLID:currentData.callId!, GROUPNAME:(currentData.groupName != nil ? currentData.groupName : currentData.empName)!]).validate().responseJSON
             {response in switch response.result {
                 
             case .Success(let JSON):
@@ -322,35 +321,35 @@ class DetailViewController: UIViewController,UITableViewDataSource,UIPopoverPres
                 let response = JSON as! NSDictionary
                 
                  //self.showActivityIndicator()
-                if((response.objectForKey("fields")) != nil){
+                if((response.objectForKey(FIELDS)) != nil){
                     self.DetailDataList=[DetailData]()
-                    let fields = response.objectForKey("fields") as! NSArray?
+                    let fields = response.objectForKey(FIELDS) as! NSArray?
                     
                     for field in fields!{
                         let detailData=DetailData();
-                        if((field.objectForKey("name")) != nil){
-                            detailData.Name=field.objectForKey("name") as? String
+                        if((field.objectForKey(NAME)) != nil){
+                            detailData.Name=field.objectForKey(NAME) as? String
                             
                         }
-                        if((field.objectForKey("label")) != nil){
-                            detailData.label=field.objectForKey("label") as? String
+                        if((field.objectForKey(LABEL)) != nil){
+                            detailData.label=field.objectForKey(LABEL) as? String
                             
                         }
                         
-                        if((field.objectForKey("type")) != nil){
-                            detailData.Type=field.objectForKey("type") as? String
+                        if((field.objectForKey(TYPE)) != nil){
+                            detailData.Type=field.objectForKey(TYPE) as? String
                            
                         }
-                        if((field.objectForKey("value")) != nil){
-                            detailData.value=field.objectForKey("value") as? String
+                        if((field.objectForKey(VALUE)) != nil){
+                            detailData.value=field.objectForKey(VALUE) as? String
                             
                         }
                         
-                        let optionsLabel = ["dropdown", "radio","checkbox"]
+                        let optionsLabel = [DROPDOWN,RADIO,CHECKBOX]
                         print(detailData.Type!)
                         let contained = optionsLabel.contains(detailData.Type!)
                         if(contained){
-                            let Options = field.objectForKey("options") as! NSDictionary?
+                            let Options = field.objectForKey(OPTIONS) as! NSDictionary?
                             self.optionsList=[OptionsData]()
                             self.OptionStringList=[String]()
                             print("Data items count: \(Options!.count)")
@@ -362,7 +361,7 @@ class DetailViewController: UIViewController,UITableViewDataSource,UIPopoverPres
                                     detailData.value=value as? String
                                   }
                                 
-                                if (detailData.Type!.containsString("checkbox") && !detailData.value!.containsString("")) {
+                                if (detailData.Type!.containsString(CHECKBOX) && !detailData.value!.containsString("")) {
                                  //   value = "check1,check3";
                                     let newString = detailData.value!.stringByReplacingOccurrencesOfString("\"", withString: "")
                                     let toArray = newString.componentsSeparatedByString(",")
@@ -394,9 +393,9 @@ class DetailViewController: UIViewController,UITableViewDataSource,UIPopoverPres
                         detailData.OptionList=self.optionsList
                         detailData.Options=self.OptionStringList
                         
-                        if (detailData.Name == "callfrom") {
+                        if (detailData.Name == CALLFROM) {
                             self.ContactNo = detailData.value;
-                        } else if (detailData.Name == "callfrom") {
+                        } else if (detailData.Name == CALLFROM) {
                             self.EmailId = detailData.value;
                         }
                         
@@ -438,19 +437,19 @@ class DetailViewController: UIViewController,UITableViewDataSource,UIPopoverPres
         var code:String?
         var msg:String?
         self.showActivityIndicator()
-        Alamofire.request(.POST, "https://mcube.vmc.in/mobapp/postDetail",
+        Alamofire.request(.POST, POST_DETAIL,
             parameters: self.getParams()).validate().responseJSON
             {response in switch response.result {
                 
             case .Success(let JSON):
                 print("Success with JSON: \(JSON)")
                 let response = JSON as! NSDictionary
-                if((response.objectForKey("code")) != nil){
-                   code=response.objectForKey("code") as? String
+                if((response.objectForKey(CODE)) != nil){
+                   code=response.objectForKey(CODE) as? String
                     
                 }
-                if((response.objectForKey("msg")) != nil){
-                    msg=response.objectForKey("msg") as? String
+                if((response.objectForKey(MESSAGE)) != nil){
+                    msg=response.objectForKey(MESSAGE) as? String
                     
                 }
                 
@@ -484,7 +483,7 @@ class DetailViewController: UIViewController,UITableViewDataSource,UIPopoverPres
     
      func showAlert(mesage :String){
         //dismissViewControllerAnimated(true, completion: nil)
-        let alertView = UIAlertController(title: "MCube", message: mesage, preferredStyle: .Alert)
+        let alertView = UIAlertController(title: TITLE, message: mesage, preferredStyle: .Alert)
         alertView.addAction(UIAlertAction(title: "Ok", style: .Default, handler: nil))
         presentViewController(alertView, animated: true, completion: nil)
     }
@@ -506,9 +505,8 @@ class DetailViewController: UIViewController,UITableViewDataSource,UIPopoverPres
     
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "addfollowup"{
-            
-            let addfollowup = segue.destinationViewController as! AddFollowupViewController
+        if segue.identifier == ADD_FOLLOWUP{
+            let addfollowup = segue.destinationViewController as! AddFollowupController
             addfollowup.currentData=self.currentData;
             addfollowup.authkey=self.authkey;
            

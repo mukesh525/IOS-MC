@@ -28,9 +28,10 @@ class Report: NSObject {
         var audioLink:String?
         var callTimeString:String?
         var empName:String?
-        let authkey = NSUserDefaults.standardUserDefaults().stringForKey("authkey")
-        Alamofire.request(.POST, "https://mcube.vmc.in/mobapp/getList", parameters:
-            ["authKey":authkey!, "limit":(self.param?.Limit!)!,"gid": (self.param?.gid!)!,"ofset":(self.param?.offset!)!,"type":(self.param?.type!)!])
+        let authkey = NSUserDefaults.standardUserDefaults().stringForKey(AUTHKEY)
+    
+        Alamofire.request(.POST, GETLIST, parameters:
+            [AUTHKEY:authkey!, LIMIT:(self.param?.Limit!)!,GROUP_ID: (self.param?.gid!)!,OFSET:(self.param?.offset!)!,TYPE:(self.param?.type!)!])
             .validate().responseJSON
             {response in switch response.result {
                 
@@ -40,72 +41,67 @@ class Report: NSObject {
                 self.result=NSMutableArray();
                 self.options=[OptionsData]();
                 let response = JSON as! NSDictionary
-                if(response.objectForKey("groups") != nil){
-                    let groups = response.objectForKey("groups") as! NSArray?
+                if(response.objectForKey(GROUPS) != nil){
+                    let groups = response.objectForKey(GROUPS) as! NSArray?
                     for group in groups!{
                         let options=OptionsData();
-                        if((group.objectForKey("key")) != nil){
-                            options.id=group.objectForKey("key") as? String
+                        if((group.objectForKey(KEY)) != nil){
+                            options.id=group.objectForKey(KEY) as? String
                         }
-                        if((group.objectForKey("val")) != nil){
-                            options.value=group.objectForKey("val") as? String
+                        if((group.objectForKey(VAL)) != nil){
+                            options.value=group.objectForKey(VAL) as? String
                         }
                         self.options.append(options)
                     }
                     
                 }
-                if(response.objectForKey("records") != nil){
-                    let records = response.objectForKey("records") as! NSArray?
+                if(response.objectForKey(RECORDS) != nil){
+                    let records = response.objectForKey(RECORDS) as! NSArray?
                     for record in records!{
                         let data=Data();
-                        if((record.objectForKey("callid")) != nil){
-                            callId=record.objectForKey("callid") as? String
+                        if((record.objectForKey(CALLID)) != nil){
+                            callId=record.objectForKey(CALLID) as? String
                             data.callId=callId;
                         }
-                        if((record.objectForKey("callfrom")) != nil){
-                            callFrom=record.objectForKey("callfrom") as? String
+                        if((record.objectForKey(CALLFROM)) != nil){
+                            callFrom=record.objectForKey(CALLFROM) as? String
                             data.callFrom=callFrom;
                         }
-                        
-                        if((record.objectForKey("callid")) != nil){
-                            callId=record.objectForKey("callid") as? String
-                            data.callId=callId;
-                        }
-                        if((record.objectForKey("status")) != nil){
-                            status=record.objectForKey("status") as? String
+                        if((record.objectForKey(STATUS)) != nil){
+                            status=record.objectForKey(STATUS) as? String
                             data.status=status;
                         }
-                        if((record.objectForKey("callername")) != nil){
-                            callerName=record.objectForKey("callername") as? String
+                        if((record.objectForKey(CALLER_NAME)) != nil){
+                            callerName=record.objectForKey(CALLER_NAME) as? String
                             data.callerName=callerName;
                         }
-                        if((record.objectForKey("groupname")) != nil){
-                            groupName=record.objectForKey("groupname") as? String
+                        if((record.objectForKey(GROUPNAME)) != nil){
+                            groupName=record.objectForKey(GROUPNAME) as? String
                             data.groupName=groupName;
                         }
-                        if((record.objectForKey("calltime")) != nil){
-                            callTimeString=record.objectForKey("calltime") as? String
+                        if((record.objectForKey(CALLTIME)) != nil){
+                            callTimeString=record.objectForKey(CALLTIME) as? String
                             data.callTimeString=callTimeString;
                             data.callTime=callTimeString!.convertDateFormater()
                         }
-                        else if((record.objectForKey("starttime")) != nil){
-                            callTimeString=record.objectForKey("starttime") as? String
+                        else if((record.objectForKey(STARTTIME)) != nil){
+                            callTimeString=record.objectForKey(STARTTIME) as? String
                             data.startTime=callTimeString;
                             
                         }
                         
-                        if((record.objectForKey("empName")) != nil){
-                            empName=record.objectForKey("empName") as? String
+                        if((record.objectForKey(EMPNAME)) != nil){
+                            empName=record.objectForKey(EMPNAME) as? String
                             data.empName=empName;
                             
                         }
-                        if((record.objectForKey("name")) != nil){
-                            callerName=record.objectForKey("name") as? String
+                        if((record.objectForKey(NAME)) != nil){
+                            callerName=record.objectForKey(NAME) as? String
                             data.callerName=callerName;
                             
                         }
-                         if((record.objectForKey("filename")) != nil){
-                            audioLink=record.objectForKey("filename") as? String
+                         if((record.objectForKey(FILENAME)) != nil){
+                            audioLink=record.objectForKey(FILENAME) as? String
                             data.audioLink=audioLink;
                         }
                         
@@ -129,21 +125,15 @@ class Report: NSObject {
                       ismenu = ModelManager.getInstance().insertMenu((self.param?.type!)!, Options: self.options)
                         
                         if ismenu {
-                            // Util.invokeAlertMethod("", strBody: "\((self.param?.type!)!) _Menu updated successfully.", delegate: nil)
-                            print("\((self.param?.type!)!)_Menu updated successfully.")
+                           print("\((self.param?.type!)!)_Menu updated successfully.")
                         } else {
-                            // Util.invokeAlertMethod("", strBody: "Error in updating \((self.param?.type!)!) Menu .", delegate: nil)
                             print("Error in updating \((self.param?.type!)!) Menu")
                         }
-                        
-                    }
-                  
-                    if isUpdated {
-                       // Util.invokeAlertMethod("", strBody: "\((self.param?.type!)!) updated successfully.", delegate: nil)
-                          print("\((self.param?.type!)!) updated successfully.")
+                   }
+                   if isUpdated {
+                        print("\((self.param?.type!)!) updated successfully.")
                     } else {
-                       // Util.invokeAlertMethod("", strBody: "Error in updating \((self.param?.type!)!) .", delegate: nil)
-                          print("Error in updating \((self.param?.type!)!).")
+                        print("Error in updating \((self.param?.type!)!).")
                     }
                 }
                 

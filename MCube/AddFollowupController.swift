@@ -9,7 +9,7 @@
 import UIKit
 import Alamofire
 
-class AddFollowupViewController: UIViewController,CustomCellDelegate,UITextFieldDelegate  {
+class AddFollowupController: UIViewController,CustomCellDelegate,UITextFieldDelegate  {
     var currentData:Data!
     var authkey:String?
     var optionsList = [OptionsData]()
@@ -66,8 +66,8 @@ class AddFollowupViewController: UIViewController,CustomCellDelegate,UITextField
             self.showActivityIndicator()
         }
         
-        Alamofire.request(.POST, "https://mcube.vmc.in//mobapp/followupFrm",
-            parameters: ["authKey":authkey!]).validate().responseJSON
+        Alamofire.request(.POST, FOLLOWUP_FORM,
+            parameters: [AUTHKEY:authkey!]).validate().responseJSON
             {response in switch response.result {
                 
             case .Success(let JSON):
@@ -75,35 +75,34 @@ class AddFollowupViewController: UIViewController,CustomCellDelegate,UITextField
                 let response = JSON as! NSDictionary
                 
                 //self.showActivityIndicator()
-                if((response.objectForKey("fields")) != nil){
+                if((response.objectForKey(FIELDS)) != nil){
                     self.DetailDataList=[DetailData]()
-                    let fields = response.objectForKey("fields") as! NSArray?
+                    let fields = response.objectForKey(FIELDS) as! NSArray?
                     
                     for field in fields!{
                         let detailData=DetailData();
-                        if((field.objectForKey("name")) != nil){
-                            detailData.Name=field.objectForKey("name") as? String
+                        if((field.objectForKey(NAME)) != nil){
+                            detailData.Name=field.objectForKey(NAME) as? String
                             
                         }
-                        if((field.objectForKey("label")) != nil){
-                            detailData.label=field.objectForKey("label") as? String
-                            
-                        }
-                        
-                        if((field.objectForKey("type")) != nil){
-                            detailData.Type=field.objectForKey("type") as? String
-                            
-                        }
-                        if((field.objectForKey("value")) != nil){
-                            detailData.value=field.objectForKey("value") as? String
+                        if((field.objectForKey(LABEL)) != nil){
+                            detailData.label=field.objectForKey(LABEL) as? String
                             
                         }
                         
-                        let optionsLabel = ["dropdown", "radio","checkbox"]
-                        // print(detailData.Type!)
+                        if((field.objectForKey(TYPE)) != nil){
+                            detailData.Type=field.objectForKey(TYPE) as? String
+                            
+                        }
+                        if((field.objectForKey(VALUE)) != nil){
+                            detailData.value=field.objectForKey(VALUE) as? String
+                            
+                        }
+                        
+                        let optionsLabel = [DROPDOWN, RADIO,CHECKBOX]
                         let contained = optionsLabel.contains(detailData.Type!)
                         if(contained){
-                            let Options = field.objectForKey("options") as! NSDictionary?
+                            let Options = field.objectForKey(OPTIONS) as! NSDictionary?
                             self.optionsList=[OptionsData]()
                             self.OptionStringList=[String]()
                             print("Data items count: \(Options!.count)")
@@ -115,7 +114,7 @@ class AddFollowupViewController: UIViewController,CustomCellDelegate,UITextField
                                     detailData.value=value as? String
                                 }
                                 
-                                if (detailData.Type!.containsString("checkbox") && !detailData.value!.containsString("")) {
+                                if (detailData.Type!.containsString(CHECKBOX) && !detailData.value!.containsString("")) {
                                     let newString = detailData.value!.stringByReplacingOccurrencesOfString("\"", withString: "")
                                     let toArray = newString.componentsSeparatedByString(",")
                                     for curentValue in toArray  {
@@ -142,9 +141,9 @@ class AddFollowupViewController: UIViewController,CustomCellDelegate,UITextField
                         detailData.OptionList=self.optionsList
                         detailData.Options=self.OptionStringList
                         
-                        if (detailData.Name == "callfrom") {
+                        if (detailData.Name == CALLFROM) {
                             self.ContactNo = detailData.value;
-                        } else if (detailData.Name == "callfrom") {
+                        } else if (detailData.Name == CALLFROM) {
                             self.EmailId = detailData.value;
                         }
                         
@@ -184,7 +183,7 @@ class AddFollowupViewController: UIViewController,CustomCellDelegate,UITextField
     
     func showAlert(mesage :String){
         //dismissViewControllerAnimated(true, completion: nil)
-        let alertView = UIAlertController(title: "MCube", message: mesage, preferredStyle: .Alert)
+        let alertView = UIAlertController(title: TITLE, message: mesage, preferredStyle: .Alert)
         alertView.addAction(UIAlertAction(title: "Ok", style: .Default, handler: nil))
         presentViewController(alertView, animated: true, completion: nil)
     }
@@ -236,7 +235,7 @@ class AddFollowupViewController: UIViewController,CustomCellDelegate,UITextField
         let detaildata: DetailData = self.DetailDataList[indexPath.row]
         
         
-        if(detaildata.Type == "label")
+        if(detaildata.Type == LABEL)
         {
             let cell1 = tableView.dequeueReusableCellWithIdentifier("LL1", forIndexPath: indexPath) as!CustomeCell1
             cell1.label1.text=detaildata.label
@@ -245,7 +244,7 @@ class AddFollowupViewController: UIViewController,CustomCellDelegate,UITextField
             
         }
             
-        else if(detaildata.Type == "hidden")
+        else if(detaildata.Type == HIDDEN)
         {
             let cell1 = tableView.dequeueReusableCellWithIdentifier("LL1", forIndexPath: indexPath) as!CustomeCell1
             cell1.label1.text=detaildata.label
@@ -255,7 +254,7 @@ class AddFollowupViewController: UIViewController,CustomCellDelegate,UITextField
             
         }
             
-        else if (detaildata.Type=="text" || detaildata.Type=="textarea") {
+        else if (detaildata.Type==TEXT || detaildata.Type==TEXTAREA) {
             let cell3 = tableView.dequeueReusableCellWithIdentifier("LT1", forIndexPath: indexPath) as!CustomeCell3
             cell3.label1.text=detaildata.label
             if (NSString(string: detaildata.value!).length > 1){
@@ -270,7 +269,7 @@ class AddFollowupViewController: UIViewController,CustomCellDelegate,UITextField
             
         }
             
-        else if (detaildata.Type=="dropdown" || detaildata.Type=="radio") {
+        else if (detaildata.Type==DROPDOWN || detaildata.Type==RADIO) {
             let cell2 = tableView.dequeueReusableCellWithIdentifier("LP1", forIndexPath: indexPath) as!CustomeCell2
             cell2.label.text=detaildata.label
             cell2.Options=detaildata.Options
@@ -290,7 +289,7 @@ class AddFollowupViewController: UIViewController,CustomCellDelegate,UITextField
             
         }
             
-        else if (detaildata.Type == "checkbox"){
+        else if (detaildata.Type == CHECKBOX){
             let cell4 = tableView.dequeueReusableCellWithIdentifier("Ltabel1", forIndexPath: indexPath) as!CustomeCell4
             cell4.label1.text=detaildata.label
             cell4.optionsList=detaildata.OptionList
@@ -299,7 +298,7 @@ class AddFollowupViewController: UIViewController,CustomCellDelegate,UITextField
             return cell4
             
         }
-        else if (detaildata.Type == "datetime"){
+        else if (detaildata.Type == DATE_TIME){
             let cell5 = tableView.dequeueReusableCellWithIdentifier("LD1", forIndexPath: indexPath) as!CustomeCell5
             cell5.label.text = detaildata.label
             detaildata.value=cell5.dateTimePicker.getStringValue();
@@ -325,17 +324,17 @@ class AddFollowupViewController: UIViewController,CustomCellDelegate,UITextField
         let detaildata: DetailData = self.DetailDataList[indexPath.row]
         let count=CGFloat(detaildata.OptionList.count);
         let chekheight=CGFloat(44);
-        if(detaildata.Type == "hidden"){
+        if(detaildata.Type == HIDDEN){
             return 0
         }
-        else if (detaildata.Type=="dropdown" || detaildata.Type=="radio") {
+        else if (detaildata.Type==DROPDOWN || detaildata.Type==RADIO) {
             
             return 100
         }
-        else if (detaildata.Type == "checkbox"){
+        else if (detaildata.Type == CHECKBOX){
             return chekheight * count
         }
-        else if (detaildata.Type == "datetime"){
+        else if (detaildata.Type == DATE_TIME){
             return 150
         }
         else{

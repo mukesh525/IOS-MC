@@ -48,12 +48,11 @@ class LoginViewController: UIViewController,ValidationDelegate ,UITextFieldDeleg
         self.password.delegate = self;
         iconClick = true
         self.setShowHideIcon()
-        if NSUserDefaults.standardUserDefaults().stringForKey("emailfield") != nil
-            && NSUserDefaults.standardUserDefaults().stringForKey("passfield") != nil
+        if NSUserDefaults.standardUserDefaults().stringForKey(EMAIL_FIELD) != nil
+            && NSUserDefaults.standardUserDefaults().stringForKey(PASS_FIELD) != nil
         {
-            email.text=NSUserDefaults.standardUserDefaults().stringForKey("emailfield")
-            password.text=NSUserDefaults.standardUserDefaults().stringForKey("passfield")
-            
+            email.text=NSUserDefaults.standardUserDefaults().stringForKey(EMAIL_FIELD)
+            password.text=NSUserDefaults.standardUserDefaults().stringForKey(PASS_FIELD)
             
         }
         
@@ -120,62 +119,62 @@ class LoginViewController: UIViewController,ValidationDelegate ,UITextFieldDeleg
         emailerror.text="";
         passworderror.text="";
         self.showActivityIndicator()
-        Alamofire.request(.POST, "https://mcube.vmc.in/mobapp/checkAuth", parameters: ["email":email.text!, "password":password.text!]).validate().responseJSON
+        Alamofire.request(.POST, LOGIN_URL, parameters: [EMAIL:email.text!, PASSWORD:password.text!]).validate().responseJSON
             {response in switch response.result {
                 
             case .Success(let JSON):
                 self.loginClick.enabled=true
                 print("Success with JSON: \(JSON)")
                 let response = JSON as! NSDictionary
-                if((response.objectForKey("code")) != nil){
-                    self.code=response.objectForKey("code")as? String;
+                if((response.objectForKey(CODE)) != nil){
+                    self.code=response.objectForKey(CODE)as? String;
                 }
-                if((response.objectForKey("msg")) != nil){
-                    self.message=response.objectForKey("msg")as? String;
+                if((response.objectForKey(MESSAGE)) != nil){
+                    self.message=response.objectForKey(MESSAGE)as? String;
                     
                 }
-                if((response.objectForKey("authKey")) != nil){
-                    self.authkey = response.objectForKey("authKey")! as? String
+                if((response.objectForKey(AUTHKEY)) != nil){
+                    self.authkey = response.objectForKey(AUTHKEY)! as? String
                 }
                 
                 
-                if((response.objectForKey("empName")) != nil){
-                    self.empName = response.objectForKey("empName")! as? String
+                if((response.objectForKey(EMPNAME)) != nil){
+                    self.empName = response.objectForKey(EMPNAME)! as? String
                     
                 }
                 
-                if((response.objectForKey("empEmail")) != nil){
-                    self.empEmail = response.objectForKey("empEmail")! as? String
+                if((response.objectForKey(EMPEMAIL)) != nil){
+                    self.empEmail = response.objectForKey(EMPEMAIL)! as? String
                     
                 }
                 
-                if((response.objectForKey("ivrs")) != nil){
-                    self.ivrs = response.objectForKey("ivrs")! as? String
+                if((response.objectForKey(IVRS)) != nil){
+                    self.ivrs = response.objectForKey(IVRS)! as? String
                     
                 }
                 
-                if((response.objectForKey("lead")) != nil){
-                    self.lead = response.objectForKey("lead")! as? String
+                if((response.objectForKey(LEAD)) != nil){
+                    self.lead = response.objectForKey(LEAD)! as? String
                     
                 }
-                if((response.objectForKey("mtracker")) != nil){
-                    self.mtracker = response.objectForKey("mtracker")! as? String
+                if((response.objectForKey(MTRACKER)) != nil){
+                    self.mtracker = response.objectForKey(MTRACKER)! as? String
                     
                 }
-                if((response.objectForKey("pbx")) != nil){
-                    self.pbx = response.objectForKey("pbx")! as? String
+                if((response.objectForKey(MCUBEX)) != nil){
+                    self.pbx = response.objectForKey(MCUBEX)! as? String
                     
                 }
-                if((response.objectForKey("track")) != nil){
-                    self.track = response.objectForKey("track")! as? String
+                if((response.objectForKey(TRACK)) != nil){
+                    self.track = response.objectForKey(TRACK)! as? String
                     
                 }
-                if((response.objectForKey("businessName")) != nil){
-                    self.businessName = response.objectForKey("businessName")! as? String
+                if((response.objectForKey(BUSINESS_NAME)) != nil){
+                    self.businessName = response.objectForKey(BUSINESS_NAME)! as? String
                     
                 }
-                if((response.objectForKey("empContact")) != nil){
-                    self.empContact = response.objectForKey("empContact")! as? String
+                if((response.objectForKey(EMP_CONTACT)) != nil){
+                    self.empContact = response.objectForKey(EMP_CONTACT)! as? String
                     
                 }
                 
@@ -201,17 +200,17 @@ class LoginViewController: UIViewController,ValidationDelegate ,UITextFieldDeleg
                 if(self.code=="200"){
                     if(self.message != nil){
                         self.showActivityIndicator()
-                        NSUserDefaults.standardUserDefaults().setObject(self.empName, forKey: "name")
-                        NSUserDefaults.standardUserDefaults().setObject(self.empEmail, forKey: "email")
-                        NSUserDefaults.standardUserDefaults().setObject(self.authkey, forKey: "authkey")
-                        NSUserDefaults.standardUserDefaults().setObject(self.empContact, forKey: "empContact")
-                        NSUserDefaults.standardUserDefaults().setObject(self.businessName, forKey: "businessName")
+                        NSUserDefaults.standardUserDefaults().setObject(self.empName, forKey: NAME)
+                        NSUserDefaults.standardUserDefaults().setObject(self.empEmail, forKey: EMAIL)
+                        NSUserDefaults.standardUserDefaults().setObject(self.authkey, forKey: AUTHKEY)
+                        NSUserDefaults.standardUserDefaults().setObject(self.empContact, forKey: EMP_CONTACT)
+                        NSUserDefaults.standardUserDefaults().setObject(self.businessName, forKey: BUSINESS_NAME)
                         
-                        NSUserDefaults.standardUserDefaults().setObject(self.track, forKey: "track")
-                        NSUserDefaults.standardUserDefaults().setObject(self.ivrs, forKey: "ivrs")
-                        NSUserDefaults.standardUserDefaults().setObject(self.lead, forKey: "lead")
-                        NSUserDefaults.standardUserDefaults().setObject(self.pbx, forKey: "pbx")
-                        NSUserDefaults.standardUserDefaults().setObject(self.mtracker, forKey: "mtracker")
+                        NSUserDefaults.standardUserDefaults().setObject(self.track, forKey: TRACK)
+                        NSUserDefaults.standardUserDefaults().setObject(self.ivrs, forKey: IVRS)
+                        NSUserDefaults.standardUserDefaults().setObject(self.lead, forKey: LEAD)
+                        NSUserDefaults.standardUserDefaults().setObject(self.pbx, forKey: MCUBEX)
+                        NSUserDefaults.standardUserDefaults().setObject(self.mtracker, forKey: MTRACKER)
                         
                         
                         
@@ -219,33 +218,27 @@ class LoginViewController: UIViewController,ValidationDelegate ,UITextFieldDeleg
                         
                         // NSUserDefaults.standardUserDefaults().setInteger(1, forKey: "select")
                         NSUserDefaults.standardUserDefaults().synchronize()
-                        if let myLoadedString = NSUserDefaults.standardUserDefaults().stringForKey("name") {
+                        if let myLoadedString = NSUserDefaults.standardUserDefaults().stringForKey(NAME) {
                             print(myLoadedString) // "Hello World"
                         }
                         
                         if(self.rememberMe.on){
-                            NSUserDefaults.standardUserDefaults().setObject(self.email.text, forKey: "emailfield")
-                            NSUserDefaults.standardUserDefaults().setObject(self.password.text, forKey: "passfield")
+                            NSUserDefaults.standardUserDefaults().setObject(self.email.text, forKey: EMAIL_FIELD)
+                            NSUserDefaults.standardUserDefaults().setObject(self.password.text, forKey: PASS_FIELD)
                             NSUserDefaults.standardUserDefaults().synchronize()
                         }
                         else{
-                            if NSUserDefaults.standardUserDefaults().stringForKey("emailfield") != nil
-                                && NSUserDefaults.standardUserDefaults().stringForKey("passfield") != nil
+                            if NSUserDefaults.standardUserDefaults().stringForKey(EMAIL_FIELD) != nil
+                                && NSUserDefaults.standardUserDefaults().stringForKey(PASS_FIELD) != nil
                             {
-                                NSUserDefaults.standardUserDefaults().removeObjectForKey("emailfield")
-                                NSUserDefaults.standardUserDefaults().removeObjectForKey("passfield")
+                                NSUserDefaults.standardUserDefaults().removeObjectForKey(PASS_FIELD)
+                                NSUserDefaults.standardUserDefaults().removeObjectForKey(PASS_FIELD)
                                 NSUserDefaults.standardUserDefaults().synchronize()
                                 
                             }
                         }
                         
-                        
-                        
-                        
                         self.performSegueWithIdentifier("login", sender: self)
-                        //self.showAlert(self.message!)
-                        
-                        
                         
                     }
                 }

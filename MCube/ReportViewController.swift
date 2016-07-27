@@ -6,7 +6,7 @@ import Alamofire
 import AVFoundation
 
 
-class FollowUpViewController: UITableViewController,UIPopoverPresentationControllerDelegate,FilterSelectedDelegate ,SWRevealViewControllerDelegate,ReportDownload {
+class ReportViewController: UITableViewController,UIPopoverPresentationControllerDelegate,FilterSelectedDelegate ,SWRevealViewControllerDelegate,ReportDownload {
     @IBOutlet var mytableview: UITableView!
     @IBOutlet var extraButton: UIBarButtonItem!
     @IBOutlet var menubutton: UIBarButtonItem!
@@ -19,13 +19,12 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
     var limit = 10;
     var offset=0;
     var gid:String="0";
-    var type:String="track"
+    var type:String=TRACK
     var isNewDataLoading:Bool=false;
     var player:AVPlayer!
-    var CurrentTitle:String="Track"
+    var CurrentTitle:String=TRACK.capitalizeIt()
     var isLogout:Bool=false;
     var CurrentData:Data!
-    //var mediaPlayer = VLCMediaPlayer()
     private var showingActivity = false
     var CurrentPlaying:Int?
     var refreshControll = UIRefreshControl()
@@ -37,19 +36,19 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
         super.viewDidLoad()
         
         setsection()
-        if let savedlimit = NSUserDefaults.standardUserDefaults().stringForKey("limit") {
+        if let savedlimit = NSUserDefaults.standardUserDefaults().stringForKey(LIMIT) {
             self.limit = Int(savedlimit)!;
         }else {self.limit=10}
         if(isLogout){
             isLogout=false;
             LogoutAlert()
         }
-        NSUserDefaults.standardUserDefaults().removeObjectForKey("select")
+        NSUserDefaults.standardUserDefaults().removeObjectForKey(SELECT)
         NSUserDefaults.standardUserDefaults().synchronize()
         self.navigationItem.title = CurrentTitle;
         tableView.allowsSelection = true;
         mytableview.backgroundView = UIImageView(image: UIImage(named: "background_port.jpg"))
-        if NSUserDefaults.standardUserDefaults().stringForKey("authkey") != nil {
+        if NSUserDefaults.standardUserDefaults().stringForKey(AUTHKEY) != nil {
             result=ModelManager.getInstance().getData(type)
             options=ModelManager.getInstance().getMenuData(type)
             if(result.count>0 && options.count>0){
@@ -67,7 +66,7 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
         }
         
         self.refreshControll.attributedTitle = NSAttributedString(string: "Pull to refresh")
-        self.refreshControll.addTarget(self, action: #selector(FollowUpViewController.refresh(_:)), forControlEvents: UIControlEvents.ValueChanged)
+        self.refreshControll.addTarget(self, action: #selector(ReportViewController.refresh(_:)), forControlEvents: UIControlEvents.ValueChanged)
         self.mytableview?.addSubview(refreshControll)
         if revealViewController() != nil {
             menubutton.target = revealViewController()
@@ -217,12 +216,12 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
         }
         
         cell.callfrom.text=data.callFrom
-        cell.callername.text=(data.callerName?.isEmpty) != nil && NSString(string: data.callerName!).length > 1 ?  data.callerName : "UNKNOWN"
+        cell.callername.text=(data.callerName?.isEmpty) != nil && NSString(string: data.callerName!).length > 1 ?  data.callerName : UNKNOWN
         
         if((data.callTimeString?.isEmpty) != nil && NSString(string: data.callTimeString!).length > 1){
             cell.date.text=data.callTimeString!.getDateFromString()
             cell.time.text=data.callTimeString!.getTimeFromString()
-            cell.status.text=(data.status?.isEmpty) != nil && NSString(string: data.status!).length > 1 ?  data.status : "UNKNOWN"
+            cell.status.text=(data.status?.isEmpty) != nil && NSString(string: data.status!).length > 1 ?  data.status : UNKNOWN
             
             cell.Group.text=data.groupName
             cell.groupLabel.text="Group"
@@ -233,7 +232,7 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
             cell.date.text=data.startTime!.getDateFromString()
             cell.time.text=data.startTime!.getTimeFromString()
             if((data.status?.isEmpty) != nil && NSString(string: data.status!).length > 0){
-                cell.status.text=data.status == "0" ? "MISSED": data.status == "1" ? "INBOUND" : "OUTBOND"
+                cell.status.text=data.status == "0" ? MISSED: data.status == "1" ? INBOUND : OUTBOUND
             }
             cell.Group.text=data.empName
             cell.groupLabel.text="Employee"
@@ -258,11 +257,8 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
     func configurePlay(filename:String,playbutton:UIButton) {
         
         let url = "http://mcube.vmctechnologies.com/sounds/\(filename)"
-        let linkString = "http://m.mp3.zing.vn/xml/song-load/MjAxNSUyRjA4JTJGMDQlMkY3JTJGYiUyRjdiNTI4YTc0YWU2MGExYWJjMDZlYzA5NmE5MzFjMjliLm1wMyU3QzEz"
         let link = NSURL(string: url)!
-        
-        
-        for currentbutton in self.playButtons{
+       for currentbutton in self.playButtons{
             if(currentbutton.tag == playbutton.tag ){
                 var image:UIImage?
                 if(self.CurrentPlaying != playbutton.tag){
@@ -271,7 +267,7 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
                 
                 if(player == nil){
                     player = AVPlayer(URL: link)
-                    NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(FollowUpViewController.playerDidFinishPlaying(_:)), name: AVPlayerItemDidPlayToEndTimeNotification, object:player.currentItem)
+                    NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ReportViewController.playerDidFinishPlaying(_:)), name: AVPlayerItemDidPlayToEndTimeNotification, object:player.currentItem)
                 }
                 if ((player.rate != 0)) {
                     player.pause()
@@ -347,7 +343,7 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
     
    
     func showAlert(mesage :String){
-        let alertView = UIAlertController(title: "MCube", message: mesage, preferredStyle: .Alert)
+        let alertView = UIAlertController(title: TITLE, message: mesage, preferredStyle: .Alert)
         alertView.addAction(UIAlertAction(title: "Ok", style: .Default, handler: nil))
         presentViewController(alertView, animated: true, completion: nil)
     }
@@ -355,16 +351,16 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
     
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "popoverSegue" && options.count > 0{
+        if segue.identifier == POPOVERSEGUE && options.count > 0{
             
-            let popoverViewController = segue.destinationViewController as! menuViewController
+            let popoverViewController = segue.destinationViewController as! FilterController
             popoverViewController.FilterOptions=options;
             popoverViewController.SeletedFilter=SeletedFilterpos;
             popoverViewController.modalPresentationStyle = UIModalPresentationStyle.Popover
             popoverViewController.popoverPresentationController!.delegate = self
             popoverViewController.delegate = self
         }
-        if segue.identifier == "detail"{
+        if segue.identifier == DETAIL{
             
             let detailview = segue.destinationViewController as! DetailViewController
             detailview.currentData=CurrentData;
@@ -392,12 +388,13 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
     
     func filteralert (){
         let option: OptionsData = self.options[SeletedFilterpos];
-        let alertController = UIAlertController(title: "MCube", message:
+        let alertController = UIAlertController(title: TITLE, message:
             "No Records available for Group : \(option.value!)", preferredStyle: .Alert)
         let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default) {
             UIAlertAction in
             self.SeletedFilterpos=0;
             self.gid="0";
+            self.showActivityIndicator()
             let param=Params(Limit: self.limit,gid:self.gid,offset:self.offset,type:self.type,isfilter:false,isMore: false,isSync:false,filterpos: self.SeletedFilterpos)
             self.isDownloading=true;
             Report(param: param, delegate: self).LoadData();
@@ -411,9 +408,9 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
     func LogoutAlert (){
         let alertController = UIAlertController(title: "Logout Alert", message:
             "Do you want to logout?", preferredStyle: .Alert)
-        let okAction = UIAlertAction(title: "Logout", style: UIAlertActionStyle.Default) {
+        let okAction = UIAlertAction(title: LOGOUT.capitalizeIt(), style: UIAlertActionStyle.Default) {
             UIAlertAction in
-            NSUserDefaults.standardUserDefaults().removeObjectForKey("authkey")
+            NSUserDefaults.standardUserDefaults().removeObjectForKey(AUTHKEY)
             NSUserDefaults.standardUserDefaults().synchronize()
             ModelManager.getInstance().deleteAllData();
             self.performSegueWithIdentifier("GoLogin", sender: self)
@@ -429,7 +426,7 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
         
     }
     func NoDataAlert (){
-        let alertController = UIAlertController(title: "MCube", message:
+        let alertController = UIAlertController(title: TITLE, message:
             "No records available", preferredStyle: .Alert)
         let okAction = UIAlertAction(title: "Retry", style: UIAlertActionStyle.Default) {
             UIAlertAction in
@@ -497,37 +494,36 @@ class FollowUpViewController: UITableViewController,UIPopoverPresentationControl
     
     func setsection() {
         
-        if NSUserDefaults.standardUserDefaults().objectForKey("launchview") != nil{
-            print("Loaded view")
-            NSUserDefaults.standardUserDefaults().removeObjectForKey("launchview")
+        if NSUserDefaults.standardUserDefaults().objectForKey(LAUNCHVIEW) != nil{
+            NSUserDefaults.standardUserDefaults().removeObjectForKey(LAUNCHVIEW)
             NSUserDefaults.standardUserDefaults().synchronize()
             
-            if  NSUserDefaults.standardUserDefaults().stringForKey("track") == "1" {
-                self.type="track"
-                self.CurrentTitle="Track"
+            if  NSUserDefaults.standardUserDefaults().stringForKey(TRACK) == "1" {
+                self.type=TRACK
+                self.CurrentTitle=TRACK.capitalizeIt()
             }
-            else if NSUserDefaults.standardUserDefaults().stringForKey("ivrs")  == "1"{
-                self.type="ivrs"
-                self.CurrentTitle="Ivrs"
+            else if NSUserDefaults.standardUserDefaults().stringForKey(IVRS)  == "1"{
+                self.type=IVRS
+                self.CurrentTitle=IVRS.capitalizeIt()
             }
                 
-            else if NSUserDefaults.standardUserDefaults().stringForKey("pbx")  == "1"{
-                self.type="x"
+            else if NSUserDefaults.standardUserDefaults().stringForKey(MCUBEX)  == "1"{
+                self.type=X
                 self.CurrentTitle="MCubeX"
             }
                 
-            else if NSUserDefaults.standardUserDefaults().stringForKey("lead") == "1" {
-                self.type="lead"
-                self.CurrentTitle="Lead"
+            else if NSUserDefaults.standardUserDefaults().stringForKey(LEAD) == "1" {
+                self.type=LEAD
+                self.CurrentTitle=LEAD.capitalizeIt()
             }
                 
-            else if NSUserDefaults.standardUserDefaults().stringForKey("mtracker") == "1" {
-                self.type="mtracker"
-                self.CurrentTitle="MTracker"
+            else if NSUserDefaults.standardUserDefaults().stringForKey(MTRACKER) == "1" {
+                self.type=MTRACKER
+                self.CurrentTitle=MTRACKER.capitalizeIt()
             }
             else{
-                self.type="followup"
-                self.CurrentTitle="Followup"
+                self.type=FOLLOWUP
+                self.CurrentTitle=FOLLOWUP.capitalizeIt()
             }
             
             

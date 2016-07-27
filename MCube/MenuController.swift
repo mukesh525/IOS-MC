@@ -32,10 +32,10 @@ class MenuController: UITableViewController {
         if(username != nil && useremail != nil ){
             
             
-            if let name = NSUserDefaults.standardUserDefaults().stringForKey("name") {
+            if let name = NSUserDefaults.standardUserDefaults().stringForKey(NAME) {
                 username.text="Hi \(name)"
             }
-            if let email = NSUserDefaults.standardUserDefaults().stringForKey("email") {
+            if let email = NSUserDefaults.standardUserDefaults().stringForKey(EMAIL) {
                 useremail.text=email
             }
             
@@ -55,31 +55,31 @@ class MenuController: UITableViewController {
             
             return 208
         case 1:
-            if let track = NSUserDefaults.standardUserDefaults().stringForKey("track") {
+            if let track = NSUserDefaults.standardUserDefaults().stringForKey(TRACK) {
                 if(track == "0"){height = 0;}
                 else{height = 40;}
             }
             return height
         case 2:
-            if let track = NSUserDefaults.standardUserDefaults().stringForKey("ivrs") {
+            if let track = NSUserDefaults.standardUserDefaults().stringForKey(IVRS) {
                 if(track == "0"){height = 0;}
                 else{height = 40;}
             }
             return height
         case 3:
-            if let track = NSUserDefaults.standardUserDefaults().stringForKey("pbx") {
+            if let track = NSUserDefaults.standardUserDefaults().stringForKey(MCUBEX) {
                 if(track == "0"){height = 0;}
                 else{height = 40;}
             }
             return height
         case 4:
-            if let track = NSUserDefaults.standardUserDefaults().stringForKey("lead") {
+            if let track = NSUserDefaults.standardUserDefaults().stringForKey(LEAD) {
                 if(track == "0"){height = 0;}
                 else{height = 40;}
             }
             return height
         case 5:
-            if let track = NSUserDefaults.standardUserDefaults().stringForKey("mtracker") {
+            if let track = NSUserDefaults.standardUserDefaults().stringForKey(MTRACKER) {
                 if(track == "0"){height = 0;}
                 else{height = 40;}
             }
@@ -101,21 +101,21 @@ class MenuController: UITableViewController {
     func setsection() ->Int{
         var select:Int=1
         
-        if  NSUserDefaults.standardUserDefaults().stringForKey("track") == "1" {
+        if  NSUserDefaults.standardUserDefaults().stringForKey(TRACK) == "1" {
             select = 1;
         }
-        else if  NSUserDefaults.standardUserDefaults().stringForKey("ivrs") == "1" {
+        else if  NSUserDefaults.standardUserDefaults().stringForKey(IVRS) == "1" {
             select = 2;           }
             
-        else if  NSUserDefaults.standardUserDefaults().stringForKey("pbx") == "1" {
+        else if  NSUserDefaults.standardUserDefaults().stringForKey(MCUBEX) == "1" {
             select = 3;
         }
             
-        else if NSUserDefaults.standardUserDefaults().stringForKey("lead") == "1" {
+        else if NSUserDefaults.standardUserDefaults().stringForKey(LEAD) == "1" {
             select = 4;
         }
             
-        else if  NSUserDefaults.standardUserDefaults().stringForKey("mtracker") == "1" {
+        else if  NSUserDefaults.standardUserDefaults().stringForKey(MTRACKER) == "1" {
             select = 5;
         }
         else{
@@ -128,11 +128,11 @@ class MenuController: UITableViewController {
     
     
   override func viewWillAppear(animated: Bool) {
-        if NSUserDefaults.standardUserDefaults().objectForKey("launch") != nil{
+        if NSUserDefaults.standardUserDefaults().objectForKey(LAUNCH) != nil{
             //  print("Loaded First")
             let myPath = NSIndexPath(forRow: self.setsection(), inSection: 0)
             self.mytableview.selectRowAtIndexPath(myPath, animated: false, scrollPosition: UITableViewScrollPosition.None)
-            NSUserDefaults.standardUserDefaults().removeObjectForKey("launch")
+            NSUserDefaults.standardUserDefaults().removeObjectForKey(LAUNCH)
             NSUserDefaults.standardUserDefaults().synchronize()
         }
     }
@@ -152,56 +152,56 @@ class MenuController: UITableViewController {
         }
         else{
             
-            let followupController = nav.topViewController as! FollowUpViewController
+            let followupController = nav.topViewController as! ReportViewController
             var path = NSIndexPath(forRow: 0 , inSection: 0)
             
-            if(segue.identifier == "followup"){
-                followupController.type = "followup"
-                followupController.CurrentTitle="Follow Up"
+            if(segue.identifier == FOLLOWUP){
+                followupController.type = FOLLOWUP
+                followupController.CurrentTitle=FOLLOWUP.capitalizeIt()
                 followupController.offset=0
                 path = NSIndexPath(forRow: 6 , inSection: 0)
                 
             }
-            else if(segue.identifier == "track"){
-                followupController.type = "track"
-                followupController.CurrentTitle="Track"
+            else if(segue.identifier == TRACK){
+                followupController.type = TRACK
+                followupController.CurrentTitle=TRACK.capitalizeIt()
                 followupController.offset=0
                 path = NSIndexPath(forRow: 1 , inSection: 0)
                 
                 
             }
-            else if(segue.identifier == "lead"){
-                followupController.type = "lead"
-                followupController.CurrentTitle="Lead"
+            else if(segue.identifier == LEAD){
+                followupController.type = LEAD
+                followupController.CurrentTitle=LEAD.capitalizeIt()
                 followupController.offset=0
                 path = NSIndexPath(forRow: 4 , inSection: 0)
                 
             }
-            else if(segue.identifier == "x"){
-                followupController.type = "x"
+            else if(segue.identifier == X){
+                followupController.type = X
                 followupController.CurrentTitle="MCubeX"
                 followupController.offset=0
                 path = NSIndexPath(forRow: 3 , inSection: 0)
                 
                 
             }
-            else if(segue.identifier == "ivrs"){
-                followupController.type = "ivrs"
-                followupController.CurrentTitle="IVRS"
+            else if(segue.identifier == IVRS){
+                followupController.type = IVRS
+                followupController.CurrentTitle=IVRS.capitalizeIt()
                 followupController.offset=0
                 path = NSIndexPath(forRow: 2 , inSection: 0)
                 
                 
             }
-            else if(segue.identifier == "mtracker"){
-                followupController.type = "mtracker"
-                followupController.CurrentTitle="Mtracker"
+            else if(segue.identifier == MTRACKER){
+                followupController.type = MTRACKER
+                followupController.CurrentTitle=MTRACKER.capitalizeIt()
                 followupController.offset=0
                 path = NSIndexPath(forRow: 5 , inSection: 0)
                 
                 
             }
-            else if(segue.identifier == "logout"){
+            else if(segue.identifier == LOGOUT){
                 followupController.isLogout = true;
                 
             }

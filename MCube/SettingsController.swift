@@ -25,19 +25,19 @@ class SettingsController: UIViewController {
         }
         
         
-        if let name = NSUserDefaults.standardUserDefaults().stringForKey("name") {
+        if let name = NSUserDefaults.standardUserDefaults().stringForKey(NAME) {
             EmpName.text="\(name)"
         }
-        if let email = NSUserDefaults.standardUserDefaults().stringForKey("email") {
+        if let email = NSUserDefaults.standardUserDefaults().stringForKey(EMAIL) {
             EmpEmail.text="\(email)"
         }
-        if let contact = NSUserDefaults.standardUserDefaults().stringForKey("empContact") {
+        if let contact = NSUserDefaults.standardUserDefaults().stringForKey(EMP_CONTACT) {
             EmpNumber.text="\(contact)"
         }
-        if let businessname = NSUserDefaults.standardUserDefaults().stringForKey("businessName") {
+        if let businessname = NSUserDefaults.standardUserDefaults().stringForKey(BUSINESS_NAME) {
             BusinessName.text="\(businessname)"
         }
-        if let limit = NSUserDefaults.standardUserDefaults().stringForKey("limit") {
+        if let limit = NSUserDefaults.standardUserDefaults().stringForKey(LIMIT) {
             LimitText.text="\(limit)"
         }
         
@@ -60,7 +60,7 @@ class SettingsController: UIViewController {
     @IBAction func SaveClick(sender: AnyObject) {
         if((LimitText.text?.isEmpty) != nil && NSString(string: LimitText.text!).length > 0 && NSString(string: LimitText.text!).length < 4){
             self.navigationController?.view.makeToast("Saved Sucessfully", duration: 2.0, position: .Bottom, title: nil, image: nil, style: nil, completion: nil)
-            NSUserDefaults.standardUserDefaults().setObject(LimitText.text, forKey: "limit")
+            NSUserDefaults.standardUserDefaults().setObject(LimitText.text, forKey: LIMIT)
             NSUserDefaults.standardUserDefaults().synchronize()
         }
             
@@ -86,7 +86,7 @@ class SettingsController: UIViewController {
             "Do you want to logout?", preferredStyle: .Alert)
         let okAction = UIAlertAction(title: "Logout", style: UIAlertActionStyle.Default) {
             UIAlertAction in
-            NSUserDefaults.standardUserDefaults().removeObjectForKey("authkey")
+            NSUserDefaults.standardUserDefaults().removeObjectForKey(AUTHKEY)
             NSUserDefaults.standardUserDefaults().synchronize()
             self.performSegueWithIdentifier("GoLogin", sender: self)
             

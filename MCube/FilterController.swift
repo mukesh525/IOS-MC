@@ -4,7 +4,7 @@ import UIKit
     func filterSelected(position: Int)
 }
 
-class menuViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class FilterController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     var SeletedFilter: Int=0;
     weak var delegate: FilterSelectedDelegate?
     var currentPopover:UIPopoverController!
@@ -44,6 +44,7 @@ class menuViewController: UIViewController, UITableViewDelegate, UITableViewData
         // let isMutableArray = self.FilterOptions[indexPath.row] is OptionsData
         //print("Results and \(isMutableArray)")
         cell.textLabel!.text = option.value
+        cell.textLabel!.font = cell.textLabel!.font.fontWithSize(15)
         
         return cell
     }
