@@ -25,62 +25,19 @@ class ReportViewController: UITableViewController,UIPopoverPresentationControlle
     var CurrentTitle:String=TRACK.capitalizeIt()
     var isLogout:Bool=false;
     var CurrentData:Data!
-    private var showingActivity = false
+    var showingActivity = false
     var CurrentPlaying:Int?
     var refreshControll = UIRefreshControl()
     var sidebarMenuOpen:Bool?
+    
+    
     @IBAction func LogoutTap(sender: UIBarButtonItem) {
         LogoutAlert()
     }
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setsection()
-        if let savedlimit = NSUserDefaults.standardUserDefaults().stringForKey(LIMIT) {
-            self.limit = Int(savedlimit)!;
-        }else {self.limit=10}
-        if(isLogout){
-            isLogout=false;
-            LogoutAlert()
-        }
-        NSUserDefaults.standardUserDefaults().removeObjectForKey(SELECT)
-        NSUserDefaults.standardUserDefaults().synchronize()
-        self.navigationItem.title = CurrentTitle;
-        tableView.allowsSelection = true;
-        mytableview.backgroundView = UIImageView(image: UIImage(named: "background_port.jpg"))
-        if NSUserDefaults.standardUserDefaults().stringForKey(AUTHKEY) != nil {
-            result=ModelManager.getInstance().getData(type)
-            options=ModelManager.getInstance().getMenuData(type)
-            if(result.count>0 && options.count>0){
-                self.playButtons=[UIButton]()
-                tableView.reloadData()
-            }
-            else if(!self.isDownloading){
-              
-                let param=Params(Limit: self.limit,gid:self.gid,offset:self.offset,type:self.type,isfilter:false,isMore: false,isSync:false,filterpos: self.SeletedFilterpos)
-                self.isDownloading=true;
-                self.showActivityIndicator()
-                Report(param: param, delegate: self).LoadData();
-            }
-            
-        }
-        
-        self.refreshControll.attributedTitle = NSAttributedString(string: "Pull to refresh")
-        self.refreshControll.addTarget(self, action: #selector(ReportViewController.refresh(_:)), forControlEvents: UIControlEvents.ValueChanged)
-        self.mytableview?.addSubview(refreshControll)
-        if revealViewController() != nil {
-            menubutton.target = revealViewController()
-            menubutton.action = #selector(SWRevealViewController.revealToggle(_:))
-            revealViewController().rightViewRevealWidth = 150
-            view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
-            
-        }
-        self.revealViewController().delegate = self
-        if self.refreshControll.refreshing{
-            self.refreshControll.endRefreshing()
-        }
-        
-       
+       self.initializeViews()
     }
     
     
@@ -128,7 +85,7 @@ class ReportViewController: UITableViewController,UIPopoverPresentationControlle
         }else{
             self.showActivityIndicator()
         }
-        print("Request failed with error: \(error)")
+        //print("Request failed with error: \(error)")
         if (error.code == -1009) {
             self.showAlert("No Internet Conncetion")
         }
@@ -138,21 +95,7 @@ class ReportViewController: UITableViewController,UIPopoverPresentationControlle
     }
     
 
-   func refresh(sender:AnyObject) {
-        // Code to refresh table view
-        
-        if(!self.isDownloading){
-            let param=Params(Limit: self.limit,gid:self.gid,offset:self.offset,type:self.type,isfilter:false,isMore: false,isSync:false,filterpos: self.SeletedFilterpos)
-            self.isDownloading=true;
-            Report(param: param, delegate: self).LoadData();
-
-        }
-        else{
-            if self.refreshControll.refreshing{
-                self.refreshControll.endRefreshing()
-            }
-        }
-    }
+ 
     
     override func viewWillAppear(animated: Bool) {
        self.playButtons=[UIButton]()
@@ -165,7 +108,6 @@ class ReportViewController: UITableViewController,UIPopoverPresentationControlle
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // Return the number of rows in the section.
         if result.count == 0{
             let emptyLabel = UILabel(frame: CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height))
             emptyLabel.text = "No Data Pull Down To Refresh"
@@ -256,7 +198,7 @@ class ReportViewController: UITableViewController,UIPopoverPresentationControlle
     
     func configurePlay(filename:String,playbutton:UIButton) {
         
-        let url = "http://mcube.vmctechnologies.com/sounds/\(filename)"
+        let url = "\(PLAY_URL)\(filename)"
         let link = NSURL(string: url)!
        for currentbutton in self.playButtons{
             if(currentbutton.tag == playbutton.tag ){
@@ -296,9 +238,7 @@ class ReportViewController: UITableViewController,UIPopoverPresentationControlle
     }
     
     func playerDidFinishPlaying(note: NSNotification) {
-        
         print("Playing Finished")
-        
         for button in self.playButtons{
             if(self.CurrentPlaying == button.tag)
             {
@@ -342,12 +282,7 @@ class ReportViewController: UITableViewController,UIPopoverPresentationControlle
     }
     
    
-    func showAlert(mesage :String){
-        let alertView = UIAlertController(title: TITLE, message: mesage, preferredStyle: .Alert)
-        alertView.addAction(UIAlertAction(title: "Ok", style: .Default, handler: nil))
-        presentViewController(alertView, animated: true, completion: nil)
-    }
-
+   
     
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -386,72 +321,8 @@ class ReportViewController: UITableViewController,UIPopoverPresentationControlle
         
     }
     
-    func filteralert (){
-        let option: OptionsData = self.options[SeletedFilterpos];
-        let alertController = UIAlertController(title: TITLE, message:
-            "No Records available for Group : \(option.value!)", preferredStyle: .Alert)
-        let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default) {
-            UIAlertAction in
-            self.SeletedFilterpos=0;
-            self.gid="0";
-            self.showActivityIndicator()
-            let param=Params(Limit: self.limit,gid:self.gid,offset:self.offset,type:self.type,isfilter:false,isMore: false,isSync:false,filterpos: self.SeletedFilterpos)
-            self.isDownloading=true;
-            Report(param: param, delegate: self).LoadData();
-
-        }
-        
-        alertController.addAction(okAction)
-        self.presentViewController(alertController, animated: true, completion: nil)
-        
-    }
-    func LogoutAlert (){
-        let alertController = UIAlertController(title: "Logout Alert", message:
-            "Do you want to logout?", preferredStyle: .Alert)
-        let okAction = UIAlertAction(title: LOGOUT.capitalizeIt(), style: UIAlertActionStyle.Default) {
-            UIAlertAction in
-            NSUserDefaults.standardUserDefaults().removeObjectForKey(AUTHKEY)
-            NSUserDefaults.standardUserDefaults().synchronize()
-            ModelManager.getInstance().deleteAllData();
-            self.performSegueWithIdentifier("GoLogin", sender: self)
-            
-        }
-        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default) {
-            UIAlertAction in
-            
-        }
-        alertController.addAction(cancelAction)
-        alertController.addAction(okAction)
-        self.presentViewController(alertController, animated: false, completion: nil)
-        
-    }
-    func NoDataAlert (){
-        let alertController = UIAlertController(title: TITLE, message:
-            "No records available", preferredStyle: .Alert)
-        let okAction = UIAlertAction(title: "Retry", style: UIAlertActionStyle.Default) {
-            UIAlertAction in
-            let param=Params(Limit: self.limit,gid:self.gid,offset:self.offset,type:self.type,isfilter:false,isMore: false,isSync:false,filterpos: self.SeletedFilterpos)
-            self.isDownloading=true;
-            Report(param: param, delegate: self).LoadData();
-
-        }
-        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default) {
-            UIAlertAction in
-            if self.showingActivity {
-                self.navigationController?.view.hideToastActivity()
-                self.showingActivity = !self.showingActivity
-            }
-            if self.refreshControll.refreshing{
-                self.refreshControll.endRefreshing()
-            }
-
-        }
-        alertController.addAction(cancelAction)
-        alertController.addAction(okAction)
-        self.presentViewController(alertController, animated: false, completion: nil)
-        
-    }
-    func showActivityIndicator(){
+   
+       func showActivityIndicator(){
         if !self.showingActivity {
             self.navigationController?.view.makeToastActivity(.Center)
         } else {
@@ -492,45 +363,9 @@ class ReportViewController: UITableViewController,UIPopoverPresentationControlle
         }
     }
     
-    func setsection() {
-        
-        if NSUserDefaults.standardUserDefaults().objectForKey(LAUNCHVIEW) != nil{
-            NSUserDefaults.standardUserDefaults().removeObjectForKey(LAUNCHVIEW)
-            NSUserDefaults.standardUserDefaults().synchronize()
-            
-            if  NSUserDefaults.standardUserDefaults().stringForKey(TRACK) == "1" {
-                self.type=TRACK
-                self.CurrentTitle=TRACK.capitalizeIt()
-            }
-            else if NSUserDefaults.standardUserDefaults().stringForKey(IVRS)  == "1"{
-                self.type=IVRS
-                self.CurrentTitle=IVRS.capitalizeIt()
-            }
-                
-            else if NSUserDefaults.standardUserDefaults().stringForKey(MCUBEX)  == "1"{
-                self.type=X
-                self.CurrentTitle="MCubeX"
-            }
-                
-            else if NSUserDefaults.standardUserDefaults().stringForKey(LEAD) == "1" {
-                self.type=LEAD
-                self.CurrentTitle=LEAD.capitalizeIt()
-            }
-                
-            else if NSUserDefaults.standardUserDefaults().stringForKey(MTRACKER) == "1" {
-                self.type=MTRACKER
-                self.CurrentTitle=MTRACKER.capitalizeIt()
-            }
-            else{
-                self.type=FOLLOWUP
-                self.CurrentTitle=FOLLOWUP.capitalizeIt()
-            }
-            
-            
-            
-        }
-        
-    }
+    
+    
+   
     
     
     var time: NSDate?
