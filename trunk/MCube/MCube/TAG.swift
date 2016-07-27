@@ -88,7 +88,7 @@ let FOLLOWUP_FORM : String = "https://mcube.vmc.in//mobapp/followupFrm"
 let GETLIST : String = "https://mcube.vmc.in/mobapp/getList"
 let GET_DETAIL_URL : String = "https://mcube.vmc.in/mobapp/getDetail"
 let LOGIN_URL : String = "https://mcube.vmc.in/mobapp/checkAuth"
-
+let PLAY_URL : String = "http://mcube.vmctechnologies.com/sounds/"
 
 
 

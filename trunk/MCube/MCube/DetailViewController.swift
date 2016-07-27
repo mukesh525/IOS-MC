@@ -16,7 +16,7 @@ class DetailViewController: UIViewController,UITableViewDataSource,UIPopoverPres
     var optionsList = Array<OptionsData>();
     var OptionStringList=[String]()
     var currentData:Data!
-    private var showingActivity = false
+    var showingActivity = false
     var authkey:String?
     var type:String?
     var ContactNo :String?
@@ -27,40 +27,23 @@ class DetailViewController: UIViewController,UITableViewDataSource,UIPopoverPres
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if let authkey = NSUserDefaults.standardUserDefaults().stringForKey(AUTHKEY) {
-            self.authkey=authkey;
-        }
-        mytableview.delegate = self
-        mytableview.dataSource = self
-        mytableview.allowsSelection=false
+        self.initializeViews();
         loadDetaildata();
-        self.refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
-        self.refreshControl.addTarget(self, action: #selector(DetailViewController.refresh(_:)), forControlEvents: UIControlEvents.ValueChanged)
-        self.mytableview?.addSubview(refreshControl)
-        if self.refreshControl.refreshing{
-            self.refreshControl.endRefreshing()
-        }
         
-        addLogOutButtonToNavigationBar("more");
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(DetailViewController.keyboardWillShow(_:)), name:UIKeyboardWillShowNotification, object: nil);
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(DetailViewController.keyboardWillHide(_:)), name:UIKeyboardWillHideNotification, object: nil);
     }
 
     deinit {
         NSNotificationCenter.defaultCenter().removeObserver(self);
     }
     
-    func keyboardWillShow(sender: NSNotification) {
-        self.view.frame.origin.y = -170
-    }
-    
-    func keyboardWillHide(sender: NSNotification) {
-        self.view.frame.origin.y = 0
-    }
-    
-     func refresh(sender:AnyObject) {
+    func refresh(sender:AnyObject) {
       loadDetaildata();
     }
+    
+    
+    
+    
+    
     func moreButtonClicked(sender:AnyObject) {
         let popoverContent = (self.storyboard?.instantiateViewControllerWithIdentifier("more"))! as UIViewController
         
@@ -98,7 +81,6 @@ class DetailViewController: UIViewController,UITableViewDataSource,UIPopoverPres
             tableView.separatorStyle = UITableViewCellSeparatorStyle.None
             return 0
         } else {
-            //tableView.backgroundView = UIImageView(image: UIImage(named: "background_port.jpg"))
             tableView.backgroundView=UIView()
             tableView.backgroundView?.backgroundColor = UIColor.clearColor()
             return DetailDataList.count
@@ -145,7 +127,7 @@ class DetailViewController: UIViewController,UITableViewDataSource,UIPopoverPres
             cell3.delegate=self
             cell3.textfiled.placeholder = detaildata.label!
             cell3.textfiled.delegate=self
-         //   cell3.onEditingBegin = {(selectedRow) -> Void in   }
+     
 
             return cell3
             
@@ -409,40 +391,6 @@ class DetailViewController: UIViewController,UITableViewDataSource,UIPopoverPres
     }
     
    
-    func showActivityIndicator(){
-        if !self.showingActivity {
-            self.navigationController?.view.makeToastActivity(.Center)
-        } else {
-            self.navigationController?.view.hideToastActivity()
-        }
-        
-        self.showingActivity = !self.showingActivity
-        
-    }
-    
-     func showAlert(mesage :String){
-        //dismissViewControllerAnimated(true, completion: nil)
-        let alertView = UIAlertController(title: TITLE, message: mesage, preferredStyle: .Alert)
-        alertView.addAction(UIAlertAction(title: "Ok", style: .Default, handler: nil))
-        presentViewController(alertView, animated: true, completion: nil)
-    }
-    
-
-    func addLogOutButtonToNavigationBar(triggerToMethodName: String)
-    {
-        let button: UIButton = UIButton()
-        button.setImage(UIImage(named: "more"), forState: .Normal)
-        button.frame = CGRectMake(20, 0, 30, 25)
-        button.contentEdgeInsets = UIEdgeInsets.init(top: 0, left: 10, bottom: 0, right: -10)
-        
-        button .addTarget(self, action:#selector(DetailViewController.moreButtonClicked(_:)), forControlEvents: UIControlEvents.TouchUpInside)
-        let rightItem:UIBarButtonItem = UIBarButtonItem()
-        rightItem.customView = button
-        self.navigationItem.rightBarButtonItem = rightItem
-    }
-    
-    
-    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == ADD_FOLLOWUP{
             let addfollowup = segue.destinationViewController as! AddFollowupController
