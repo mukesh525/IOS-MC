@@ -45,22 +45,62 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     
+//    func application(application: UIApplication, performFetchWithCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
+//        
+//        //let appDelegate  = UIApplication.sharedApplication().delegate as! AppDelegate
+//       // let viewController = appDelegate.window!.rootViewController as! UINavigationController
+//   
+//       if let nav = window?.rootViewController as? UINavigationController,
+//            viewControllers = nav.viewControllers as? [UITableViewController] {
+//            for viewController in viewControllers {
+//                if let fetchViewController = viewController as? ReportViewController {
+//                    fetchViewController.fetch {
+//                        fetchViewController.updateBackground()
+//                        completionHandler(.NewData)
+//                        print("background fetch done")
+//                        return
+//                    }
+//                }
+//                    completionHandler(.Failed)
+//            }
+//        }
+//    }
+    
+    
     func application(application: UIApplication, performFetchWithCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
+        print("Complete");
+        completionHandler(UIBackgroundFetchResult.NewData)
+        updateBackground();
         
-        //let appDelegate  = UIApplication.sharedApplication().delegate as! AppDelegate
-       // let viewController = appDelegate.window!.rootViewController as! UINavigationController
-   
-       if let nav = window?.rootViewController as? UINavigationController,
-            viewControllers = nav.viewControllers as? [UITableViewController] {
-            for viewController in viewControllers {
-                if let fetchViewController = viewController as? ReportViewController {
-                    fetchViewController.fetch {
-                        fetchViewController.updateBackground()
-                        completionHandler(.NewData)
+    }
+    
+    func updateBackground() {
+        
+        let queue = NSOperationQueue()
+        queue.maxConcurrentOperationCount = 2
+        let types = [TRACK,FOLLOWUP,IVRS,LEAD,X,MTRACKER]
+        for type in types {
+            let operation = NetworkOperation(type: type) { responseObject, error in
+                if responseObject == nil {
+                    print("failed: \(error)")
+                } else {
+                    let result:NSMutableArray=ParseJason().ParseReportJason(responseObject!);
+                    let menu:Array<OptionsData>=ParseJason().ParseMenu(responseObject!);
+                    let isUpdated = ModelManager.getInstance().insertData(type, isDelete: true, Datas: result, isMore: false)
+                    let isMenu = ModelManager.getInstance().insertMenu (type, Options: menu)
+                    if(isUpdated && isMenu){
+                        
+                        print("Background Result for type \(type) and \(ParseJason().ParseReportJason(responseObject!).count)")
                     }
+                    
+                    
                 }
             }
+            queue.addOperation(operation)
         }
+        
+
+    
     }
     
  
