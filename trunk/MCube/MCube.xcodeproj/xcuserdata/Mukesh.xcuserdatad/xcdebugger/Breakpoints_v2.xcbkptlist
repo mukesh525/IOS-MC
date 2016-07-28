@@ -291,27 +291,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MCube/LoginViewController.swift"
-            timestampString = "491293527.48021"
+            timestampString = "491393947.514419"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "219"
-            endingLineNumber = "219"
-            landmarkName = "validationSuccessful()"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "MCube/LoginViewController.swift"
-            timestampString = "491293527.48021"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "222"
-            endingLineNumber = "222"
+            startingLineNumber = "220"
+            endingLineNumber = "220"
             landmarkName = "validationSuccessful()"
             landmarkType = "5">
          </BreakpointContent>

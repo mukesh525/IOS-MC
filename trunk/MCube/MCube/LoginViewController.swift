@@ -212,11 +212,9 @@ class LoginViewController: UIViewController,ValidationDelegate ,UITextFieldDeleg
                         NSUserDefaults.standardUserDefaults().setObject(self.pbx, forKey: MCUBEX)
                         NSUserDefaults.standardUserDefaults().setObject(self.mtracker, forKey: MTRACKER)
                         
-                        
-                        
-                        
-                        
-                        // NSUserDefaults.standardUserDefaults().setInteger(1, forKey: "select")
+                        NSUserDefaults.standardUserDefaults().setInteger(0,forKey: LAUNCH)
+                        NSUserDefaults.standardUserDefaults().setInteger(0,forKey: LAUNCHVIEW)
+                       
                         NSUserDefaults.standardUserDefaults().synchronize()
                         if let myLoadedString = NSUserDefaults.standardUserDefaults().stringForKey(NAME) {
                             print(myLoadedString) // "Hello World"

@@ -37,34 +37,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
           Util.copyFile("mcubeios")
         
-        
+        let settings = UIUserNotificationSettings(forTypes: UIUserNotificationType.Alert, categories: nil)
+        UIApplication.sharedApplication().registerUserNotificationSettings(settings)
         UIApplication.sharedApplication().setMinimumBackgroundFetchInterval(UIApplicationBackgroundFetchIntervalMinimum)
-
-        
         return true
     }
 
-    
-//    func application(application: UIApplication, performFetchWithCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
-//        
-//        //let appDelegate  = UIApplication.sharedApplication().delegate as! AppDelegate
-//       // let viewController = appDelegate.window!.rootViewController as! UINavigationController
-//   
-//       if let nav = window?.rootViewController as? UINavigationController,
-//            viewControllers = nav.viewControllers as? [UITableViewController] {
-//            for viewController in viewControllers {
-//                if let fetchViewController = viewController as? ReportViewController {
-//                    fetchViewController.fetch {
-//                        fetchViewController.updateBackground()
-//                        completionHandler(.NewData)
-//                        print("background fetch done")
-//                        return
-//                    }
-//                }
-//                    completionHandler(.Failed)
-//            }
-//        }
-//    }
     
     
     func application(application: UIApplication, performFetchWithCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
@@ -99,6 +77,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             queue.addOperation(operation)
         }
         
+        let localNotification:UILocalNotification = UILocalNotification()
+        localNotification.alertAction = "Testing notifications on iOS9"
+        localNotification.alertBody = "Fetch Completed"
+        localNotification.fireDate = NSDate(timeIntervalSinceNow: 1)
+        UIApplication.sharedApplication().scheduleLocalNotification(localNotification)
 
     
     }

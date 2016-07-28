@@ -17,6 +17,7 @@ class AddFollowupController: UIViewController,CustomCellDelegate,UITextFieldDele
     var DetailDataList = [DetailData]()
     var ContactNo :String?
     var EmailId :String?
+    var type :String?
     @IBOutlet weak var mytableView: UITableView!
     private var showingActivity = false
     var refreshControl = UIRefreshControl()
@@ -30,22 +31,21 @@ class AddFollowupController: UIViewController,CustomCellDelegate,UITextFieldDele
         }
         
         loadDetaildata();
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(DetailViewController.keyboardWillShow(_:)), name:UIKeyboardWillShowNotification, object: nil);
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(DetailViewController.keyboardWillHide(_:)), name:UIKeyboardWillHideNotification, object: nil);
     }
     
     deinit {
         NSNotificationCenter.defaultCenter().removeObserver(self);
     }
     
-    func keyboardWillShow(sender: NSNotification) {
-        self.view.frame.origin.y = -170
+
+
+    override func viewWillDisappear(animated: Bool) {
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillHideNotification, object: nil)
     }
-    
-    func keyboardWillHide(sender: NSNotification) {
-        self.view.frame.origin.y = 0
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        self.view.endEditing(true)
     }
-    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -54,7 +54,7 @@ class AddFollowupController: UIViewController,CustomCellDelegate,UITextFieldDele
     
     @IBAction func SubmitClick(sender: UIButton) {
         
-        
+        self.UpdateRecords();
         
     }
     
@@ -356,6 +356,52 @@ class AddFollowupController: UIViewController,CustomCellDelegate,UITextFieldDele
         detaildata.value=cell.textfiled.text!
         print("index \(indexPath.row)  value  \(cell.textfiled.text!)")
     }
+    
+    func UpdateRecords() {
+        var code:String?
+        var msg:String?
+        self.showActivityIndicator()
+       Alamofire.request(.POST, POST_DETAIL,
+            parameters: self.DetailDataList.getParams(self.currentData,type:self.type!,postFollowup: true)).validate().responseJSON
+            {response in switch response.result {
+                
+            case .Success(let JSON):
+                print("Success with JSON: \(JSON)")
+                let response = JSON as! NSDictionary
+                if((response.objectForKey(CODE)) != nil){
+                    code=response.objectForKey(CODE) as? String
+                    
+                }
+                if((response.objectForKey(MESSAGE)) != nil){
+                    msg=response.objectForKey(MESSAGE) as? String
+                    
+                }
+                
+                self.showActivityIndicator()
+                if(code == "202" && msg != nil){
+                    self.showAlert("Records Updated Successfully")
+                }else{
+                    self.showAlert("Something went wrong try again")
+                }
+            case .Failure(let error):
+                print("Request failed with error: \(error)")
+                self.showActivityIndicator()
+                if (error.code == -1009) {
+                    self.showAlert("No Internet Conncetion")
+                }
+                }
+        }
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     

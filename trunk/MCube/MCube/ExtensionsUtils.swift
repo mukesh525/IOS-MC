@@ -61,17 +61,6 @@ extension DetailViewController {
         presentViewController(alertView, animated: true, completion: nil)
     }
     
-   
-    
-    func keyboardWillShow(sender: NSNotification) {
-        self.view.frame.origin.y = -170
-    }
-    
-    func keyboardWillHide(sender: NSNotification) {
-        self.view.frame.origin.y = 0
-    }
-    
-    
     func moreButtonClicked(sender:AnyObject) {
         let popoverContent = (self.storyboard?.instantiateViewControllerWithIdentifier("more"))! as UIViewController
         
@@ -107,8 +96,7 @@ extension DetailViewController {
             self.refreshControl.endRefreshing()
         }
         addLogOutButtonToNavigationBar("more");
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(DetailViewController.keyboardWillShow(_:)), name:UIKeyboardWillShowNotification, object: nil);
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(DetailViewController.keyboardWillHide(_:)), name:UIKeyboardWillHideNotification, object: nil);
+
    }
 
 }
@@ -305,13 +293,26 @@ extension ReportViewController{
 
 extension _ArrayType where Generator.Element == DetailData {
 
-    func getParams(currentData:Data,type:String)->[String: AnyObject]?{
+    func getParams(currentData:Data,type:String,postFollowup:Bool)->[String: AnyObject]?{
         let authkey = NSUserDefaults.standardUserDefaults().stringForKey(AUTHKEY)
         var parameters: [String: AnyObject]? = [:]
         print(self.count)
-        parameters![AUTHKEY]=authkey
-        parameters![TYPE]=type
+        parameters![AUTHKEY]=authkey!
+         print("\(AUTHKEY) :\(authkey!) ")
         parameters![GROUP_NAME]=(currentData.groupName != nil ? currentData.groupName : currentData.empName)!
+        var gname=(currentData.groupName != nil ? currentData.groupName : currentData.empName)!
+         print("\(GROUP_NAME) :\(gname) ")
+        if(postFollowup){
+            parameters![CALLID]=currentData.callId!
+            print("\(CALLID) :\(currentData.callId!) ")
+            parameters![FTYPE]="calltrack"
+            print("\(FTYPE) :calltrack ")
+            parameters![TYPE]=FOLLOWUP
+            print("\(TYPE) :\(FOLLOWUP) ")
+        }else{
+            parameters![TYPE]=type
+            print("\(TYPE) :\(type) ")
+        }
         
         for curentValue in  self{
             

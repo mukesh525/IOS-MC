@@ -335,6 +335,38 @@
             endingLineNumber = "12"
             landmarkName = "DetailViewController"
             landmarkType = "3">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MCube.DetailViewController.init (nibName : Swift.Optional&lt;Swift.String&gt;, bundle : Swift.Optional&lt;__ObjC.NSBundle&gt;) -&gt; MCube.DetailViewController"
+                  moduleName = "MCube"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mukesh/Documents/IOS-MCube/MCube/DetailViewController.swift"
+                  timestampString = "491402354.940386"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "14"
+                  endingLineNumber = "14"
+                  offsetFromSymbolStart = "70">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MCube.DetailViewController.init (coder : __ObjC.NSCoder) -&gt; Swift.Optional&lt;MCube.DetailViewController&gt;"
+                  moduleName = "MCube"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mukesh/Documents/IOS-MCube/MCube/DetailViewController.swift"
+                  timestampString = "491402354.940591"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "14"
+                  endingLineNumber = "14"
+                  offsetFromSymbolStart = "31">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2052,7 +2084,7 @@
                   moduleName = "MCube"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/mukesh/Documents/IOS-MCube/MCube/NetworkOperation.swift"
-                  timestampString = "491384623.902421"
+                  timestampString = "491402354.97801"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "0"
@@ -2067,7 +2099,7 @@
                   moduleName = "MCube"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/mukesh/Documents/IOS-MCube/MCube/NetworkOperation.swift"
-                  timestampString = "491384623.902642"
+                  timestampString = "491402354.978153"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "0"
@@ -2082,7 +2114,7 @@
                   moduleName = "MCube"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/mukesh/Documents/IOS-MCube/MCube/NetworkOperation.swift"
-                  timestampString = "491384623.902861"
+                  timestampString = "491402354.978284"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "11"
@@ -2147,7 +2179,7 @@
                   moduleName = "MCube"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/mukesh/Documents/IOS-MCube/MCube/Report.swift"
-                  timestampString = "491384623.905736"
+                  timestampString = "491402354.97958"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "44"
@@ -2162,7 +2194,7 @@
                   moduleName = "MCube"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/mukesh/Documents/IOS-MCube/MCube/Report.swift"
-                  timestampString = "491384623.905897"
+                  timestampString = "491402354.979719"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "44"
@@ -2191,16 +2223,32 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "MCube/ReportViewController.swift"
-            timestampString = "491386331.762798"
+            filePath = "MCube/ExtensionsUtils.swift"
+            timestampString = "491402206.368117"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "388"
-            endingLineNumber = "388"
-            landmarkName = "updateBackground()"
+            startingLineNumber = "349"
+            endingLineNumber = "349"
+            landmarkName = "getParams(_:type:postFollowup:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MCube/ExtensionsUtils.swift"
+            timestampString = "491402206.368117"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "300"
+            endingLineNumber = "300"
+            landmarkName = "getParams(_:type:postFollowup:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

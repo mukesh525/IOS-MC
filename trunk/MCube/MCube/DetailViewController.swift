@@ -241,7 +241,7 @@ class DetailViewController: UIViewController,UITableViewDataSource,UIPopoverPres
         var msg:String?
         self.showActivityIndicator()
         Alamofire.request(.POST, POST_DETAIL,
-            parameters: self.DetailDataList.getParams(self.currentData,type:self.type!)).validate().responseJSON
+            parameters: self.DetailDataList.getParams(self.currentData,type:self.type!,postFollowup: false)).validate().responseJSON
             {response in switch response.result {
                 
             case .Success(let JSON):
@@ -278,6 +278,7 @@ class DetailViewController: UIViewController,UITableViewDataSource,UIPopoverPres
             let addfollowup = segue.destinationViewController as! AddFollowupController
             addfollowup.currentData=self.currentData;
             addfollowup.authkey=self.authkey;
+            addfollowup.type=self.type;
            
             
         }

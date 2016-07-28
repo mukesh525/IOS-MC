@@ -44,6 +44,7 @@ let EMP_CONTACT : String = "empContact"
 
 
 let TYPE : String = "type"
+let FTYPE : String = "ftype"
 let GROUP_NAME : String = "groupname"
 let CHECKBOX : String = "checkbox"
 let DROPDOWN : String = "dropdown"

@@ -3,12 +3,14 @@ PODS:
   - BEMCheckBox (1.2.1)
   - SwiftValidator (3.0.1)
   - Toast-Swift (1.3.0)
+  - TPKeyboardAvoiding (1.3)
 
 DEPENDENCIES:
   - Alamofire (~> 3.4)
   - BEMCheckBox
   - SwiftValidator (from `https://github.com/jpotts18/SwiftValidator.git`, tag `4.0.0`)
   - Toast-Swift (~> 1.3.0)
+  - TPKeyboardAvoiding
 
 EXTERNAL SOURCES:
   SwiftValidator:
@@ -25,7 +27,8 @@ SPEC CHECKSUMS:
   BEMCheckBox: 264b8b72aa92adbfefa265cc58a0cdb86b207b9f
   SwiftValidator: 461a2c00173f001287a8fa1f12704b87ec8a6bc4
   Toast-Swift: 25c3d98db42dc70d9a77b5006ee000e0becb458e
+  TPKeyboardAvoiding: a5138f318c06fb3e151f886e18ce4a72695d9cbe
 
-PODFILE CHECKSUM: 4c5496d9135d1b3ab2fb4e84789ca38e55667714
+PODFILE CHECKSUM: c764f93b968b06b13f056b0fadc228f7e0e5a51e
 
 COCOAPODS: 1.0.1
