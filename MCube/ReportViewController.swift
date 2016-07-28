@@ -370,11 +370,8 @@ class ReportViewController: UITableViewController,UIPopoverPresentationControlle
    
     
     
-    var time: NSDate?
-    
     func fetch(completion: () -> Void) {
-        time = NSDate()
-       // self.LoadData(false);
+      
         completion()
     }
     
