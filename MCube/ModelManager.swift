@@ -40,8 +40,8 @@ class ModelManager: NSObject {
     
     
     
-    func insertData(tablename:String,isDelete:Bool,Datas:NSMutableArray,isMore:Bool) -> Bool
-     {   createTable(tablename)
+    func insertData(tablename:String,isDelete:Bool,Datas:NSMutableArray,isMore:Bool) -> Bool {
+        createTable(tablename)
         if(isDelete){
         deleteData(tablename,isMore: isMore)
         }
@@ -54,7 +54,7 @@ class ModelManager: NSObject {
             
         }
         
-        if(!isInserted){
+        if(!isInserted && Datas.count > 0){
             NSLog("Error %d: %@",sharedInstance.database!.lastErrorCode(), sharedInstance.database!.lastErrorMessage())
         }
     

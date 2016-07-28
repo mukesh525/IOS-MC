@@ -19,12 +19,16 @@
 		8B326D661D39023A00022B33 /* DetailData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B326D651D39023A00022B33 /* DetailData.swift */; };
 		8B471D2A1D40B05F008BD625 /* MoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B471D291D40B05F008BD625 /* MoreViewController.swift */; };
 		8B5910871D4876320045D6D2 /* TAG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5910861D4876320045D6D2 /* TAG.swift */; };
+		8B5910891D48BC0E0045D6D2 /* DetailDataTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5910881D48BC0E0045D6D2 /* DetailDataTask.swift */; };
 		8B59B2251D45E25700AE9269 /* ExtensionsUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B59B2241D45E25700AE9269 /* ExtensionsUtils.swift */; };
 		8B64868A1D3E019D0071C76D /* mcubeios.db in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8B6486891D3E018A0071C76D /* mcubeios.db */; };
 		8B6584BB1D4203DD007D2C2D /* AddFollowupController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6584BA1D4203DD007D2C2D /* AddFollowupController.swift */; };
 		8B68B06B1D474CAB00250691 /* Report.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B68B06A1D474CAB00250691 /* Report.swift */; };
 		8B68B06D1D4760A100250691 /* Params.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B68B06C1D4760A100250691 /* Params.swift */; };
 		8B68B0711D4797D900250691 /* FilterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B68B0701D4797D900250691 /* FilterController.swift */; };
+		8B71F4891D49D68500761CD6 /* NetworkOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B71F4881D49D68500761CD6 /* NetworkOperation.swift */; };
+		8B71F48B1D49D78500761CD6 /* ConcurrentOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B71F48A1D49D78500761CD6 /* ConcurrentOperation.swift */; };
+		8B71F48E1D49D94100761CD6 /* ParseJason.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B71F48D1D49D94100761CD6 /* ParseJason.swift */; };
 		8B804BA41D44A53E00D95629 /* CustomeCell5.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B804BA31D44A53E00D95629 /* CustomeCell5.swift */; };
 		8B8DB3641D36165A008A5EA6 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B8DB3631D361659008A5EA6 /* AVFoundation.framework */; };
 		8BAD4E411D27682200A64393 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BAD4E401D27682200A64393 /* SWRevealViewController.m */; };
@@ -95,12 +99,16 @@
 		8B326D651D39023A00022B33 /* DetailData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailData.swift; sourceTree = "<group>"; };
 		8B471D291D40B05F008BD625 /* MoreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreViewController.swift; sourceTree = "<group>"; };
 		8B5910861D4876320045D6D2 /* TAG.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TAG.swift; sourceTree = "<group>"; };
+		8B5910881D48BC0E0045D6D2 /* DetailDataTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailDataTask.swift; sourceTree = "<group>"; };
 		8B59B2241D45E25700AE9269 /* ExtensionsUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionsUtils.swift; sourceTree = "<group>"; };
 		8B6486891D3E018A0071C76D /* mcubeios.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = mcubeios.db; sourceTree = "<group>"; };
 		8B6584BA1D4203DD007D2C2D /* AddFollowupController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddFollowupController.swift; sourceTree = "<group>"; };
 		8B68B06A1D474CAB00250691 /* Report.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Report.swift; sourceTree = "<group>"; };
 		8B68B06C1D4760A100250691 /* Params.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Params.swift; sourceTree = "<group>"; };
 		8B68B0701D4797D900250691 /* FilterController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterController.swift; sourceTree = "<group>"; };
+		8B71F4881D49D68500761CD6 /* NetworkOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkOperation.swift; sourceTree = "<group>"; };
+		8B71F48A1D49D78500761CD6 /* ConcurrentOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConcurrentOperation.swift; sourceTree = "<group>"; };
+		8B71F48D1D49D94100761CD6 /* ParseJason.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseJason.swift; sourceTree = "<group>"; };
 		8B804BA31D44A53E00D95629 /* CustomeCell5.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomeCell5.swift; sourceTree = "<group>"; };
 		8B8DB3631D361659008A5EA6 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		8BAD4E401D27682200A64393 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
@@ -203,6 +211,10 @@
 			isa = PBXGroup;
 			children = (
 				8B68B06A1D474CAB00250691 /* Report.swift */,
+				8B5910881D48BC0E0045D6D2 /* DetailDataTask.swift */,
+				8B71F4881D49D68500761CD6 /* NetworkOperation.swift */,
+				8B71F48A1D49D78500761CD6 /* ConcurrentOperation.swift */,
+				8B71F48D1D49D94100761CD6 /* ParseJason.swift */,
 			);
 			name = DownloadTask;
 			sourceTree = "<group>";
@@ -591,6 +603,7 @@
 				8B5910871D4876320045D6D2 /* TAG.swift in Sources */,
 				F4702A181A7F351C00E30A3C /* MenuController.swift in Sources */,
 				8B68B06B1D474CAB00250691 /* Report.swift in Sources */,
+				8B71F48B1D49D78500761CD6 /* ConcurrentOperation.swift in Sources */,
 				8B804BA41D44A53E00D95629 /* CustomeCell5.swift in Sources */,
 				8BD246D61D3CED2500480CFB /* StudentInfo.swift in Sources */,
 				F47029F61A7F27DB00E30A3C /* AppDelegate.swift in Sources */,
@@ -600,8 +613,10 @@
 				8BD246D51D3CED2500480CFB /* ModelManager.swift in Sources */,
 				8B68B06D1D4760A100250691 /* Params.swift in Sources */,
 				8BBFE0B91D28D99C00435723 /* ReportViewController.swift in Sources */,
+				8B5910891D48BC0E0045D6D2 /* DetailDataTask.swift in Sources */,
 				8B326D641D3900E700022B33 /* ChekboxCell.swift in Sources */,
 				8BBFE0BB1D28E25900435723 /* FollowupTableViewCell.swift in Sources */,
+				8B71F48E1D49D94100761CD6 /* ParseJason.swift in Sources */,
 				8BF82F401D37B99000E1BA8D /* SettingsController.swift in Sources */,
 				8B59B2251D45E25700AE9269 /* ExtensionsUtils.swift in Sources */,
 				8BD246E71D3CEFA700480CFB /* FMDatabase.m in Sources */,
@@ -613,6 +628,7 @@
 				8B1A6D0E1D2CD2C800A9AFFD /* OptionsData.swift in Sources */,
 				8B326D4B1D38D6F400022B33 /* DetailViewController.swift in Sources */,
 				8B471D2A1D40B05F008BD625 /* MoreViewController.swift in Sources */,
+				8B71F4891D49D68500761CD6 /* NetworkOperation.swift in Sources */,
 				8BD246D71D3CED2500480CFB /* Util.swift in Sources */,
 				8B68B0711D4797D900250691 /* FilterController.swift in Sources */,
 				8BD246E81D3CEFA700480CFB /* FMDatabaseAdditions.m in Sources */,

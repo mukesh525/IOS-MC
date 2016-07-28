@@ -25,8 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().tintColor = UIColor.whiteColor()
         UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
         
-        
-         let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
          if NSUserDefaults.standardUserDefaults().stringForKey(AUTHKEY) != nil {
            let vc = storyboard.instantiateViewControllerWithIdentifier("Home") as!SWRevealViewController
            self.window!.rootViewController = vc;
@@ -56,7 +55,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             for viewController in viewControllers {
                 if let fetchViewController = viewController as? ReportViewController {
                     fetchViewController.fetch {
-                        fetchViewController.updateUI()
+                        fetchViewController.updateBackground()
                         completionHandler(.NewData)
                     }
                 }
