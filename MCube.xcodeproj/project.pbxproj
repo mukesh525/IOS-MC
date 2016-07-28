@@ -29,6 +29,7 @@
 		8B71F4891D49D68500761CD6 /* NetworkOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B71F4881D49D68500761CD6 /* NetworkOperation.swift */; };
 		8B71F48B1D49D78500761CD6 /* ConcurrentOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B71F48A1D49D78500761CD6 /* ConcurrentOperation.swift */; };
 		8B71F48E1D49D94100761CD6 /* ParseJason.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B71F48D1D49D94100761CD6 /* ParseJason.swift */; };
+		8B71F4921D4A1D1700761CD6 /* TPKATableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B71F4911D4A1D1700761CD6 /* TPKATableViewController.m */; };
 		8B804BA41D44A53E00D95629 /* CustomeCell5.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B804BA31D44A53E00D95629 /* CustomeCell5.swift */; };
 		8B8DB3641D36165A008A5EA6 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B8DB3631D361659008A5EA6 /* AVFoundation.framework */; };
 		8BAD4E411D27682200A64393 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BAD4E401D27682200A64393 /* SWRevealViewController.m */; };
@@ -109,6 +110,8 @@
 		8B71F4881D49D68500761CD6 /* NetworkOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkOperation.swift; sourceTree = "<group>"; };
 		8B71F48A1D49D78500761CD6 /* ConcurrentOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConcurrentOperation.swift; sourceTree = "<group>"; };
 		8B71F48D1D49D94100761CD6 /* ParseJason.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseJason.swift; sourceTree = "<group>"; };
+		8B71F4901D4A1D1700761CD6 /* TPKATableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPKATableViewController.h; sourceTree = "<group>"; };
+		8B71F4911D4A1D1700761CD6 /* TPKATableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPKATableViewController.m; sourceTree = "<group>"; };
 		8B804BA31D44A53E00D95629 /* CustomeCell5.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomeCell5.swift; sourceTree = "<group>"; };
 		8B8DB3631D361659008A5EA6 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		8BAD4E401D27682200A64393 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
@@ -219,6 +222,15 @@
 			name = DownloadTask;
 			sourceTree = "<group>";
 		};
+		8B71F48F1D4A1C5A00761CD6 /* TPKeyboardAvoiding */ = {
+			isa = PBXGroup;
+			children = (
+				8B71F4901D4A1D1700761CD6 /* TPKATableViewController.h */,
+				8B71F4911D4A1D1700761CD6 /* TPKATableViewController.m */,
+			);
+			name = TPKeyboardAvoiding;
+			sourceTree = "<group>";
+		};
 		8B8DB3741D367231008A5EA6 /* Images */ = {
 			isa = PBXGroup;
 			children = (
@@ -257,6 +269,7 @@
 		8BAD4E491D276ACD00A64393 /* Libs */ = {
 			isa = PBXGroup;
 			children = (
+				8B71F48F1D4A1C5A00761CD6 /* TPKeyboardAvoiding */,
 				8BD246DF1D3CEF9100480CFB /* FMDB */,
 			);
 			name = Libs;
@@ -448,7 +461,7 @@
 								enabled = 1;
 							};
 							com.apple.Maps.iOS = {
-								enabled = 1;
+								enabled = 0;
 							};
 						};
 					};
@@ -626,6 +639,7 @@
 				8BB16D391D35078E0060B841 /* PushNoAnimationSegue.swift in Sources */,
 				8BB16D3B1D3510F80060B841 /* CheckBox.swift in Sources */,
 				8B1A6D0E1D2CD2C800A9AFFD /* OptionsData.swift in Sources */,
+				8B71F4921D4A1D1700761CD6 /* TPKATableViewController.m in Sources */,
 				8B326D4B1D38D6F400022B33 /* DetailViewController.swift in Sources */,
 				8B471D2A1D40B05F008BD625 /* MoreViewController.swift in Sources */,
 				8B71F4891D49D68500761CD6 /* NetworkOperation.swift in Sources */,
