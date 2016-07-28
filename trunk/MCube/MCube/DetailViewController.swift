@@ -9,7 +9,7 @@
 import UIKit
 import Alamofire
 
-class DetailViewController: UIViewController,UITableViewDataSource,UIPopoverPresentationControllerDelegate, UITableViewDelegate,CustomCellDelegate,UITextFieldDelegate {
+class DetailViewController: UIViewController,UITableViewDataSource,UIPopoverPresentationControllerDelegate, UITableViewDelegate,CustomCellDelegate,UITextFieldDelegate ,DetailDownload{
 
     @IBOutlet weak var addfollowup: UIButton!
     var DetailDataList = Array<DetailData>();
@@ -28,7 +28,12 @@ class DetailViewController: UIViewController,UITableViewDataSource,UIPopoverPres
     override func viewDidLoad() {
         super.viewDidLoad()
         self.initializeViews();
-        loadDetaildata();
+        
+        if !self.refreshControl.refreshing{
+            self.showActivityIndicator()
+        }
+        DetailDataTask(delegate: self).loadDetaildata(authkey!, type: self.type!, currentData:currentData);
+
         
     }
 
@@ -37,35 +42,42 @@ class DetailViewController: UIViewController,UITableViewDataSource,UIPopoverPres
     }
     
     func refresh(sender:AnyObject) {
-      loadDetaildata();
+      DetailDataTask(delegate: self).loadDetaildata(authkey!, type: self.type!, currentData:currentData);
     }
     
     
+    func OnError(error: NSError) {
+        print("Request failed with error: \(error)")
+        if (error.code == -1009) {
+           self.showAlert("No Internet Conncetion")
+        }
+        if self.refreshControl.refreshing{
+            self.refreshControl.endRefreshing()
+        }
+        else{
+            self.showActivityIndicator()
+        }
+    }
     
     
-    
-    func moreButtonClicked(sender:AnyObject) {
-        let popoverContent = (self.storyboard?.instantiateViewControllerWithIdentifier("more"))! as UIViewController
-        
-        popoverContent.modalPresentationStyle = .Popover
-        if let popover = popoverContent.popoverPresentationController {
-            
-            let viewForSource = sender as! UIView
-            popover.sourceView = viewForSource
-            popover.sourceRect = viewForSource.bounds
-            popoverContent.preferredContentSize = CGSizeMake(150,220)
-            popover.delegate = self
+    func OnFinishDownload(result: Array<DetailData>) {
+     
+        self.DetailDataList=result;
+        if self.refreshControl.refreshing{
+            self.refreshControl.endRefreshing()
+        }
+        else{
+            self.showActivityIndicator()
         }
         
-        self.presentViewController(popoverContent, animated: true, completion: nil)
+        self.mytableview.reloadData()
+        print(self.DetailDataList.count)
+        
+        
+        
     }
     
-    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
-        return .None
-    }
-    
-    
-    @IBAction func UpdateClick(sender: AnyObject) {
+     @IBAction func UpdateClick(sender: AnyObject) {
         
        self.UpdateRecords()
         
@@ -175,7 +187,6 @@ class DetailViewController: UIViewController,UITableViewDataSource,UIPopoverPres
           return cell4
             
        }
-        //if (detaildata.label != nil && detaildata.label != "")
         else {
             let cell1 = tableView.dequeueReusableCellWithIdentifier("LL", forIndexPath: indexPath) as!CustomeCell1
             cell1.label1.text=detaildata.label
@@ -225,135 +236,6 @@ class DetailViewController: UIViewController,UITableViewDataSource,UIPopoverPres
     }
 
 
-    
-     
-    func loadDetaildata() {
-        
-        if !self.refreshControl.refreshing{
-            self.showActivityIndicator()
-        }
-      
-        Alamofire.request(.POST, GET_DETAIL_URL,
-            parameters: [AUTHKEY:self.authkey!,TYPE:self.type!, CALLID:currentData.callId!, GROUPNAME:(currentData.groupName != nil ? currentData.groupName : currentData.empName)!]).validate().responseJSON
-            {response in switch response.result {
-                
-            case .Success(let JSON):
-                print("Success with JSON: \(JSON)")
-                let response = JSON as! NSDictionary
-                
-                 //self.showActivityIndicator()
-                if((response.objectForKey(FIELDS)) != nil){
-                    self.DetailDataList=[DetailData]()
-                    let fields = response.objectForKey(FIELDS) as! NSArray?
-                    
-                    for field in fields!{
-                        let detailData=DetailData();
-                        if((field.objectForKey(NAME)) != nil){
-                            detailData.Name=field.objectForKey(NAME) as? String
-                            
-                        }
-                        if((field.objectForKey(LABEL)) != nil){
-                            detailData.label=field.objectForKey(LABEL) as? String
-                            
-                        }
-                        
-                        if((field.objectForKey(TYPE)) != nil){
-                            detailData.Type=field.objectForKey(TYPE) as? String
-                           
-                        }
-                        if((field.objectForKey(VALUE)) != nil){
-                            detailData.value=field.objectForKey(VALUE) as? String
-                            
-                        }
-                        
-                        let optionsLabel = [DROPDOWN,RADIO,CHECKBOX]
-                        print(detailData.Type!)
-                        let contained = optionsLabel.contains(detailData.Type!)
-                        if(contained){
-                            let Options = field.objectForKey(OPTIONS) as! NSDictionary?
-                            self.optionsList=[OptionsData]()
-                            self.OptionStringList=[String]()
-                            print("Data items count: \(Options!.count)")
-                            for (key, value) in Options! {
-                                 let mOptionsData = OptionsData();
-                                 mOptionsData.id=key as? String
-                                 mOptionsData.value=value as? String
-                                 if(key as? String == detailData.value){
-                                    detailData.value=value as? String
-                                  }
-                                
-                                if (detailData.Type!.containsString(CHECKBOX) && !detailData.value!.containsString("")) {
-                                 //   value = "check1,check3";
-                                    let newString = detailData.value!.stringByReplacingOccurrencesOfString("\"", withString: "")
-                                    let toArray = newString.componentsSeparatedByString(",")
-                                    print(newString)
-                                    for curentValue in toArray  {
-                                        if (key as! String==curentValue) {
-                                            mOptionsData.isChecked=true
-                                            print(" \(curentValue) is cheked")
-                                        }
-                                       print(curentValue)
-                                    }
-                                  }
-                                
-                                
-                                self.OptionStringList.append(value as! String)
-                                self.optionsList.append(mOptionsData)
-                                //print("Property: \"\(key as! String)\"")
-                            }
-                               detailData.OptionList=self.optionsList;
-                            
-                       
-                        }
-                        else {
-                            self.optionsList=[OptionsData]()
-                            self.OptionStringList=[String]()
-
-                        }
-                        
-                        detailData.OptionList=self.optionsList
-                        detailData.Options=self.OptionStringList
-                        
-                        if (detailData.Name == CALLFROM) {
-                            self.ContactNo = detailData.value;
-                        } else if (detailData.Name == CALLFROM) {
-                            self.EmailId = detailData.value;
-                        }
-                        
-                       self.DetailDataList.append(detailData);
-
-
-                }
-                    if self.refreshControl.refreshing{
-                        self.refreshControl.endRefreshing()
-                    }
-                    else{
-                        self.showActivityIndicator()
-                    }
-
-                    self.mytableview.reloadData()
-                    print(self.DetailDataList.count)
-                    
-            }
-                
-            
-            
-                case .Failure(let error):
-                print("Request failed with error: \(error)")
-                if (error.code == -1009) {
-                    self.showAlert("No Internet Conncetion")
-                }
-                if self.refreshControl.refreshing{
-                    self.refreshControl.endRefreshing()
-                }
-                else{
-                self.showActivityIndicator()
-                }
-            }
- }
-
-    }
-    
     func UpdateRecords() {
         var code:String?
         var msg:String?

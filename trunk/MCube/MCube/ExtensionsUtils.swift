@@ -71,6 +71,28 @@ extension DetailViewController {
         self.view.frame.origin.y = 0
     }
     
+    
+    func moreButtonClicked(sender:AnyObject) {
+        let popoverContent = (self.storyboard?.instantiateViewControllerWithIdentifier("more"))! as UIViewController
+        
+        popoverContent.modalPresentationStyle = .Popover
+        if let popover = popoverContent.popoverPresentationController {
+            
+            let viewForSource = sender as! UIView
+            popover.sourceView = viewForSource
+            popover.sourceRect = viewForSource.bounds
+            popoverContent.preferredContentSize = CGSizeMake(150,220)
+            popover.delegate = self
+        }
+        
+        self.presentViewController(popoverContent, animated: true, completion: nil)
+    }
+    
+    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
+        return .None
+    }
+    
+    
     func initializeViews(){
         if let authkey = NSUserDefaults.standardUserDefaults().stringForKey(AUTHKEY) {
             self.authkey=authkey;
@@ -275,33 +297,6 @@ extension ReportViewController{
 
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

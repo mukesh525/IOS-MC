@@ -38,6 +38,8 @@ class ReportViewController: UITableViewController,UIPopoverPresentationControlle
         super.viewDidLoad()
         
        self.initializeViews()
+        
+//        self.updateBackground();
     }
     
     
@@ -376,17 +378,31 @@ class ReportViewController: UITableViewController,UIPopoverPresentationControlle
         completion()
     }
     
-    func updateUI() {
-        if let time = time {
-            let formatter = NSDateFormatter()
-            formatter.dateStyle = .ShortStyle
-            formatter.timeStyle = .LongStyle
-            print("Updated \(formatter.stringFromDate(time))")
-          //  updateLabel?.text = formatter.stringFromDate(time)
+    func updateBackground() {
+        
+        let queue = NSOperationQueue()
+        queue.maxConcurrentOperationCount = 2
+        let types = [TRACK,FOLLOWUP,IVRS,LEAD,X,MTRACKER]
+        for type in types {
+            let operation = NetworkOperation(type: type) { responseObject, error in
+                if responseObject == nil {
+                    print("failed: \(error)")
+                } else {
+                    let result:NSMutableArray=ParseJason().ParseReportJason(responseObject!);
+                    let menu:Array<OptionsData>=ParseJason().ParseMenu(responseObject!);
+                    let isUpdated = ModelManager.getInstance().insertData(type, isDelete: true, Datas: result, isMore: false)
+                    let isMenu = ModelManager.getInstance().insertMenu (type, Options: menu)
+                    if(isUpdated && isMenu){
+                        
+                        print("Background Result for type \(type) and \(ParseJason().ParseReportJason(responseObject!).count)")
+                     }
+               
+                    
+                }
+            }
+            queue.addOperation(operation)
         }
-        else {
-          print("Not yet updated")
-        }
+        
     }
     
     
