@@ -11,6 +11,7 @@ import Alamofire
 
 class DetailViewController: UIViewController,UITableViewDataSource,UIPopoverPresentationControllerDelegate, UITableViewDelegate,CustomCellDelegate,UITextFieldDelegate ,DetailDownload{
 
+    @IBOutlet weak var updatebtn: UIButton!
     @IBOutlet weak var addfollowup: UIButton!
     var DetailDataList = Array<DetailData>();
     var optionsList = Array<OptionsData>();

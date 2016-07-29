@@ -1350,6 +1350,7 @@
                     <connections>
                         <outlet property="addfollowup" destination="We4-2R-qmN" id="ePP-f5-VWL"/>
                         <outlet property="mytableview" destination="SEd-am-rMC" id="LoS-7o-Cqd"/>
+                        <outlet property="updatebtn" destination="bwr-eM-VJa" id="dkJ-j6-eFX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Upf-sz-ASz" userLabel="First Responder" sceneMemberID="firstResponder"/>
