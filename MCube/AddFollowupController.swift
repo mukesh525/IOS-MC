@@ -182,7 +182,6 @@ class AddFollowupController: UIViewController,CustomCellDelegate,UITextFieldDele
     }
     
     func showAlert(mesage :String){
-        //dismissViewControllerAnimated(true, completion: nil)
         let alertView = UIAlertController(title: TITLE, message: mesage, preferredStyle: .Alert)
         alertView.addAction(UIAlertAction(title: "Ok", style: .Default, handler: nil))
         presentViewController(alertView, animated: true, completion: nil)

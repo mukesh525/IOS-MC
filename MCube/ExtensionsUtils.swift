@@ -89,6 +89,10 @@ extension DetailViewController {
         mytableview.delegate = self
         mytableview.dataSource = self
         mytableview.allowsSelection=false
+        if(type==FOLLOWUP){
+         updatebtn.setTitle("History",  forState: UIControlState.Normal)
+         addfollowup.setTitle("New",  forState: UIControlState.Normal)
+        }
         self.refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
         self.refreshControl.addTarget(self, action: #selector(DetailViewController.refresh(_:)), forControlEvents: UIControlEvents.ValueChanged)
         self.mytableview?.addSubview(refreshControl)
@@ -287,10 +291,6 @@ extension ReportViewController{
 }
 
 
-
-
-
-
 extension _ArrayType where Generator.Element == DetailData {
 
     func getParams(currentData:Data,type:String,postFollowup:Bool)->[String: AnyObject]?{
@@ -298,15 +298,25 @@ extension _ArrayType where Generator.Element == DetailData {
         var parameters: [String: AnyObject]? = [:]
         print(self.count)
         parameters![AUTHKEY]=authkey!
-         print("\(AUTHKEY) :\(authkey!) ")
         parameters![GROUP_NAME]=(currentData.groupName != nil ? currentData.groupName : currentData.empName)!
-        var gname=(currentData.groupName != nil ? currentData.groupName : currentData.empName)!
-         print("\(GROUP_NAME) :\(gname) ")
         if(postFollowup){
             parameters![CALLID]=currentData.callId!
-            print("\(CALLID) :\(currentData.callId!) ")
-            parameters![FTYPE]="calltrack"
-            print("\(FTYPE) :calltrack ")
+            if(type==TRACK){
+                  parameters![FTYPE]="calltrack"
+                  print("\(FTYPE) :calltrack ")
+            }
+            else if(type==LEAD){
+                parameters![FTYPE]="leads"
+                print("\(FTYPE) :leads ")
+            }
+            else if(type==X){
+                parameters![FTYPE]=MCUBEX
+                print("\(FTYPE) :calltrack ")
+            }
+            else{
+                  parameters![FTYPE]=type
+                  print("\(FTYPE) :\(type) ")
+            }
             parameters![TYPE]=FOLLOWUP
             print("\(TYPE) :\(FOLLOWUP) ")
         }else{
