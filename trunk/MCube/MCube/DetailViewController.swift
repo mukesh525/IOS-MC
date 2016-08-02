@@ -8,8 +8,9 @@
 
 import UIKit
 import Alamofire
+import MessageUI
 
-class DetailViewController: UIViewController,UITableViewDataSource,UIPopoverPresentationControllerDelegate, UITableViewDelegate,CustomCellDelegate,UITextFieldDelegate ,DetailDownload{
+class DetailViewController: UIViewController,UITableViewDataSource,UIPopoverPresentationControllerDelegate, UITableViewDelegate,CustomCellDelegate,UITextFieldDelegate ,DetailDownload,MoreSelectedDelegate,MFMessageComposeViewControllerDelegate,MFMailComposeViewControllerDelegate{
 
     @IBOutlet weak var updatebtn: UIButton!
     @IBOutlet weak var addfollowup: UIButton!
@@ -289,15 +290,70 @@ class DetailViewController: UIViewController,UITableViewDataSource,UIPopoverPres
     
     
     
+    func moreSelected(position: Int) {
+        print(position);
+        switch position {
+        case 0  :
+           self.UpdateRecords()
+        case 1  :
+            self.performSegueWithIdentifier(ADD_FOLLOWUP, sender: self)
+        case 2  :
+            if let url = NSURL(string: "tel://\(self.currentData.callFrom)") {
+                UIApplication.sharedApplication().openURL(url)
+                print(url)
+            }
+        case 3  :
+            self.sendSms()
+        case 4  :
+            let mailComposeViewController = configuredMailComposeViewController()
+            if MFMailComposeViewController.canSendMail() {
+                self.presentViewController(mailComposeViewController, animated: true, completion: nil)
+            } else {
+                self.showSendMailErrorAlert()
+            }
+        default :
+            print("default")
+            
+    }
+}
+    
+    func messageComposeViewController(controller: MFMessageComposeViewController, didFinishWithResult result: MessageComposeResult) {
+        //... handle sms screen actions
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    func sendSms(){
+     if (MFMessageComposeViewController.canSendText()) {
+            let controller = MFMessageComposeViewController()
+            controller.body = "Message Body"
+            controller.recipients = [self.currentData.callFrom!]
+            controller.messageComposeDelegate = self
+            self.presentViewController(controller, animated: true, completion: nil)
+        }
+    
+   }
     
     
+    func configuredMailComposeViewController() -> MFMailComposeViewController {
+        let mailComposerVC = MFMailComposeViewController()
+        mailComposerVC.mailComposeDelegate = self // Extremely important to set the --mailComposeDelegate-- property, NOT the --delegate-- property
+        
+        mailComposerVC.setToRecipients(["someone@somewhere.com"])
+        mailComposerVC.setSubject("MCube")
+        //mailComposerVC.setMessageBody("Sending e-mail in-app is not so bad!", isHTML: false)
+        
+        return mailComposerVC
+    }
     
+    func showSendMailErrorAlert() {
+        let sendMailErrorAlert = UIAlertView(title: "Could Not Send Email", message: "Your device could not send e-mail.  Please check e-mail configuration and try again.", delegate: self, cancelButtonTitle: "OK")
+        sendMailErrorAlert.show()
+    }
     
-    
-    
-    
-    
-    
+    // MARK: MFMailComposeViewControllerDelegate Method
+    func mailComposeController(controller: MFMailComposeViewController!, didFinishWithResult result: MFMailComposeResult, error: NSError!) {
+        controller.dismissViewControllerAnimated(true, completion: nil)
+    }
     
     
     

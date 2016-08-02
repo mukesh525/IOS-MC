@@ -8,28 +8,21 @@
 
 import UIKit
 
+@objc protocol MoreSelectedDelegate {
+    func moreSelected(position: Int)
+}
 class MoreViewController: UITableViewController {
-
+    weak var delegate: MoreSelectedDelegate?
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        self.dismissViewControllerAnimated(true, completion: nil)
+        delegate?.moreSelected(indexPath.item)
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

@@ -62,15 +62,14 @@ extension DetailViewController {
     }
     
     func moreButtonClicked(sender:AnyObject) {
-        let popoverContent = (self.storyboard?.instantiateViewControllerWithIdentifier("more"))! as UIViewController
-        
+        let popoverContent = (self.storyboard?.instantiateViewControllerWithIdentifier("more"))! as! MoreViewController
         popoverContent.modalPresentationStyle = .Popover
         if let popover = popoverContent.popoverPresentationController {
-            
-            let viewForSource = sender as! UIView
+           let viewForSource = sender as! UIView
             popover.sourceView = viewForSource
             popover.sourceRect = viewForSource.bounds
             popoverContent.preferredContentSize = CGSizeMake(150,220)
+            popoverContent.delegate=self
             popover.delegate = self
         }
         
