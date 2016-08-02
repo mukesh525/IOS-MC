@@ -125,10 +125,11 @@ class ReportViewController: UITableViewController,UIPopoverPresentationControlle
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
+        if(self.type != HISTORY){
         self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
         self.CurrentData = self.result[indexPath.row] as! Data
         self.performSegueWithIdentifier("detail", sender: self)
-        
+        }
     }
     
     
@@ -146,7 +147,7 @@ class ReportViewController: UITableViewController,UIPopoverPresentationControlle
             if((data.audioLink?.isEmpty) != nil && NSString(string: data.audioLink!).length > 5){
                 self.configurePlay(data.audioLink!,playbutton: cell.playButton)
             }else{
-                self.showAlert("You clicked Play button \(indexPath.row)")
+               // self.showAlert("You clicked Play button \(indexPath.row)")
             }
             
         }

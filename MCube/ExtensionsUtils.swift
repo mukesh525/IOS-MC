@@ -150,9 +150,10 @@ extension ReportViewController{
             menubutton.action = #selector(SWRevealViewController.revealToggle(_:))
             revealViewController().rightViewRevealWidth = 150
             view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+            self.revealViewController().delegate = self
             
         }
-        self.revealViewController().delegate = self
+       
         if self.refreshControll.refreshing{
             self.refreshControll.endRefreshing()
         }
