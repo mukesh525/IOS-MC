@@ -81,7 +81,11 @@ class DetailViewController: UIViewController,UITableViewDataSource,UIPopoverPres
     
      @IBAction func UpdateClick(sender: AnyObject) {
         
-       self.UpdateRecords()
+        if(self.type == FOLLOWUP){
+         self.performSegueWithIdentifier("history", sender: self)
+        }else {
+            self.UpdateRecords()
+        }
         
     }
     
@@ -281,9 +285,16 @@ class DetailViewController: UIViewController,UITableViewDataSource,UIPopoverPres
             addfollowup.currentData=self.currentData;
             addfollowup.authkey=self.authkey;
             addfollowup.type=self.type;
-           
-            
         }
+        if segue.identifier == HISTORY {
+            let navController = segue.destinationViewController as! SWRevealViewController
+            navController.loadView()
+            let secondVc = navController.frontViewController as! UINavigationController
+            secondVc.loadView()
+            let detailController = secondVc.topViewController as! ReportViewController
+            detailController.type = HISTORY
+        }
+        
         
     }
     
@@ -351,11 +362,9 @@ class DetailViewController: UIViewController,UITableViewDataSource,UIPopoverPres
     }
     
     // MARK: MFMailComposeViewControllerDelegate Method
-    func mailComposeController(controller: MFMailComposeViewController!, didFinishWithResult result: MFMailComposeResult, error: NSError!) {
+    func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
         controller.dismissViewControllerAnimated(true, completion: nil)
     }
-    
-    
     
 
 }

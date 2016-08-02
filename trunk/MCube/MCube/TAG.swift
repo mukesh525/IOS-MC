@@ -7,6 +7,7 @@ let LEAD : String = "lead"
 let MTRACKER : String = "mtracker"
 let FOLLOWUP : String = "followup"
 let X : String = "x"
+let HISTORY : String = "history"
 let LOGOUT : String = "logout"
 
 
