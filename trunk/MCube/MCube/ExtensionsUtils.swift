@@ -167,7 +167,7 @@ extension ReportViewController{
         if(player != nil){
             player = nil;
         }
-        self.playButtons = Array<UIButton>()
+        self.playButtons.removeAll()
             
         if(!self.isDownloading){
             let param=Params(Limit: self.limit,gid:self.gid,offset:self.offset,type:self.type,isfilter:false,isMore: false,isSync:false,filterpos: self.SeletedFilterpos)

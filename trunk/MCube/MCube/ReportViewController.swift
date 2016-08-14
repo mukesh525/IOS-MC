@@ -349,9 +349,20 @@ class ReportViewController: UITableViewController,UIPopoverPresentationControlle
             sidebarMenuOpen = false
         } else {
             self.mytableview.userInteractionEnabled = false
-            
-            self.player=nil;
             sidebarMenuOpen = true
+            
+            
+            for currentbutton in self.playButtons{
+                if(currentbutton.tag == self.CurrentPlaying ){
+                    self.player=nil;
+                    let image = UIImage(named: "play")?.imageWithRenderingMode(.AlwaysTemplate)
+                    currentbutton.setImage(image, forState: .Normal)
+                    currentbutton.tintColor = UIColor(red: 255.0/255.0, green: 87.0/255.0, blue: 34.0/255.0, alpha: 1.0)
+                }
+
+            
+            }
+            
         }
     }
     
