@@ -11,6 +11,7 @@ target 'MCube' do
   pod 'Toast-Swift', '~> 1.3.0'
   pod 'BEMCheckBox'
   pod 'TPKeyboardAvoiding'
+  #pod 'PayUIndia-PG-SDK'
   
    target 'MCubeTests' do
     inherit! :search_paths

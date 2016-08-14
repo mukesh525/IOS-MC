@@ -6,6 +6,7 @@ import Alamofire
 import AVFoundation
 
 
+
 class ReportViewController: UITableViewController,UIPopoverPresentationControllerDelegate,FilterSelectedDelegate ,SWRevealViewControllerDelegate,ReportDownload {
     @IBOutlet var mytableview: UITableView!
     @IBOutlet var extraButton: UIBarButtonItem!
@@ -15,7 +16,7 @@ class ReportViewController: UITableViewController,UIPopoverPresentationControlle
     var SeletedFilterpos: Int=0;
     var isDownloading:Bool = false;
     var options :Array<OptionsData> = Array<OptionsData>()
-    var playButtons=[UIButton]();
+    var playButtons :Array<UIButton> = Array<UIButton>()
     var limit = 10;
     var offset=0;
     var gid:String="0";
@@ -71,7 +72,7 @@ class ReportViewController: UITableViewController,UIPopoverPresentationControlle
             self.mytableview.reloadData()
         }
            self.isDownloading=false;
-       
+
         }
 
     
@@ -137,6 +138,7 @@ class ReportViewController: UITableViewController,UIPopoverPresentationControlle
         return cellSpacingHeight
     }
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as!FollowupTableViewCell
         let data: Data = self.result[indexPath.row] as! Data
         cell.layer.cornerRadius=15
@@ -181,15 +183,18 @@ class ReportViewController: UITableViewController,UIPopoverPresentationControlle
             cell.groupLabel.text="Employee"
         }
         
-        let image = UIImage(named: "play")?.imageWithRenderingMode(.AlwaysTemplate)
+        
+        let image:UIImage!
+        if(player != nil && indexPath.row == CurrentPlaying){
+           image = UIImage(named: "pause")?.imageWithRenderingMode(.AlwaysTemplate)
+        }
+        else{
+            image = UIImage(named: "play")?.imageWithRenderingMode(.AlwaysTemplate)
+            
+        }
         cell.playButton.setImage(image, forState: .Normal)
         cell.playButton.tintColor = UIColor(red: 255.0/255.0, green: 87.0/255.0, blue: 34.0/255.0, alpha: 1.0)
-        
-        if(indexPath.row == 0){
-           self.playButtons=[UIButton]()
-        }
-        self.playButtons.append(cell.playButton)
-        
+        self.playButtons.insert(cell.playButton, atIndex:indexPath.row)
         
         return cell
     }
@@ -198,11 +203,12 @@ class ReportViewController: UITableViewController,UIPopoverPresentationControlle
     
     
     func configurePlay(filename:String,playbutton:UIButton) {
-        
+         print(self.playButtons.count)
         let url = "\(PLAY_URL)\(filename)"
         let link = NSURL(string: url)!
        for currentbutton in self.playButtons{
             if(currentbutton.tag == playbutton.tag ){
+                print(currentbutton.tag)
                 var image:UIImage?
                 if(self.CurrentPlaying != playbutton.tag){
                     player = nil;
@@ -247,6 +253,7 @@ class ReportViewController: UITableViewController,UIPopoverPresentationControlle
                 button.setImage(image, forState: .Normal)
                 button.tintColor = UIColor(red: 255.0/255.0, green: 87.0/255.0, blue: 34.0/255.0, alpha: 1.0)
                 self.player = nil;
+                self.CurrentPlaying=nil;
             }
             
         }
@@ -342,6 +349,8 @@ class ReportViewController: UITableViewController,UIPopoverPresentationControlle
             sidebarMenuOpen = false
         } else {
             self.mytableview.userInteractionEnabled = false
+            
+            self.player=nil;
             sidebarMenuOpen = true
         }
     }
