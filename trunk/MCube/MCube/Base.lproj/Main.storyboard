@@ -976,7 +976,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background_port.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="z5J-Tl-VL6">
-                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="559"/>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="SEd-am-rMC" customClass="TPKeyboardAvoidingTableView">
                                 <rect key="frame" x="16" y="64" width="343" height="452"/>
@@ -1304,7 +1304,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="z5J-Tl-VL6" firstAttribute="bottom" secondItem="F5K-6l-iPl" secondAttribute="top" constant="-5" id="1Mf-i5-9wO"/>
+                            <constraint firstItem="z5J-Tl-VL6" firstAttribute="bottom" secondItem="F5K-6l-iPl" secondAttribute="top" id="1Mf-i5-9wO"/>
                             <constraint firstItem="z5J-Tl-VL6" firstAttribute="top" secondItem="SEd-am-rMC" secondAttribute="top" id="HWR-OK-Ah5"/>
                             <constraint firstItem="bwr-eM-VJa" firstAttribute="baseline" secondItem="We4-2R-qmN" secondAttribute="firstBaseline" id="Ltv-i1-sfx"/>
                             <constraint firstItem="bwr-eM-VJa" firstAttribute="top" secondItem="SEd-am-rMC" secondAttribute="bottom" constant="30" id="MbB-V9-8IB"/>
@@ -1871,7 +1871,7 @@
         <image name="wishlist" width="1024" height="1024"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="ovh-6l-Ib4"/>
         <segue reference="ao1-ON-piW"/>
-        <segue reference="9Lf-ih-Dgm"/>
     </inferredMetricsTieBreakers>
 </document>

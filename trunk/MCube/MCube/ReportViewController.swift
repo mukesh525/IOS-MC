@@ -160,10 +160,10 @@ class ReportViewController: UITableViewController,UIPopoverPresentationControlle
             
             if(self.playButtons.get(indexPath.row) != nil){
                 self.playButtons[indexPath.row]=cell.playButton
-                print("replacing \(indexPath.row)")
+               // print("replacing \(indexPath.row)")
             }else{
                 self.playButtons.append(cell.playButton)
-                print("appending \(indexPath.row)")
+               // print("appending \(indexPath.row)")
             }
 
             
