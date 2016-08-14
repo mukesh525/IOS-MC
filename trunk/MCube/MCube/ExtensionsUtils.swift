@@ -120,6 +120,8 @@ extension ReportViewController{
             isLogout=false;
             LogoutAlert()
         }
+        
+        player=nil;
         NSUserDefaults.standardUserDefaults().removeObjectForKey(SELECT)
         NSUserDefaults.standardUserDefaults().synchronize()
         self.navigationItem.title = CurrentTitle;
@@ -161,6 +163,12 @@ extension ReportViewController{
     }
     
     func refresh(sender:AnyObject) {
+        
+        if(player != nil){
+            player = nil;
+        }
+        self.playButtons = Array<UIButton>()
+            
         if(!self.isDownloading){
             let param=Params(Limit: self.limit,gid:self.gid,offset:self.offset,type:self.type,isfilter:false,isMore: false,isSync:false,filterpos: self.SeletedFilterpos)
             self.isDownloading=true;

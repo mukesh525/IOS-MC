@@ -15,6 +15,7 @@ class MenuController: UITableViewController {
     @IBOutlet weak var username: UILabel!
     @IBOutlet weak var useremail: UILabel!
     var options:NSMutableArray=NSMutableArray();
+    var currentType:String = TRACK
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -27,8 +28,6 @@ class MenuController: UITableViewController {
             self.options.addObject(optiondata)
             
         }
-        
-        //  self.mytableview.allowsSelection=true;
         if(username != nil && useremail != nil ){
             
             
@@ -40,11 +39,8 @@ class MenuController: UITableViewController {
             }
             
         }
-        
-        //tableView.selectRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), animated: false, scrollPosition: .None)
         self.clearsSelectionOnViewWillAppear = false;
-        
-        
+       
     }
     
     
@@ -143,71 +139,57 @@ class MenuController: UITableViewController {
         return indexPath
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        let nav = segue.destinationViewController as! UINavigationController
+    
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let path = NSIndexPath(forRow: indexPath.row , inSection: 0)
+        switch indexPath.row {
+        case 1:
+            currentType=TRACK
+        case 2:
+            currentType=IVRS
+        case 3:
+             currentType=X
+        case 4:
+            currentType=LEAD
+        case 5:
+             currentType=MTRACKER
+        case 6:
+             currentType=FOLLOWUP
+        default:
+             currentType=TRACK
+        }
+        mytableview.selectRowAtIndexPath(path, animated: false, scrollPosition: UITableViewScrollPosition.None)
         
-        if(segue.identifier == "settings")   {
-            
-            
+        if(indexPath.row == 8){
+            self.performSegueWithIdentifier("settings", sender: self)
         }
         else{
-            
-            let followupController = nav.topViewController as! ReportViewController
-            var path = NSIndexPath(forRow: 0 , inSection: 0)
-            
-            if(segue.identifier == FOLLOWUP){
-                followupController.type = FOLLOWUP
-                followupController.CurrentTitle=FOLLOWUP.capitalizeIt()
-                followupController.offset=0
-                path = NSIndexPath(forRow: 6 , inSection: 0)
-                
-            }
-            else if(segue.identifier == TRACK){
-                followupController.type = TRACK
-                followupController.CurrentTitle=TRACK.capitalizeIt()
-                followupController.offset=0
-                path = NSIndexPath(forRow: 1 , inSection: 0)
-                
-                
-            }
-            else if(segue.identifier == LEAD){
-                followupController.type = LEAD
-                followupController.CurrentTitle=LEAD.capitalizeIt()
-                followupController.offset=0
-                path = NSIndexPath(forRow: 4 , inSection: 0)
-                
-            }
-            else if(segue.identifier == X){
-                followupController.type = X
-                followupController.CurrentTitle="MCubeX"
-                followupController.offset=0
-                path = NSIndexPath(forRow: 3 , inSection: 0)
-                
-                
-            }
-            else if(segue.identifier == IVRS){
-                followupController.type = IVRS
-                followupController.CurrentTitle=IVRS.capitalizeIt()
-                followupController.offset=0
-                path = NSIndexPath(forRow: 2 , inSection: 0)
-                
-                
-            }
-            else if(segue.identifier == MTRACKER){
-                followupController.type = MTRACKER
-                followupController.CurrentTitle=MTRACKER.capitalizeIt()
-                followupController.offset=0
-                path = NSIndexPath(forRow: 5 , inSection: 0)
-                
-                
-            }
-            else if(segue.identifier == LOGOUT){
-                followupController.isLogout = true;
-                
-            }
-            mytableview.selectRowAtIndexPath(path, animated: false, scrollPosition: UITableViewScrollPosition.None)
-            
+           self.performSegueWithIdentifier("push", sender: self)
         }
+      
+        
+    }
+    
+    
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        let nav = segue.destinationViewController as! UINavigationController
+    
+         if(segue.identifier == "settings"){
+            
+         }
+        else{
+        let followupController = nav.topViewController as! ReportViewController
+        followupController.type = currentType
+        if(currentType == X){
+           followupController.CurrentTitle="MCubeX"
+         }
+         else {
+          followupController.CurrentTitle=currentType.capitalizeIt()
+        }
+     }
+
     }
     
     
