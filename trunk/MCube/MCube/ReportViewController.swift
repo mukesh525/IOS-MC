@@ -16,7 +16,8 @@ class ReportViewController: UITableViewController,UIPopoverPresentationControlle
     var SeletedFilterpos: Int=0;
     var isDownloading:Bool = false;
     var options :Array<OptionsData> = Array<OptionsData>()
-    var playButtons :Array<UIButton> = Array<UIButton>()
+   // var playButtons :Array<UIButton> = Array<UIButton>()
+    var playButtons = [UIButton]()
     var limit = 10;
     var offset=0;
     var gid:String="0";
@@ -156,6 +157,16 @@ class ReportViewController: UITableViewController,UIPopoverPresentationControlle
         cell.backgroundColor = UIColor.clearColor()
         if((data.audioLink?.isEmpty) != nil && NSString(string: data.audioLink!).length > 5){
             cell.playButton.hidden=false
+            
+            if(self.playButtons.get(indexPath.row) != nil){
+                self.playButtons[indexPath.row]=cell.playButton
+                print("replacing \(indexPath.row)")
+            }else{
+                self.playButtons.append(cell.playButton)
+                print("appending \(indexPath.row)")
+            }
+
+            
         }else{
             cell.playButton.hidden=true
         }
@@ -194,7 +205,7 @@ class ReportViewController: UITableViewController,UIPopoverPresentationControlle
         }
         cell.playButton.setImage(image, forState: .Normal)
         cell.playButton.tintColor = UIColor(red: 255.0/255.0, green: 87.0/255.0, blue: 34.0/255.0, alpha: 1.0)
-        self.playButtons.insert(cell.playButton, atIndex:indexPath.row)
+             //  self.playButtons.insert(cell.playButton, atIndex:indexPath.row)
         
         return cell
     }
@@ -208,7 +219,6 @@ class ReportViewController: UITableViewController,UIPopoverPresentationControlle
         let link = NSURL(string: url)!
        for currentbutton in self.playButtons{
             if(currentbutton.tag == playbutton.tag ){
-                print(currentbutton.tag)
                 var image:UIImage?
                 if(self.CurrentPlaying != playbutton.tag){
                     player = nil;
