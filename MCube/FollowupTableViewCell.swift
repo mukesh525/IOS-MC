@@ -16,6 +16,12 @@ class FollowupTableViewCell: UITableViewCell {
             onButtonTapped()
         }
     }
+    @IBAction func overflowClicked(sender: AnyObject) {
+        
+        if let onMoreTapped = self.onMoreTapped {
+            onMoreTapped(sender)
+        }
+    }
 
     @IBOutlet weak var groupLabel: UILabel!
     @IBOutlet weak var status: UILabel!
@@ -25,6 +31,8 @@ class FollowupTableViewCell: UITableViewCell {
     @IBOutlet weak var callername: UILabel!
     @IBOutlet weak var Group: UILabel!
     var onButtonTapped : (() -> Void)? = nil
+    var onMoreTapped :((AnyObject) -> Void)?
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

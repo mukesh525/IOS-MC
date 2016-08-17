@@ -4,10 +4,11 @@
 import UIKit
 import Alamofire
 import AVFoundation
+import MessageUI
 
 
 
-class ReportViewController: UITableViewController,UIPopoverPresentationControllerDelegate,FilterSelectedDelegate ,SWRevealViewControllerDelegate,ReportDownload {
+class ReportViewController: UITableViewController,UIPopoverPresentationControllerDelegate,FilterSelectedDelegate ,OverflowSelectedDelegate,SWRevealViewControllerDelegate,ReportDownload,MFMessageComposeViewControllerDelegate {
     @IBOutlet var mytableview: UITableView!
     @IBOutlet var extraButton: UIBarButtonItem!
     @IBOutlet var menubutton: UIBarButtonItem!
@@ -154,17 +155,38 @@ class ReportViewController: UITableViewController,UIPopoverPresentationControlle
             }
             
         }
+        cell.onMoreTapped={ (sender) -> Void in
+            let popoverContent = (self.storyboard?.instantiateViewControllerWithIdentifier(OVERFLOW))! as! OverflowController
+            popoverContent.modalPresentationStyle = .Popover
+            if let popover = popoverContent.popoverPresentationController {
+                let viewForSource = sender as! UIView
+                popover.sourceView = viewForSource
+                popover.sourceRect = viewForSource.bounds
+                if(self.type == MTRACKER){
+                    popoverContent.preferredContentSize = CGSizeMake(140,133)
+                } else{
+                   popoverContent.preferredContentSize = CGSizeMake(140,90)
+                }
+                popoverContent.delegate=self
+                popoverContent.CurrentData=self.result[indexPath.row] as! Data;
+                popoverContent.Type=self.type
+                
+                popover.delegate = self
+            }
+            
+            self.presentViewController(popoverContent, animated: true, completion: nil)
+            
+            
+        }
         cell.backgroundColor = UIColor.clearColor()
         if((data.audioLink?.isEmpty) != nil && NSString(string: data.audioLink!).length > 5){
             cell.playButton.hidden=false
             
             if(self.playButtons.get(indexPath.row) != nil){
                 self.playButtons[indexPath.row]=cell.playButton
-               // print("replacing \(indexPath.row)")
-            }else{
+               }else{
                 self.playButtons.append(cell.playButton)
-               // print("appending \(indexPath.row)")
-            }
+               }
 
             
         }else{
@@ -205,8 +227,6 @@ class ReportViewController: UITableViewController,UIPopoverPresentationControlle
         }
         cell.playButton.setImage(image, forState: .Normal)
         cell.playButton.tintColor = UIColor(red: 255.0/255.0, green: 87.0/255.0, blue: 34.0/255.0, alpha: 1.0)
-             //  self.playButtons.insert(cell.playButton, atIndex:indexPath.row)
-        
         return cell
     }
     
@@ -301,6 +321,38 @@ class ReportViewController: UITableViewController,UIPopoverPresentationControlle
     
    
    
+    func overflowSelected(position: Int, CurrentData: Data) {
+        
+        if(position == 0){
+        if let url = NSURL(string: "tel://\(CurrentData.callFrom)") {
+            UIApplication.sharedApplication().openURL(url)
+            print(url)
+        }
+        }else{
+           self.sendSms(CurrentData)
+        }
+        
+        
+    }
+    
+    func sendSms(CurrentData: Data){
+        if (MFMessageComposeViewController.canSendText()) {
+            let controller = MFMessageComposeViewController()
+            controller.body = "Message Body"
+            controller.recipients = [CurrentData.callFrom!]
+            controller.messageComposeDelegate = self
+            self.presentViewController(controller, animated: true, completion: nil)
+        }
+        
+    }
+
+    func canSendText() -> Bool {
+        return MFMessageComposeViewController.canSendText()
+    }
+    func messageComposeViewController(controller: MFMessageComposeViewController!, didFinishWithResult result: MessageComposeResult) {
+        controller.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
     
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -320,7 +372,7 @@ class ReportViewController: UITableViewController,UIPopoverPresentationControlle
             detailview.type=self.type
             
         }
-        
+                
     }
     func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
         return UIModalPresentationStyle.None

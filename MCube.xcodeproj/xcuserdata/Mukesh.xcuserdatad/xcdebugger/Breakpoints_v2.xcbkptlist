@@ -545,11 +545,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MCube/FollowupTableViewCell.swift"
-            timestampString = "490009654.591669"
+            timestampString = "493106852.926586"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "20"
-            endingLineNumber = "20"
+            startingLineNumber = "26"
+            endingLineNumber = "26"
             landmarkName = "FollowupTableViewCell"
             landmarkType = "3">
             <Locations>

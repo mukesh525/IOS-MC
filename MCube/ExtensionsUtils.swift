@@ -327,6 +327,7 @@ extension _ArrayType where Generator.Element == DetailData {
             }
             parameters![TYPE]=FOLLOWUP
             print("\(TYPE) :\(FOLLOWUP) ")
+            
         }else{
             parameters![TYPE]=type
             print("\(TYPE) :\(type) ")
