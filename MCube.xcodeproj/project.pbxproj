@@ -19,6 +19,7 @@
 		8B326D661D39023A00022B33 /* DetailData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B326D651D39023A00022B33 /* DetailData.swift */; };
 		8B471D2A1D40B05F008BD625 /* MoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B471D291D40B05F008BD625 /* MoreViewController.swift */; };
 		8B53AE751D64302C00ED693E /* OverflowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B53AE741D64302C00ED693E /* OverflowController.swift */; };
+		8B53AE771D6444E500ED693E /* MapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B53AE761D6444E500ED693E /* MapController.swift */; };
 		8B5910871D4876320045D6D2 /* TAG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5910861D4876320045D6D2 /* TAG.swift */; };
 		8B5910891D48BC0E0045D6D2 /* DetailDataTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5910881D48BC0E0045D6D2 /* DetailDataTask.swift */; };
 		8B59B2251D45E25700AE9269 /* ExtensionsUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B59B2241D45E25700AE9269 /* ExtensionsUtils.swift */; };
@@ -101,6 +102,7 @@
 		8B326D651D39023A00022B33 /* DetailData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailData.swift; sourceTree = "<group>"; };
 		8B471D291D40B05F008BD625 /* MoreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreViewController.swift; sourceTree = "<group>"; };
 		8B53AE741D64302C00ED693E /* OverflowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverflowController.swift; sourceTree = "<group>"; };
+		8B53AE761D6444E500ED693E /* MapController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapController.swift; sourceTree = "<group>"; };
 		8B5910861D4876320045D6D2 /* TAG.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TAG.swift; sourceTree = "<group>"; };
 		8B5910881D48BC0E0045D6D2 /* DetailDataTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailDataTask.swift; sourceTree = "<group>"; };
 		8B59B2241D45E25700AE9269 /* ExtensionsUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionsUtils.swift; sourceTree = "<group>"; };
@@ -254,6 +256,7 @@
 				8B6584BA1D4203DD007D2C2D /* AddFollowupController.swift */,
 				8B68B0701D4797D900250691 /* FilterController.swift */,
 				8B53AE741D64302C00ED693E /* OverflowController.swift */,
+				8B53AE761D6444E500ED693E /* MapController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -623,6 +626,7 @@
 				8B804BA41D44A53E00D95629 /* CustomeCell5.swift in Sources */,
 				8BD246D61D3CED2500480CFB /* StudentInfo.swift in Sources */,
 				F47029F61A7F27DB00E30A3C /* AppDelegate.swift in Sources */,
+				8B53AE771D6444E500ED693E /* MapController.swift in Sources */,
 				8B326D5D1D39007200022B33 /* CustomeCell2.swift in Sources */,
 				8BAD4E781D278C9B00A64393 /* LoginViewController.swift in Sources */,
 				8B326D5F1D39008300022B33 /* CustomeCell3.swift in Sources */,
