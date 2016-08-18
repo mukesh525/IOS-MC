@@ -7,31 +7,38 @@
 //
 
 import UIKit
-@objc protocol OverflowSelectedDelegate {
+@objc protocol OverflowSelectedDelegate  {
     func overflowSelected(position: Int,CurrentData:Data)
 }
 
-class OverflowController: UITableViewController {
+
+class OverflowController: UITableViewController  {
     weak var delegate: OverflowSelectedDelegate?
     var CurrentData:Data!
-    var Type:String!
+   var Type:String!
+     weak var dismissalDelegate: DismissalDelegate?
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Do any additional setup after loading the view.
-    }
+        
+        }
+    
+    
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
         self.dismissViewControllerAnimated(true, completion: nil)
-        delegate?.overflowSelected(indexPath.item,CurrentData: CurrentData)
+        if(indexPath.row == 2){
+            dismissalDelegate?.finishedShowing(self)
+        }else{
+            delegate?.overflowSelected(indexPath.row,CurrentData: CurrentData)}
+        
+       
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         
         if (indexPath.row == 2 && Type != MTRACKER){
             return 0;
-            
         }
         else{
           return 44

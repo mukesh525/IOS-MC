@@ -8,13 +8,14 @@ import MessageUI
 
 
 
-class ReportViewController: UITableViewController,UIPopoverPresentationControllerDelegate,FilterSelectedDelegate ,OverflowSelectedDelegate,SWRevealViewControllerDelegate,ReportDownload,MFMessageComposeViewControllerDelegate {
+class ReportViewController: UITableViewController,UIPopoverPresentationControllerDelegate,FilterSelectedDelegate ,OverflowSelectedDelegate,SWRevealViewControllerDelegate,ReportDownload,MFMessageComposeViewControllerDelegate,DismissalDelegate{
     @IBOutlet var mytableview: UITableView!
     @IBOutlet var extraButton: UIBarButtonItem!
     @IBOutlet var menubutton: UIBarButtonItem!
     let cellSpacingHeight: CGFloat = 5
     var result:NSMutableArray=NSMutableArray();
     var SeletedFilterpos: Int=0;
+    var morePopOver:OverflowController!
     var isDownloading:Bool = false;
     var options :Array<OptionsData> = Array<OptionsData>()
    // var playButtons :Array<UIButton> = Array<UIButton>()
@@ -41,6 +42,9 @@ class ReportViewController: UITableViewController,UIPopoverPresentationControlle
         super.viewDidLoad()
         self.initializeViews()
     
+    }
+    override func viewDidAppear(animated: Bool) {
+        print("test")
     }
     
     
@@ -156,6 +160,7 @@ class ReportViewController: UITableViewController,UIPopoverPresentationControlle
             
         }
         cell.onMoreTapped={ (sender) -> Void in
+             //self.performSegueWithIdentifier("locate", sender: self)
             let popoverContent = (self.storyboard?.instantiateViewControllerWithIdentifier(OVERFLOW))! as! OverflowController
             popoverContent.modalPresentationStyle = .Popover
             if let popover = popoverContent.popoverPresentationController {
@@ -170,11 +175,13 @@ class ReportViewController: UITableViewController,UIPopoverPresentationControlle
                 popoverContent.delegate=self
                 popoverContent.CurrentData=self.result[indexPath.row] as! Data;
                 popoverContent.Type=self.type
-                
+                popoverContent.dismissalDelegate = self
                 popover.delegate = self
+               
             }
             
             self.presentViewController(popoverContent, animated: true, completion: nil)
+
             
             
         }
@@ -327,8 +334,12 @@ class ReportViewController: UITableViewController,UIPopoverPresentationControlle
         if let url = NSURL(string: "tel://\(CurrentData.callFrom)") {
             UIApplication.sharedApplication().openURL(url)
             print(url)
+            }
         }
-        }else{
+        else if(position == 2){
+         self.performSegueWithIdentifier("locate", sender: self)
+        }
+        else{
            self.sendSms(CurrentData)
         }
         
@@ -356,7 +367,8 @@ class ReportViewController: UITableViewController,UIPopoverPresentationControlle
     
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == POPOVERSEGUE && options.count > 0{
+        
+    if segue.identifier == POPOVERSEGUE && options.count > 0{
             
             let popoverViewController = segue.destinationViewController as! FilterController
             popoverViewController.FilterOptions=options;
@@ -372,6 +384,16 @@ class ReportViewController: UITableViewController,UIPopoverPresentationControlle
             detailview.type=self.type
             
         }
+        if segue.identifier == DETAIL{
+            
+            let detailview = segue.destinationViewController as! DetailViewController
+            detailview.currentData=CurrentData;
+            detailview.type=self.type
+            
+        }
+        
+        
+        
                 
     }
     func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
@@ -446,6 +468,11 @@ class ReportViewController: UITableViewController,UIPopoverPresentationControlle
         }
     }
     
-  
+      func finishedShowing(viewController: UIViewController) {
+       viewController.dismissViewControllerAnimated(true, completion: nil)
+       self.performSegueWithIdentifier("locate", sender: self)
+     
+        
+    }
     
 }

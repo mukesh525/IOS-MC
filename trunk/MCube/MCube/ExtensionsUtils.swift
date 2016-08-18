@@ -28,6 +28,42 @@ extension UIDatePicker {
 
 
 
+protocol DismissalDelegate : class{
+    func finishedShowing(viewController: UIViewController);
+}
+
+protocol Dismissable : class{
+    weak var dismissalDelegate : DismissalDelegate? { get set }
+}
+
+extension DismissalDelegate where Self: UIViewController{
+    func finishedShowing(viewController: UIViewController) {
+        if viewController.isBeingPresented() && viewController.presentingViewController == self{
+            self.dismissViewControllerAnimated(true, completion: nil)
+            return
+        }
+        
+        self.navigationController?.popViewControllerAnimated(true)
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -109,9 +145,11 @@ extension DetailViewController {
 
 
 
-extension ReportViewController{
 
-    func initializeViews(){
+
+extension ReportViewController{
+    
+   func initializeViews(){
         setsection()
         if let savedlimit = NSUserDefaults.standardUserDefaults().stringForKey(LIMIT) {
             self.limit = Int(savedlimit)!;
