@@ -33,6 +33,7 @@
 		8B71F48E1D49D94100761CD6 /* ParseJason.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B71F48D1D49D94100761CD6 /* ParseJason.swift */; };
 		8B71F4921D4A1D1700761CD6 /* TPKATableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B71F4911D4A1D1700761CD6 /* TPKATableViewController.m */; };
 		8B804BA41D44A53E00D95629 /* CustomeCell5.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B804BA31D44A53E00D95629 /* CustomeCell5.swift */; };
+		8B8869021D65C029000D6884 /* CustomPointAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8869011D65C029000D6884 /* CustomPointAnnotation.swift */; };
 		8B8DB3641D36165A008A5EA6 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B8DB3631D361659008A5EA6 /* AVFoundation.framework */; };
 		8BAD4E411D27682200A64393 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BAD4E401D27682200A64393 /* SWRevealViewController.m */; };
 		8BAD4E441D2769E400A64393 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BAD4E431D2769E400A64393 /* Default.png */; };
@@ -117,6 +118,7 @@
 		8B71F4901D4A1D1700761CD6 /* TPKATableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPKATableViewController.h; sourceTree = "<group>"; };
 		8B71F4911D4A1D1700761CD6 /* TPKATableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPKATableViewController.m; sourceTree = "<group>"; };
 		8B804BA31D44A53E00D95629 /* CustomeCell5.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomeCell5.swift; sourceTree = "<group>"; };
+		8B8869011D65C029000D6884 /* CustomPointAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomPointAnnotation.swift; sourceTree = "<group>"; };
 		8B8DB3631D361659008A5EA6 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		8BAD4E401D27682200A64393 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
 		8BAD4E421D27683200A64393 /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
@@ -268,6 +270,7 @@
 				8B1A6D0D1D2CD2C800A9AFFD /* OptionsData.swift */,
 				8B326D651D39023A00022B33 /* DetailData.swift */,
 				8B68B06C1D4760A100250691 /* Params.swift */,
+				8B8869011D65C029000D6884 /* CustomPointAnnotation.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -618,6 +621,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B8869021D65C029000D6884 /* CustomPointAnnotation.swift in Sources */,
 				8BAD4E411D27682200A64393 /* SWRevealViewController.m in Sources */,
 				8B5910871D4876320045D6D2 /* TAG.swift in Sources */,
 				F4702A181A7F351C00E30A3C /* MenuController.swift in Sources */,
