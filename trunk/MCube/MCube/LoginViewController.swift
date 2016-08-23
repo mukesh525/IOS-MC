@@ -12,12 +12,19 @@ import BEMCheckBox
 
 class LoginViewController: UIViewController,ValidationDelegate ,UITextFieldDelegate {
     
-    @IBOutlet weak var rememberMe: BEMCheckBox!
-    @IBOutlet weak var loginButton: UIButton!
-    @IBOutlet weak var passworderror: UILabel!
+    @IBOutlet weak var logo: UIImageView!
     @IBOutlet weak var password: UITextField!
-    @IBOutlet weak var emailerror: UILabel!
     @IBOutlet weak var email: UITextField!
+    @IBOutlet weak var emailerror: UILabel!
+    @IBOutlet weak var passworderror: UILabel!
+    @IBOutlet weak var loginButton: UIButton!
+    @IBOutlet weak var rememberMe: BEMCheckBox!
+//    @IBOutlet weak var rememberMe: BEMCheckBox!
+//    @IBOutlet weak var loginButton: UIButton!
+//    @IBOutlet weak var passworderror: UILabel!
+//    @IBOutlet weak var password: UITextField!
+//    @IBOutlet weak var emailerror: UILabel!
+//    @IBOutlet weak var email: UITextField!
     private var showingActivity = false
     let validator = Validator()
     var code:String?
@@ -36,7 +43,7 @@ class LoginViewController: UIViewController,ValidationDelegate ,UITextFieldDeleg
     //var rememberMe:Bool=false
     var showpassicon:UIImageView?
     var iconClick : Bool!
-    @IBOutlet weak var checkBox: CheckBox!
+
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -1656,11 +1656,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MCube/LoginViewController.swift"
-            timestampString = "491293527.48021"
+            timestampString = "493459399.287492"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "65"
-            endingLineNumber = "65"
+            startingLineNumber = "72"
+            endingLineNumber = "72"
             landmarkName = "imageTapped(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -2052,7 +2052,7 @@
                   moduleName = "MCube"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/mukesh/Documents/IOS-MCube/MCube/NetworkOperation.swift"
-                  timestampString = "493195196.614117"
+                  timestampString = "493560624.860709"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "0"
@@ -2067,7 +2067,7 @@
                   moduleName = "MCube"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/mukesh/Documents/IOS-MCube/MCube/NetworkOperation.swift"
-                  timestampString = "493195196.614352"
+                  timestampString = "493560624.860858"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "0"
@@ -2082,7 +2082,7 @@
                   moduleName = "MCube"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/mukesh/Documents/IOS-MCube/MCube/NetworkOperation.swift"
-                  timestampString = "493195196.614579"
+                  timestampString = "493560624.860984"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "11"
@@ -2147,7 +2147,7 @@
                   moduleName = "MCube"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/mukesh/Documents/IOS-MCube/MCube/Report.swift"
-                  timestampString = "493195196.616592"
+                  timestampString = "493560624.862297"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "44"
@@ -2162,7 +2162,7 @@
                   moduleName = "MCube"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/mukesh/Documents/IOS-MCube/MCube/Report.swift"
-                  timestampString = "493195196.616891"
+                  timestampString = "493560624.862448"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "44"
@@ -2745,6 +2745,38 @@
             startingLineNumber = "163"
             endingLineNumber = "163"
             landmarkName = "initializeViews()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MCube/MapController.swift"
+            timestampString = "493207971.010641"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "52"
+            endingLineNumber = "52"
+            landmarkName = "mapView(_:viewForAnnotation:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MCube/MapController.swift"
+            timestampString = "493207971.010641"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "51"
+            endingLineNumber = "51"
+            landmarkName = "mapView(_:viewForAnnotation:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
