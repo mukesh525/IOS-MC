@@ -62,13 +62,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 if responseObject == nil {
                     print("failed: \(error)")
                 } else {
-                    let result:NSMutableArray=ParseJason().ParseReportJason(responseObject!);
+                    let result:NSMutableArray=ParseJason().ParseReportJason(responseObject!,type: type);
                     let menu:Array<OptionsData>=ParseJason().ParseMenu(responseObject!);
                     let isUpdated = ModelManager.getInstance().insertData(type, isDelete: true, Datas: result, isMore: false)
                     let isMenu = ModelManager.getInstance().insertMenu (type, Options: menu)
                     if(isUpdated && isMenu){
                         
-                        print("Background Result for type \(type) and \(ParseJason().ParseReportJason(responseObject!).count)")
+                        print("Background Result for type \(type) and \(ParseJason().ParseReportJason(responseObject!,type:type).count)")
                     }
                     
                     

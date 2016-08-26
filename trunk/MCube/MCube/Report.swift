@@ -27,7 +27,7 @@ class Report: NSObject {
             {response in switch response.result {
                 
             case .Success(let JSON):
-            self.result=ParseJason().ParseReportJason(JSON);
+            self.result=ParseJason().ParseReportJason(JSON,type: (self.param?.type!)!);
             self.options=ParseJason().ParseMenu(JSON);
             print("Success with JSON: \(JSON)")
             

@@ -45,7 +45,7 @@ class ParseJason: NSObject {
 }
     
   
-    func ParseReportJason(JSON:AnyObject) -> NSMutableArray{
+    func ParseReportJason(JSON:AnyObject,type:String) -> NSMutableArray{
         result=NSMutableArray();
         options=[OptionsData]();
         let response = JSON as! NSDictionary
@@ -57,6 +57,12 @@ class ParseJason: NSObject {
                     callId=record.objectForKey(CALLID) as? String
                     data.callId=callId;
                 }
+//                if((record.objectForKey(DATAID)) != nil){
+//                    if(type == FOLLOWUP){
+//                       callId=record.objectForKey(DATAID) as? String
+//                        data.callId=callId;
+//                    }
+//                }
                 if((record.objectForKey(CALLFROM)) != nil){
                     callFrom=record.objectForKey(CALLFROM) as? String
                     data.callFrom=callFrom;

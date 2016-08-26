@@ -347,6 +347,8 @@ extension _ArrayType where Generator.Element == DetailData {
         parameters![GROUP_NAME]=(currentData.groupName != nil ? currentData.groupName : currentData.empName)!
         if(postFollowup){
             parameters![CALLID]=currentData.callId!
+            print("\(CALLID) :\(currentData.callId!)")
+            
             if(type==TRACK){
                   parameters![FTYPE]="calltrack"
                   print("\(FTYPE) :calltrack ")
@@ -360,8 +362,8 @@ extension _ArrayType where Generator.Element == DetailData {
                 print("\(FTYPE) :calltrack ")
             }
             else{
-                  parameters![FTYPE]=type
-                  print("\(FTYPE) :\(type) ")
+                parameters![FTYPE] = (type != FOLLOWUP ? type:currentData.groupName!)
+                  print("\(FTYPE) :\(type != FOLLOWUP ? type:currentData.groupName!)")
             }
             parameters![TYPE]=FOLLOWUP
             print("\(TYPE) :\(FOLLOWUP) ")

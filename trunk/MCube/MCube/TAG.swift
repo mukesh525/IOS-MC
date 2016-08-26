@@ -59,6 +59,7 @@ let DATE_TIME : String = "datetime"
 
 
 let CALLID : String = "callid"
+let DATAID : String = "dataid"
 let GROUPNAME : String = "groupname"
 let FIELDS : String = "fields"
 let VALUE : String = "value"
