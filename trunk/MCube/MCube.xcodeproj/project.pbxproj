@@ -10,6 +10,7 @@
 		0FC07413E5A68EE61CF6127D /* Pods_MCubeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FD2DC71E87A5DE1A2F739AB /* Pods_MCubeTests.framework */; };
 		8B1A6D031D2CD0E600A9AFFD /* FilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1A6D021D2CD0E500A9AFFD /* FilterCell.swift */; };
 		8B1A6D0E1D2CD2C800A9AFFD /* OptionsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1A6D0D1D2CD2C800A9AFFD /* OptionsData.swift */; };
+		8B250D461D745AF6002706EF /* kTextFiledPlaceHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B250D451D745AF6002706EF /* kTextFiledPlaceHolder.swift */; };
 		8B326D4B1D38D6F400022B33 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B326D4A1D38D6F400022B33 /* DetailViewController.swift */; };
 		8B326D5B1D39005E00022B33 /* CustomeCell1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B326D5A1D39005E00022B33 /* CustomeCell1.swift */; };
 		8B326D5D1D39007200022B33 /* CustomeCell2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B326D5C1D39007200022B33 /* CustomeCell2.swift */; };
@@ -23,6 +24,7 @@
 		8B5910871D4876320045D6D2 /* TAG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5910861D4876320045D6D2 /* TAG.swift */; };
 		8B5910891D48BC0E0045D6D2 /* DetailDataTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5910881D48BC0E0045D6D2 /* DetailDataTask.swift */; };
 		8B59B2251D45E25700AE9269 /* ExtensionsUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B59B2241D45E25700AE9269 /* ExtensionsUtils.swift */; };
+		8B6049AF1D76B46900DADD52 /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6049AE1D76B46900DADD52 /* Address.swift */; };
 		8B64868A1D3E019D0071C76D /* mcubeios.db in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8B6486891D3E018A0071C76D /* mcubeios.db */; };
 		8B6584BB1D4203DD007D2C2D /* AddFollowupController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6584BA1D4203DD007D2C2D /* AddFollowupController.swift */; };
 		8B68B06B1D474CAB00250691 /* Report.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B68B06A1D474CAB00250691 /* Report.swift */; };
@@ -94,6 +96,7 @@
 		6FD2DC71E87A5DE1A2F739AB /* Pods_MCubeTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MCubeTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B1A6D021D2CD0E500A9AFFD /* FilterCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterCell.swift; sourceTree = "<group>"; };
 		8B1A6D0D1D2CD2C800A9AFFD /* OptionsData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionsData.swift; sourceTree = "<group>"; };
+		8B250D451D745AF6002706EF /* kTextFiledPlaceHolder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = kTextFiledPlaceHolder.swift; sourceTree = "<group>"; };
 		8B326D4A1D38D6F400022B33 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		8B326D5A1D39005E00022B33 /* CustomeCell1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomeCell1.swift; sourceTree = "<group>"; };
 		8B326D5C1D39007200022B33 /* CustomeCell2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomeCell2.swift; sourceTree = "<group>"; };
@@ -107,6 +110,7 @@
 		8B5910861D4876320045D6D2 /* TAG.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TAG.swift; sourceTree = "<group>"; };
 		8B5910881D48BC0E0045D6D2 /* DetailDataTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailDataTask.swift; sourceTree = "<group>"; };
 		8B59B2241D45E25700AE9269 /* ExtensionsUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionsUtils.swift; sourceTree = "<group>"; };
+		8B6049AE1D76B46900DADD52 /* Address.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Address.swift; sourceTree = "<group>"; };
 		8B6486891D3E018A0071C76D /* mcubeios.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = mcubeios.db; sourceTree = "<group>"; };
 		8B6584BA1D4203DD007D2C2D /* AddFollowupController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddFollowupController.swift; sourceTree = "<group>"; };
 		8B68B06A1D474CAB00250691 /* Report.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Report.swift; sourceTree = "<group>"; };
@@ -244,11 +248,13 @@
 				8BAD4E451D2769F300A64393 /* background_port.jpg */,
 			);
 			name = Images;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		8BAD4E471D276AB100A64393 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				8B250D451D745AF6002706EF /* kTextFiledPlaceHolder.swift */,
 				8B471D291D40B05F008BD625 /* MoreViewController.swift */,
 				F4702A171A7F351C00E30A3C /* MenuController.swift */,
 				8BAD4E771D278C9B00A64393 /* LoginViewController.swift */,
@@ -266,11 +272,13 @@
 		8BAD4E481D276ABE00A64393 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				8B8DB3741D367231008A5EA6 /* Images */,
 				8BE66F731D2A7B950073CFE5 /* Data.swift */,
 				8B1A6D0D1D2CD2C800A9AFFD /* OptionsData.swift */,
 				8B326D651D39023A00022B33 /* DetailData.swift */,
 				8B68B06C1D4760A100250691 /* Params.swift */,
 				8B8869011D65C029000D6884 /* CustomPointAnnotation.swift */,
+				8B6049AE1D76B46900DADD52 /* Address.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -322,7 +330,6 @@
 		F47029E71A7F27DB00E30A3C = {
 			isa = PBXGroup;
 			children = (
-				8B8DB3741D367231008A5EA6 /* Images */,
 				F4702A151A7F342F00E30A3C /* MapKit.framework */,
 				F47029F21A7F27DB00E30A3C /* MCube */,
 				F4702A081A7F27DC00E30A3C /* MCubeTests */,
@@ -647,9 +654,11 @@
 				8BD246E71D3CEFA700480CFB /* FMDatabase.m in Sources */,
 				8B326D661D39023A00022B33 /* DetailData.swift in Sources */,
 				8BD246EA1D3CEFA700480CFB /* FMResultSet.m in Sources */,
+				8B6049AF1D76B46900DADD52 /* Address.swift in Sources */,
 				8BE66F741D2A7B950073CFE5 /* Data.swift in Sources */,
 				8BB16D391D35078E0060B841 /* PushNoAnimationSegue.swift in Sources */,
 				8BB16D3B1D3510F80060B841 /* CheckBox.swift in Sources */,
+				8B250D461D745AF6002706EF /* kTextFiledPlaceHolder.swift in Sources */,
 				8B1A6D0E1D2CD2C800A9AFFD /* OptionsData.swift in Sources */,
 				8B71F4921D4A1D1700761CD6 /* TPKATableViewController.m in Sources */,
 				8B326D4B1D38D6F400022B33 /* DetailViewController.swift in Sources */,

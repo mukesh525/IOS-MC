@@ -10,22 +10,79 @@ import MapKit
 
 class MapController: UIViewController,MKMapViewDelegate {
 
+  @IBOutlet weak var addressLabel: UILabel!
   @IBOutlet weak var mapView: MKMapView!
    
+    @IBOutlet weak var latlong: UILabel!
     let regionRadius: CLLocationDistance = 1000
     
     override func viewDidLoad() {
-        let initialLocation = CLLocation(latitude: 21.282778, longitude: -157.829444)
-        centerMapOnLocation(initialLocation)
         self.mapView.delegate = self
+        latlong.text="LAT:12.9719811 LONG:77.7502391"
         
-        var info1 = CustomPointAnnotation()
-        info1.coordinate = CLLocationCoordinate2DMake(42, -84)
-        info1.title = "Info1"
-        info1.subtitle = "Subtitle"
-        info1.imageName = "place"
+        let location = CLLocationCoordinate2D(
+            latitude: 12.9719811,
+            longitude: 77.7502391
+        )
+        // 2
+        let span = MKCoordinateSpanMake(0.01, 0.01)
+        let region = MKCoordinateRegion(center: location, span: span)
+        mapView.setRegion(region, animated: true)
         
-        mapView.addAnnotation(info1)
+        //3
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = location
+        annotation.title = "Call Received Location"
+        annotation.subtitle = "London London London"
+       
+        mapView.addAnnotation(annotation)
+        addressLabel.numberOfLines = 2;
+        
+        
+        
+        let address=Address();
+        let geoCoder = CLGeocoder()
+        let loc = CLLocation(latitude: location.latitude, longitude: location.longitude)
+        geoCoder.reverseGeocodeLocation(loc, completionHandler: { (placemarks, error) -> Void in
+           
+            var placeMark: CLPlacemark!
+            placeMark = placemarks?[0]
+           // print(placeMark.addressDictionary!)
+            
+            // Location name
+            if let locationName = placeMark.addressDictionary!["Name"] as? NSString {
+               // print(locationName)
+                address.LocationName=locationName as String;
+            }
+            
+            // Street address
+            if let street = placeMark.addressDictionary!["Thoroughfare"] as? NSString {
+                //print(street)
+                 address.Street=street as String;
+            }
+            
+            // City
+            if let city = placeMark.addressDictionary!["City"] as? NSString {
+               // print(city)
+                 address.City=city as String;
+            }
+            
+            // Zip code
+            if let zip = placeMark.addressDictionary!["ZIP"] as? NSString {
+               // print(zip)
+                 address.Zip=zip as String;
+            }
+            
+            // Country
+            if let country = placeMark.addressDictionary!["Country"] as? NSString {
+               // print(country)
+                address.Country=country as String;
+            }
+            self.addressLabel.text="\(address.LocationName!),\(address.Street!),\(address.City!),\(address.Zip!),\(address.Country!)"
+  
+        })
+
+        
         
         
         
@@ -34,40 +91,9 @@ class MapController: UIViewController,MKMapViewDelegate {
         
         
     }
+    
+    
 
 
-    func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
-        if !(annotation is CustomPointAnnotation) {
-            return nil
-        }
-        
-        let reuseId = "test"
-        
-        var anView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseId)
-        if anView == nil {
-            anView = MKAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
-            anView!.canShowCallout = true
-        }
-        else {
-            anView!.annotation = annotation
-        }
-        
-        //Set annotation-specific properties **AFTER**
-        //the view is dequeued or created...
-        
-        let cpa = annotation as! CustomPointAnnotation
-        anView!.image = UIImage(named:cpa.imageName)
-        
-        return anView
-    }
-    
-    
-    
-   func centerMapOnLocation(location: CLLocation) {
-   let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate,regionRadius * 2.0, regionRadius * 2.0)
-    mapView.setRegion(coordinateRegion, animated: true)
-   }
-    
-    
-    
+
 }

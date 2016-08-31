@@ -19,12 +19,6 @@ class LoginViewController: UIViewController,ValidationDelegate ,UITextFieldDeleg
     @IBOutlet weak var passworderror: UILabel!
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var rememberMe: BEMCheckBox!
-//    @IBOutlet weak var rememberMe: BEMCheckBox!
-//    @IBOutlet weak var loginButton: UIButton!
-//    @IBOutlet weak var passworderror: UILabel!
-//    @IBOutlet weak var password: UITextField!
-//    @IBOutlet weak var emailerror: UILabel!
-//    @IBOutlet weak var email: UITextField!
     private var showingActivity = false
     let validator = Validator()
     var code:String?
@@ -91,7 +85,9 @@ class LoginViewController: UIViewController,ValidationDelegate ,UITextFieldDeleg
     }
     
 
-    
+    override func prefersStatusBarHidden() -> Bool {
+        return true
+    }
     
     
     override func didReceiveMemoryWarning() {
