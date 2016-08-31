@@ -12,6 +12,7 @@ target 'MCube' do
   pod 'BEMCheckBox'
   pod 'TPKeyboardAvoiding'
   pod 'MBProgressHUD'
+ 
   
    target 'MCubeTests' do
     inherit! :search_paths
