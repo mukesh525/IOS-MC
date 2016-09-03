@@ -11,6 +11,9 @@
 		8B1A6D031D2CD0E600A9AFFD /* FilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1A6D021D2CD0E500A9AFFD /* FilterCell.swift */; };
 		8B1A6D0E1D2CD2C800A9AFFD /* OptionsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1A6D0D1D2CD2C800A9AFFD /* OptionsData.swift */; };
 		8B250D461D745AF6002706EF /* kTextFiledPlaceHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B250D451D745AF6002706EF /* kTextFiledPlaceHolder.swift */; };
+		8B2DAFE01D7AB4C3003AC452 /* CustomSubView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B2DAFDF1D7AB4C3003AC452 /* CustomSubView.xib */; };
+		8B2DAFE21D7AB5B6003AC452 /* CustomSubView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2DAFE11D7AB5B6003AC452 /* CustomSubView.swift */; };
+		8B2DAFE41D7AB64D003AC452 /* MapPin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2DAFE31D7AB64D003AC452 /* MapPin.swift */; };
 		8B326D4B1D38D6F400022B33 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B326D4A1D38D6F400022B33 /* DetailViewController.swift */; };
 		8B326D5B1D39005E00022B33 /* CustomeCell1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B326D5A1D39005E00022B33 /* CustomeCell1.swift */; };
 		8B326D5D1D39007200022B33 /* CustomeCell2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B326D5C1D39007200022B33 /* CustomeCell2.swift */; };
@@ -35,7 +38,6 @@
 		8B71F48E1D49D94100761CD6 /* ParseJason.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B71F48D1D49D94100761CD6 /* ParseJason.swift */; };
 		8B71F4921D4A1D1700761CD6 /* TPKATableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B71F4911D4A1D1700761CD6 /* TPKATableViewController.m */; };
 		8B804BA41D44A53E00D95629 /* CustomeCell5.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B804BA31D44A53E00D95629 /* CustomeCell5.swift */; };
-		8B8869021D65C029000D6884 /* CustomPointAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8869011D65C029000D6884 /* CustomPointAnnotation.swift */; };
 		8B8DB3641D36165A008A5EA6 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B8DB3631D361659008A5EA6 /* AVFoundation.framework */; };
 		8BAD4E411D27682200A64393 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BAD4E401D27682200A64393 /* SWRevealViewController.m */; };
 		8BAD4E441D2769E400A64393 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BAD4E431D2769E400A64393 /* Default.png */; };
@@ -97,6 +99,9 @@
 		8B1A6D021D2CD0E500A9AFFD /* FilterCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterCell.swift; sourceTree = "<group>"; };
 		8B1A6D0D1D2CD2C800A9AFFD /* OptionsData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionsData.swift; sourceTree = "<group>"; };
 		8B250D451D745AF6002706EF /* kTextFiledPlaceHolder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = kTextFiledPlaceHolder.swift; sourceTree = "<group>"; };
+		8B2DAFDF1D7AB4C3003AC452 /* CustomSubView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomSubView.xib; sourceTree = "<group>"; };
+		8B2DAFE11D7AB5B6003AC452 /* CustomSubView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomSubView.swift; sourceTree = "<group>"; };
+		8B2DAFE31D7AB64D003AC452 /* MapPin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapPin.swift; sourceTree = "<group>"; };
 		8B326D4A1D38D6F400022B33 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		8B326D5A1D39005E00022B33 /* CustomeCell1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomeCell1.swift; sourceTree = "<group>"; };
 		8B326D5C1D39007200022B33 /* CustomeCell2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomeCell2.swift; sourceTree = "<group>"; };
@@ -122,7 +127,6 @@
 		8B71F4901D4A1D1700761CD6 /* TPKATableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPKATableViewController.h; sourceTree = "<group>"; };
 		8B71F4911D4A1D1700761CD6 /* TPKATableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPKATableViewController.m; sourceTree = "<group>"; };
 		8B804BA31D44A53E00D95629 /* CustomeCell5.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomeCell5.swift; sourceTree = "<group>"; };
-		8B8869011D65C029000D6884 /* CustomPointAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomPointAnnotation.swift; sourceTree = "<group>"; };
 		8B8DB3631D361659008A5EA6 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		8BAD4E401D27682200A64393 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
 		8BAD4E421D27683200A64393 /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
@@ -265,6 +269,8 @@
 				8B68B0701D4797D900250691 /* FilterController.swift */,
 				8B53AE741D64302C00ED693E /* OverflowController.swift */,
 				8B53AE761D6444E500ED693E /* MapController.swift */,
+				8B2DAFDF1D7AB4C3003AC452 /* CustomSubView.xib */,
+				8B2DAFE11D7AB5B6003AC452 /* CustomSubView.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -277,8 +283,8 @@
 				8B1A6D0D1D2CD2C800A9AFFD /* OptionsData.swift */,
 				8B326D651D39023A00022B33 /* DetailData.swift */,
 				8B68B06C1D4760A100250691 /* Params.swift */,
-				8B8869011D65C029000D6884 /* CustomPointAnnotation.swift */,
 				8B6049AE1D76B46900DADD52 /* Address.swift */,
+				8B2DAFE31D7AB64D003AC452 /* MapPin.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -513,6 +519,7 @@
 			files = (
 				8BAD4E461D2769F300A64393 /* background_port.jpg in Resources */,
 				8BD246D91D3CED4500480CFB /* FMDB in Resources */,
+				8B2DAFE01D7AB4C3003AC452 /* CustomSubView.xib in Resources */,
 				F47029FB1A7F27DB00E30A3C /* Main.storyboard in Resources */,
 				F4702A001A7F27DC00E30A3C /* LaunchScreen.xib in Resources */,
 				F47029FD1A7F27DB00E30A3C /* Images.xcassets in Resources */,
@@ -628,7 +635,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8B8869021D65C029000D6884 /* CustomPointAnnotation.swift in Sources */,
 				8BAD4E411D27682200A64393 /* SWRevealViewController.m in Sources */,
 				8B5910871D4876320045D6D2 /* TAG.swift in Sources */,
 				F4702A181A7F351C00E30A3C /* MenuController.swift in Sources */,
@@ -639,6 +645,7 @@
 				F47029F61A7F27DB00E30A3C /* AppDelegate.swift in Sources */,
 				8B53AE771D6444E500ED693E /* MapController.swift in Sources */,
 				8B326D5D1D39007200022B33 /* CustomeCell2.swift in Sources */,
+				8B2DAFE21D7AB5B6003AC452 /* CustomSubView.swift in Sources */,
 				8BAD4E781D278C9B00A64393 /* LoginViewController.swift in Sources */,
 				8B326D5F1D39008300022B33 /* CustomeCell3.swift in Sources */,
 				8BD246D51D3CED2500480CFB /* ModelManager.swift in Sources */,
@@ -648,6 +655,7 @@
 				8B326D641D3900E700022B33 /* ChekboxCell.swift in Sources */,
 				8B53AE751D64302C00ED693E /* OverflowController.swift in Sources */,
 				8BBFE0BB1D28E25900435723 /* FollowupTableViewCell.swift in Sources */,
+				8B2DAFE41D7AB64D003AC452 /* MapPin.swift in Sources */,
 				8B71F48E1D49D94100761CD6 /* ParseJason.swift in Sources */,
 				8BF82F401D37B99000E1BA8D /* SettingsController.swift in Sources */,
 				8B59B2251D45E25700AE9269 /* ExtensionsUtils.swift in Sources */,
