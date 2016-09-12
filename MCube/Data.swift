@@ -20,6 +20,7 @@ class Data: NSObject {
     var callTimeString:String?
     var startTime:String?
     var empName:String?
+    var location:String?
     
     override init() {
         

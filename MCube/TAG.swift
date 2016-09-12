@@ -32,6 +32,7 @@ let DETAIL : String = "detail"
 let LAUNCHVIEW : String = "launchview"
 let NAME : String = "name"
 let EMAIL : String = "email"
+let LOCATE:String="locate"
 
 
 let EMAIL_FIELD : String = "emailfield"
@@ -43,7 +44,7 @@ let EMPNAME : String = "empName"
 let EMPEMAIL : String = "empEmail"
 let BUSINESS_NAME : String = "businessName"
 let EMP_CONTACT : String = "empContact"
-
+let LOCATION:String="location"
 
 let TYPE : String = "type"
 let FTYPE : String = "ftype"

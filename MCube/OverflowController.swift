@@ -15,7 +15,7 @@ import UIKit
 class OverflowController: UITableViewController  {
     weak var delegate: OverflowSelectedDelegate?
     var CurrentData:Data!
-   var Type:String!
+    var Type:String!
      weak var dismissalDelegate: DismissalDelegate?
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,12 +27,12 @@ class OverflowController: UITableViewController  {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         self.dismissViewControllerAnimated(true, completion: nil)
-        if(indexPath.row == 2){
-            dismissalDelegate?.finishedShowing(self)
-        }else{
-            delegate?.overflowSelected(indexPath.row,CurrentData: CurrentData)}
+         delegate?.overflowSelected(indexPath.row,CurrentData: CurrentData)
+//        if(indexPath.row == 2){
+//            dismissalDelegate?.finishedShowing(self)
+//        }else{
+//            delegate?.overflowSelected(indexPath.row,CurrentData: CurrentData)}
         
-       
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {

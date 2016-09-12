@@ -26,7 +26,7 @@ class ModelManager: NSObject {
     
     func createTable(tablename:String) -> Bool {
         sharedInstance.database!.open()
-        let sqlStatement = "CREATE TABLE IF NOT EXISTS \(tablename) ( _id INTEGER PRIMARY KEY AUTOINCREMENT,callid TEXT,callfrom TEXT,dataid TEXT, callername TEXT,groupname TEXT,calltime  TEXT,status TEXT,audio TEXT )"
+        let sqlStatement = "CREATE TABLE IF NOT EXISTS \(tablename) ( _id INTEGER PRIMARY KEY AUTOINCREMENT,callid TEXT,callfrom TEXT,dataid TEXT, callername TEXT,groupname TEXT,calltime  TEXT,status TEXT,audio TEXT,location TEXT)"
         let sqlStatement1 = "CREATE TABLE IF NOT EXISTS \(tablename)_menu (_id INTEGER PRIMARY KEY AUTOINCREMENT, optionid TEXT,optionname TEXT,isCheked TEXT )"
         let isCreated = sharedInstance.database!.executeUpdate(sqlStatement, withArgumentsInArray:nil)
         let isCreatedmenu = sharedInstance.database!.executeUpdate(sqlStatement1, withArgumentsInArray:nil)
@@ -50,7 +50,7 @@ class ModelManager: NSObject {
         sharedInstance.database!.open()
         for i in 0 ..< Datas.count {
         let data: Data = Datas[i] as! Data
-            isInserted = sharedInstance.database!.executeUpdate("INSERT INTO \(tablename) (callid,callfrom,dataid,callername,groupname,calltime,status,audio) VALUES (?,?,?,?,?,?,?,?)", withArgumentsInArray: [data.callId!, data.callFrom!,"N/A",data.callerName == nil ?"UNKNOWN":data.callerName!,data.groupName == nil ? data.empName!:data.groupName!,data.callTimeString == nil ? data.startTime!:data.callTimeString!,data.status == nil ? "UNKNOWN":data.status!,data.audioLink == nil ? empty:data.audioLink!])
+            isInserted = sharedInstance.database!.executeUpdate("INSERT INTO \(tablename) (callid,callfrom,dataid,callername,groupname,calltime,status,audio) VALUES (?,?,?,?,?,?,?,?.?)", withArgumentsInArray: [data.callId!, data.callFrom!,"N/A",data.callerName == nil ?"UNKNOWN":data.callerName!,data.groupName == nil ? data.empName!:data.groupName!,data.callTimeString == nil ? data.startTime!:data.callTimeString!,data.status == nil ? "UNKNOWN":data.status!,data.audioLink == nil ? empty:data.audioLink!,data.location == nil ? "0,0":data.location!])
             
         }
         
