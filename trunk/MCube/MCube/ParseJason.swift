@@ -20,6 +20,7 @@ class ParseJason: NSObject {
      var audioLink:String?
      var callTimeString:String?
      var empName:String?
+    var location:String?
     
     
     func ParseMenu(JSON:AnyObject) -> Array<OptionsData>{
@@ -57,12 +58,6 @@ class ParseJason: NSObject {
                     callId=record.objectForKey(CALLID) as? String
                     data.callId=callId;
                 }
-//                if((record.objectForKey(DATAID)) != nil){
-//                    if(type == FOLLOWUP){
-//                       callId=record.objectForKey(DATAID) as? String
-//                        data.callId=callId;
-//                    }
-//                }
                 if((record.objectForKey(CALLFROM)) != nil){
                     callFrom=record.objectForKey(CALLFROM) as? String
                     data.callFrom=callFrom;
@@ -104,6 +99,10 @@ class ParseJason: NSObject {
                     audioLink=record.objectForKey(FILENAME) as? String
                     data.audioLink=audioLink;
                 }
+                if((record.objectForKey(LOCATION)) != nil){
+                    location=record.objectForKey(LOCATION) as? String
+                    data.location=location;
+                }
                 
                 self.result.addObject(data)
             }
@@ -113,7 +112,7 @@ class ParseJason: NSObject {
     
     
         return self.result
-        
+        
 }
     
     

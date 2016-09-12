@@ -337,7 +337,8 @@ class ReportViewController: UITableViewController,UIPopoverPresentationControlle
             }
         }
         else if(position == 2){
-         self.performSegueWithIdentifier("locate", sender: self)
+            self.CurrentData=CurrentData;
+         self.performSegueWithIdentifier(LOCATE, sender: self)
         }
         else{
            self.sendSms(CurrentData)
@@ -360,7 +361,7 @@ class ReportViewController: UITableViewController,UIPopoverPresentationControlle
     func canSendText() -> Bool {
         return MFMessageComposeViewController.canSendText()
     }
-    func messageComposeViewController(controller: MFMessageComposeViewController!, didFinishWithResult result: MessageComposeResult) {
+    func messageComposeViewController(controller: MFMessageComposeViewController, didFinishWithResult result: MessageComposeResult) {
         controller.dismissViewControllerAnimated(true, completion: nil)
     }
     
@@ -377,19 +378,16 @@ class ReportViewController: UITableViewController,UIPopoverPresentationControlle
             popoverViewController.popoverPresentationController!.delegate = self
             popoverViewController.delegate = self
         }
-        if segue.identifier == DETAIL{
+       else if segue.identifier == DETAIL{
             
             let detailview = segue.destinationViewController as! DetailViewController
             detailview.currentData=CurrentData;
             detailview.type=self.type
             
         }
-        if segue.identifier == DETAIL{
-            
-            let detailview = segue.destinationViewController as! DetailViewController
-            detailview.currentData=CurrentData;
-            detailview.type=self.type
-            
+        else if segue.identifier == LOCATE{
+         let mapView = segue.destinationViewController as! MapController
+         mapView.currentdata=CurrentData;
         }
         
         

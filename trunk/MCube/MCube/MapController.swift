@@ -7,6 +7,7 @@
 //
 
 import MapKit
+import Foundation
 
 class MapController: UIViewController,MKMapViewDelegate {
 
@@ -17,12 +18,14 @@ class MapController: UIViewController,MKMapViewDelegate {
     @IBOutlet weak var latlong: UILabel!
     let regionRadius: CLLocationDistance = 1000
     var punkt:MapPin!
-    override func viewDidLoad() {
+    var currentdata:Data!
+       override func viewDidLoad() {
         self.mapView.delegate = self
-        latlong.text="LAT:12.9719811 LONG:77.7502391"
+        let locate=currentdata.location!.componentsSeparatedByString(",")
+        latlong.text="LAT:\(locate[0]) LONG:\(locate[1])"
         location = CLLocationCoordinate2D(
-            latitude: 12.9719811,
-            longitude: 77.7502391
+            latitude: Double(locate[0])!,
+            longitude: Double(locate[1])!
         )
        
         let span = MKCoordinateSpanMake(0.01, 0.01)
@@ -35,7 +38,6 @@ class MapController: UIViewController,MKMapViewDelegate {
        
         
         addressLabel.numberOfLines = 2;
-        
         let address=Address();
         let geoCoder = CLGeocoder()
         let loc = CLLocation(latitude: location.latitude, longitude: location.longitude)
@@ -62,7 +64,7 @@ class MapController: UIViewController,MKMapViewDelegate {
             if let country = placeMark.addressDictionary!["Country"] as? NSString {
                 address.Country=country as String;
             }
-            self.addressLabel.text="\(address.LocationName!),\(address.Street!),\(address.City!),\(address.Zip!),\(address.Country!)"
+            self.addressLabel.text="\(address.LocationName == nil ? "":address.LocationName!),\(address.Street == nil ? "":address.Street!),\(address.City == nil ? "":address.City!),\(address.Zip == nil ? "":address.Zip!),\(address.Country == nil ?"":address.Country!)"
   
         })
 
@@ -122,13 +124,6 @@ class MapController: UIViewController,MKMapViewDelegate {
     
     func mapViewDidFinishLoadingMap(mapView: MKMapView) {
         
-        //self.mapView.selectAnnotation(punkt, animated: false)
-        
-//        for map in mapView.annotations {
-//            if(map.isEqual(punkt)){
-//                mapView.selectAnnotation(map, animated: false)
-//            }
-//        }
 
         
     }
@@ -143,7 +138,7 @@ class MapController: UIViewController,MKMapViewDelegate {
     override func viewDidAppear(animated: Bool) {
         let region = MKCoordinateRegion(center:location, span: MKCoordinateSpanMake(0.01, 0.01))
         mapView.setRegion(region, animated: true)
-        punkt = MapPin(name: "Rohit", type: MISSED, time: "2:00 pm", date: "23/12/78", number: "9886102532")
+        punkt = MapPin(name:currentdata.callerName!, type: currentdata.status! == "0" ? MISSED:currentdata.status! == "1" ? INBOUND:OUTBOUND, time: currentdata.startTime!.getTimeFromString(), date: currentdata.startTime!.getDateFromString(), number: currentdata.callFrom!)
         punkt.coordinate = location
         mapView.addAnnotation(punkt)
        self.mapView.selectAnnotation(punkt, animated: false)
