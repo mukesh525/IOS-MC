@@ -9,7 +9,7 @@
 import UIKit
 
 @objc protocol MoreSelectedDelegate {
-    func moreSelected(position: Int)
+    func moreSelected(_ position: Int)
 }
 class MoreViewController: UITableViewController {
     weak var delegate: MoreSelectedDelegate?
@@ -19,10 +19,10 @@ class MoreViewController: UITableViewController {
         // Do any additional setup after loading the view.
     }
 
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        self.dismissViewControllerAnimated(true, completion: nil)
-        delegate?.moreSelected(indexPath.item)
+        self.dismiss(animated: true, completion: nil)
+        delegate?.moreSelected((indexPath as NSIndexPath).item)
     }
     
 }

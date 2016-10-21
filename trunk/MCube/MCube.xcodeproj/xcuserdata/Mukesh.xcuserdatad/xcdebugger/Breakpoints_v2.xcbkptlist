@@ -24,13 +24,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MCube/LoginViewController.swift"
-            timestampString = "494166005.538052"
+            timestampString = "496145889.728843"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "212"
-            endingLineNumber = "212"
+            startingLineNumber = "254"
+            endingLineNumber = "254"
             landmarkName = "validationSuccessful()"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -56,13 +56,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MCube/LoginViewController.swift"
-            timestampString = "494166005.538052"
+            timestampString = "496145889.728843"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "206"
-            endingLineNumber = "206"
+            startingLineNumber = "248"
+            endingLineNumber = "248"
             landmarkName = "validationSuccessful()"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -275,13 +275,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MCube/LoginViewController.swift"
-            timestampString = "494166005.538052"
+            timestampString = "496145889.728843"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "215"
-            endingLineNumber = "215"
+            startingLineNumber = "257"
+            endingLineNumber = "257"
             landmarkName = "validationSuccessful()"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -291,13 +291,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MCube/LoginViewController.swift"
-            timestampString = "494166005.538052"
+            timestampString = "496145889.728843"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "229"
-            endingLineNumber = "229"
+            startingLineNumber = "271"
+            endingLineNumber = "271"
             landmarkName = "validationSuccessful()"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -545,7 +545,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MCube/FollowupTableViewCell.swift"
-            timestampString = "493106852.926586"
+            timestampString = "495356123.320665"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "26"

@@ -22,27 +22,27 @@ class CustomeCell4: UITableViewCell ,UITableViewDataSource, UITableViewDelegate{
         chekboxTable.allowsSelection=false
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
     }
     //MARK: - Tableview Delegate & Datasource
-    func tableView(tableView:UITableView, numberOfRowsInSection section:Int) -> Int
+    func tableView(_ tableView:UITableView, numberOfRowsInSection section:Int) -> Int
     {
         return optionsList.count
     }
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int
+    func numberOfSections(in tableView: UITableView) -> Int
     {
         return 1
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
         
-        let cell1 = tableView.dequeueReusableCellWithIdentifier("checkcell", forIndexPath: indexPath) as!ChekboxCell
-        let optdata: OptionsData = self.optionsList[indexPath.row]
+        let cell1 = tableView.dequeueReusableCell(withIdentifier: "checkcell", for: indexPath) as!ChekboxCell
+        let optdata: OptionsData = self.optionsList[(indexPath as NSIndexPath).row]
         cell1.checklabel.text=optdata.value
         cell1.Chekbox.on = optdata.isChecked
         cell1.DidTapCheckBox = {(checkbox) -> Void in
@@ -56,12 +56,12 @@ class CustomeCell4: UITableViewCell ,UITableViewDataSource, UITableViewDelegate{
         
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
         
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
                return 44
     }
     

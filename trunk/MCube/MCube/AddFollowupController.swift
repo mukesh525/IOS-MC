@@ -19,14 +19,14 @@ class AddFollowupController: UIViewController,CustomCellDelegate,UITextFieldDele
     var EmailId :String?
     var type :String?
     @IBOutlet weak var mytableView: UITableView!
-    private var showingActivity = false
+    fileprivate var showingActivity = false
     var refreshControl = UIRefreshControl()
     override func viewDidLoad() {
         super.viewDidLoad()
         self.refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
-        self.refreshControl.addTarget(self, action: #selector(DetailViewController.refresh(_:)), forControlEvents: UIControlEvents.ValueChanged)
+        self.refreshControl.addTarget(self, action: #selector(DetailViewController.refresh(_:)), for: UIControlEvents.valueChanged)
         self.mytableView?.addSubview(refreshControl)
-        if self.refreshControl.refreshing{
+        if self.refreshControl.isRefreshing{
             self.refreshControl.endRefreshing()
         }
         
@@ -34,16 +34,16 @@ class AddFollowupController: UIViewController,CustomCellDelegate,UITextFieldDele
     }
     
     deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(self);
+        NotificationCenter.default.removeObserver(self);
     }
     
 
 
-    override func viewWillDisappear(animated: Bool) {
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillShowNotification, object: nil)
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillHideNotification, object: nil)
+    override func viewWillDisappear(_ animated: Bool) {
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
     
@@ -52,7 +52,7 @@ class AddFollowupController: UIViewController,CustomCellDelegate,UITextFieldDele
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func SubmitClick(sender: UIButton) {
+    @IBAction func SubmitClick(_ sender: UIButton) {
         
         self.UpdateRecords();
         
@@ -62,47 +62,47 @@ class AddFollowupController: UIViewController,CustomCellDelegate,UITextFieldDele
     
     func loadDetaildata() {
         
-        if !self.refreshControl.refreshing{
+        if !self.refreshControl.isRefreshing{
             self.showActivityIndicator()
         }
         
-        Alamofire.request(.POST, FOLLOWUP_FORM,
+        Alamofire.request(FOLLOWUP_FORM,method :.post,
             parameters: [AUTHKEY:authkey!]).validate().responseJSON
             {response in switch response.result {
                 
-            case .Success(let JSON):
+            case .success(let JSON):
                 print("Success with JSON: \(JSON)")
                 let response = JSON as! NSDictionary
                 
                 //self.showActivityIndicator()
-                if((response.objectForKey(FIELDS)) != nil){
+                if((response.object(forKey: FIELDS)) != nil){
                     self.DetailDataList=[DetailData]()
-                    let fields = response.objectForKey(FIELDS) as! NSArray?
+                    let fields = response.object(forKey: FIELDS) as! NSArray?
                     
                     for field in fields!{
                         let detailData=DetailData();
-                        if((field.objectForKey(NAME)) != nil){
-                            detailData.Name=field.objectForKey(NAME) as? String
+                        if(((field as AnyObject).object(forKey: NAME)) != nil){
+                            detailData.Name=(field as AnyObject).object(forKey: NAME) as? String
                             
                         }
-                        if((field.objectForKey(LABEL)) != nil){
-                            detailData.label=field.objectForKey(LABEL) as? String
+                        if(((field as AnyObject).object(forKey: LABEL)) != nil){
+                            detailData.label=(field as AnyObject).object(forKey: LABEL) as? String
                             
                         }
                         
-                        if((field.objectForKey(TYPE)) != nil){
-                            detailData.Type=field.objectForKey(TYPE) as? String
+                        if(((field as AnyObject).object(forKey: TYPE)) != nil){
+                            detailData.Type=(field as AnyObject).object(forKey: TYPE) as? String
                             
                         }
-                        if((field.objectForKey(VALUE)) != nil){
-                            detailData.value=field.objectForKey(VALUE) as? String
+                        if(((field as AnyObject).object(forKey: VALUE)) != nil){
+                            detailData.value=(field as AnyObject).object(forKey: VALUE) as? String
                             
                         }
                         
                         let optionsLabel = [DROPDOWN, RADIO,CHECKBOX]
                         let contained = optionsLabel.contains(detailData.Type!)
                         if(contained){
-                            let Options = field.objectForKey(OPTIONS) as! NSDictionary?
+                            let Options = (field as AnyObject).object(forKey: OPTIONS) as! NSDictionary?
                             self.optionsList=[OptionsData]()
                             self.OptionStringList=[String]()
                             print("Data items count: \(Options!.count)")
@@ -114,9 +114,9 @@ class AddFollowupController: UIViewController,CustomCellDelegate,UITextFieldDele
                                     detailData.value=value as? String
                                 }
                                 
-                                if (detailData.Type!.containsString(CHECKBOX) && !detailData.value!.containsString("")) {
-                                    let newString = detailData.value!.stringByReplacingOccurrencesOfString("\"", withString: "")
-                                    let toArray = newString.componentsSeparatedByString(",")
+                                if (detailData.Type!.contains(CHECKBOX) && !detailData.value!.contains("")) {
+                                    let newString = detailData.value!.replacingOccurrences(of: "\"", with: "")
+                                    let toArray = newString.components(separatedBy: ",")
                                     for curentValue in toArray  {
                                         if (key as! String==curentValue) {
                                             mOptionsData.isChecked=true
@@ -151,7 +151,7 @@ class AddFollowupController: UIViewController,CustomCellDelegate,UITextFieldDele
                         
                         
                     }
-                    if self.refreshControl.refreshing{
+                    if self.refreshControl.isRefreshing{
                         self.refreshControl.endRefreshing()
                     }
                     else{
@@ -165,12 +165,12 @@ class AddFollowupController: UIViewController,CustomCellDelegate,UITextFieldDele
                 
                 
                 
-            case .Failure(let error):
+            case .failure(let error):
                 print("Request failed with error: \(error)")
-                if (error.code == -1009) {
-                    self.showAlert("No Internet Conncetion")
+               if (((error as NSError).code == -1009 )||((error as NSError).code == -1001 )) {
+                  self.showAlert("No Internet Conncetion")
                 }
-                if self.refreshControl.refreshing{
+                if self.refreshControl.isRefreshing{
                     self.refreshControl.endRefreshing()
                 }
                 else{
@@ -181,14 +181,14 @@ class AddFollowupController: UIViewController,CustomCellDelegate,UITextFieldDele
         
     }
     
-    func showAlert(mesage :String){
-        let alertView = UIAlertController(title: TITLE, message: mesage, preferredStyle: .Alert)
-        alertView.addAction(UIAlertAction(title: "Ok", style: .Default, handler: nil))
-        presentViewController(alertView, animated: true, completion: nil)
+    func showAlert(_ mesage :String){
+        let alertView = UIAlertController(title: TITLE, message: mesage, preferredStyle: .alert)
+        alertView.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+        present(alertView, animated: true, completion: nil)
     }
     func showActivityIndicator(){
         if !self.showingActivity {
-            self.navigationController?.view.makeToastActivity(.Center)
+            self.navigationController?.view.makeToastActivity(.center)
         } else {
             self.navigationController?.view.hideToastActivity()
         }
@@ -197,46 +197,46 @@ class AddFollowupController: UIViewController,CustomCellDelegate,UITextFieldDele
         
     }
     
-    func refresh(sender:AnyObject) {
+    func refresh(_ sender:AnyObject) {
         // Code to refresh table view
         loadDetaildata();
     }
     
     
     //MARK: - Tableview Delegate & Datasource
-    func tableView(tableView:UITableView, numberOfRowsInSection section:Int) -> Int
+    func tableView(_ tableView:UITableView, numberOfRowsInSection section:Int) -> Int
     {
         if DetailDataList.count == 0{
-            let emptyLabel = UILabel(frame: CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height))
+            let emptyLabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.bounds.size.width, height: self.view.bounds.size.height))
             emptyLabel.text = "No Data Pull Down To Refresh"
-            emptyLabel.textAlignment = NSTextAlignment.Center
+            emptyLabel.textAlignment = NSTextAlignment.center
             tableView.backgroundView = emptyLabel
-            tableView.separatorStyle = UITableViewCellSeparatorStyle.None
+            tableView.separatorStyle = UITableViewCellSeparatorStyle.none
             return 0
         } else {
             //tableView.backgroundView = UIImageView(image: UIImage(named: "background_port.jpg"))
             tableView.backgroundView=UIView()
-            tableView.backgroundView?.backgroundColor = UIColor.clearColor()
+            tableView.backgroundView?.backgroundColor = UIColor.clear
             return DetailDataList.count
         }
         
     }
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int
+    func numberOfSectionsInTableView(_ tableView: UITableView) -> Int
     {
         return 1
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
+    func tableView(_ tableView: UITableView, cellForRowAtIndexPath indexPath: IndexPath) -> UITableViewCell
     {
         
         
-        let detaildata: DetailData = self.DetailDataList[indexPath.row]
+        let detaildata: DetailData = self.DetailDataList[(indexPath as NSIndexPath).row]
         
         
         if(detaildata.Type == LABEL)
         {
-            let cell1 = tableView.dequeueReusableCellWithIdentifier("LL1", forIndexPath: indexPath) as!CustomeCell1
+            let cell1 = tableView.dequeueReusableCell(withIdentifier: "LL1", for: indexPath) as!CustomeCell1
             cell1.label1.text=detaildata.label
             cell1.label2.text=detaildata.value
             return cell1
@@ -245,7 +245,7 @@ class AddFollowupController: UIViewController,CustomCellDelegate,UITextFieldDele
             
         else if(detaildata.Type == HIDDEN)
         {
-            let cell1 = tableView.dequeueReusableCellWithIdentifier("LL1", forIndexPath: indexPath) as!CustomeCell1
+            let cell1 = tableView.dequeueReusableCell(withIdentifier: "LL1", for: indexPath) as!CustomeCell1
             cell1.label1.text=detaildata.label
             cell1.label2.text=detaildata.value
             
@@ -254,7 +254,7 @@ class AddFollowupController: UIViewController,CustomCellDelegate,UITextFieldDele
         }
             
         else if (detaildata.Type==TEXT || detaildata.Type==TEXTAREA) {
-            let cell3 = tableView.dequeueReusableCellWithIdentifier("LT1", forIndexPath: indexPath) as!CustomeCell3
+            let cell3 = tableView.dequeueReusableCell(withIdentifier: "LT1", for: indexPath) as!CustomeCell3
             cell3.label1.text=detaildata.label
             if (NSString(string: detaildata.value!).length > 1){
                 cell3.textfiled.text=detaildata.value}
@@ -269,7 +269,7 @@ class AddFollowupController: UIViewController,CustomCellDelegate,UITextFieldDele
         }
             
         else if (detaildata.Type==DROPDOWN || detaildata.Type==RADIO) {
-            let cell2 = tableView.dequeueReusableCellWithIdentifier("LP1", forIndexPath: indexPath) as!CustomeCell2
+            let cell2 = tableView.dequeueReusableCell(withIdentifier: "LP1", for: indexPath) as!CustomeCell2
             cell2.label.text=detaildata.label
             cell2.Options=detaildata.Options
                if (NSString(string: detaildata.value!).length > 1){
@@ -289,7 +289,7 @@ class AddFollowupController: UIViewController,CustomCellDelegate,UITextFieldDele
         }
             
         else if (detaildata.Type == CHECKBOX){
-            let cell4 = tableView.dequeueReusableCellWithIdentifier("Ltabel1", forIndexPath: indexPath) as!CustomeCell4
+            let cell4 = tableView.dequeueReusableCell(withIdentifier: "Ltabel1", for: indexPath) as!CustomeCell4
             cell4.label1.text=detaildata.label
             cell4.optionsList=detaildata.OptionList
             cell4.chekboxTable.reloadData()
@@ -298,7 +298,7 @@ class AddFollowupController: UIViewController,CustomCellDelegate,UITextFieldDele
             
         }
         else if (detaildata.Type == DATE_TIME){
-            let cell5 = tableView.dequeueReusableCellWithIdentifier("LD1", forIndexPath: indexPath) as!CustomeCell5
+            let cell5 = tableView.dequeueReusableCell(withIdentifier: "LD1", for: indexPath) as!CustomeCell5
             cell5.label.text = detaildata.label
             detaildata.value=cell5.dateTimePicker.getStringValue();
             cell5.onDateChnaged = { (selectedRow) -> Void in
@@ -309,7 +309,7 @@ class AddFollowupController: UIViewController,CustomCellDelegate,UITextFieldDele
         }
             
         else {
-            let cell1 = tableView.dequeueReusableCellWithIdentifier("LL1", forIndexPath: indexPath) as!CustomeCell1
+            let cell1 = tableView.dequeueReusableCell(withIdentifier: "LL1", for: indexPath) as!CustomeCell1
             cell1.label1.text=detaildata.label
             cell1.label2.text=detaildata.value
             return cell1
@@ -319,8 +319,8 @@ class AddFollowupController: UIViewController,CustomCellDelegate,UITextFieldDele
     
     
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        let detaildata: DetailData = self.DetailDataList[indexPath.row]
+    func tableView(_ tableView: UITableView, heightForRowAtIndexPath indexPath: IndexPath) -> CGFloat {
+        let detaildata: DetailData = self.DetailDataList[(indexPath as NSIndexPath).row]
         let count=CGFloat(detaildata.OptionList.count);
         let chekheight=CGFloat(44);
         if(detaildata.Type == HIDDEN){
@@ -344,35 +344,35 @@ class AddFollowupController: UIViewController,CustomCellDelegate,UITextFieldDele
     }
     
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.view.endEditing(true)
         return false
     }
     
-    func cellTextChanged(cell: CustomeCell3) {
-        let indexPath = self.mytableView.indexPathForRowAtPoint(cell.center)!
-        let detaildata: DetailData = self.DetailDataList[indexPath.row]
+    func cellTextChanged(_ cell: CustomeCell3) {
+        let indexPath = self.mytableView.indexPathForRow(at: cell.center)!
+        let detaildata: DetailData = self.DetailDataList[(indexPath as NSIndexPath).row]
         detaildata.value=cell.textfiled.text!
-        print("index \(indexPath.row)  value  \(cell.textfiled.text!)")
+        print("index \((indexPath as NSIndexPath).row)  value  \(cell.textfiled.text!)")
     }
     
     func UpdateRecords() {
         var code:String?
         var msg:String?
         self.showActivityIndicator()
-       Alamofire.request(.POST, POST_DETAIL,
+        Alamofire.request(POST_DETAIL,method:.post,
             parameters: self.DetailDataList.getParams(self.currentData,type:self.type!,postFollowup: true)).validate().responseJSON
             {response in switch response.result {
                 
-            case .Success(let JSON):
+            case .success(let JSON):
                 print("Success with JSON: \(JSON)")
                 let response = JSON as! NSDictionary
-                if((response.objectForKey(CODE)) != nil){
-                    code=response.objectForKey(CODE) as? String
+                if((response.object(forKey: CODE)) != nil){
+                    code=response.object(forKey: CODE) as? String
                     
                 }
-                if((response.objectForKey(MESSAGE)) != nil){
-                    msg=response.objectForKey(MESSAGE) as? String
+                if((response.object(forKey: MESSAGE)) != nil){
+                    msg=response.object(forKey: MESSAGE) as? String
                     
                 }
                 
@@ -382,10 +382,10 @@ class AddFollowupController: UIViewController,CustomCellDelegate,UITextFieldDele
                 }else{
                     self.showAlert("Something went wrong try again")
                 }
-            case .Failure(let error):
+            case .failure(let error):
                 print("Request failed with error: \(error)")
                 self.showActivityIndicator()
-                if (error.code == -1009) {
+                 if (((error as NSError).code == -1009 )||((error as NSError).code == -1001 )) {
                     self.showAlert("No Internet Conncetion")
                 }
                 }
@@ -393,16 +393,16 @@ class AddFollowupController: UIViewController,CustomCellDelegate,UITextFieldDele
     }
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
 }
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+

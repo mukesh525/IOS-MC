@@ -21,7 +21,7 @@ class MapController: UIViewController,MKMapViewDelegate {
     var currentdata:Data!
        override func viewDidLoad() {
         self.mapView.delegate = self
-        let locate=currentdata.location!.componentsSeparatedByString(",")
+        let locate=currentdata.location!.components(separatedBy: ",")
         latlong.text="LAT:\(locate[0]) LONG:\(locate[1])"
         location = CLLocationCoordinate2D(
             latitude: Double(locate[0])!,
@@ -64,7 +64,8 @@ class MapController: UIViewController,MKMapViewDelegate {
             if let country = placeMark.addressDictionary!["Country"] as? NSString {
                 address.Country=country as String;
             }
-            self.addressLabel.text="\(address.LocationName == nil ? "":address.LocationName!),\(address.Street == nil ? "":address.Street!),\(address.City == nil ? "":address.City!),\(address.Zip == nil ? "":address.Zip!),\(address.Country == nil ?"":address.Country!)"
+            //,\(address.Street == nil ? "":address.Street!)
+            self.addressLabel.text="\(address.LocationName == nil ? "":address.LocationName!),\(address.City == nil ? "":address.City!),\(address.Zip == nil ? "":address.Zip!),\(address.Country == nil ?"":address.Country!)"
   
         })
 
@@ -72,9 +73,9 @@ class MapController: UIViewController,MKMapViewDelegate {
     }
     
     
-    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         let reuseId = "pin"
-        var pinView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseId) as? MKPinAnnotationView
+        var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKPinAnnotationView
         
         if pinView == nil {
             //println("Pinview was nil")
@@ -97,15 +98,15 @@ class MapController: UIViewController,MKMapViewDelegate {
 
     
     
-    func mapView(mapView: MKMapView, didSelectAnnotationView view: MKAnnotationView) {
-        if view.annotation!.isKindOfClass(MKUserLocation){
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        if view.annotation!.isKind(of: MKUserLocation.self){
             return
         }
         
-        let customView = (NSBundle.mainBundle().loadNibNamed("CustomSubView", owner: self, options: nil))[0] as! CustomSubView;
+        let customView = (Bundle.main.loadNibNamed("CustomSubView", owner: self, options: nil))?[0] as! CustomSubView;
         
         var calloutViewFrame = customView.frame;
-            calloutViewFrame.origin = CGPointMake(-calloutViewFrame.size.width/2 + 15,-calloutViewFrame.size.height);
+            calloutViewFrame.origin = CGPoint(x: -calloutViewFrame.size.width/2 + 15,y: -calloutViewFrame.size.height);
         
         customView.frame = calloutViewFrame;
         
@@ -122,20 +123,20 @@ class MapController: UIViewController,MKMapViewDelegate {
       
     }
     
-    func mapViewDidFinishLoadingMap(mapView: MKMapView) {
+    func mapViewDidFinishLoadingMap(_ mapView: MKMapView) {
         
 
         
     }
     
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         self.mapView.delegate=self
     }
     
  
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         let region = MKCoordinateRegion(center:location, span: MKCoordinateSpanMake(0.01, 0.01))
         mapView.setRegion(region, animated: true)
         punkt = MapPin(name:currentdata.callerName!, type: currentdata.status! == "0" ? MISSED:currentdata.status! == "1" ? INBOUND:OUTBOUND, time: currentdata.startTime!.getTimeFromString(), date: currentdata.startTime!.getDateFromString(), number: currentdata.callFrom!)

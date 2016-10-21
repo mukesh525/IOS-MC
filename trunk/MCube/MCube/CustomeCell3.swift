@@ -10,7 +10,7 @@ import UIKit
 
 
 protocol CustomCellDelegate {
-    func cellTextChanged(cell: CustomeCell3)
+    func cellTextChanged(_ cell: CustomeCell3)
 }
 
 
@@ -25,20 +25,20 @@ class CustomeCell3: UITableViewCell{
         super.awakeFromNib()
         // Initialization code
      
-        textfiled.addTarget(self, action: #selector(CustomeCell3.textFieldDidChange(_:)), forControlEvents: UIControlEvents.EditingChanged)
+        textfiled.addTarget(self, action: #selector(CustomeCell3.textFieldDidChange(_:)), for: UIControlEvents.editingChanged)
            }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
     }
-    func textFieldDidChange(textField: UITextField) {
+    func textFieldDidChange(_ textField: UITextField) {
         onTextChanged?(self)
         delegate?.cellTextChanged(self)
      
     }
-    @IBAction func textFieldDidBeginEditing(sender: AnyObject) {
+    @IBAction func textFieldDidBeginEditing(_ sender: AnyObject) {
         onEditingBegin?(self)
       
       //  return true;

@@ -8,7 +8,7 @@ import UIKit
 class DetailData: NSObject {
     var label:String?
     var Name:String?
-    var Type:String?
+    var `Type`:String?
     var value:String?
     var Values = [String]()
     var Options = [String]()

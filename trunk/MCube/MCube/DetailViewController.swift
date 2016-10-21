@@ -31,7 +31,7 @@ class DetailViewController: UIViewController,UITableViewDataSource,UIPopoverPres
         super.viewDidLoad()
         self.initializeViews();
         
-        if !self.refreshControl.refreshing{
+        if !self.refreshControl.isRefreshing{
             self.showActivityIndicator()
         }
         DetailDataTask(delegate: self).loadDetaildata(authkey!, type: self.type!, currentData:currentData);
@@ -40,20 +40,20 @@ class DetailViewController: UIViewController,UITableViewDataSource,UIPopoverPres
     }
 
     deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(self);
+        NotificationCenter.default.removeObserver(self);
     }
     
-    func refresh(sender:AnyObject) {
+    func refresh(_ sender:AnyObject) {
       DetailDataTask(delegate: self).loadDetaildata(authkey!, type: self.type!, currentData:currentData);
     }
     
     
-    func OnError(error: NSError) {
+    func OnError(_ error: NSError) {
         print("Request failed with error: \(error)")
         if (error.code == -1009) {
            self.showAlert("No Internet Conncetion")
         }
-        if self.refreshControl.refreshing{
+        if self.refreshControl.isRefreshing{
             self.refreshControl.endRefreshing()
         }
         else{
@@ -62,10 +62,10 @@ class DetailViewController: UIViewController,UITableViewDataSource,UIPopoverPres
     }
     
     
-    func OnFinishDownload(result: Array<DetailData>) {
+    func OnFinishDownload(_ result: Array<DetailData>) {
      
         self.DetailDataList=result;
-        if self.refreshControl.refreshing{
+        if self.refreshControl.isRefreshing{
             self.refreshControl.endRefreshing()
         }
         else{
@@ -79,48 +79,48 @@ class DetailViewController: UIViewController,UITableViewDataSource,UIPopoverPres
         
     }
     
-     @IBAction func UpdateClick(sender: AnyObject) {
+     @IBAction func UpdateClick(_ sender: AnyObject) {
         
         if(self.type == FOLLOWUP){
-         self.performSegueWithIdentifier("history", sender: self)
+         self.performSegue(withIdentifier: "history", sender: self)
         }else {
             self.UpdateRecords()
         }
         
     }
     
-    func tableView(tableView:UITableView, numberOfRowsInSection section:Int) -> Int
+    func tableView(_ tableView:UITableView, numberOfRowsInSection section:Int) -> Int
     {
         if DetailDataList.count == 0{
-            let emptyLabel = UILabel(frame: CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height))
+            let emptyLabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.bounds.size.width, height: self.view.bounds.size.height))
             emptyLabel.text = "No Data Pull Down To Refresh"
-            emptyLabel.textAlignment = NSTextAlignment.Center
+            emptyLabel.textAlignment = NSTextAlignment.center
             tableView.backgroundView = emptyLabel
-            tableView.separatorStyle = UITableViewCellSeparatorStyle.None
+            tableView.separatorStyle = UITableViewCellSeparatorStyle.none
             return 0
         } else {
             tableView.backgroundView=UIView()
-            tableView.backgroundView?.backgroundColor = UIColor.clearColor()
+            tableView.backgroundView?.backgroundColor = UIColor.clear
             return DetailDataList.count
         }
 
     }
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int
+    func numberOfSections(in tableView: UITableView) -> Int
     {
         return 1
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
         
         
-        let detaildata: DetailData = self.DetailDataList[indexPath.row] 
+        let detaildata: DetailData = self.DetailDataList[(indexPath as NSIndexPath).row] 
         
        
           if(detaildata.Type == LABEL)
         {
-            let cell1 = tableView.dequeueReusableCellWithIdentifier("LL", forIndexPath: indexPath) as!CustomeCell1
+            let cell1 = tableView.dequeueReusableCell(withIdentifier: "LL", for: indexPath) as!CustomeCell1
             cell1.label1.text=detaildata.label
             cell1.label2.text=detaildata.value
             return cell1
@@ -129,7 +129,7 @@ class DetailViewController: UIViewController,UITableViewDataSource,UIPopoverPres
         
         else if(detaildata.Type == HIDDEN)
           {
-            let cell1 = tableView.dequeueReusableCellWithIdentifier("LL", forIndexPath: indexPath) as!CustomeCell1
+            let cell1 = tableView.dequeueReusableCell(withIdentifier: "LL", for: indexPath) as!CustomeCell1
             cell1.label1.text=detaildata.label
             cell1.label2.text=detaildata.value
             
@@ -138,7 +138,7 @@ class DetailViewController: UIViewController,UITableViewDataSource,UIPopoverPres
         }
         
         else if (detaildata.Type==TEXT || detaildata.Type==TEXTAREA) {
-            let cell3 = tableView.dequeueReusableCellWithIdentifier("LT", forIndexPath: indexPath) as!CustomeCell3
+            let cell3 = tableView.dequeueReusableCell(withIdentifier: "LT", for: indexPath) as!CustomeCell3
             cell3.label1.text=detaildata.label
             if (NSString(string: detaildata.value!).length > 1){
             cell3.textfiled.text=detaildata.value}
@@ -153,7 +153,7 @@ class DetailViewController: UIViewController,UITableViewDataSource,UIPopoverPres
         }
         
         else if (detaildata.Type==DROPDOWN || detaildata.Type==RADIO) {
-            let cell2 = tableView.dequeueReusableCellWithIdentifier("LP", forIndexPath: indexPath) as!CustomeCell2
+            let cell2 = tableView.dequeueReusableCell(withIdentifier: "LP", for: indexPath) as!CustomeCell2
              cell2.label.text=detaildata.label
              cell2.Options=detaildata.Options
             if (NSString(string: detaildata.value!).length > 1){
@@ -173,7 +173,7 @@ class DetailViewController: UIViewController,UITableViewDataSource,UIPopoverPres
             
         }
         else if (detaildata.Type == DATE_TIME){
-            let cell5 = tableView.dequeueReusableCellWithIdentifier("LD", forIndexPath: indexPath) as!CustomeCell5
+            let cell5 = tableView.dequeueReusableCell(withIdentifier: "LD", for: indexPath) as!CustomeCell5
             cell5.label.text = detaildata.label
             detaildata.value=cell5.dateTimePicker.getStringValue();
             cell5.onDateChnaged = { (selectedRow) -> Void in
@@ -185,7 +185,7 @@ class DetailViewController: UIViewController,UITableViewDataSource,UIPopoverPres
 
         
        else if (detaildata.Type == CHECKBOX){
-       let cell4 = tableView.dequeueReusableCellWithIdentifier("Ltabel", forIndexPath: indexPath) as!CustomeCell4
+       let cell4 = tableView.dequeueReusableCell(withIdentifier: "Ltabel", for: indexPath) as!CustomeCell4
            cell4.label1.text=detaildata.label
            cell4.optionsList=detaildata.OptionList
            cell4.chekboxTable.reloadData()
@@ -194,7 +194,7 @@ class DetailViewController: UIViewController,UITableViewDataSource,UIPopoverPres
             
        }
         else {
-            let cell1 = tableView.dequeueReusableCellWithIdentifier("LL", forIndexPath: indexPath) as!CustomeCell1
+            let cell1 = tableView.dequeueReusableCell(withIdentifier: "LL", for: indexPath) as!CustomeCell1
             cell1.label1.text=detaildata.label
             cell1.label2.text=detaildata.value
             return cell1
@@ -204,8 +204,8 @@ class DetailViewController: UIViewController,UITableViewDataSource,UIPopoverPres
     
  
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        let detaildata: DetailData = self.DetailDataList[indexPath.row]
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let detaildata: DetailData = self.DetailDataList[(indexPath as NSIndexPath).row]
         let count=CGFloat(detaildata.OptionList.count);
         let chekheight=CGFloat(44);
         if(detaildata.Type == HIDDEN){
@@ -229,16 +229,16 @@ class DetailViewController: UIViewController,UITableViewDataSource,UIPopoverPres
     }
     
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.view.endEditing(true)
         return false
     }
     
-    func cellTextChanged(cell: CustomeCell3) {
-        let indexPath = self.mytableview.indexPathForRowAtPoint(cell.center)!
-        let detaildata: DetailData = self.DetailDataList[indexPath.row]
+    func cellTextChanged(_ cell: CustomeCell3) {
+        let indexPath = self.mytableview.indexPathForRow(at: cell.center)!
+        let detaildata: DetailData = self.DetailDataList[(indexPath as NSIndexPath).row]
         detaildata.value=cell.textfiled.text!
-        print("index \(indexPath.row)  value  \(cell.textfiled.text!)")
+        print("index \((indexPath as NSIndexPath).row)  value  \(cell.textfiled.text!)")
     }
 
 
@@ -246,19 +246,19 @@ class DetailViewController: UIViewController,UITableViewDataSource,UIPopoverPres
         var code:String?
         var msg:String?
         self.showActivityIndicator()
-        Alamofire.request(.POST, POST_DETAIL,
+        Alamofire.request(POST_DETAIL,method: .post,
             parameters: self.DetailDataList.getParams(self.currentData,type:self.type!,postFollowup: false)).validate().responseJSON
             {response in switch response.result {
                 
-            case .Success(let JSON):
+            case .success(let JSON):
                 print("Success with JSON: \(JSON)")
                 let response = JSON as! NSDictionary
-                if((response.objectForKey(CODE)) != nil){
-                   code=response.objectForKey(CODE) as? String
+                if((response.object(forKey: CODE)) != nil){
+                   code=response.object(forKey: CODE) as? String
                     
                 }
-                if((response.objectForKey(MESSAGE)) != nil){
-                    msg=response.objectForKey(MESSAGE) as? String
+                if((response.object(forKey: MESSAGE)) != nil){
+                    msg=response.object(forKey: MESSAGE) as? String
                     
                 }
                 
@@ -268,26 +268,26 @@ class DetailViewController: UIViewController,UITableViewDataSource,UIPopoverPres
                 }else{
                 self.showAlert("Something went wrong try again")
                  }
-            case .Failure(let error):
+            case .failure(let error):
                 print("Request failed with error: \(error)")
                 self.showActivityIndicator()
-                if (error.code == -1009) {
-                    self.showAlert("No Internet Conncetion")
-                }
+//                if (error == -1009) {
+//                    self.showAlert("No Internet Conncetion")
+//                }
                }
         }
     }
     
    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == ADD_FOLLOWUP{
-            let addfollowup = segue.destinationViewController as! AddFollowupController
+            let addfollowup = segue.destination as! AddFollowupController
             addfollowup.currentData=self.currentData;
             addfollowup.authkey=self.authkey;
             addfollowup.type=self.type;
         }
         if segue.identifier == HISTORY {
-            let navController = segue.destinationViewController as! SWRevealViewController
+            let navController = segue.destination as! SWRevealViewController
             navController.loadView()
             let secondVc = navController.frontViewController as! UINavigationController
             secondVc.loadView()
@@ -301,16 +301,16 @@ class DetailViewController: UIViewController,UITableViewDataSource,UIPopoverPres
     
     
     
-    func moreSelected(position: Int) {
+    func moreSelected(_ position: Int) {
         print(position);
         switch position {
         case 0  :
            self.UpdateRecords()
         case 1  :
-            self.performSegueWithIdentifier(ADD_FOLLOWUP, sender: self)
+            self.performSegue(withIdentifier: ADD_FOLLOWUP, sender: self)
         case 2  :
-            if let url = NSURL(string: "tel://\(self.currentData.callFrom)") {
-                UIApplication.sharedApplication().openURL(url)
+            if let url = URL(string: "tel://\(self.currentData.callFrom)") {
+                UIApplication.shared.openURL(url)
                 print(url)
             }
         case 3  :
@@ -318,7 +318,7 @@ class DetailViewController: UIViewController,UITableViewDataSource,UIPopoverPres
         case 4  :
             let mailComposeViewController = configuredMailComposeViewController()
             if MFMailComposeViewController.canSendMail() {
-                self.presentViewController(mailComposeViewController, animated: true, completion: nil)
+                self.present(mailComposeViewController, animated: true, completion: nil)
             } else {
                 self.showSendMailErrorAlert()
             }
@@ -328,9 +328,9 @@ class DetailViewController: UIViewController,UITableViewDataSource,UIPopoverPres
     }
 }
     
-    func messageComposeViewController(controller: MFMessageComposeViewController, didFinishWithResult result: MessageComposeResult) {
+    func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
         //... handle sms screen actions
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
     
     func sendSms(){
@@ -339,7 +339,7 @@ class DetailViewController: UIViewController,UITableViewDataSource,UIPopoverPres
             controller.body = "Message Body"
             controller.recipients = [self.currentData.callFrom!]
             controller.messageComposeDelegate = self
-            self.presentViewController(controller, animated: true, completion: nil)
+            self.present(controller, animated: true, completion: nil)
         }
     
    }
@@ -362,8 +362,8 @@ class DetailViewController: UIViewController,UITableViewDataSource,UIPopoverPres
     }
     
     // MARK: MFMailComposeViewControllerDelegate Method
-    func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
-        controller.dismissViewControllerAnimated(true, completion: nil)
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true, completion: nil)
     }
     
 

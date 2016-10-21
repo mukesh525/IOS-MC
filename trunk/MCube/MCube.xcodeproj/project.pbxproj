@@ -10,7 +10,6 @@
 		0FC07413E5A68EE61CF6127D /* Pods_MCubeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FD2DC71E87A5DE1A2F739AB /* Pods_MCubeTests.framework */; };
 		8B1A6D031D2CD0E600A9AFFD /* FilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1A6D021D2CD0E500A9AFFD /* FilterCell.swift */; };
 		8B1A6D0E1D2CD2C800A9AFFD /* OptionsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1A6D0D1D2CD2C800A9AFFD /* OptionsData.swift */; };
-		8B250D461D745AF6002706EF /* kTextFiledPlaceHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B250D451D745AF6002706EF /* kTextFiledPlaceHolder.swift */; };
 		8B2DAFE01D7AB4C3003AC452 /* CustomSubView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B2DAFDF1D7AB4C3003AC452 /* CustomSubView.xib */; };
 		8B2DAFE21D7AB5B6003AC452 /* CustomSubView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2DAFE11D7AB5B6003AC452 /* CustomSubView.swift */; };
 		8B2DAFE41D7AB64D003AC452 /* MapPin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2DAFE31D7AB64D003AC452 /* MapPin.swift */; };
@@ -40,6 +39,7 @@
 		8B71F4921D4A1D1700761CD6 /* TPKATableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B71F4911D4A1D1700761CD6 /* TPKATableViewController.m */; };
 		8B804BA41D44A53E00D95629 /* CustomeCell5.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B804BA31D44A53E00D95629 /* CustomeCell5.swift */; };
 		8B8DB3641D36165A008A5EA6 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B8DB3631D361659008A5EA6 /* AVFoundation.framework */; };
+		8BABF47D1D8FC2B500ADEF53 /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BABF47C1D8FC2B500ADEF53 /* Toast.swift */; };
 		8BAD4E411D27682200A64393 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BAD4E401D27682200A64393 /* SWRevealViewController.m */; };
 		8BAD4E441D2769E400A64393 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BAD4E431D2769E400A64393 /* Default.png */; };
 		8BAD4E461D2769F300A64393 /* background_port.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8BAD4E451D2769F300A64393 /* background_port.jpg */; };
@@ -99,7 +99,6 @@
 		6FD2DC71E87A5DE1A2F739AB /* Pods_MCubeTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MCubeTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B1A6D021D2CD0E500A9AFFD /* FilterCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterCell.swift; sourceTree = "<group>"; };
 		8B1A6D0D1D2CD2C800A9AFFD /* OptionsData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionsData.swift; sourceTree = "<group>"; };
-		8B250D451D745AF6002706EF /* kTextFiledPlaceHolder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = kTextFiledPlaceHolder.swift; sourceTree = "<group>"; };
 		8B2DAFDF1D7AB4C3003AC452 /* CustomSubView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomSubView.xib; sourceTree = "<group>"; };
 		8B2DAFE11D7AB5B6003AC452 /* CustomSubView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomSubView.swift; sourceTree = "<group>"; };
 		8B2DAFE31D7AB64D003AC452 /* MapPin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapPin.swift; sourceTree = "<group>"; };
@@ -130,6 +129,7 @@
 		8B71F4911D4A1D1700761CD6 /* TPKATableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPKATableViewController.m; sourceTree = "<group>"; };
 		8B804BA31D44A53E00D95629 /* CustomeCell5.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomeCell5.swift; sourceTree = "<group>"; };
 		8B8DB3631D361659008A5EA6 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		8BABF47C1D8FC2B500ADEF53 /* Toast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Toast.swift; sourceTree = "<group>"; };
 		8BAD4E401D27682200A64393 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
 		8BAD4E421D27683200A64393 /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
 		8BAD4E431D2769E400A64393 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
@@ -261,7 +261,6 @@
 		8BAD4E471D276AB100A64393 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				8B250D451D745AF6002706EF /* kTextFiledPlaceHolder.swift */,
 				8B471D291D40B05F008BD625 /* MoreViewController.swift */,
 				F4702A171A7F351C00E30A3C /* MenuController.swift */,
 				8BAD4E771D278C9B00A64393 /* LoginViewController.swift */,
@@ -304,6 +303,7 @@
 		8BB16D371D3507650060B841 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				8BABF47C1D8FC2B500ADEF53 /* Toast.swift */,
 				8BB16D381D35078E0060B841 /* PushNoAnimationSegue.swift */,
 				8BB16D3A1D3510F80060B841 /* CheckBox.swift */,
 				8B5910861D4876320045D6D2 /* TAG.swift */,
@@ -475,12 +475,13 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0700;
-				LastUpgradeCheck = 0700;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = AppCoda;
 				TargetAttributes = {
 					F47029EF1A7F27DB00E30A3C = {
 						CreatedOnToolsVersion = 6.1.1;
 						DevelopmentTeam = HMVM4SM8W5;
+						LastSwiftMigration = 0800;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -568,7 +569,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		3E6B328FAD5D922C9605EAB8 /* [CP] Copy Pods Resources */ = {
@@ -628,7 +629,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -659,6 +660,7 @@
 				8B53AE751D64302C00ED693E /* OverflowController.swift in Sources */,
 				8BBFE0BB1D28E25900435723 /* FollowupTableViewCell.swift in Sources */,
 				8B2DAFE41D7AB64D003AC452 /* MapPin.swift in Sources */,
+				8BABF47D1D8FC2B500ADEF53 /* Toast.swift in Sources */,
 				8B71F48E1D49D94100761CD6 /* ParseJason.swift in Sources */,
 				8BF82F401D37B99000E1BA8D /* SettingsController.swift in Sources */,
 				8B59B2251D45E25700AE9269 /* ExtensionsUtils.swift in Sources */,
@@ -669,7 +671,6 @@
 				8BE66F741D2A7B950073CFE5 /* Data.swift in Sources */,
 				8BB16D391D35078E0060B841 /* PushNoAnimationSegue.swift in Sources */,
 				8BB16D3B1D3510F80060B841 /* CheckBox.swift in Sources */,
-				8B250D461D745AF6002706EF /* kTextFiledPlaceHolder.swift in Sources */,
 				8B1A6D0E1D2CD2C800A9AFFD /* OptionsData.swift in Sources */,
 				8B71F4921D4A1D1700761CD6 /* TPKATableViewController.m in Sources */,
 				8B326D4B1D38D6F400022B33 /* DetailViewController.swift in Sources */,
@@ -737,8 +738,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -747,6 +750,7 @@
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -764,6 +768,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 2.3;
 			};
 			name = Debug;
 		};
@@ -780,8 +785,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -789,6 +796,7 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -798,6 +806,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 2.3;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -806,6 +816,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 343F00C09A1E0BB317CDB94A /* Pods-MCube.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -815,13 +826,14 @@
 					"$(PROJECT_DIR)/Pods/MobileVLCKit/MobileVLCKit-binary",
 				);
 				INFOPLIST_FILE = MCube/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.vmctechnologies.mcube;
 				PRODUCT_NAME = MCube;
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "MCube/MCube-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -829,6 +841,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 9970CCB6D39B095F49DF1288 /* Pods-MCube.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -838,12 +851,13 @@
 					"$(PROJECT_DIR)/Pods/MobileVLCKit/MobileVLCKit-binary",
 				);
 				INFOPLIST_FILE = MCube/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.vmctechnologies.mcube;
 				PRODUCT_NAME = MCube;
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "MCube/MCube-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};

@@ -10,28 +10,28 @@ import UIKit
 
 class Util: NSObject {
     
-    class func getPath(fileName: String) -> String {
+    class func getPath(_ fileName: String) -> String {
         
-        let documentsURL = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)[0]
-        let fileURL = documentsURL.URLByAppendingPathComponent(fileName)
+        let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+        let fileURL = documentsURL.appendingPathComponent(fileName)
 
        // print(fileURL.path!)
         
-        return fileURL.path!
+        return fileURL.path
     }
     
-    class func copyFile(fileName: NSString) {
+    class func copyFile(_ fileName: NSString) {
         
           let dbPath: String = getPath(fileName as String)
-          let fileManager : NSFileManager = NSFileManager.defaultManager()
-            if !fileManager.fileExistsAtPath(dbPath) {
+          let fileManager : FileManager = FileManager.default
+            if !fileManager.fileExists(atPath: dbPath) {
            
-            let defaultStorePath : NSString! = NSBundle.mainBundle().pathForResource(fileName as String, ofType: "db")
+            let defaultStorePath : NSString! = Bundle.main.path(forResource: fileName as String, ofType: "db") as NSString!
             var error : NSError?
             if((defaultStorePath) != nil) {
                 do {
                     
-                   try fileManager.copyItemAtPath(defaultStorePath as String, toPath: dbPath)
+                   try fileManager.copyItem(atPath: defaultStorePath as String, toPath: dbPath)
                 } catch let error1 as NSError {
                     error = error1
                 }
@@ -45,7 +45,7 @@ class Util: NSObject {
                 alert.message = "Your database copy successfully"
             }
             alert.delegate = nil
-            alert.addButtonWithTitle("Ok")
+            alert.addButton(withTitle: "Ok")
            // alert.show()
         }
     }
@@ -54,12 +54,12 @@ class Util: NSObject {
         }
 }
     
-    class func invokeAlertMethod(strTitle: NSString, strBody: NSString, delegate: AnyObject?) {
+    class func invokeAlertMethod(_ strTitle: NSString, strBody: NSString, delegate: AnyObject?) {
         let alert: UIAlertView = UIAlertView()
         alert.message = strBody as String
         alert.title = strTitle as String
         alert.delegate = delegate
-        alert.addButtonWithTitle("Ok")
+        alert.addButton(withTitle: "Ok")
         alert.show()
     }
    

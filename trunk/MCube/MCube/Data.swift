@@ -13,7 +13,7 @@ class Data: NSObject {
     var callFrom:String?
     var callerName:String?
     var groupName:String?
-    var callTime:NSDate?
+    var callTime:Date?
     var status:String?
     var dataId:String?
     var audioLink:String?

@@ -11,10 +11,10 @@ import UIKit
 class NetworkOperation : ConcurrentOperation {
     
   var type:String?
-  let networkOperationCompletionHandler: (responseObject: AnyObject?, error: NSError?) -> ()
+  let networkOperationCompletionHandler: (_ responseObject: AnyObject?, _ error: NSError?) -> ()
    weak var request: Alamofire.Request?
     
-    init(type:String, networkOperationCompletionHandler: (responseObject: AnyObject?, error: NSError?) -> ()) {
+    init(type:String, networkOperationCompletionHandler: @escaping (_ responseObject: AnyObject?, _ error: NSError?) -> ()) {
         self.type = type
         self.networkOperationCompletionHandler = networkOperationCompletionHandler
         super.init()
@@ -24,13 +24,13 @@ class NetworkOperation : ConcurrentOperation {
     
     override func main() {
         
-        let authkey = NSUserDefaults.standardUserDefaults().stringForKey(AUTHKEY)
-         request =  Alamofire.request(.POST, GETLIST, parameters:
+        let authkey = UserDefaults.standard.string(forKey: AUTHKEY)
+        request =  Alamofire.request(GETLIST,method:.post, parameters:
             [AUTHKEY:authkey!, LIMIT:"10",GROUP_ID: "0",OFSET:"0",TYPE:type!])
             .validate()
             .responseJSON {response in
                // print("Background Result for type \(self.type!) and \(result.count)")
-                self.networkOperationCompletionHandler(responseObject: response.result.value, error: response.result.error)
+                self.networkOperationCompletionHandler(response.result.value as AnyObject?, response.result.error as NSError?)
                 self.completeOperation()
             }
         

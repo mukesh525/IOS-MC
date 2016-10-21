@@ -14,11 +14,6 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>EGFloatingTextField.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>MBProgressHUD.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -34,22 +29,7 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>PureLayout.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>SwiftValidator.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>TPKeyboardAvoiding.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>Toast-Swift.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -62,17 +42,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>4D129139961EFD33F355936C44F52965</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>55618EEF014467516D0E0C3C02E54A28</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>566D684A68E09758048DBF71B5F34369</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>7049F641D2684C092A422AB13A75C831</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -82,27 +57,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>9673ECA35B5FE19A38C4B3CB1378A9BE</key>
+		<key>AE2F8B7B9762F32DA0707B2BB8C096C7</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>C489B6EA72FD6E80F9AD33A8D64CFD51</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>E61CE3B6DFA1FE6B3E296965C76C0E10</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>E76A3C72BB8C21DF9CE8875298844E1F</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>ED95BC091EA0F75CC186A3E327B69D0F</key>
+		<key>DBA6001481CEA0EBA031CC5C94508FAA</key>
 		<dict>
 			<key>primary</key>
 			<true/>

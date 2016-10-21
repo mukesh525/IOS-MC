@@ -24,12 +24,12 @@ class ModelManager: NSObject {
     }
     
     
-    func createTable(tablename:String) -> Bool {
+    func createTable(_ tablename:String) -> Bool {
         sharedInstance.database!.open()
         let sqlStatement = "CREATE TABLE IF NOT EXISTS \(tablename) ( _id INTEGER PRIMARY KEY AUTOINCREMENT,callid TEXT,callfrom TEXT,dataid TEXT, callername TEXT,groupname TEXT,calltime  TEXT,status TEXT,audio TEXT,location TEXT)"
         let sqlStatement1 = "CREATE TABLE IF NOT EXISTS \(tablename)_menu (_id INTEGER PRIMARY KEY AUTOINCREMENT, optionid TEXT,optionname TEXT,isCheked TEXT )"
-        let isCreated = sharedInstance.database!.executeUpdate(sqlStatement, withArgumentsInArray:nil)
-        let isCreatedmenu = sharedInstance.database!.executeUpdate(sqlStatement1, withArgumentsInArray:nil)
+        let isCreated = sharedInstance.database!.executeUpdate(sqlStatement, withArgumentsIn:nil)
+        let isCreatedmenu = sharedInstance.database!.executeUpdate(sqlStatement1, withArgumentsIn:nil)
         sharedInstance.database!.close()
         if(!isCreated || !isCreatedmenu){
             NSLog("Error %d: %@",sharedInstance.database!.lastErrorCode(), sharedInstance.database!.lastErrorMessage())
@@ -40,7 +40,7 @@ class ModelManager: NSObject {
     
     
     
-    func insertData(tablename:String,isDelete:Bool,Datas:NSMutableArray,isMore:Bool) -> Bool {
+    func insertData(_ tablename:String,isDelete:Bool,Datas:NSMutableArray,isMore:Bool) -> Bool {
         createTable(tablename)
         if(isDelete){
         deleteData(tablename,isMore: isMore)
@@ -50,12 +50,12 @@ class ModelManager: NSObject {
         sharedInstance.database!.open()
         for i in 0 ..< Datas.count {
         let data: Data = Datas[i] as! Data
-            isInserted = sharedInstance.database!.executeUpdate("INSERT INTO \(tablename) (callid,callfrom,dataid,callername,groupname,calltime,status,audio) VALUES (?,?,?,?,?,?,?,?.?)", withArgumentsInArray: [data.callId!, data.callFrom!,"N/A",data.callerName == nil ?"UNKNOWN":data.callerName!,data.groupName == nil ? data.empName!:data.groupName!,data.callTimeString == nil ? data.startTime!:data.callTimeString!,data.status == nil ? "UNKNOWN":data.status!,data.audioLink == nil ? empty:data.audioLink!,data.location == nil ? "0,0":data.location!])
+            isInserted = sharedInstance.database!.executeUpdate("INSERT INTO \(tablename) (callid,callfrom,dataid,callername,groupname,calltime,status,audio,location) VALUES (?,?,?,?,?,?,?,?,?)", withArgumentsIn: [data.callId!, data.callFrom!,"N/A",data.callerName == nil ?"UNKNOWN":data.callerName!,data.groupName == nil ? data.empName!:data.groupName!,data.callTimeString == nil ? data.startTime!:data.callTimeString!,data.status == nil ? "UNKNOWN":data.status!,data.audioLink == nil ? empty:data.audioLink!,data.location == nil ? "0":data.location!])
             
         }
         
         if(!isInserted && Datas.count > 0){
-            NSLog("Error %d: %@",sharedInstance.database!.lastErrorCode(), sharedInstance.database!.lastErrorMessage())
+            NSLog("Error while inserting  %d: %@",sharedInstance.database!.lastErrorCode(), sharedInstance.database!.lastErrorMessage())
         }
     
        sharedInstance.database!.close()
@@ -64,7 +64,7 @@ class ModelManager: NSObject {
     }
     
     
-    func insertMenu(tablename:String,Options:Array<OptionsData>) -> Bool
+    func insertMenu(_ tablename:String,Options:Array<OptionsData>) -> Bool
      {
         createTable(tablename)
        // deleteData(tablename)
@@ -72,7 +72,7 @@ class ModelManager: NSObject {
         let empty:String="N/A"
         sharedInstance.database!.open()
         for option in Options {
-            isInserted = sharedInstance.database!.executeUpdate("INSERT INTO \(tablename)_menu (optionid,optionname,isCheked) VALUES (?,?,?)", withArgumentsInArray: [option.id!,option.value!,empty])
+            isInserted = sharedInstance.database!.executeUpdate("INSERT INTO \(tablename)_menu (optionid,optionname,isCheked) VALUES (?,?,?)", withArgumentsIn: [option.id!,option.value!,empty])
             
         }
         
@@ -85,17 +85,17 @@ class ModelManager: NSObject {
         
     }
 
-    func getMenuData(tablename:String) -> Array<OptionsData>
+    func getMenuData(_ tablename:String) -> Array<OptionsData>
     {
         var options = [OptionsData]()
         sharedInstance.database!.open()
-        let resultSet: FMResultSet! = sharedInstance.database!.executeQuery("SELECT * FROM \(tablename)_menu", withArgumentsInArray: nil)
+        let resultSet: FMResultSet! = sharedInstance.database!.executeQuery("SELECT * FROM \(tablename)_menu", withArgumentsIn: nil)
        
         if (resultSet != nil) {
             while resultSet.next() {
                 let data :OptionsData=OptionsData()
-                data.id = resultSet.stringForColumn("optionid")
-                data.value = resultSet.stringForColumn("optionname")
+                data.id = resultSet.string(forColumn: "optionid")
+                data.value = resultSet.string(forColumn: "optionname")
                  options.append(data)
             }
         }
@@ -107,31 +107,33 @@ class ModelManager: NSObject {
     
     
     
-     func getData(tablename:String)-> NSMutableArray
+     func getData(_ tablename:String)-> NSMutableArray
      {  let empty:String="N/A"
         sharedInstance.database!.open()
-        let resultSet: FMResultSet! = sharedInstance.database!.executeQuery("SELECT * FROM \(tablename)", withArgumentsInArray: nil)
+        let resultSet: FMResultSet! = sharedInstance.database!.executeQuery("SELECT * FROM \(tablename)", withArgumentsIn: nil)
         let resultData : NSMutableArray = NSMutableArray()
         if (resultSet != nil) {
             while resultSet.next() {
                 let data : Data = Data()
-                data.callId = resultSet.stringForColumn("callid")
-                data.callFrom = resultSet.stringForColumn("callfrom")
-                data.dataId = resultSet.stringForColumn("dataid")
-                data.callerName = resultSet.stringForColumn("callername")
+                data.callId = resultSet.string(forColumn: "callid")
+                data.callFrom = resultSet.string(forColumn: "callfrom")
+                data.dataId = resultSet.string(forColumn: "dataid")
+                data.callerName = resultSet.string(forColumn: "callername")
+                data.location = resultSet.string(forColumn: "location")
+
                 if(tablename == "mtracker"){
-                    data.empName = resultSet.stringForColumn("groupname")
-                    data.startTime = resultSet.stringForColumn("calltime")
+                    data.empName = resultSet.string(forColumn: "groupname")
+                    data.startTime = resultSet.string(forColumn: "calltime")
                 }else{
-                    data.groupName = resultSet.stringForColumn("groupname")
-                    data.callTimeString = resultSet.stringForColumn("calltime")
+                    data.groupName = resultSet.string(forColumn: "groupname")
+                    data.callTimeString = resultSet.string(forColumn: "calltime")
                 
                 }
-                data.status = resultSet.stringForColumn("status")
-                if(resultSet.stringForColumn("audio") != empty){
-                data.audioLink = resultSet.stringForColumn("audio")
+                data.status = resultSet.string(forColumn: "status")
+                if(resultSet.string(forColumn: "audio") != empty){
+                data.audioLink = resultSet.string(forColumn: "audio")
                 }
-                resultData.addObject(data)
+                resultData.add(data)
             }
         }
        sharedInstance.database!.close()
@@ -142,23 +144,23 @@ class ModelManager: NSObject {
         
             sharedInstance.database!.open()
             var sucess:Bool=false;
-            sucess=sharedInstance.database!.executeUpdate("DELETE FROM track",withArgumentsInArray: nil)
-            sucess=sharedInstance.database!.executeUpdate("DELETE FROM track_menu",withArgumentsInArray: nil)
+            sucess=sharedInstance.database!.executeUpdate("DELETE FROM track",withArgumentsIn: nil)
+            sucess=sharedInstance.database!.executeUpdate("DELETE FROM track_menu",withArgumentsIn: nil)
             
-            sucess=sharedInstance.database!.executeUpdate("DELETE FROM lead",withArgumentsInArray: nil)
-            sucess=sharedInstance.database!.executeUpdate("DELETE FROM lead_menu",withArgumentsInArray: nil)
+            sucess=sharedInstance.database!.executeUpdate("DELETE FROM lead",withArgumentsIn: nil)
+            sucess=sharedInstance.database!.executeUpdate("DELETE FROM lead_menu",withArgumentsIn: nil)
             
-            sucess=sharedInstance.database!.executeUpdate("DELETE FROM ivrs",withArgumentsInArray: nil)
-            sucess=sharedInstance.database!.executeUpdate("DELETE FROM ivrs_menu",withArgumentsInArray: nil)
+            sucess=sharedInstance.database!.executeUpdate("DELETE FROM ivrs",withArgumentsIn: nil)
+            sucess=sharedInstance.database!.executeUpdate("DELETE FROM ivrs_menu",withArgumentsIn: nil)
             
-            sucess=sharedInstance.database!.executeUpdate("DELETE FROM x",withArgumentsInArray: nil)
-            sucess=sharedInstance.database!.executeUpdate("DELETE FROM x_menu",withArgumentsInArray: nil)
+            sucess=sharedInstance.database!.executeUpdate("DELETE FROM x",withArgumentsIn: nil)
+            sucess=sharedInstance.database!.executeUpdate("DELETE FROM x_menu",withArgumentsIn: nil)
             
-            sucess=sharedInstance.database!.executeUpdate("DELETE FROM followup",withArgumentsInArray: nil)
-            sucess=sharedInstance.database!.executeUpdate("DELETE FROM followup_menu",withArgumentsInArray: nil)
+            sucess=sharedInstance.database!.executeUpdate("DELETE FROM followup",withArgumentsIn: nil)
+            sucess=sharedInstance.database!.executeUpdate("DELETE FROM followup_menu",withArgumentsIn: nil)
             
-            sucess=sharedInstance.database!.executeUpdate("DELETE FROM mtracker",withArgumentsInArray: nil)
-            sucess=sharedInstance.database!.executeUpdate("DELETE FROM mtracker_menu",withArgumentsInArray: nil)
+            sucess=sharedInstance.database!.executeUpdate("DELETE FROM mtracker",withArgumentsIn: nil)
+            sucess=sharedInstance.database!.executeUpdate("DELETE FROM mtracker_menu",withArgumentsIn: nil)
             sharedInstance.database!.close()
             if(sucess){
                 print(" cleared sucessfullly")
@@ -169,12 +171,12 @@ class ModelManager: NSObject {
         }
   
     
-    func deleteData(table:String,isMore:Bool){
+    func deleteData(_ table:String,isMore:Bool){
         sharedInstance.database!.open()
         var sucessmenu:Bool=false;
-        let sucess=sharedInstance.database!.executeUpdate("DELETE FROM \(table)",withArgumentsInArray: nil)
+        let sucess=sharedInstance.database!.executeUpdate("DELETE FROM \(table)",withArgumentsIn: nil)
         if(!isMore){
-         sucessmenu=sharedInstance.database!.executeUpdate("DELETE FROM \(table)_menu",withArgumentsInArray: nil)
+         sucessmenu=sharedInstance.database!.executeUpdate("DELETE FROM \(table)_menu",withArgumentsIn: nil)
         }
         sharedInstance.database!.close()
         if(sucess && sucessmenu){
@@ -186,31 +188,31 @@ class ModelManager: NSObject {
     
      }
    
-    func updateStudentData(studentInfo: StudentInfo) -> Bool {
+    func updateStudentData(_ studentInfo: StudentInfo) -> Bool {
         sharedInstance.database!.open()
-        let isUpdated = sharedInstance.database!.executeUpdate("UPDATE student_info SET Name=?, Marks=? WHERE RollNo=?", withArgumentsInArray: [studentInfo.Name, studentInfo.Marks, studentInfo.RollNo])
+        let isUpdated = sharedInstance.database!.executeUpdate("UPDATE student_info SET Name=?, Marks=? WHERE RollNo=?", withArgumentsIn: [studentInfo.Name, studentInfo.Marks, studentInfo.RollNo])
         sharedInstance.database!.close()
         return isUpdated
     }
     
-    func deleteStudentData(studentInfo: StudentInfo) -> Bool {
+    func deleteStudentData(_ studentInfo: StudentInfo) -> Bool {
         sharedInstance.database!.open()
-        let isDeleted = sharedInstance.database!.executeUpdate("DELETE FROM student_info WHERE RollNo=?", withArgumentsInArray: [studentInfo.RollNo])
+        let isDeleted = sharedInstance.database!.executeUpdate("DELETE FROM student_info WHERE RollNo=?", withArgumentsIn: [studentInfo.RollNo])
         sharedInstance.database!.close()
         return isDeleted
     }
 
     func getAllStudentData() -> NSMutableArray {
         sharedInstance.database!.open()
-        let resultSet: FMResultSet! = sharedInstance.database!.executeQuery("SELECT * FROM student_info", withArgumentsInArray: nil)
+        let resultSet: FMResultSet! = sharedInstance.database!.executeQuery("SELECT * FROM student_info", withArgumentsIn: nil)
         let marrStudentInfo : NSMutableArray = NSMutableArray()
         if (resultSet != nil) {
             while resultSet.next() {
                 let studentInfo : StudentInfo = StudentInfo()
-                studentInfo.RollNo = resultSet.stringForColumn("RollNo")
-                studentInfo.Name = resultSet.stringForColumn("Name")
-                studentInfo.Marks = resultSet.stringForColumn("Marks")
-                marrStudentInfo.addObject(studentInfo)
+                studentInfo.RollNo = resultSet.string(forColumn: "RollNo")
+                studentInfo.Name = resultSet.string(forColumn: "Name")
+                studentInfo.Marks = resultSet.string(forColumn: "Marks")
+                marrStudentInfo.add(studentInfo)
             }
         }
         sharedInstance.database!.close()

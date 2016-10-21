@@ -10,7 +10,7 @@ import UIKit
 
 class TriangularView: UIView {
 
-    override func drawRect(rect: CGRect) {
+    override func draw(_ rect: CGRect) {
         
         // Get Height and Width
         let layerHeight = self.layer.frame.height
@@ -20,32 +20,32 @@ class TriangularView: UIView {
         let bezierPath = UIBezierPath()
         
         // Draw Points
-        bezierPath.moveToPoint(CGPointMake(75,10))
-        bezierPath.addLineToPoint(CGPointMake(160, 150))
-        bezierPath.addLineToPoint(CGPointMake(10, 50))
+        bezierPath.move(to: CGPoint(x: 75,y: 10))
+        bezierPath.addLine(to: CGPoint(x: 160, y: 150))
+        bezierPath.addLine(to: CGPoint(x: 10, y: 50))
        // bezierPath.addLineToPoint(CGPointMake(0, layerHeight))
-        bezierPath.closePath()
+        bezierPath.close()
         
         // Apply Color
-        UIColor.whiteColor().setFill()
+        UIColor.white.setFill()
         bezierPath.fill()
         
         // Mask to Path
         let shapeLayer = CAShapeLayer()
-        shapeLayer.path = bezierPath.CGPath
+        shapeLayer.path = bezierPath.cgPath
         self.layer.mask = shapeLayer
         
     }
     
     
-    override func drawRect(rect: CGRect, forViewPrintFormatter formatter: UIViewPrintFormatter) {
+    override func draw(_ rect: CGRect, for formatter: UIViewPrintFormatter) {
   
         // Drawing a triangle using UIBezierPath
         let context = UIGraphicsGetCurrentContext()
         
         // Paint the View Blue before drawing the traingle
-        CGContextSetFillColorWithColor(context, UIColor.blueColor().CGColor)  // Set fill color
-        CGContextFillRect(context, rect) // Fill rectangle using the context data
+        context?.setFillColor(UIColor.blue.cgColor)  // Set fill color
+        context?.fill(rect) // Fill rectangle using the context data
         
         // Imagine a triangle resting on the bottom of the container with the base as the width of the rectangle, and the apex of the traingle at the top center of the container
         // The co-ordinates of the rectangle will look like
@@ -54,18 +54,18 @@ class TriangularView: UIView {
         // Bottom Right = (x: Container Width, y: Container Height)
         
         // Create path for drawing a triangle
-        var trianglePath = UIBezierPath()
+        let trianglePath = UIBezierPath()
         // First move to the Top point
-        trianglePath.moveToPoint(CGPoint(x: self.bounds.width/2, y: 0.0))
+        trianglePath.move(to: CGPoint(x: self.bounds.width/2, y: 0.0))
         // Add line to Bottom Right
-        trianglePath.addLineToPoint(CGPoint(x: self.bounds.width, y: self.bounds.height))
+        trianglePath.addLine(to: CGPoint(x: self.bounds.width, y: self.bounds.height))
         // Add line to Bottom Left
-        trianglePath.addLineToPoint(CGPoint(x: 0.0, y: self.bounds.height))
+        trianglePath.addLine(to: CGPoint(x: 0.0, y: self.bounds.height))
         // Complete path by drawing path to the Top
-        trianglePath.addLineToPoint(CGPoint(x: self.bounds.width/2, y: 0.0))
+        trianglePath.addLine(to: CGPoint(x: self.bounds.width/2, y: 0.0))
         
         // Set the fill color
-        CGContextSetFillColorWithColor(context, UIColor.greenColor().CGColor)
+        context?.setFillColor(UIColor.green.cgColor)
         // Fill the triangle path
         trianglePath.fill()    }
 
