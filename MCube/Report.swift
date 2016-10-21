@@ -4,8 +4,8 @@ import UIKit
 import Alamofire
 
 protocol ReportDownload {
-    func OnFinishDownload(result:NSMutableArray,param:Params)
-    func OnError(error:NSError)
+    func OnFinishDownload(_ result:NSMutableArray,param:Params)
+    func OnError(_ error:NSError)
 }
 
 
@@ -20,15 +20,15 @@ class Report: NSObject {
         self.delegate=delegate;
     }
   func LoadData(){
-     let authkey = NSUserDefaults.standardUserDefaults().stringForKey(AUTHKEY)
-         Alamofire.request(.POST, GETLIST, parameters:
+     let authkey = UserDefaults.standard.string(forKey: AUTHKEY)
+    Alamofire.request(GETLIST,method:.post, parameters:
             [AUTHKEY:authkey!, LIMIT:(self.param?.Limit!)!,GROUP_ID: (self.param?.gid!)!,OFSET:(self.param?.offset!)!,TYPE:(self.param?.type!)!])
             .validate().responseJSON
             {response in switch response.result {
                 
-            case .Success(let JSON):
-            self.result=ParseJason().ParseReportJason(JSON,type: (self.param?.type!)!);
-            self.options=ParseJason().ParseMenu(JSON);
+            case .success(let JSON):
+            self.result=ParseJason().ParseReportJason(JSON as AnyObject,type: (self.param?.type!)!);
+            self.options=ParseJason().ParseMenu(JSON as AnyObject);
             print("Success with JSON: \(JSON)")
             
             
@@ -57,8 +57,8 @@ class Report: NSObject {
                 }
                 self.delegate?.OnFinishDownload(self.result,param: self.param!)
                 
-            case .Failure(let error):
-                 self.delegate?.OnError(error)
+            case .failure(let error):
+                 self.delegate?.OnError(error as NSError)
                 }
                 
 

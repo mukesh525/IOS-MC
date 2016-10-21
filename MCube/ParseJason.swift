@@ -23,18 +23,18 @@ class ParseJason: NSObject {
     var location:String?
     
     
-    func ParseMenu(JSON:AnyObject) -> Array<OptionsData>{
+    func ParseMenu(_ JSON:AnyObject) -> Array<OptionsData>{
        
         let response = JSON as! NSDictionary
-        if(response.objectForKey(GROUPS) != nil){
-            let groups = response.objectForKey(GROUPS) as! NSArray?
+        if(response.object(forKey: GROUPS) != nil){
+            let groups = response.object(forKey: GROUPS) as! NSArray?
             for group in groups!{
                 let options=OptionsData();
-                if((group.objectForKey(KEY)) != nil){
-                    options.id=group.objectForKey(KEY) as? String
+                if(((group as AnyObject).object(forKey: KEY)) != nil){
+                    options.id=(group as AnyObject).object(forKey: KEY) as? String
                 }
-                if((group.objectForKey(VAL)) != nil){
-                    options.value=group.objectForKey(VAL) as? String
+                if(((group as AnyObject).object(forKey: VAL)) != nil){
+                    options.value=(group as AnyObject).object(forKey: VAL) as? String
                 }
                 self.options.append(options)
             }
@@ -46,65 +46,75 @@ class ParseJason: NSObject {
 }
     
   
-    func ParseReportJason(JSON:AnyObject,type:String) -> NSMutableArray{
+    func ParseReportJason(_ JSON:AnyObject,type:String) -> NSMutableArray{
         result=NSMutableArray();
         options=[OptionsData]();
         let response = JSON as! NSDictionary
-        if(response.objectForKey(RECORDS) != nil){
-            let records = response.objectForKey(RECORDS) as! NSArray?
+        if(response.object(forKey: RECORDS) != nil){
+            let records = response.object(forKey: RECORDS) as! NSArray?
             for record in records!{
                 let data=Data();
-                if((record.objectForKey(CALLID)) != nil){
-                    callId=record.objectForKey(CALLID) as? String
+                if(((record as AnyObject).object(forKey: CALLID)) != nil){
+                    callId=(record as AnyObject).object(forKey: CALLID) as? String
                     data.callId=callId;
                 }
-                if((record.objectForKey(CALLFROM)) != nil){
-                    callFrom=record.objectForKey(CALLFROM) as? String
+                if(((record as AnyObject).object(forKey: CALLFROM)) != nil){
+                    callFrom=(record as AnyObject).object(forKey: CALLFROM) as? String
                     data.callFrom=callFrom;
+                    
                 }
-                if((record.objectForKey(STATUS)) != nil){
-                    status=record.objectForKey(STATUS) as? String
+                if(((record as AnyObject).object(forKey: STATUS)) != nil){
+                    status=(record as AnyObject).object(forKey: STATUS) as? String
                     data.status=status;
                 }
-                if((record.objectForKey(CALLER_NAME)) != nil){
-                    callerName=record.objectForKey(CALLER_NAME) as? String
+                if(((record as AnyObject).object(forKey: CALLER_NAME)) != nil){
+                    callerName=(record as AnyObject).object(forKey: CALLER_NAME) as? String
                     data.callerName=callerName;
                 }
-                if((record.objectForKey(GROUPNAME)) != nil){
-                    groupName=record.objectForKey(GROUPNAME) as? String
+                if(((record as AnyObject).object(forKey: GROUPNAME)) != nil){
+                    groupName=(record as AnyObject).object(forKey: GROUPNAME) as? String
                     data.groupName=groupName;
                 }
-                if((record.objectForKey(CALLTIME)) != nil){
-                    callTimeString=record.objectForKey(CALLTIME) as? String
+                if(((record as AnyObject).object(forKey: CALLTIME)) != nil){
+                    callTimeString=(record as AnyObject).object(forKey: CALLTIME) as? String
                     data.callTimeString=callTimeString;
                     data.callTime=callTimeString!.convertDateFormater()
                 }
-                else if((record.objectForKey(STARTTIME)) != nil){
-                    callTimeString=record.objectForKey(STARTTIME) as? String
+                else if(((record as AnyObject).object(forKey: STARTTIME)) != nil){
+                    callTimeString=(record as AnyObject).object(forKey: STARTTIME) as? String
                     data.startTime=callTimeString;
                     
+                       if(((record as AnyObject).object(forKey: STATUS)) != nil){
+                        status=(record as AnyObject).object(forKey: STATUS) as? String
+                        if(status == "0" || status == "1" || status == "2"){
+                            if(((record as AnyObject).object(forKey: CALLTO)) != nil){
+                                data.callFrom=(record as AnyObject).object(forKey: CALLTO) as? String
+                        }
+                     }
+                    
+                    }
                 }
                 
-                if((record.objectForKey(EMPNAME)) != nil){
-                    empName=record.objectForKey(EMPNAME) as? String
+                if(((record as AnyObject).object(forKey: EMPNAME)) != nil){
+                    empName=(record as AnyObject).object(forKey: EMPNAME) as? String
                     data.empName=empName;
                     
                 }
-                if((record.objectForKey(NAME)) != nil){
-                    callerName=record.objectForKey(NAME) as? String
+                if(((record as AnyObject).object(forKey: NAME)) != nil){
+                    callerName=(record as AnyObject).object(forKey: NAME) as? String
                     data.callerName=callerName;
                     
                 }
-                if((record.objectForKey(FILENAME)) != nil){
-                    audioLink=record.objectForKey(FILENAME) as? String
+                if(((record as AnyObject).object(forKey: FILENAME)) != nil){
+                    audioLink=(record as AnyObject).object(forKey: FILENAME) as? String
                     data.audioLink=audioLink;
                 }
-                if((record.objectForKey(LOCATION)) != nil){
-                    location=record.objectForKey(LOCATION) as? String
+                if(((record as AnyObject).object(forKey: LOCATION)) != nil){
+                    location=(record as AnyObject).object(forKey: LOCATION) as? String
                     data.location=location;
                 }
                 
-                self.result.addObject(data)
+                self.result.add(data)
             }
             
                   }

@@ -1,16 +1,16 @@
 
 import UIKit
 extension UIImage {
-    func imageWithInsets(insets: UIEdgeInsets) -> UIImage {
+    func imageWithInsets(_ insets: UIEdgeInsets) -> UIImage {
         UIGraphicsBeginImageContextWithOptions(
-            CGSizeMake(self.size.width + insets.left + insets.right,
-                self.size.height + insets.top + insets.bottom), false, self.scale)
+            CGSize(width: self.size.width + insets.left + insets.right,
+                height: self.size.height + insets.top + insets.bottom), false, self.scale)
         _ = UIGraphicsGetCurrentContext()
         let origin = CGPoint(x: insets.left, y: insets.top)
-        self.drawAtPoint(origin)
+        self.draw(at: origin)
         let imageWithInsets = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
-        return imageWithInsets
+        return imageWithInsets!
   }
 }
 
@@ -18,9 +18,9 @@ extension UIImage {
 
 extension UIDatePicker {
     func getStringValue() -> String {
-        let dateFormatter = NSDateFormatter()
+        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = DATETIMEFOEMAT
-        let formatteddate = dateFormatter.stringFromDate(self.date)
+        let formatteddate = dateFormatter.string(from: self.date)
         return formatteddate
     }
 }
@@ -29,7 +29,7 @@ extension UIDatePicker {
 
 
 protocol DismissalDelegate : class{
-    func finishedShowing(viewController: UIViewController);
+    func finishedShowing(_ viewController: UIViewController);
 }
 
 protocol Dismissable : class{
@@ -37,13 +37,13 @@ protocol Dismissable : class{
 }
 
 extension DismissalDelegate where Self: UIViewController{
-    func finishedShowing(viewController: UIViewController) {
-        if viewController.isBeingPresented() && viewController.presentingViewController == self{
-            self.dismissViewControllerAnimated(true, completion: nil)
+    func finishedShowing(_ viewController: UIViewController) {
+        if viewController.isBeingPresented && viewController.presentingViewController == self{
+            self.dismiss(animated: true, completion: nil)
             return
         }
         
-        self.navigationController?.popViewControllerAnimated(true)
+        self.navigationController?.popViewController(animated: true)
     }
 }
 
@@ -68,13 +68,13 @@ extension DismissalDelegate where Self: UIViewController{
 
 
 extension DetailViewController {
-    func addLogOutButtonToNavigationBar(triggerToMethodName: String){
+    func addLogOutButtonToNavigationBar(_ triggerToMethodName: String){
         let button: UIButton = UIButton()
-        button.setImage(UIImage(named: "more"), forState: .Normal)
-        button.frame = CGRectMake(20, 0, 30, 25)
+        button.setImage(UIImage(named: "more"), for: UIControlState())
+        button.frame = CGRect(x: 20, y: 0, width: 30, height: 25)
         button.contentEdgeInsets = UIEdgeInsets.init(top: 0, left: 10, bottom: 0, right: -10)
         
-        button .addTarget(self, action:#selector(DetailViewController.moreButtonClicked(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        button .addTarget(self, action:#selector(DetailViewController.moreButtonClicked(_:)), for: UIControlEvents.touchUpInside)
         let rightItem:UIBarButtonItem = UIBarButtonItem()
         rightItem.customView = button
         self.navigationItem.rightBarButtonItem = rightItem
@@ -82,7 +82,7 @@ extension DetailViewController {
     
      func showActivityIndicator(){
         if !self.showingActivity {
-            self.navigationController?.view.makeToastActivity(.Center)
+            self.navigationController?.view.makeToastActivity(.center)
         } else {
             self.navigationController?.view.hideToastActivity()
         }
@@ -91,47 +91,47 @@ extension DetailViewController {
         
     }
     
-    func showAlert(mesage :String){
-        let alertView = UIAlertController(title: TITLE, message: mesage, preferredStyle: .Alert)
-        alertView.addAction(UIAlertAction(title: "Ok", style: .Default, handler: nil))
-        presentViewController(alertView, animated: true, completion: nil)
+    func showAlert(_ mesage :String){
+        let alertView = UIAlertController(title: TITLE, message: mesage, preferredStyle: .alert)
+        alertView.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+        present(alertView, animated: true, completion: nil)
     }
     
-    func moreButtonClicked(sender:AnyObject) {
-        let popoverContent = (self.storyboard?.instantiateViewControllerWithIdentifier("more"))! as! MoreViewController
-        popoverContent.modalPresentationStyle = .Popover
+    func moreButtonClicked(_ sender:AnyObject) {
+        let popoverContent = (self.storyboard?.instantiateViewController(withIdentifier: "more"))! as! MoreViewController
+        popoverContent.modalPresentationStyle = .popover
         if let popover = popoverContent.popoverPresentationController {
            let viewForSource = sender as! UIView
             popover.sourceView = viewForSource
             popover.sourceRect = viewForSource.bounds
-            popoverContent.preferredContentSize = CGSizeMake(150,220)
+            popoverContent.preferredContentSize = CGSize(width: 150,height: 220)
             popoverContent.delegate=self
             popover.delegate = self
         }
         
-        self.presentViewController(popoverContent, animated: true, completion: nil)
+        self.present(popoverContent, animated: true, completion: nil)
     }
     
-    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
-        return .None
+    @objc(adaptivePresentationStyleForPresentationController:) func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+        return .none
     }
     
     
     func initializeViews(){
-        if let authkey = NSUserDefaults.standardUserDefaults().stringForKey(AUTHKEY) {
+        if let authkey = UserDefaults.standard.string(forKey: AUTHKEY) {
             self.authkey=authkey;
         }
         mytableview.delegate = self
         mytableview.dataSource = self
         mytableview.allowsSelection=false
         if(type==FOLLOWUP){
-         updatebtn.setTitle("History",  forState: UIControlState.Normal)
-         addfollowup.setTitle("New",  forState: UIControlState.Normal)
+         updatebtn.setTitle("History",  for: UIControlState())
+         addfollowup.setTitle("New",  for: UIControlState())
         }
         self.refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
-        self.refreshControl.addTarget(self, action: #selector(DetailViewController.refresh(_:)), forControlEvents: UIControlEvents.ValueChanged)
+        self.refreshControl.addTarget(self, action: #selector(DetailViewController.refresh(_:)), for: UIControlEvents.valueChanged)
         self.mytableview?.addSubview(refreshControl)
-        if self.refreshControl.refreshing{
+        if self.refreshControl.isRefreshing{
             self.refreshControl.endRefreshing()
         }
         addLogOutButtonToNavigationBar("more");
@@ -151,7 +151,7 @@ extension ReportViewController{
     
    func initializeViews(){
         setsection()
-        if let savedlimit = NSUserDefaults.standardUserDefaults().stringForKey(LIMIT) {
+        if let savedlimit = UserDefaults.standard.string(forKey: LIMIT) {
             self.limit = Int(savedlimit)!;
         }else {self.limit=10}
         if(isLogout){
@@ -160,12 +160,12 @@ extension ReportViewController{
         }
         
         player=nil;
-        NSUserDefaults.standardUserDefaults().removeObjectForKey(SELECT)
-        NSUserDefaults.standardUserDefaults().synchronize()
+        UserDefaults.standard.removeObject(forKey: SELECT)
+        UserDefaults.standard.synchronize()
         self.navigationItem.title = CurrentTitle;
         tableView.allowsSelection = true;
         mytableview.backgroundView = UIImageView(image: UIImage(named: "background_port.jpg"))
-        if NSUserDefaults.standardUserDefaults().stringForKey(AUTHKEY) != nil {
+        if UserDefaults.standard.string(forKey: AUTHKEY) != nil {
             result=ModelManager.getInstance().getData(type)
             options=ModelManager.getInstance().getMenuData(type)
             if(result.count>0 && options.count>0){
@@ -183,7 +183,7 @@ extension ReportViewController{
         }
         
         self.refreshControll.attributedTitle = NSAttributedString(string: "Pull to refresh")
-        self.refreshControll.addTarget(self, action: #selector(ReportViewController.refresh(_:)), forControlEvents: UIControlEvents.ValueChanged)
+        self.refreshControll.addTarget(self, action: #selector(ReportViewController.refresh(_:)), for: UIControlEvents.valueChanged)
         self.mytableview?.addSubview(refreshControll)
         if revealViewController() != nil {
             menubutton.target = revealViewController()
@@ -194,13 +194,13 @@ extension ReportViewController{
             
         }
        
-        if self.refreshControll.refreshing{
+        if self.refreshControll.isRefreshing{
             self.refreshControll.endRefreshing()
         }
         
     }
     
-    func refresh(sender:AnyObject) {
+    func refresh(_ sender:AnyObject) {
         
         if(player != nil){
             player = nil;
@@ -214,43 +214,43 @@ extension ReportViewController{
             
         }
         else{
-            if self.refreshControll.refreshing{
+            if self.refreshControll.isRefreshing{
                 self.refreshControll.endRefreshing()
             }
         }
     }
 
-    func showAlert(mesage :String){
-        let alertView = UIAlertController(title: TITLE, message: mesage, preferredStyle: .Alert)
-        alertView.addAction(UIAlertAction(title: "Ok", style: .Default, handler: nil))
-        presentViewController(alertView, animated: true, completion: nil)
+    func showAlert(_ mesage :String){
+        let alertView = UIAlertController(title: TITLE, message: mesage, preferredStyle: .alert)
+        alertView.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+        present(alertView, animated: true, completion: nil)
     }
     func setsection() {
         
-        if NSUserDefaults.standardUserDefaults().objectForKey(LAUNCHVIEW) != nil{
-            NSUserDefaults.standardUserDefaults().removeObjectForKey(LAUNCHVIEW)
-            NSUserDefaults.standardUserDefaults().synchronize()
+        if UserDefaults.standard.object(forKey: LAUNCHVIEW) != nil{
+            UserDefaults.standard.removeObject(forKey: LAUNCHVIEW)
+            UserDefaults.standard.synchronize()
             
-            if  NSUserDefaults.standardUserDefaults().stringForKey(TRACK) == "1" {
+            if  UserDefaults.standard.string(forKey: TRACK) == "1" {
                 self.type=TRACK
                 self.CurrentTitle=TRACK.capitalizeIt()
             }
-            else if NSUserDefaults.standardUserDefaults().stringForKey(IVRS)  == "1"{
+            else if UserDefaults.standard.string(forKey: IVRS)  == "1"{
                 self.type=IVRS
                 self.CurrentTitle=IVRS.capitalizeIt()
             }
                 
-            else if NSUserDefaults.standardUserDefaults().stringForKey(MCUBEX)  == "1"{
+            else if UserDefaults.standard.string(forKey: MCUBEX)  == "1"{
                 self.type=X
                 self.CurrentTitle="MCubeX"
             }
                 
-            else if NSUserDefaults.standardUserDefaults().stringForKey(LEAD) == "1" {
+            else if UserDefaults.standard.string(forKey: LEAD) == "1" {
                 self.type=LEAD
                 self.CurrentTitle=LEAD.capitalizeIt()
             }
                 
-            else if NSUserDefaults.standardUserDefaults().stringForKey(MTRACKER) == "1" {
+            else if UserDefaults.standard.string(forKey: MTRACKER) == "1" {
                 self.type=MTRACKER
                 self.CurrentTitle=MTRACKER.capitalizeIt()
             }
@@ -265,8 +265,8 @@ extension ReportViewController{
         func filteralert (){
             let option: OptionsData = self.options[SeletedFilterpos];
             let alertController = UIAlertController(title: TITLE, message:
-                "No Records available for Group : \(option.value!)", preferredStyle: .Alert)
-            let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default) {
+                "No Records available for Group : \(option.value!)", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) {
                 UIAlertAction in
                 self.SeletedFilterpos=0;
                 self.gid="0";
@@ -278,7 +278,7 @@ extension ReportViewController{
             }
             
             alertController.addAction(okAction)
-            self.presentViewController(alertController, animated: true, completion: nil)
+            self.present(alertController, animated: true, completion: nil)
             
         }
         
@@ -287,48 +287,48 @@ extension ReportViewController{
     
     func LogoutAlert (){
         let alertController = UIAlertController(title: "Logout Alert", message:
-            "Do you want to logout?", preferredStyle: .Alert)
-        let okAction = UIAlertAction(title: LOGOUT.capitalizeIt(), style: UIAlertActionStyle.Default) {
+            "Do you want to logout?", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: LOGOUT.capitalizeIt(), style: UIAlertActionStyle.default) {
             UIAlertAction in
-            NSUserDefaults.standardUserDefaults().removeObjectForKey(AUTHKEY)
-            NSUserDefaults.standardUserDefaults().synchronize()
+            UserDefaults.standard.removeObject(forKey: AUTHKEY)
+            UserDefaults.standard.synchronize()
             ModelManager.getInstance().deleteAllData();
-            self.performSegueWithIdentifier("GoLogin", sender: self)
+            self.performSegue(withIdentifier: "GoLogin", sender: self)
             
         }
-        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default) {
+        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default) {
             UIAlertAction in
             
         }
         alertController.addAction(cancelAction)
         alertController.addAction(okAction)
-        self.presentViewController(alertController, animated: false, completion: nil)
+        self.present(alertController, animated: false, completion: nil)
         
     }
     func NoDataAlert (){
         let alertController = UIAlertController(title: TITLE, message:
-            "No records available", preferredStyle: .Alert)
-        let okAction = UIAlertAction(title: "Retry", style: UIAlertActionStyle.Default) {
+            "No records available", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "Retry", style: UIAlertActionStyle.default) {
             UIAlertAction in
             let param=Params(Limit: self.limit,gid:self.gid,offset:self.offset,type:self.type,isfilter:false,isMore: false,isSync:false,filterpos: self.SeletedFilterpos)
             self.isDownloading=true;
             Report(param: param, delegate: self).LoadData();
             
         }
-        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default) {
+        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default) {
             UIAlertAction in
             if self.showingActivity {
                 self.navigationController?.view.hideToastActivity()
                 self.showingActivity = !self.showingActivity
             }
-            if self.refreshControll.refreshing{
+            if self.refreshControll.isRefreshing{
                 self.refreshControll.endRefreshing()
             }
             
         }
         alertController.addAction(cancelAction)
         alertController.addAction(okAction)
-        self.presentViewController(alertController, animated: false, completion: nil)
+        self.present(alertController, animated: false, completion: nil)
         
     }
 
@@ -337,39 +337,39 @@ extension ReportViewController{
 }
 
 
-extension _ArrayType where Generator.Element == DetailData {
+extension Array where Element : DetailData {
 
-    func getParams(currentData:Data,type:String,postFollowup:Bool)->[String: AnyObject]?{
-        let authkey = NSUserDefaults.standardUserDefaults().stringForKey(AUTHKEY)
-        var parameters: [String: AnyObject]? = [:]
+    func getParams(_ currentData:Data,type:String,postFollowup:Bool)->[String: Any]?{
+        let authkey = UserDefaults.standard.string(forKey: AUTHKEY)
+        var parameters: [String: Any]? = [:]
         print(self.count)
-        parameters![AUTHKEY]=authkey!
+        parameters![AUTHKEY]=authkey! as AnyObject?
         parameters![GROUP_NAME]=(currentData.groupName != nil ? currentData.groupName : currentData.empName)!
         if(postFollowup){
-            parameters![CALLID]=currentData.callId!
+            parameters![CALLID]=currentData.callId! as AnyObject?
             print("\(CALLID) :\(currentData.callId!)")
             
             if(type==TRACK){
-                  parameters![FTYPE]="calltrack"
+                  parameters![FTYPE]="calltrack" as AnyObject?
                   print("\(FTYPE) :calltrack ")
             }
             else if(type==LEAD){
-                parameters![FTYPE]="leads"
+                parameters![FTYPE]="leads" as AnyObject?
                 print("\(FTYPE) :leads ")
             }
             else if(type==X){
-                parameters![FTYPE]=MCUBEX
+                parameters![FTYPE]=MCUBEX as AnyObject?
                 print("\(FTYPE) :calltrack ")
             }
             else{
                 parameters![FTYPE] = (type != FOLLOWUP ? type:currentData.groupName!)
                   print("\(FTYPE) :\(type != FOLLOWUP ? type:currentData.groupName!)")
             }
-            parameters![TYPE]=FOLLOWUP
+            parameters![TYPE]=FOLLOWUP as AnyObject?
             print("\(TYPE) :\(FOLLOWUP) ")
             
         }else{
-            parameters![TYPE]=type
+            parameters![TYPE]=type as AnyObject?
             print("\(TYPE) :\(type) ")
         }
         
@@ -384,7 +384,7 @@ extension _ArrayType where Generator.Element == DetailData {
                 }
                 
                 if(val.count>0){
-                    let joined=val.joinWithSeparator(",")
+                    let joined=val.joined(separator: ",")
                     print("\(curentValue.Name!)  :   \(joined)")
                     parameters![curentValue.Name!] = joined
                     
@@ -421,39 +421,39 @@ extension _ArrayType where Generator.Element == DetailData {
 extension String {
 
 func getDateFromString() -> String {
-    let dateFormatter = NSDateFormatter()
+    let dateFormatter = DateFormatter()
     dateFormatter.dateFormat = DATETIMEFOEMAT
-    dateFormatter.timeZone = NSTimeZone(name: "UTC")
-    guard let date = dateFormatter.dateFromString(self) else {
+    dateFormatter.timeZone = TimeZone(identifier: "UTC")
+    guard let date = dateFormatter.date(from: self) else {
         assert(false, "no date from string")
         return ""
     }
     dateFormatter.dateFormat = "dd-MM-yyyy"
-    let timeStamp = dateFormatter.stringFromDate(date)
+    let timeStamp = dateFormatter.string(from: date)
     return timeStamp
    }
     
     func getTimeFromString() -> String {
-        let dateFormatter = NSDateFormatter()
+        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = DATETIMEFOEMAT
-        dateFormatter.timeZone = NSTimeZone(name: "UTC")
-        guard let date = dateFormatter.dateFromString(self) else {
+        dateFormatter.timeZone = TimeZone(identifier: "UTC")
+        guard let date = dateFormatter.date(from: self) else {
             assert(false, "no date from string")
             return ""
         }
         dateFormatter.dateFormat = "hh:mm a"
-        let timeStamp = dateFormatter.stringFromDate(date)
+        let timeStamp = dateFormatter.string(from: date)
         return timeStamp
     }
     
-    func convertDateFormater() -> NSDate {
-        let dateFormatter = NSDateFormatter()
+    func convertDateFormater() -> Date {
+        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = DATETIMEFOEMAT
-        dateFormatter.timeZone = NSTimeZone(name: "UTC")
+        dateFormatter.timeZone = TimeZone(identifier: "UTC")
         
-        guard let date = dateFormatter.dateFromString(self) else {
+        guard let date = dateFormatter.date(from: self) else {
             assert(false, "no date from string")
-            return NSDate()
+            return Date()
         }
         return date
     }
@@ -461,7 +461,7 @@ func getDateFromString() -> String {
      func  capitalizeIt()-> String {
         if isEmpty { return "" }
         var result = self
-        result.replaceRange(startIndex...startIndex, with: String(self[startIndex]).uppercaseString)
+        result.replaceSubrange(startIndex...startIndex, with: String(self[startIndex]).uppercased())
         return result    }
     
     
@@ -471,7 +471,7 @@ extension Array {
     
     // Safely lookup an index that might be out of bounds,
     // returning nil if it does not exist
-    func get(index: Int) -> Element? {
+    func get(_ index: Int) -> Element? {
         if 0 <= index && index < count {
             return self[index]
         } else {

@@ -35,7 +35,7 @@ class ReportViewController: UITableViewController,UIPopoverPresentationControlle
     var sidebarMenuOpen:Bool?
     
     
-    @IBAction func LogoutTap(sender: UIBarButtonItem) {
+    @IBAction func LogoutTap(_ sender: UIBarButtonItem) {
         LogoutAlert()
     }
     override func viewDidLoad() {
@@ -43,15 +43,15 @@ class ReportViewController: UITableViewController,UIPopoverPresentationControlle
         self.initializeViews()
     
     }
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         print("test")
     }
     
     
-    func OnFinishDownload(result: NSMutableArray,param:Params) {
+    func OnFinishDownload(_ result: NSMutableArray,param:Params) {
        self.isNewDataLoading = false
        if(param.isMore == true){
-        self.result.addObjectsFromArray(result as [AnyObject])
+        self.result.addObjects(from: result as [AnyObject])
         }else{
           self.result=result;
         }
@@ -66,7 +66,7 @@ class ReportViewController: UITableViewController,UIPopoverPresentationControlle
             
         }
         else{
-            if self.refreshControll.refreshing{
+            if self.refreshControll.isRefreshing{
                 self.refreshControll.endRefreshing()
             }
             
@@ -84,10 +84,10 @@ class ReportViewController: UITableViewController,UIPopoverPresentationControlle
     
     
     
-    func OnError(error: NSError) {
+    func OnError(_ error: NSError) {
         self.isDownloading=false;
         self.isNewDataLoading=false;
-        if self.refreshControll.refreshing{
+        if self.refreshControll.isRefreshing{
             self.refreshControll.endRefreshing()
         }else{
             self.showActivityIndicator()
@@ -104,23 +104,23 @@ class ReportViewController: UITableViewController,UIPopoverPresentationControlle
 
  
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
        self.playButtons=[UIButton]()
         self.tableView.reloadData()
     }
     
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if result.count == 0{
-            let emptyLabel = UILabel(frame: CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height))
+            let emptyLabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.bounds.size.width, height: self.view.bounds.size.height))
             emptyLabel.text = "No Data Pull Down To Refresh"
-            emptyLabel.textAlignment = NSTextAlignment.Center
+            emptyLabel.textAlignment = NSTextAlignment.center
             self.tableView.backgroundView = emptyLabel
-            self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
+            self.tableView.separatorStyle = UITableViewCellSeparatorStyle.none
             return 0
         } else {
             self.tableView.backgroundView = UIImageView(image: UIImage(named: "background_port.jpg"))
@@ -130,27 +130,27 @@ class ReportViewController: UITableViewController,UIPopoverPresentationControlle
     
     
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         if(self.type != HISTORY){
-        self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        self.CurrentData = self.result[indexPath.row] as! Data
-        self.performSegueWithIdentifier("detail", sender: self)
+        self.tableView.deselectRow(at: indexPath, animated: true)
+        self.CurrentData = self.result[(indexPath as NSIndexPath).row] as! Data
+        self.performSegue(withIdentifier: "detail", sender: self)
         }
     }
     
     
-    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return cellSpacingHeight
     }
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as!FollowupTableViewCell
-        let data: Data = self.result[indexPath.row] as! Data
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as!FollowupTableViewCell
+        let data: Data = self.result[(indexPath as NSIndexPath).row] as! Data
         cell.layer.cornerRadius=15
-        cell.layer.borderColor = UIColor.orangeColor().CGColor
+        cell.layer.borderColor = UIColor.orange.cgColor
         cell.layer.borderWidth = 2
-        cell.playButton.tag=indexPath.row
+        cell.playButton.tag=(indexPath as NSIndexPath).row
         cell.onButtonTapped = {
             if((data.audioLink?.isEmpty) != nil && NSString(string: data.audioLink!).length > 5){
                 self.configurePlay(data.audioLink!,playbutton: cell.playButton)
@@ -161,43 +161,43 @@ class ReportViewController: UITableViewController,UIPopoverPresentationControlle
         }
         cell.onMoreTapped={ (sender) -> Void in
              //self.performSegueWithIdentifier("locate", sender: self)
-            let popoverContent = (self.storyboard?.instantiateViewControllerWithIdentifier(OVERFLOW))! as! OverflowController
-            popoverContent.modalPresentationStyle = .Popover
+            let popoverContent = (self.storyboard?.instantiateViewController(withIdentifier: OVERFLOW))! as! OverflowController
+            popoverContent.modalPresentationStyle = .popover
             if let popover = popoverContent.popoverPresentationController {
                 let viewForSource = sender as! UIView
                 popover.sourceView = viewForSource
                 popover.sourceRect = viewForSource.bounds
                 if(self.type == MTRACKER){
-                    popoverContent.preferredContentSize = CGSizeMake(140,133)
+                    popoverContent.preferredContentSize = CGSize(width: 140,height: 133)
                 } else{
-                   popoverContent.preferredContentSize = CGSizeMake(140,90)
+                   popoverContent.preferredContentSize = CGSize(width: 140,height: 90)
                 }
                 popoverContent.delegate=self
-                popoverContent.CurrentData=self.result[indexPath.row] as! Data;
+                popoverContent.CurrentData=self.result[(indexPath as NSIndexPath).row] as! Data;
                 popoverContent.Type=self.type
                 popoverContent.dismissalDelegate = self
                 popover.delegate = self
                
             }
             
-            self.presentViewController(popoverContent, animated: true, completion: nil)
+            self.present(popoverContent, animated: true, completion: nil)
 
             
             
         }
-        cell.backgroundColor = UIColor.clearColor()
+        cell.backgroundColor = UIColor.clear
         if((data.audioLink?.isEmpty) != nil && NSString(string: data.audioLink!).length > 5){
-            cell.playButton.hidden=false
+            cell.playButton.isHidden=false
             
-            if(self.playButtons.get(indexPath.row) != nil){
-                self.playButtons[indexPath.row]=cell.playButton
+            if(self.playButtons.get((indexPath as NSIndexPath).row) != nil){
+                self.playButtons[(indexPath as NSIndexPath).row]=cell.playButton
                }else{
                 self.playButtons.append(cell.playButton)
                }
 
             
         }else{
-            cell.playButton.hidden=true
+            cell.playButton.isHidden=true
         }
         
         cell.callfrom.text=data.callFrom
@@ -218,21 +218,23 @@ class ReportViewController: UITableViewController,UIPopoverPresentationControlle
             cell.time.text=data.startTime!.getTimeFromString()
             if((data.status?.isEmpty) != nil && NSString(string: data.status!).length > 0){
                 cell.status.text=data.status == "0" ? MISSED: data.status == "1" ? INBOUND : OUTBOUND
+                cell.callFromlabel.text=data.status == "2" ? "Call To" : "Call From"
             }
             cell.Group.text=data.empName
             cell.groupLabel.text="Employee"
+            
         }
         
         
         let image:UIImage!
-        if(player != nil && indexPath.row == CurrentPlaying){
-           image = UIImage(named: "pause")?.imageWithRenderingMode(.AlwaysTemplate)
+        if(player != nil && (indexPath as NSIndexPath).row == CurrentPlaying){
+           image = UIImage(named: "pause")?.withRenderingMode(.alwaysTemplate)
         }
         else{
-            image = UIImage(named: "play")?.imageWithRenderingMode(.AlwaysTemplate)
+            image = UIImage(named: "play")?.withRenderingMode(.alwaysTemplate)
             
         }
-        cell.playButton.setImage(image, forState: .Normal)
+        cell.playButton.setImage(image, for: UIControlState())
         cell.playButton.tintColor = UIColor(red: 255.0/255.0, green: 87.0/255.0, blue: 34.0/255.0, alpha: 1.0)
         return cell
     }
@@ -240,10 +242,10 @@ class ReportViewController: UITableViewController,UIPopoverPresentationControlle
     
     
     
-    func configurePlay(filename:String,playbutton:UIButton) {
+    func configurePlay(_ filename:String,playbutton:UIButton) {
          print(self.playButtons.count)
         let url = "\(PLAY_URL)\(filename)"
-        let link = NSURL(string: url)!
+        let link = URL(string: url)!
        for currentbutton in self.playButtons{
             if(currentbutton.tag == playbutton.tag ){
                 var image:UIImage?
@@ -252,42 +254,42 @@ class ReportViewController: UITableViewController,UIPopoverPresentationControlle
                 }
                 
                 if(player == nil){
-                    player = AVPlayer(URL: link)
-                    NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ReportViewController.playerDidFinishPlaying(_:)), name: AVPlayerItemDidPlayToEndTimeNotification, object:player.currentItem)
+                    player = AVPlayer(url: link)
+                    NotificationCenter.default.addObserver(self, selector: #selector(ReportViewController.playerDidFinishPlaying(_:)), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object:player.currentItem)
                 }
                 if ((player.rate != 0)) {
                     player.pause()
-                    image = UIImage(named: "play")?.imageWithRenderingMode(.AlwaysTemplate)
+                    image = UIImage(named: "play")?.withRenderingMode(.alwaysTemplate)
                 }
                 else{
-                    image = UIImage(named: "pause")?.imageWithRenderingMode(.AlwaysTemplate)
+                    image = UIImage(named: "pause")?.withRenderingMode(.alwaysTemplate)
                     self.CurrentPlaying=playbutton.tag;
                     player.play()
                    
                    
                 }
                 
-                currentbutton.setImage(image, forState: .Normal)
+                currentbutton.setImage(image, for: UIControlState())
                 currentbutton.tintColor = UIColor(red: 255.0/255.0, green: 87.0/255.0, blue: 34.0/255.0, alpha: 1.0)
                 
             }
             else{
                 
-                let image = UIImage(named: "play")?.imageWithRenderingMode(.AlwaysTemplate)
-                currentbutton.setImage(image, forState: .Normal)
+                let image = UIImage(named: "play")?.withRenderingMode(.alwaysTemplate)
+                currentbutton.setImage(image, for: UIControlState())
                 currentbutton.tintColor = UIColor(red: 255.0/255.0, green: 87.0/255.0, blue: 34.0/255.0, alpha: 1.0)
                 
             }
         }
     }
     
-    func playerDidFinishPlaying(note: NSNotification) {
+    func playerDidFinishPlaying(_ note: Notification) {
         print("Playing Finished")
         for button in self.playButtons{
             if(self.CurrentPlaying == button.tag)
             {
-                let image = UIImage(named: "play")?.imageWithRenderingMode(.AlwaysTemplate)
-                button.setImage(image, forState: .Normal)
+                let image = UIImage(named: "play")?.withRenderingMode(.alwaysTemplate)
+                button.setImage(image, for: UIControlState())
                 button.tintColor = UIColor(red: 255.0/255.0, green: 87.0/255.0, blue: 34.0/255.0, alpha: 1.0)
                 self.player = nil;
                 self.CurrentPlaying=nil;
@@ -300,18 +302,18 @@ class ReportViewController: UITableViewController,UIPopoverPresentationControlle
     }
     
     deinit{
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
         
         
     }
     
     
     
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 153;
     }
     
-    override func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+    override func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         if scrollView == tableView{
             
             if ((scrollView.contentOffset.y + scrollView.frame.size.height) >= scrollView.contentSize.height)
@@ -328,17 +330,17 @@ class ReportViewController: UITableViewController,UIPopoverPresentationControlle
     
    
    
-    func overflowSelected(position: Int, CurrentData: Data) {
+    func overflowSelected(_ position: Int, CurrentData: Data) {
         
         if(position == 0){
-        if let url = NSURL(string: "tel://\(CurrentData.callFrom)") {
-            UIApplication.sharedApplication().openURL(url)
+        if let url = URL(string: "tel://\(CurrentData.callFrom)") {
+            UIApplication.shared.openURL(url)
             print(url)
             }
         }
         else if(position == 2){
             self.CurrentData=CurrentData;
-         self.performSegueWithIdentifier(LOCATE, sender: self)
+         self.performSegue(withIdentifier: LOCATE, sender: self)
         }
         else{
            self.sendSms(CurrentData)
@@ -347,13 +349,13 @@ class ReportViewController: UITableViewController,UIPopoverPresentationControlle
         
     }
     
-    func sendSms(CurrentData: Data){
+    func sendSms(_ CurrentData: Data){
         if (MFMessageComposeViewController.canSendText()) {
             let controller = MFMessageComposeViewController()
             controller.body = "Message Body"
             controller.recipients = [CurrentData.callFrom!]
             controller.messageComposeDelegate = self
-            self.presentViewController(controller, animated: true, completion: nil)
+            self.present(controller, animated: true, completion: nil)
         }
         
     }
@@ -361,32 +363,45 @@ class ReportViewController: UITableViewController,UIPopoverPresentationControlle
     func canSendText() -> Bool {
         return MFMessageComposeViewController.canSendText()
     }
-    func messageComposeViewController(controller: MFMessageComposeViewController, didFinishWithResult result: MessageComposeResult) {
-        controller.dismissViewControllerAnimated(true, completion: nil)
+    func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
+        controller.dismiss(animated: true, completion: nil)
     }
     
     
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
     if segue.identifier == POPOVERSEGUE && options.count > 0{
-            
-            let popoverViewController = segue.destinationViewController as! FilterController
-            popoverViewController.FilterOptions=options;
+        
+        
+        
+        
+        
+        
+        
+        
+            let popoverViewController = segue.destination as! FilterController
+            popoverViewController.preferredContentSize = CGSize(width: 320, height: 186);         popoverViewController.FilterOptions=options;
             popoverViewController.SeletedFilter=SeletedFilterpos;
-            popoverViewController.modalPresentationStyle = UIModalPresentationStyle.Popover
+            popoverViewController.modalPresentationStyle = UIModalPresentationStyle.popover
             popoverViewController.popoverPresentationController!.delegate = self
             popoverViewController.delegate = self
+
+        
+       
+        
+        
+        
         }
        else if segue.identifier == DETAIL{
             
-            let detailview = segue.destinationViewController as! DetailViewController
+            let detailview = segue.destination as! DetailViewController
             detailview.currentData=CurrentData;
             detailview.type=self.type
             
         }
         else if segue.identifier == LOCATE{
-         let mapView = segue.destinationViewController as! MapController
+         let mapView = segue.destination as! MapController
          mapView.currentdata=CurrentData;
         }
         
@@ -394,12 +409,12 @@ class ReportViewController: UITableViewController,UIPopoverPresentationControlle
         
                 
     }
-    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
-        return UIModalPresentationStyle.None
+    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+        return UIModalPresentationStyle.none
     }
     
     
-    func filterSelected(position: Int) {
+    func filterSelected(_ position: Int) {
         self.SeletedFilterpos=position;
         let option: OptionsData = self.options[position]
         self.gid=option.id!;
@@ -414,7 +429,7 @@ class ReportViewController: UITableViewController,UIPopoverPresentationControlle
    
        func showActivityIndicator(){
         if !self.showingActivity {
-            self.navigationController?.view.makeToastActivity(.Center)
+            self.navigationController?.view.makeToastActivity(.center)
         } else {
             self.navigationController?.view.hideToastActivity()
         }
@@ -425,20 +440,20 @@ class ReportViewController: UITableViewController,UIPopoverPresentationControlle
     
     
     
-    func revealController(revealController: SWRevealViewController!,  willMoveToPosition position: FrontViewPosition){
-        if(position == FrontViewPosition.Left) {
-            self.mytableview.userInteractionEnabled = true
+    func revealController(_ revealController: SWRevealViewController!,  willMoveTo position: FrontViewPosition){
+        if(position == FrontViewPosition.left) {
+            self.mytableview.isUserInteractionEnabled = true
             sidebarMenuOpen = false
         } else {
-            self.mytableview.userInteractionEnabled = false
+            self.mytableview.isUserInteractionEnabled = false
             sidebarMenuOpen = true
             
             
             for currentbutton in self.playButtons{
                 if(currentbutton.tag == self.CurrentPlaying ){
                     self.player=nil;
-                    let image = UIImage(named: "play")?.imageWithRenderingMode(.AlwaysTemplate)
-                    currentbutton.setImage(image, forState: .Normal)
+                    let image = UIImage(named: "play")?.withRenderingMode(.alwaysTemplate)
+                    currentbutton.setImage(image, for: UIControlState())
                     currentbutton.tintColor = UIColor(red: 255.0/255.0, green: 87.0/255.0, blue: 34.0/255.0, alpha: 1.0)
                 }
 
@@ -448,17 +463,17 @@ class ReportViewController: UITableViewController,UIPopoverPresentationControlle
         }
     }
     
-    func revealController(revealController: SWRevealViewController!,  didMoveToPosition position: FrontViewPosition){
-        if(position == FrontViewPosition.Left) {
-            self.mytableview.userInteractionEnabled = true
+    func revealController(_ revealController: SWRevealViewController!,  didMoveTo position: FrontViewPosition){
+        if(position == FrontViewPosition.left) {
+            self.mytableview.isUserInteractionEnabled = true
             sidebarMenuOpen = false
         } else {
-            self.mytableview.userInteractionEnabled = false
+            self.mytableview.isUserInteractionEnabled = false
             sidebarMenuOpen = true
         }
     }
     
-    override func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
+    override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
         if(sidebarMenuOpen == true){
             return nil
         } else {
@@ -466,9 +481,9 @@ class ReportViewController: UITableViewController,UIPopoverPresentationControlle
         }
     }
     
-      func finishedShowing(viewController: UIViewController) {
-       viewController.dismissViewControllerAnimated(true, completion: nil)
-       self.performSegueWithIdentifier("locate", sender: self)
+      func finishedShowing(_ viewController: UIViewController) {
+       viewController.dismiss(animated: true, completion: nil)
+       self.performSegue(withIdentifier: "locate", sender: self)
      
         
     }

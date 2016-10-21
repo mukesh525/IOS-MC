@@ -25,16 +25,16 @@ class MenuController: UITableViewController {
             let optiondata = OptionsData();
             optiondata.id="1"
             optiondata.value = "Mukesh"
-            self.options.addObject(optiondata)
+            self.options.add(optiondata)
             
         }
         if(username != nil && useremail != nil ){
             
             
-            if let name = NSUserDefaults.standardUserDefaults().stringForKey(NAME) {
+            if let name = UserDefaults.standard.string(forKey: NAME) {
                 username.text="Hi \(name)"
             }
-            if let email = NSUserDefaults.standardUserDefaults().stringForKey(EMAIL) {
+            if let email = UserDefaults.standard.string(forKey: EMAIL) {
                 useremail.text=email
             }
             
@@ -44,38 +44,38 @@ class MenuController: UITableViewController {
     }
     
     
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         var height:CGFloat=40
-        switch indexPath.row {
+        switch (indexPath as NSIndexPath).row {
         case 0:
             
             return 208
         case 1:
-            if let track = NSUserDefaults.standardUserDefaults().stringForKey(TRACK) {
+            if let track = UserDefaults.standard.string(forKey: TRACK) {
                 if(track == "0"){height = 0;}
                 else{height = 40;}
             }
             return height
         case 2:
-            if let track = NSUserDefaults.standardUserDefaults().stringForKey(IVRS) {
+            if let track = UserDefaults.standard.string(forKey: IVRS) {
                 if(track == "0"){height = 0;}
                 else{height = 40;}
             }
             return height
         case 3:
-            if let track = NSUserDefaults.standardUserDefaults().stringForKey(MCUBEX) {
+            if let track = UserDefaults.standard.string(forKey: MCUBEX) {
                 if(track == "0"){height = 0;}
                 else{height = 40;}
             }
             return height
         case 4:
-            if let track = NSUserDefaults.standardUserDefaults().stringForKey(LEAD) {
+            if let track = UserDefaults.standard.string(forKey: LEAD) {
                 if(track == "0"){height = 0;}
                 else{height = 40;}
             }
             return height
         case 5:
-            if let track = NSUserDefaults.standardUserDefaults().stringForKey(MTRACKER) {
+            if let track = UserDefaults.standard.string(forKey: MTRACKER) {
                 if(track == "0"){height = 0;}
                 else{height = 40;}
             }
@@ -97,21 +97,21 @@ class MenuController: UITableViewController {
     func setsection() ->Int{
         var select:Int=1
         
-        if  NSUserDefaults.standardUserDefaults().stringForKey(TRACK) == "1" {
+        if  UserDefaults.standard.string(forKey: TRACK) == "1" {
             select = 1;
         }
-        else if  NSUserDefaults.standardUserDefaults().stringForKey(IVRS) == "1" {
+        else if  UserDefaults.standard.string(forKey: IVRS) == "1" {
             select = 2;           }
             
-        else if  NSUserDefaults.standardUserDefaults().stringForKey(MCUBEX) == "1" {
+        else if  UserDefaults.standard.string(forKey: MCUBEX) == "1" {
             select = 3;
         }
             
-        else if NSUserDefaults.standardUserDefaults().stringForKey(LEAD) == "1" {
+        else if UserDefaults.standard.string(forKey: LEAD) == "1" {
             select = 4;
         }
             
-        else if  NSUserDefaults.standardUserDefaults().stringForKey(MTRACKER) == "1" {
+        else if  UserDefaults.standard.string(forKey: MTRACKER) == "1" {
             select = 5;
         }
         else{
@@ -123,27 +123,27 @@ class MenuController: UITableViewController {
     }
     
     
-  override func viewWillAppear(animated: Bool) {
-        if NSUserDefaults.standardUserDefaults().objectForKey(LAUNCH) != nil{
+  override func viewWillAppear(_ animated: Bool) {
+        if UserDefaults.standard.object(forKey: LAUNCH) != nil{
             //  print("Loaded First")
-            let myPath = NSIndexPath(forRow: self.setsection(), inSection: 0)
-            self.mytableview.selectRowAtIndexPath(myPath, animated: false, scrollPosition: UITableViewScrollPosition.None)
-            NSUserDefaults.standardUserDefaults().removeObjectForKey(LAUNCH)
-            NSUserDefaults.standardUserDefaults().synchronize()
+            let myPath = IndexPath(row: self.setsection(), section: 0)
+            self.mytableview.selectRow(at: myPath, animated: false, scrollPosition: UITableViewScrollPosition.none)
+            UserDefaults.standard.removeObject(forKey: LAUNCH)
+            UserDefaults.standard.synchronize()
         }
     }
     
-    override func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
-        if ( indexPath.row == 0 ){ return nil};
-        if ( indexPath.row == 7 ){ return nil};
+    override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+        if ( (indexPath as NSIndexPath).row == 0 ){ return nil};
+        if ( (indexPath as NSIndexPath).row == 7 ){ return nil};
         return indexPath
     }
     
     
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let path = NSIndexPath(forRow: indexPath.row , inSection: 0)
-        switch indexPath.row {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let path = IndexPath(row: (indexPath as NSIndexPath).row , section: 0)
+        switch (indexPath as NSIndexPath).row {
         case 1:
             currentType=TRACK
         case 2:
@@ -159,13 +159,13 @@ class MenuController: UITableViewController {
         default:
              currentType=TRACK
         }
-        mytableview.selectRowAtIndexPath(path, animated: false, scrollPosition: UITableViewScrollPosition.None)
+        mytableview.selectRow(at: path, animated: false, scrollPosition: UITableViewScrollPosition.none)
         
-        if(indexPath.row == 8){
-            self.performSegueWithIdentifier("settings", sender: self)
+        if((indexPath as NSIndexPath).row == 8){
+            self.performSegue(withIdentifier: "settings", sender: self)
         }
         else{
-           self.performSegueWithIdentifier("push", sender: self)
+           self.performSegue(withIdentifier: "push", sender: self)
         }
       
         
@@ -173,8 +173,8 @@ class MenuController: UITableViewController {
     
     
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        let nav = segue.destinationViewController as! UINavigationController
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let nav = segue.destination as! UINavigationController
     
          if(segue.identifier == "settings"){
             

@@ -67,6 +67,7 @@ let VALUE : String = "value"
 
 let OPTIONS : String = "options"
 let CALLFROM : String = "callfrom"
+let CALLTO:String = "callto"
 let ADD_FOLLOWUP : String = "addfollowup"
 
 let GROUP_ID : String = "gid"

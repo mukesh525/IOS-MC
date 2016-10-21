@@ -2,15 +2,14 @@
 //  Copyright © 2016 AppCoda. All rights reserved.
 
 import UIKit
-import SwiftValidator
+//import SwiftValidator
 import Alamofire
-import Toast_Swift
 import BEMCheckBox
 
 
 
 
-class LoginViewController: UIViewController,ValidationDelegate ,UITextFieldDelegate {
+class LoginViewController: UIViewController,UITextFieldDelegate {
     
     @IBOutlet weak var logo: UIImageView!
     @IBOutlet weak var password: UITextField!
@@ -19,8 +18,8 @@ class LoginViewController: UIViewController,ValidationDelegate ,UITextFieldDeleg
     @IBOutlet weak var passworderror: UILabel!
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var rememberMe: BEMCheckBox!
-    private var showingActivity = false
-    let validator = Validator()
+    fileprivate var showingActivity = false
+   // let validator = Validator()
     var code:String?
     var authkey:String?
     var message:String?
@@ -34,7 +33,6 @@ class LoginViewController: UIViewController,ValidationDelegate ,UITextFieldDeleg
     var track:String?
     var businessName:String?
     var empContact:String?
-    //var rememberMe:Bool=false
     var showpassicon:UIImageView?
     var iconClick : Bool!
 
@@ -42,50 +40,47 @@ class LoginViewController: UIViewController,ValidationDelegate ,UITextFieldDeleg
     override func viewDidLoad() {
         super.viewDidLoad()
         //loginButton.layer.cornerRadius = 10
-        validator.registerField(email, errorLabel: emailerror, rules: [RequiredRule(), EmailRule(message: "Invalid email")])
-        
-        validator.registerField(password,errorLabel: passworderror, rules: [RequiredRule(), MinLengthRule(length: 5)])
         self.email.delegate = self;
         self.password.delegate = self;
         iconClick = true
         self.setShowHideIcon()
-        if NSUserDefaults.standardUserDefaults().stringForKey(EMAIL_FIELD) != nil
-            && NSUserDefaults.standardUserDefaults().stringForKey(PASS_FIELD) != nil
+        if UserDefaults.standard.string(forKey: EMAIL_FIELD) != nil
+            && UserDefaults.standard.string(forKey: PASS_FIELD) != nil
         {
-            email.text=NSUserDefaults.standardUserDefaults().stringForKey(EMAIL_FIELD)
-            password.text=NSUserDefaults.standardUserDefaults().stringForKey(PASS_FIELD)
+            email.text=UserDefaults.standard.string(forKey: EMAIL_FIELD)
+            password.text=UserDefaults.standard.string(forKey: PASS_FIELD)
             
         }
         
     }
     
     
-    func imageTapped(img: AnyObject)
+    func imageTapped(_ img: AnyObject)
     {
         // Your action
        
         if(iconClick == true) {
-            password.secureTextEntry = false
+            password.isSecureTextEntry = false
             iconClick = false
             showpassicon = UIImageView(image:UIImage(named: "show")!.imageWithInsets(UIEdgeInsetsMake(0, 5, 0, 5)))
             
         } else {
-            password.secureTextEntry = true
+            password.isSecureTextEntry = true
             iconClick = true
             showpassicon = UIImageView(image:UIImage(named: "hide")!.imageWithInsets(UIEdgeInsetsMake(0, 5, 0, 5)))
         }
         
        
-        showpassicon!.userInteractionEnabled=true;
+        showpassicon!.isUserInteractionEnabled=true;
         let tapGestureRecognizer = UITapGestureRecognizer(target:self, action:#selector(LoginViewController.imageTapped(_:)))
         showpassicon!.addGestureRecognizer(tapGestureRecognizer)
-        password.rightViewMode = UITextFieldViewMode.Always
+        password.rightViewMode = UITextFieldViewMode.always
         password.rightView = showpassicon
         
     }
     
 
-    override func prefersStatusBarHidden() -> Bool {
+    override var prefersStatusBarHidden : Bool {
         return true
     }
     
@@ -94,90 +89,137 @@ class LoginViewController: UIViewController,ValidationDelegate ,UITextFieldDeleg
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == email {
             password.becomeFirstResponder()
             return false
         }
         if textField == password {
             textField.resignFirstResponder()
-            validator.validate(self)
+            //validator.validate(self)
             return false
         }
         return true
     }
     
     
-    @IBAction func LoginTap(sender: AnyObject) {
-        validator.validate(self)
+    @IBAction func LoginTap(_ sender: AnyObject) {
+         if(validateFields()){
+            validationSuccessful()
+        }
+        
+    }
+    
+    
+    
+    func validateFields() -> Bool{
+        return isValidEmail(testStr: email.text!)&&isValidPassword(testStr: password.text!)
+      }
+    
+    
+    
+    
+    func isValidEmail(testStr:String) -> Bool {
+        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
+        let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
+        if(!emailTest.evaluate(with: testStr)){
+            self.emailerror.text = "Enter valid email"}
+        else{
+            self.emailerror.text = ""
+         }
+        
+        return emailTest.evaluate(with: testStr)
+    }
+    
+    
+    func isValidPassword(testStr:String) -> Bool {
+       if( testStr.characters.count<1){
+            self.passworderror.text = "Password Cannot Be Empty"
+            return false
+        }
+        else{
+            self.passworderror.text = ""
+            return true
+        }
         
         
     }
+
+    
+    
+    
+    
+    
+    
     @IBOutlet weak var loginClick: UIButton!
     
     
     
     func validationSuccessful() {
-        loginClick.enabled=false
+        loginClick.isEnabled=false
         emailerror.text="";
         passworderror.text="";
         self.showActivityIndicator()
-        Alamofire.request(.POST, LOGIN_URL, parameters: [EMAIL:email.text!, PASSWORD:password.text!]).validate().responseJSON
+       
+        
+        
+        
+        Alamofire.request(LOGIN_URL,method: .post, parameters: [EMAIL:email.text!, PASSWORD:password.text!]).validate().responseJSON
             {response in switch response.result {
                 
-            case .Success(let JSON):
-                self.loginClick.enabled=true
+            case .success(let JSON):
+                self.loginClick.isEnabled=true
                 print("Success with JSON: \(JSON)")
                 let response = JSON as! NSDictionary
-                if((response.objectForKey(CODE)) != nil){
-                    self.code=response.objectForKey(CODE)as? String;
+                if((response.object(forKey: CODE)) != nil){
+                    self.code=response.object(forKey: CODE)as? String;
                 }
-                if((response.objectForKey(MESSAGE)) != nil){
-                    self.message=response.objectForKey(MESSAGE)as? String;
+                if((response.object(forKey: MESSAGE)) != nil){
+                    self.message=response.object(forKey: MESSAGE)as? String;
                     
                 }
-                if((response.objectForKey(AUTHKEY)) != nil){
-                    self.authkey = response.objectForKey(AUTHKEY)! as? String
+                if((response.object(forKey: AUTHKEY)) != nil){
+                    self.authkey = response.object(forKey: AUTHKEY)! as? String
                 }
                 
                 
-                if((response.objectForKey(EMPNAME)) != nil){
-                    self.empName = response.objectForKey(EMPNAME)! as? String
+                if((response.object(forKey: EMPNAME)) != nil){
+                    self.empName = response.object(forKey: EMPNAME)! as? String
                     
                 }
                 
-                if((response.objectForKey(EMPEMAIL)) != nil){
-                    self.empEmail = response.objectForKey(EMPEMAIL)! as? String
+                if((response.object(forKey: EMPEMAIL)) != nil){
+                    self.empEmail = response.object(forKey: EMPEMAIL)! as? String
                     
                 }
                 
-                if((response.objectForKey(IVRS)) != nil){
-                    self.ivrs = response.objectForKey(IVRS)! as? String
+                if((response.object(forKey: IVRS)) != nil){
+                    self.ivrs = response.object(forKey: IVRS)! as? String
                     
                 }
                 
-                if((response.objectForKey(LEAD)) != nil){
-                    self.lead = response.objectForKey(LEAD)! as? String
+                if((response.object(forKey: LEAD)) != nil){
+                    self.lead = response.object(forKey: LEAD)! as? String
                     
                 }
-                if((response.objectForKey(MTRACKER)) != nil){
-                    self.mtracker = response.objectForKey(MTRACKER)! as? String
+                if((response.object(forKey: MTRACKER)) != nil){
+                    self.mtracker = response.object(forKey: MTRACKER)! as? String
                     
                 }
-                if((response.objectForKey(MCUBEX)) != nil){
-                    self.pbx = response.objectForKey(MCUBEX)! as? String
+                if((response.object(forKey: MCUBEX)) != nil){
+                    self.pbx = response.object(forKey: MCUBEX)! as? String
                     
                 }
-                if((response.objectForKey(TRACK)) != nil){
-                    self.track = response.objectForKey(TRACK)! as? String
+                if((response.object(forKey: TRACK)) != nil){
+                    self.track = response.object(forKey: TRACK)! as? String
                     
                 }
-                if((response.objectForKey(BUSINESS_NAME)) != nil){
-                    self.businessName = response.objectForKey(BUSINESS_NAME)! as? String
+                if((response.object(forKey: BUSINESS_NAME)) != nil){
+                    self.businessName = response.object(forKey: BUSINESS_NAME)! as? String
                     
                 }
-                if((response.objectForKey(EMP_CONTACT)) != nil){
-                    self.empContact = response.objectForKey(EMP_CONTACT)! as? String
+                if((response.object(forKey: EMP_CONTACT)) != nil){
+                    self.empContact = response.object(forKey: EMP_CONTACT)! as? String
                     
                 }
                 
@@ -185,13 +227,13 @@ class LoginViewController: UIViewController,ValidationDelegate ,UITextFieldDeleg
                 
                 //  print("code \(self.code)")
                 
-            case .Failure(let error):
-                //print("Request failed with error: \(error)")
-                if (error.code == -1009) {
+            case .failure(let error):
+                print("Request failed with error: \(error)")
+                if (((error as NSError).code == -1009 )||((error as NSError).code == -1001 )) {
                     self.showAlert("No Internet Conncetion")
                 }
                 
-                self.loginClick.enabled=true;
+                self.loginClick.isEnabled=true;
                 self.showActivityIndicator()
                 }
                 if(self.code=="401"||self.code=="400"){
@@ -203,43 +245,43 @@ class LoginViewController: UIViewController,ValidationDelegate ,UITextFieldDeleg
                 if(self.code=="200"){
                     if(self.message != nil){
                         self.showActivityIndicator()
-                        NSUserDefaults.standardUserDefaults().setObject(self.empName, forKey: NAME)
-                        NSUserDefaults.standardUserDefaults().setObject(self.empEmail, forKey: EMAIL)
-                        NSUserDefaults.standardUserDefaults().setObject(self.authkey, forKey: AUTHKEY)
-                        NSUserDefaults.standardUserDefaults().setObject(self.empContact, forKey: EMP_CONTACT)
-                        NSUserDefaults.standardUserDefaults().setObject(self.businessName, forKey: BUSINESS_NAME)
+                        UserDefaults.standard.set(self.empName, forKey: NAME)
+                        UserDefaults.standard.set(self.empEmail, forKey: EMAIL)
+                        UserDefaults.standard.set(self.authkey, forKey: AUTHKEY)
+                        UserDefaults.standard.set(self.empContact, forKey: EMP_CONTACT)
+                        UserDefaults.standard.set(self.businessName, forKey: BUSINESS_NAME)
                         
-                        NSUserDefaults.standardUserDefaults().setObject(self.track, forKey: TRACK)
-                        NSUserDefaults.standardUserDefaults().setObject(self.ivrs, forKey: IVRS)
-                        NSUserDefaults.standardUserDefaults().setObject(self.lead, forKey: LEAD)
-                        NSUserDefaults.standardUserDefaults().setObject(self.pbx, forKey: MCUBEX)
-                        NSUserDefaults.standardUserDefaults().setObject(self.mtracker, forKey: MTRACKER)
+                        UserDefaults.standard.set(self.track, forKey: TRACK)
+                        UserDefaults.standard.set(self.ivrs, forKey: IVRS)
+                        UserDefaults.standard.set(self.lead, forKey: LEAD)
+                        UserDefaults.standard.set(self.pbx, forKey: MCUBEX)
+                        UserDefaults.standard.set(self.mtracker, forKey: MTRACKER)
                         
-                        NSUserDefaults.standardUserDefaults().setInteger(0,forKey: LAUNCH)
-                        NSUserDefaults.standardUserDefaults().setInteger(0,forKey: LAUNCHVIEW)
+                        UserDefaults.standard.set(0,forKey: LAUNCH)
+                        UserDefaults.standard.set(0,forKey: LAUNCHVIEW)
                        
-                        NSUserDefaults.standardUserDefaults().synchronize()
-                        if let myLoadedString = NSUserDefaults.standardUserDefaults().stringForKey(NAME) {
+                        UserDefaults.standard.synchronize()
+                        if let myLoadedString = UserDefaults.standard.string(forKey: NAME) {
                             print(myLoadedString) // "Hello World"
                         }
                         
                         if(self.rememberMe.on){
-                            NSUserDefaults.standardUserDefaults().setObject(self.email.text, forKey: EMAIL_FIELD)
-                            NSUserDefaults.standardUserDefaults().setObject(self.password.text, forKey: PASS_FIELD)
-                            NSUserDefaults.standardUserDefaults().synchronize()
+                            UserDefaults.standard.set(self.email.text, forKey: EMAIL_FIELD)
+                            UserDefaults.standard.set(self.password.text, forKey: PASS_FIELD)
+                            UserDefaults.standard.synchronize()
                         }
                         else{
-                            if NSUserDefaults.standardUserDefaults().stringForKey(EMAIL_FIELD) != nil
-                                && NSUserDefaults.standardUserDefaults().stringForKey(PASS_FIELD) != nil
+                            if UserDefaults.standard.string(forKey: EMAIL_FIELD) != nil
+                                && UserDefaults.standard.string(forKey: PASS_FIELD) != nil
                             {
-                                NSUserDefaults.standardUserDefaults().removeObjectForKey(PASS_FIELD)
-                                NSUserDefaults.standardUserDefaults().removeObjectForKey(PASS_FIELD)
-                                NSUserDefaults.standardUserDefaults().synchronize()
+                                UserDefaults.standard.removeObject(forKey: PASS_FIELD)
+                                UserDefaults.standard.removeObject(forKey: PASS_FIELD)
+                                UserDefaults.standard.synchronize()
                                 
                             }
                         }
                         
-                        self.performSegueWithIdentifier("login", sender: self)
+                        self.performSegue(withIdentifier: "login", sender: self)
                         
                     }
                 }
@@ -253,7 +295,7 @@ class LoginViewController: UIViewController,ValidationDelegate ,UITextFieldDeleg
     
     func showActivityIndicator(){
         if !self.showingActivity {
-            self.navigationController?.view.makeToastActivity(.Center)
+            self.navigationController?.view.makeToastActivity(.center)
         } else {
             self.navigationController?.view.hideToastActivity()
         }
@@ -266,28 +308,28 @@ class LoginViewController: UIViewController,ValidationDelegate ,UITextFieldDeleg
     
     
     
-    func showAlert(mesage :String){
+    func showAlert(_ mesage :String){
         //dismissViewControllerAnimated(true, completion: nil)
-        let alertView = UIAlertController(title: "MCube", message: mesage, preferredStyle: .Alert)
-        alertView.addAction(UIAlertAction(title: "Ok", style: .Default, handler: nil))
-        presentViewController(alertView, animated: true, completion: nil)
+        let alertView = UIAlertController(title: "MCube", message: mesage, preferredStyle: .alert)
+        alertView.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+        present(alertView, animated: true, completion: nil)
     }
     
     
-    
-    func validationFailed(errors: [(Validatable, ValidationError)]) {
-        // turn the fields to red
-        for (field, error) in errors {
-            if let field = field as? UITextField {
-                field.layer.borderColor = UIColor.redColor().CGColor
-                field.layer.borderWidth = 1.0
-            }
-            error.errorLabel?.text = error.errorMessage // works if you added labels
-            error.errorLabel?.hidden = false
-        }    }
-
-    
-    
+//    
+//    func validationFailed(_ errors: [(Validatable, ValidationError)]) {
+//        // turn the fields to red
+//        for (field, error) in errors {
+//            if let field = field as? UITextField {
+//                field.layer.borderColor = UIColor.red.cgColor
+//                field.layer.borderWidth = 1.0
+//            }
+//            error.errorLabel?.text = error.errorMessage // works if you added labels
+//            error.errorLabel?.isHidden = false
+//        }    }
+//
+//    
+//    
     
     
     
@@ -297,21 +339,21 @@ class LoginViewController: UIViewController,ValidationDelegate ,UITextFieldDeleg
         
         let user:UIImage=UIImage(named: "user")!;
         let usericon:UIImageView = UIImageView(image:user.imageWithInsets(UIEdgeInsetsMake(0, 5, 0, 5)))
-        email.leftViewMode = UITextFieldViewMode.Always
+        email.leftViewMode = UITextFieldViewMode.always
         email.leftView = usericon
         
         let pass:UIImage=UIImage(named: "pass")!;
         let passicon:UIImageView = UIImageView(image:pass.imageWithInsets(UIEdgeInsetsMake(0, 5, 0, 5)))
-        password.leftViewMode = UITextFieldViewMode.Always
+        password.leftViewMode = UITextFieldViewMode.always
         password.leftView = passicon
         
         
         //  let showpass:UIImage=UIImage(named: "show")!;
         showpassicon = UIImageView(image:UIImage(named: "hide")!.imageWithInsets(UIEdgeInsetsMake(0, 5, 0, 5)))
-        showpassicon!.userInteractionEnabled=true;
+        showpassicon!.isUserInteractionEnabled=true;
         let tapGestureRecognizer = UITapGestureRecognizer(target:self, action:#selector(LoginViewController.imageTapped(_:)))
         showpassicon!.addGestureRecognizer(tapGestureRecognizer)
-        password.rightViewMode = UITextFieldViewMode.Always
+        password.rightViewMode = UITextFieldViewMode.always
         password.rightView = showpassicon
         
     }

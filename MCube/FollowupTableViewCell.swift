@@ -11,18 +11,19 @@ import UIKit
 class FollowupTableViewCell: UITableViewCell {
 
     @IBOutlet weak var playButton: UIButton!
-    @IBAction func playClicked(sender: AnyObject) {
+    @IBAction func playClicked(_ sender: AnyObject) {
         if let onButtonTapped = self.onButtonTapped {
             onButtonTapped()
         }
     }
-    @IBAction func overflowClicked(sender: AnyObject) {
+    @IBAction func overflowClicked(_ sender: AnyObject) {
         
         if let onMoreTapped = self.onMoreTapped {
             onMoreTapped(sender)
         }
     }
 
+    @IBOutlet weak var callFromlabel: UILabel!
     @IBOutlet weak var groupLabel: UILabel!
     @IBOutlet weak var status: UILabel!
     @IBOutlet weak var time: UILabel!
@@ -38,7 +39,7 @@ class FollowupTableViewCell: UITableViewCell {
         // Initialization code
     }
     
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         
         // Configure the view for the selected state

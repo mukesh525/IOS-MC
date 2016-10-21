@@ -25,19 +25,19 @@ class SettingsController: UIViewController {
         }
         
         
-        if let name = NSUserDefaults.standardUserDefaults().stringForKey(NAME) {
+        if let name = UserDefaults.standard.string(forKey: NAME) {
             EmpName.text="\(name)"
         }
-        if let email = NSUserDefaults.standardUserDefaults().stringForKey(EMAIL) {
+        if let email = UserDefaults.standard.string(forKey: EMAIL) {
             EmpEmail.text="\(email)"
         }
-        if let contact = NSUserDefaults.standardUserDefaults().stringForKey(EMP_CONTACT) {
+        if let contact = UserDefaults.standard.string(forKey: EMP_CONTACT) {
             EmpNumber.text="\(contact)"
         }
-        if let businessname = NSUserDefaults.standardUserDefaults().stringForKey(BUSINESS_NAME) {
+        if let businessname = UserDefaults.standard.string(forKey: BUSINESS_NAME) {
             BusinessName.text="\(businessname)"
         }
-        if let limit = NSUserDefaults.standardUserDefaults().stringForKey(LIMIT) {
+        if let limit = UserDefaults.standard.string(forKey: LIMIT) {
             LimitText.text="\(limit)"
         }
         
@@ -52,52 +52,52 @@ class SettingsController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func LogoutTap(sender: AnyObject) {
+    @IBAction func LogoutTap(_ sender: AnyObject) {
         self.LogoutAlert()
     }
     
     
-    @IBAction func SaveClick(sender: AnyObject) {
+    @IBAction func SaveClick(_ sender: AnyObject) {
         if((LimitText.text?.isEmpty) != nil && NSString(string: LimitText.text!).length > 0 && NSString(string: LimitText.text!).length < 4){
-            self.navigationController?.view.makeToast("Saved Sucessfully", duration: 2.0, position: .Bottom, title: nil, image: nil, style: nil, completion: nil)
-            NSUserDefaults.standardUserDefaults().setObject(LimitText.text, forKey: LIMIT)
-            NSUserDefaults.standardUserDefaults().synchronize()
+            self.navigationController?.view.makeToast("Saved Sucessfully", duration: 2.0, position: .bottom, title: nil, image: nil, style: nil, completion: nil)
+            UserDefaults.standard.set(LimitText.text, forKey: LIMIT)
+            UserDefaults.standard.synchronize()
         }
             
         else if(NSString(string: LimitText.text!).length > 3) {
             
-        self.navigationController?.view.makeToast("Limit must be less than 100", duration: 2.0, position: .Bottom, title: nil, image: nil, style: nil, completion: nil)
+        self.navigationController?.view.makeToast("Limit must be less than 100", duration: 2.0, position: .bottom, title: nil, image: nil, style: nil, completion: nil)
         }
         else {
-            self.navigationController?.view.makeToast("Limit cannot be empty", duration: 2.0, position: .Bottom, title: nil, image: nil, style: nil, completion: nil)
+            self.navigationController?.view.makeToast("Limit cannot be empty", duration: 2.0, position: .bottom, title: nil, image: nil, style: nil, completion: nil)
           }
     }
     
     
     
-    func showAlert(mesage :String){
+    func showAlert(_ mesage :String){
         //dismissViewControllerAnimated(true, completion: nil)
-        let alertView = UIAlertController(title: "MCube", message: mesage, preferredStyle: .Alert)
-        alertView.addAction(UIAlertAction(title: "Ok", style: .Default, handler: nil))
-        presentViewController(alertView, animated: true, completion: nil)
+        let alertView = UIAlertController(title: "MCube", message: mesage, preferredStyle: .alert)
+        alertView.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+        present(alertView, animated: true, completion: nil)
     }
     func LogoutAlert (){
         let alertController = UIAlertController(title: "Logout Alert", message:
-            "Do you want to logout?", preferredStyle: .Alert)
-        let okAction = UIAlertAction(title: "Logout", style: UIAlertActionStyle.Default) {
+            "Do you want to logout?", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "Logout", style: UIAlertActionStyle.default) {
             UIAlertAction in
-            NSUserDefaults.standardUserDefaults().removeObjectForKey(AUTHKEY)
-            NSUserDefaults.standardUserDefaults().synchronize()
-            self.performSegueWithIdentifier("GoLogin", sender: self)
+            UserDefaults.standard.removeObject(forKey: AUTHKEY)
+            UserDefaults.standard.synchronize()
+            self.performSegue(withIdentifier: "GoLogin", sender: self)
             
         }
-        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default) {
+        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default) {
             UIAlertAction in
             
         }
         alertController.addAction(cancelAction)
         alertController.addAction(okAction)
-        self.presentViewController(alertController, animated: false, completion: nil)
+        self.present(alertController, animated: false, completion: nil)
         
     }
     

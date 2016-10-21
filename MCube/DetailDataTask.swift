@@ -9,48 +9,49 @@ import UIKit
 import Alamofire
 
 protocol DetailDownload {
-    func OnFinishDownload(result:Array<DetailData>)
-    func OnError(error:NSError)
+    func OnFinishDownload(_ result:Array<DetailData>)
+    func OnError(_ error:NSError)
 }
 class DetailDataTask: NSObject {
     var delegate: DetailDownload?
     var DetailDataList = Array<DetailData>();
     var optionsList = Array<OptionsData>();
+    
     var OptionStringList=[String]()
 
     init(delegate: DetailDownload) {
         self.delegate=delegate;
     }
     
-   func loadDetaildata(authkey:String,type:String,currentData:Data) {
+   func loadDetaildata(_ authkey:String,type:String,currentData:Data) {
         
-      Alamofire.request(.POST, GET_DETAIL_URL,
+      Alamofire.request(GET_DETAIL_URL,method: .post,
             parameters: [AUTHKEY:authkey,TYPE:type, CALLID:currentData.callId!, GROUPNAME:(currentData.groupName != nil ? currentData.groupName :currentData.empName)!]).validate().responseJSON
             {response in switch response.result {
-            case .Success(let JSON):
+            case .success(let JSON):
                 print("Success with JSON: \(JSON)")
                 let response = JSON as! NSDictionary
-                  if((response.objectForKey(FIELDS)) != nil){
+                  if((response.object(forKey: FIELDS)) != nil){
                   self.DetailDataList  = Array<DetailData>();
-                    let fields = response.objectForKey(FIELDS) as! NSArray?
+                    let fields = response.object(forKey: FIELDS) as! NSArray?
                     
                     for field in fields!{
                         let detailData=DetailData();
-                        if((field.objectForKey(NAME)) != nil){
-                            detailData.Name=field.objectForKey(NAME) as? String
+                        if(((field as AnyObject).object(forKey: NAME)) != nil){
+                            detailData.Name=(field as AnyObject).object(forKey: NAME) as? String
                             
                         }
-                        if((field.objectForKey(LABEL)) != nil){
-                            detailData.label=field.objectForKey(LABEL) as? String
+                        if(((field as AnyObject).object(forKey: LABEL)) != nil){
+                            detailData.label=(field as AnyObject).object(forKey: LABEL) as? String
                             
                         }
                         
-                        if((field.objectForKey(TYPE)) != nil){
-                            detailData.Type=field.objectForKey(TYPE) as? String
+                        if(((field as AnyObject).object(forKey: TYPE)) != nil){
+                            detailData.Type=(field as AnyObject).object(forKey: TYPE) as? String
                             
                         }
-                        if((field.objectForKey(VALUE)) != nil){
-                            detailData.value=field.objectForKey(VALUE) as? String
+                        if(((field as AnyObject).object(forKey: VALUE)) != nil){
+                            detailData.value=(field as AnyObject).object(forKey: VALUE) as? String
                             
                         }
                         
@@ -58,7 +59,7 @@ class DetailDataTask: NSObject {
                         print(detailData.Type!)
                         let contained = optionsLabel.contains(detailData.Type!)
                         if(contained){
-                            let Options = field.objectForKey(OPTIONS) as! NSDictionary?
+                            let Options = (field as AnyObject).object(forKey: OPTIONS) as! NSDictionary?
                             self.optionsList=[OptionsData]()
                             self.OptionStringList=[String]()
                             print("Data items count: \(Options!.count)")
@@ -70,10 +71,10 @@ class DetailDataTask: NSObject {
                                     detailData.value=value as? String
                                 }
                                 
-                                if (detailData.Type!.containsString(CHECKBOX) && !detailData.value!.containsString("")) {
+                                if (detailData.Type!.contains(CHECKBOX) && !detailData.value!.contains("")) {
                                     //   value = "check1,check3";
-                                    let newString = detailData.value!.stringByReplacingOccurrencesOfString("\"", withString: "")
-                                    let toArray = newString.componentsSeparatedByString(",")
+                                    let newString = detailData.value!.replacingOccurrences(of: "\"", with: "")
+                                    let toArray = newString.components(separatedBy: ",")
                                     print(newString)
                                     for curentValue in toArray  {
                                         if (key as! String==curentValue) {
@@ -108,8 +109,8 @@ class DetailDataTask: NSObject {
                  self.delegate?.OnFinishDownload(self.DetailDataList)
                 
                 
-            case .Failure(let error):
-                self.delegate?.OnError(error)
+            case .failure(let error):
+                self.delegate?.OnError(error as NSError)
 
                 }
         }

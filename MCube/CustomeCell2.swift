@@ -24,38 +24,38 @@ class CustomeCell2: UITableViewCell,UIPickerViewDelegate, UIPickerViewDataSource
     override func layoutSubviews() {
         super.layoutSubviews()
         uiPicker.reloadAllComponents()
-        var defaultRowIndex = Options.indexOf(itemAtDefaultPosition)
+        var defaultRowIndex = Options.index(of: itemAtDefaultPosition)
         if(defaultRowIndex == nil) { defaultRowIndex = 0 }
         uiPicker.selectRow(defaultRowIndex!, inComponent: 0, animated: false)
         
     }
     
     
-    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int){
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int){
       
         pickerSelected?(row)
   
     }
     
  
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
     }
-    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
         // Column count: use one column.
         return 1
     }
     
-    func pickerView(pickerView: UIPickerView,
+    func pickerView(_ pickerView: UIPickerView,
                     numberOfRowsInComponent component: Int) -> Int {
         
         // Row count: rows equals array length.
         return Options.count
     }
     
-    func pickerView(pickerView: UIPickerView,
+    func pickerView(_ pickerView: UIPickerView,
                     titleForRow row: Int,
                                 forComponent component: Int) -> String? {
         
