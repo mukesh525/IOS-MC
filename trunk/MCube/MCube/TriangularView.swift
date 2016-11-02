@@ -13,8 +13,8 @@ class TriangularView: UIView {
     override func draw(_ rect: CGRect) {
         
         // Get Height and Width
-        let layerHeight = self.layer.frame.height
-        let layerWidth = self.layer.frame.width
+        _ = self.layer.frame.height
+        _ = self.layer.frame.width
         
         // Create Path
         let bezierPath = UIBezierPath()

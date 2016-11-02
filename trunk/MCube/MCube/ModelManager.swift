@@ -24,7 +24,8 @@ class ModelManager: NSObject {
     }
     
     
-    func createTable(_ tablename:String) -> Bool {
+    func createTable(_ tablename:String) //-> Bool
+    {
         sharedInstance.database!.open()
         let sqlStatement = "CREATE TABLE IF NOT EXISTS \(tablename) ( _id INTEGER PRIMARY KEY AUTOINCREMENT,callid TEXT,callfrom TEXT,dataid TEXT, callername TEXT,groupname TEXT,calltime  TEXT,status TEXT,audio TEXT,location TEXT)"
         let sqlStatement1 = "CREATE TABLE IF NOT EXISTS \(tablename)_menu (_id INTEGER PRIMARY KEY AUTOINCREMENT, optionid TEXT,optionname TEXT,isCheked TEXT )"
@@ -34,14 +35,14 @@ class ModelManager: NSObject {
         if(!isCreated || !isCreatedmenu){
             NSLog("Error %d: %@",sharedInstance.database!.lastErrorCode(), sharedInstance.database!.lastErrorMessage())
         }
-        return isCreated
+        //return isCreated
     }
     
     
     
     
     func insertData(_ tablename:String,isDelete:Bool,Datas:NSMutableArray,isMore:Bool) -> Bool {
-        createTable(tablename)
+       createTable(tablename)
         if(isDelete){
         deleteData(tablename,isMore: isMore)
         }

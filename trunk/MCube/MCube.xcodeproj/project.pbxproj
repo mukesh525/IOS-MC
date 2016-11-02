@@ -480,8 +480,9 @@
 				TargetAttributes = {
 					F47029EF1A7F27DB00E30A3C = {
 						CreatedOnToolsVersion = 6.1.1;
-						DevelopmentTeam = HMVM4SM8W5;
+						DevelopmentTeam = 85YHY7ANCT;
 						LastSwiftMigration = 0800;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -821,6 +822,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 85YHY7ANCT;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Pods/MobileVLCKit/MobileVLCKit-binary",
@@ -828,7 +830,7 @@
 				INFOPLIST_FILE = MCube/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.vmctechnologies.mcube;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mcube.vmc;
 				PRODUCT_NAME = MCube;
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "MCube/MCube-Bridging-Header.h";
@@ -846,6 +848,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 85YHY7ANCT;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Pods/MobileVLCKit/MobileVLCKit-binary",
@@ -853,7 +856,7 @@
 				INFOPLIST_FILE = MCube/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.vmctechnologies.mcube;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mcube.vmc;
 				PRODUCT_NAME = MCube;
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "MCube/MCube-Bridging-Header.h";

@@ -333,14 +333,11 @@ class ReportViewController: UITableViewController,UIPopoverPresentationControlle
     func overflowSelected(_ position: Int, CurrentData: Data) {
         
         if(position == 0){
-        if let url = URL(string: "tel://\(CurrentData.callFrom)") {
-            UIApplication.shared.openURL(url)
-            print(url)
-            }
+            UIApplication.shared.openURL(NSURL(string: "tel://\(CurrentData.callFrom!)")! as URL)
         }
         else if(position == 2){
             self.CurrentData=CurrentData;
-         self.performSegue(withIdentifier: LOCATE, sender: self)
+            self.performSegue(withIdentifier: LOCATE, sender: self)
         }
         else{
            self.sendSms(CurrentData)
@@ -372,12 +369,6 @@ class ReportViewController: UITableViewController,UIPopoverPresentationControlle
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
     if segue.identifier == POPOVERSEGUE && options.count > 0{
-        
-        
-        
-        
-        
-        
         
         
             let popoverViewController = segue.destination as! FilterController
