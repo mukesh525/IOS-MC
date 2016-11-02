@@ -36,7 +36,7 @@ class Util: NSObject {
                     error = error1
                 }
 
-            let alert: UIAlertView = UIAlertView()
+         /*   let alert: UIAlertView = UIAlertView()
             if (error != nil) {
                 alert.title = "Error Occured"
                 alert.message = error?.localizedDescription
@@ -45,22 +45,25 @@ class Util: NSObject {
                 alert.message = "Your database copy successfully"
             }
             alert.delegate = nil
-            alert.addButton(withTitle: "Ok")
+           alert.addButton(withTitle: "Ok")
            // alert.show()
-        }
+        }*/
     }
       else{
          // print("databse exist")
         }
-}
+        }
+    }
     
-    class func invokeAlertMethod(_ strTitle: NSString, strBody: NSString, delegate: AnyObject?) {
+    func invokeAlertMethod(_ strTitle: NSString, strBody: NSString, delegate: AnyObject?) {
         let alert: UIAlertView = UIAlertView()
         alert.message = strBody as String
         alert.title = strTitle as String
         alert.delegate = delegate
         alert.addButton(withTitle: "Ok")
         alert.show()
+        
+        
     }
    
 }

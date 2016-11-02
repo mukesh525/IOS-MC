@@ -77,11 +77,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             queue.addOperation(operation)
         }
         
-        let localNotification:UILocalNotification = UILocalNotification()
-        localNotification.alertAction = "Testing notifications on iOS9"
-        localNotification.alertBody = "Fetch Completed"
-        localNotification.fireDate = Date(timeIntervalSinceNow: 1)
-        UIApplication.shared.scheduleLocalNotification(localNotification)
+//        let localNotification:UILocalNotification = UILocalNotification()
+//        localNotification.alertAction = "Testing notifications on iOS9"
+//        localNotification.alertBody = "Fetch Completed"
+//        localNotification.fireDate = Date(timeIntervalSinceNow: 1)
+//        UIApplication.shared.scheduleLocalNotification(localNotification)
 
     
     }
