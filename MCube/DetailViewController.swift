@@ -377,7 +377,7 @@ class DetailViewController: UIViewController,UITableViewDataSource,UIPopoverPres
         
         
         
-        sendMailErrorAlert.show()
+       // sendMailErrorAlert.show()
     }
     
     // MARK: MFMailComposeViewControllerDelegate Method
