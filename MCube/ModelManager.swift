@@ -51,7 +51,9 @@ class ModelManager: NSObject {
         sharedInstance.database!.open()
         for i in 0 ..< Datas.count {
         let data: Data = Datas[i] as! Data
-            isInserted = sharedInstance.database!.executeUpdate("INSERT INTO \(tablename) (callid,callfrom,dataid,callername,groupname,calltime,status,audio,location) VALUES (?,?,?,?,?,?,?,?,?)", withArgumentsIn: [data.callId!, data.callFrom!,"N/A",data.callerName == nil ?"UNKNOWN":data.callerName!,data.groupName == nil ? data.empName!:data.groupName!,data.callTimeString == nil ? data.startTime!:data.callTimeString!,data.status == nil ? "UNKNOWN":data.status!,data.audioLink == nil ? empty:data.audioLink!,data.location == nil ? "0":data.location!])
+            isInserted = sharedInstance.database!.executeUpdate("INSERT INTO \(tablename) (callid,callfrom,dataid,callername,groupname,calltime,status,audio,location) VALUES (?,?,?,?,?,?,?,?,?)", withArgumentsIn: [data.callId!, data.callFrom!,"N/A",data.callerName == nil ?"UNKNOWN":data.callerName!,
+                data.groupName == nil ? (data.empName == nil ? "UNKNOWN":data.empName!):data.groupName!,
+                data.callTimeString == nil ? data.startTime!:data.callTimeString!,data.status == nil ? "UNKNOWN":data.status!,data.audioLink == nil ? empty:data.audioLink!,data.location == nil ? "0":data.location!])
             
         }
         
