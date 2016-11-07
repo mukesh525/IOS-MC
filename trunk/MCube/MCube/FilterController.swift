@@ -11,10 +11,7 @@ class FilterController: UIViewController, UITableViewDelegate, UITableViewDataSo
     var FilterOptions = [OptionsData]()
     
     @IBOutlet weak var myTableView: UITableView!
-    override func viewWillAppear(_ animated: Bool) {
-    // self.preferredContentSize=myTableView.contentSize;
-    }
-    
+   
     
 
     

@@ -47,39 +47,42 @@ class ReportViewController: UITableViewController,UIPopoverPresentationControlle
         print("test")
     }
     
-    
-    func OnFinishDownload(_ result: NSMutableArray,param:Params) {
-       self.isNewDataLoading = false
-       if(param.isMore == true){
-        self.result.addObjects(from: result as [AnyObject])
-        }else{
-          self.result=result;
-        }
-        
-        if(self.result.count == 0 && param.isfilter == true){
-            self.showActivityIndicator()
-            self.filteralert()
-        }
-        else if(self.result.count == 0 && param.isfilter == false){
-            self.showActivityIndicator()
-            self.NoDataAlert()
-            
-        }
-        else{
-            if self.refreshControll.isRefreshing{
-                self.refreshControll.endRefreshing()
-            }
-            
-            else{
-                if(param.isMore==false){
-                self.showActivityIndicator()
+    func OnFinishDownload(_ result: NSMutableArray, options: Array<OptionsData>, param: Params) {
+        self.isNewDataLoading = false
+               if(param.isMore == true){
+                self.result.addObjects(from: result as [AnyObject])
+                }else{
+                  self.result=result;
+                 self.options=options;
                 }
-            }
-            self.mytableview.reloadData()
-        }
-           self.isDownloading=false;
+        
+                if(self.result.count == 0 && param.isfilter == true){
+                    self.showActivityIndicator()
+                    self.filteralert()
+                }
+                else if(self.result.count == 0 && param.isfilter == false){
+                    self.showActivityIndicator()
+                    self.NoDataAlert()
+        
+                }
+                else{
+                    if self.refreshControll.isRefreshing{
+                        self.refreshControll.endRefreshing()
+                    }
+        
+                    else{
+                        if(param.isMore==false){
+                        self.showActivityIndicator()
+                        }
+                    }
+                    self.mytableview.reloadData()
+                }
+                   self.isDownloading=false;
+        
+    }
 
-        }
+    
+
 
     
     
@@ -366,23 +369,27 @@ class ReportViewController: UITableViewController,UIPopoverPresentationControlle
     
     
     
+    
+    @IBAction func onFilterTapped(_ sender: Any) {
+        
+        print("Filter Clicked")
+        if(options.count>0){
+        self.performSegue(withIdentifier: POPOVERSEGUE, sender: self)
+        }
+
+    }
+    
+    
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
     if segue.identifier == POPOVERSEGUE && options.count > 0{
-        
-        
-            let popoverViewController = segue.destination as! FilterController
+           let popoverViewController = segue.destination as! FilterController
             popoverViewController.preferredContentSize = CGSize(width: 320, height: 186);         popoverViewController.FilterOptions=options;
             popoverViewController.SeletedFilter=SeletedFilterpos;
             popoverViewController.modalPresentationStyle = UIModalPresentationStyle.popover
             popoverViewController.popoverPresentationController!.delegate = self
             popoverViewController.delegate = self
-
-        
-       
-        
-        
-        
         }
        else if segue.identifier == DETAIL{
             

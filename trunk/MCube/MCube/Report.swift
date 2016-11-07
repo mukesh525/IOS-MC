@@ -4,7 +4,7 @@ import UIKit
 import Alamofire
 
 protocol ReportDownload {
-    func OnFinishDownload(_ result:NSMutableArray,param:Params)
+    func OnFinishDownload(_ result:NSMutableArray,options :Array<OptionsData>,param:Params)
     func OnError(_ error:NSError)
 }
 
@@ -55,7 +55,7 @@ class Report: NSObject {
                         print("Error in updating \((self.param?.type!)!).")
                     }
                 }
-                self.delegate?.OnFinishDownload(self.result,param: self.param!)
+                self.delegate?.OnFinishDownload(self.result,options: self.options,param: self.param!)
                 
             case .failure(let error):
                  self.delegate?.OnError(error as NSError)
