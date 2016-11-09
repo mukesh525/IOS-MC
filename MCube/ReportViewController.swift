@@ -189,7 +189,8 @@ class ReportViewController: UITableViewController,UIPopoverPresentationControlle
             
         }
         cell.backgroundColor = UIColor.clear
-        if((data.audioLink?.isEmpty) != nil && NSString(string: data.audioLink!).length > 5){
+        if((data.audioLink?.isEmpty) != nil && NSString(string: data.audioLink!).length > 5 &&
+            data.groupName != nil){
             cell.playButton.isHidden=false
             
             if(self.playButtons.get((indexPath as NSIndexPath).row) != nil){
