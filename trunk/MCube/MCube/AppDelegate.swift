@@ -7,15 +7,14 @@
 //
 
 import UIKit
-
+import UserNotifications
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate ,UNUserNotificationCenterDelegate {
 
     var window: UIWindow?
 
-
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+ func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
      
         UserDefaults.standard.set(0,forKey: LAUNCH)
         UserDefaults.standard.set(0,forKey: LAUNCHVIEW)
@@ -29,27 +28,49 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
          if UserDefaults.standard.string(forKey: AUTHKEY) != nil {
            let vc = storyboard.instantiateViewController(withIdentifier: "Home") as!SWRevealViewController
            self.window!.rootViewController = vc;
-        }
-        else
-        {
+        } else {
            let vc = storyboard.instantiateViewController(withIdentifier: "loginController") as! LoginViewController
            self.window!.rootViewController = vc;
         }
           Util.copyFile("mcubeios")
         
-        let settings = UIUserNotificationSettings(types: UIUserNotificationType.alert, categories: nil)
-        UIApplication.shared.registerUserNotificationSettings(settings)
-        UIApplication.shared.setMinimumBackgroundFetchInterval(UIApplicationBackgroundFetchIntervalMinimum)
+   
+    
+      let settings = UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
+      UIApplication.shared.registerUserNotificationSettings(settings)
+      UIApplication.shared.registerForRemoteNotifications()
+  
         return true
+    }
+    
+    
+    
+    
+    @nonobjc func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+       let token = String(format: "%@", deviceToken as CVarArg)
+            .trimmingCharacters(in: CharacterSet(charactersIn: "<>"))
+            .replacingOccurrences(of: " ", with: "")
+         print(token)
+
     }
 
     
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+         print("APNs registration failed: \(error)")
+    }
     
+     
     func application(_ application: UIApplication, performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         print("Complete");
         completionHandler(UIBackgroundFetchResult.newData)
         updateBackground();
         
+    }
+    
+    // Push notification received
+    func application(_ application: UIApplication, didReceiveRemoteNotification data: [AnyHashable : Any]) {
+        // Print notification payload data
+        print("Push notification received: \(data)")
     }
     
     func updateBackground() {
@@ -85,6 +106,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     
     }
+    
+ 
+    @nonobjc func application(_ application: UIApplication,
+                     didReceiveRemoteNotification userInfo: [NSObject : AnyObject],
+                     fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void){
+        
+        
+           print("Push notification received: \(userInfo)")
+    }
+    
     
  
     func applicationWillResignActive(_ application: UIApplication) {

@@ -1,4 +1,4 @@
- //
+// //
 //  Util.swift
 //  DemoProject
 //
@@ -27,13 +27,13 @@ class Util: NSObject {
             if !fileManager.fileExists(atPath: dbPath) {
            
             let defaultStorePath : NSString! = Bundle.main.path(forResource: fileName as String, ofType: "db") as NSString!
-            var error : NSError?
+            //var error : NSError?
             if((defaultStorePath) != nil) {
                 do {
                     
                    try fileManager.copyItem(atPath: defaultStorePath as String, toPath: dbPath)
-                } catch let error1 as NSError {
-                    error = error1
+                } catch _ as NSError {
+                   // error = error1
                 }
 
          /*   let alert: UIAlertView = UIAlertView()

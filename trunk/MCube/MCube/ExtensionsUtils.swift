@@ -156,7 +156,7 @@ extension ReportViewController{
         }else {self.limit=10}
         if(isLogout){
             isLogout=false;
-            LogoutAlert()
+           LogoutAlert()
         }
         
         player=nil;
@@ -298,7 +298,8 @@ extension ReportViewController{
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default) {
             UIAlertAction in
-            
+           // self.dismiss(animated: true, completion:nil)
+           alertController.dismiss(animated: true, completion: nil)
         }
         alertController.addAction(cancelAction)
         alertController.addAction(okAction)

@@ -157,6 +157,7 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
     
     func validationSuccessful() {
         loginClick.isEnabled=false
+        loginClick.setTitle("Authenticating..", for: UIControlState.disabled)
         emailerror.text="";
         passworderror.text="";
         self.showActivityIndicator()
