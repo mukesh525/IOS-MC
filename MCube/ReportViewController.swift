@@ -33,8 +33,7 @@ class ReportViewController: UITableViewController,UIPopoverPresentationControlle
     var CurrentPlaying:Int?
     var refreshControll = UIRefreshControl()
     var sidebarMenuOpen:Bool?
-    
-    
+      
     @IBAction func LogoutTap(_ sender: UIBarButtonItem) {
         LogoutAlert()
     }
@@ -192,8 +191,8 @@ class ReportViewController: UITableViewController,UIPopoverPresentationControlle
         if((data.audioLink?.isEmpty) != nil && NSString(string: data.audioLink!).length > 5 &&
             data.groupName != nil){
             cell.playButton.isHidden=false
-            
-            if(self.playButtons.get((indexPath as NSIndexPath).row) != nil){
+            cell.playButton.tag=(indexPath as NSIndexPath).row
+           if(self.playButtons.get((indexPath as NSIndexPath).row) != nil){
                 self.playButtons[(indexPath as NSIndexPath).row]=cell.playButton
                }else{
                 self.playButtons.append(cell.playButton)
@@ -249,6 +248,7 @@ class ReportViewController: UITableViewController,UIPopoverPresentationControlle
     func configurePlay(_ filename:String,playbutton:UIButton) {
          print(self.playButtons.count)
         let url = "\(PLAY_URL)\(filename)"
+        print(url)
         let link = URL(string: url)!
        for currentbutton in self.playButtons{
             if(currentbutton.tag == playbutton.tag ){

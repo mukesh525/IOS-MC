@@ -16,6 +16,7 @@ class MenuController: UITableViewController {
     @IBOutlet weak var useremail: UILabel!
     var options:NSMutableArray=NSMutableArray();
     var currentType:String = TRACK
+    var isLogout:Bool=false
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -85,6 +86,8 @@ class MenuController: UITableViewController {
             return 40;
         case 7:
             return 20;
+        case 9:
+            return 0;
         default:
             return height
         }
@@ -146,16 +149,25 @@ class MenuController: UITableViewController {
         switch (indexPath as NSIndexPath).row {
         case 1:
             currentType=TRACK
+             isLogout=false
         case 2:
             currentType=IVRS
+             isLogout=false
         case 3:
              currentType=X
+             isLogout=false
         case 4:
             currentType=LEAD
+             isLogout=false
         case 5:
              currentType=MTRACKER
+             isLogout=false
         case 6:
              currentType=FOLLOWUP
+             isLogout=false
+        case 9:
+           // currentType=X
+            isLogout=true
         default:
              currentType=TRACK
         }
@@ -182,6 +194,7 @@ class MenuController: UITableViewController {
         else{
         let followupController = nav.topViewController as! ReportViewController
         followupController.type = currentType
+        followupController.isLogout=self.isLogout
         if(currentType == X){
            followupController.CurrentTitle="MCubeX"
          }
