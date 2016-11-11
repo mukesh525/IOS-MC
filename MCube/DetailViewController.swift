@@ -9,6 +9,7 @@
 import UIKit
 import Alamofire
 import MessageUI
+import MBProgressHUD
 
 class DetailViewController: UIViewController,UITableViewDataSource,UIPopoverPresentationControllerDelegate, UITableViewDelegate,CustomCellDelegate,UITextFieldDelegate ,DetailDownload,MoreSelectedDelegate,MFMessageComposeViewControllerDelegate,MFMailComposeViewControllerDelegate{
 
