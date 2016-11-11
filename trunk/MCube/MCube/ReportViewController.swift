@@ -5,6 +5,7 @@ import UIKit
 import Alamofire
 import AVFoundation
 import MessageUI
+import MBProgressHUD
 
 
 
@@ -437,14 +438,36 @@ class ReportViewController: UITableViewController,UIPopoverPresentationControlle
    
        func showActivityIndicator(){
         if !self.showingActivity {
-            self.navigationController?.view.makeToastActivity(.center)
+            showProgress()
+           // self.navigationController?.view.makeToastActivity(.center)
+            self.navigationController?.view.isUserInteractionEnabled = false;
         } else {
-            self.navigationController?.view.hideToastActivity()
+            hideProgress()             // self.navigationController?.view.hideToastActivity()
+            self.navigationController?.view.isUserInteractionEnabled = true;
         }
         
         self.showingActivity = !self.showingActivity
         
     }
+    
+    
+    func showProgress(){
+        let spinnerActivity = MBProgressHUD.showAdded(to: self.view, animated: true);
+        spinnerActivity.label.text = "Loading";
+        spinnerActivity.contentColor=UIColor.black
+        spinnerActivity.detailsLabel.text = "Please Wait!!";
+        spinnerActivity.isUserInteractionEnabled = false;
+    
+    
+    }
+    
+    
+    func hideProgress(){
+        MBProgressHUD.hideAllHUDs(for: self.view, animated: true);
+    }
+    
+    
+    
     
     
     

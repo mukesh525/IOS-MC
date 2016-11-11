@@ -1,5 +1,7 @@
 
 import UIKit
+import MBProgressHUD
+
 extension UIImage {
     func imageWithInsets(_ insets: UIEdgeInsets) -> UIImage {
         UIGraphicsBeginImageContextWithOptions(
@@ -51,22 +53,6 @@ extension DismissalDelegate where Self: UIViewController{
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 extension DetailViewController {
     func addLogOutButtonToNavigationBar(_ triggerToMethodName: String){
         let button: UIButton = UIButton()
@@ -80,16 +66,34 @@ extension DetailViewController {
         self.navigationItem.rightBarButtonItem = rightItem
     }
     
-     func showActivityIndicator(){
+    func showActivityIndicator(){
         if !self.showingActivity {
-            self.navigationController?.view.makeToastActivity(.center)
+           /// self.navigationController?.view.makeToastActivity(.center)
+           self.navigationController?.view.isUserInteractionEnabled = false;
+            showProgress()
         } else {
-            self.navigationController?.view.hideToastActivity()
+            hideProgress()
+           // self.navigationController?.view.hideToastActivity()
+            self.navigationController?.view.isUserInteractionEnabled = true;
         }
         
         self.showingActivity = !self.showingActivity
         
     }
+    
+    func showProgress(){
+        let spinnerActivity = MBProgressHUD.showAdded(to: self.view, animated: true);
+        spinnerActivity.label.text = "Loading";
+        spinnerActivity.contentColor=UIColor.black
+        spinnerActivity.detailsLabel.text = "Please Wait!!";
+        spinnerActivity.isUserInteractionEnabled = false;
+    }
+    
+    
+    func hideProgress(){
+       MBProgressHUD.hideAllHUDs(for: self.view, animated: true);
+    }
+
     
     func showAlert(_ mesage :String){
         let alertView = UIAlertController(title: TITLE, message: mesage, preferredStyle: .alert)
