@@ -192,15 +192,19 @@ class ReportViewController: UITableViewController,UIPopoverPresentationControlle
             data.groupName != nil){
             cell.playButton.isHidden=false
             cell.playButton.tag=(indexPath as NSIndexPath).row
+           //  print("tag get called \(indexPath.row)")
            if(self.playButtons.get((indexPath as NSIndexPath).row) != nil){
+               // print("tag get called \(indexPath.row)")
                 self.playButtons[(indexPath as NSIndexPath).row]=cell.playButton
                }else{
                 self.playButtons.append(cell.playButton)
+             //  print("append get called \(indexPath.row)")
                }
 
             
         }else{
             cell.playButton.isHidden=true
+            
         }
         
         cell.callfrom.text=data.callFrom
@@ -246,12 +250,17 @@ class ReportViewController: UITableViewController,UIPopoverPresentationControlle
     
     
     func configurePlay(_ filename:String,playbutton:UIButton) {
-         print(self.playButtons.count)
+        print("play button size before \(self.playButtons.count)")
         let url = "\(PLAY_URL)\(filename)"
-        print(url)
+        //print(url)
+        let unique = Array(Set(self.playButtons))
+        print("play button size after sorting \(unique.count)")
         let link = URL(string: url)!
-       for currentbutton in self.playButtons{
-            if(currentbutton.tag == playbutton.tag ){
+        for currentbutton in unique{
+           // print ("TAG \(playbutton.tag)  ButtonTag \(currentbutton.tag)")
+           if(currentbutton.tag == playbutton.tag ){
+               // print ("TAG \(playbutton.tag)  ButtonTag \(currentbutton.tag)")
+            
                 var image:UIImage?
                 if(self.CurrentPlaying != playbutton.tag){
                     player = nil;
