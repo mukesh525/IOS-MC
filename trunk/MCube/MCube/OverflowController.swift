@@ -16,36 +16,37 @@ class OverflowController: UITableViewController  {
     weak var delegate: OverflowSelectedDelegate?
     var CurrentData:Data!
     var `Type`:String!
-     weak var dismissalDelegate: DismissalDelegate?
+    weak var dismissalDelegate: DismissalDelegate?
     override func viewDidLoad() {
         super.viewDidLoad()
         
         
-        }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+       //tableViewHeightConstraint.constant = tableView.contentSize.height
+    }
     
     
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.dismiss(animated: true, completion: nil)
-         delegate?.overflowSelected((indexPath as NSIndexPath).row,CurrentData: CurrentData)
-//        if(indexPath.row == 2){
-//            dismissalDelegate?.finishedShowing(self)
-//        }else{
-//            delegate?.overflowSelected(indexPath.row,CurrentData: CurrentData)}
+        delegate?.overflowSelected((indexPath as NSIndexPath).row,CurrentData: CurrentData)
         
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        if ((indexPath as NSIndexPath).row == 2 && Type != MTRACKER){
-            return 0;
+        if ((indexPath as NSIndexPath).row == 2 && (Type != MTRACKER ? true:CurrentData.location == "0.0,0.0")){
+            return 0
         }
         else{
-          return 44
+            return 44
         }
         
     }
-
+    
+    
     
     
 }

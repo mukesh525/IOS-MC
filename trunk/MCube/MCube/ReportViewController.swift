@@ -468,9 +468,6 @@ class ReportViewController: UITableViewController,UIPopoverPresentationControlle
     
     
     
-    
-    
-    
     func revealController(_ revealController: SWRevealViewController!,  willMoveTo position: FrontViewPosition){
         if(position == FrontViewPosition.left) {
             self.mytableview.isUserInteractionEnabled = true
