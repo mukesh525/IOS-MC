@@ -1879,7 +1879,7 @@
                   moduleName = "MCube"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/mukesh/Documents/IOS-MCube/MCube/Report.swift"
-                  timestampString = "500581035.027518"
+                  timestampString = "500794689.040362"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "25"
@@ -1894,7 +1894,7 @@
                   moduleName = "MCube"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/mukesh/Documents/IOS-MCube/MCube/Report.swift"
-                  timestampString = "500581035.030372"
+                  timestampString = "500794689.043297"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "25"
@@ -2133,7 +2133,7 @@
                   moduleName = "MCube"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/mukesh/Documents/IOS-MCube/MCube/NetworkOperation.swift"
-                  timestampString = "500581035.04142"
+                  timestampString = "500794689.054754"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "0"
@@ -2148,7 +2148,7 @@
                   moduleName = "MCube"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/mukesh/Documents/IOS-MCube/MCube/NetworkOperation.swift"
-                  timestampString = "500581035.04439"
+                  timestampString = "500794689.056869"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "0"
@@ -2163,7 +2163,7 @@
                   moduleName = "MCube"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/mukesh/Documents/IOS-MCube/MCube/NetworkOperation.swift"
-                  timestampString = "500581035.047504"
+                  timestampString = "500794689.05967"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "11"
@@ -2178,7 +2178,7 @@
                   moduleName = "MCube"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/mukesh/Documents/IOS-MCube/MCube/NetworkOperation.swift"
-                  timestampString = "500581035.050242"
+                  timestampString = "500794689.06179"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "0"
@@ -2227,7 +2227,7 @@
                   moduleName = "MCube"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/mukesh/Documents/IOS-MCube/MCube/Report.swift"
-                  timestampString = "500581035.057771"
+                  timestampString = "500794689.067821"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "30"
@@ -2242,7 +2242,7 @@
                   moduleName = "MCube"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/mukesh/Documents/IOS-MCube/MCube/Report.swift"
-                  timestampString = "500581035.060018"
+                  timestampString = "500794689.06995"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "30"
@@ -2275,7 +2275,7 @@
                   moduleName = "MCube"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/mukesh/Documents/IOS-MCube/MCube/Report.swift"
-                  timestampString = "500581035.064518"
+                  timestampString = "500794689.07491"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "44"
@@ -2290,7 +2290,7 @@
                   moduleName = "MCube"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/mukesh/Documents/IOS-MCube/MCube/Report.swift"
-                  timestampString = "500581035.066808"
+                  timestampString = "500794689.077296"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "44"
@@ -2323,11 +2323,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MCube/ExtensionsUtils.swift"
-            timestampString = "500571812.272159"
+            timestampString = "500794255.14424"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "413"
-            endingLineNumber = "413"
+            startingLineNumber = "424"
+            endingLineNumber = "424"
             landmarkName = "getParams(_:type:postFollowup:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -2339,11 +2339,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MCube/ExtensionsUtils.swift"
-            timestampString = "500571812.272159"
+            timestampString = "500794255.14424"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "352"
-            endingLineNumber = "352"
+            startingLineNumber = "363"
+            endingLineNumber = "363"
             landmarkName = "getParams(_:type:postFollowup:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -2355,11 +2355,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MCube/ExtensionsUtils.swift"
-            timestampString = "500571812.272159"
+            timestampString = "500794255.14424"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "357"
-            endingLineNumber = "357"
+            startingLineNumber = "368"
+            endingLineNumber = "368"
             landmarkName = "getParams(_:type:postFollowup:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -2392,8 +2392,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "307"
             endingLineNumber = "307"
-            landmarkName = "moreSelected(_:)"
-            landmarkType = "7">
+            landmarkName = "DetailViewController"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2408,8 +2408,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "313"
             endingLineNumber = "313"
-            landmarkName = "moreSelected(_:)"
-            landmarkType = "7">
+            landmarkName = "DetailViewController"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2419,11 +2419,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MCube/ExtensionsUtils.swift"
-            timestampString = "500571812.272159"
+            timestampString = "500794255.14424"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "192"
-            endingLineNumber = "192"
+            startingLineNumber = "203"
+            endingLineNumber = "203"
             landmarkName = "initializeViews()"
             landmarkType = "7">
          </BreakpointContent>
@@ -2435,11 +2435,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MCube/ExtensionsUtils.swift"
-            timestampString = "500571812.272159"
+            timestampString = "500794255.14424"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "191"
-            endingLineNumber = "191"
+            startingLineNumber = "202"
+            endingLineNumber = "202"
             landmarkName = "initializeViews()"
             landmarkType = "7">
          </BreakpointContent>
@@ -2499,11 +2499,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MCube/ExtensionsUtils.swift"
-            timestampString = "500571812.272159"
+            timestampString = "500794255.14424"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "300"
-            endingLineNumber = "300"
+            startingLineNumber = "311"
+            endingLineNumber = "311"
             landmarkName = "LogoutAlert()"
             landmarkType = "7">
          </BreakpointContent>
@@ -2515,11 +2515,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MCube/ExtensionsUtils.swift"
-            timestampString = "500571812.272159"
+            timestampString = "500794255.14424"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "298"
-            endingLineNumber = "298"
+            startingLineNumber = "309"
+            endingLineNumber = "309"
             landmarkName = "LogoutAlert()"
             landmarkType = "7">
          </BreakpointContent>
@@ -2595,11 +2595,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MCube/ReportViewController.swift"
-            timestampString = "500562885.022512"
+            timestampString = "500794839.561882"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "238"
-            endingLineNumber = "238"
+            startingLineNumber = "234"
+            endingLineNumber = "234"
             landmarkName = "tableView(_:cellForRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -2611,11 +2611,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MCube/ReportViewController.swift"
-            timestampString = "500562885.022512"
+            timestampString = "500794839.561882"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "261"
-            endingLineNumber = "261"
+            startingLineNumber = "257"
+            endingLineNumber = "257"
             landmarkName = "configurePlay(_:playbutton:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -2627,11 +2627,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MCube/ReportViewController.swift"
-            timestampString = "500562885.022512"
+            timestampString = "500794839.561882"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "279"
-            endingLineNumber = "279"
+            startingLineNumber = "275"
+            endingLineNumber = "275"
             landmarkName = "configurePlay(_:playbutton:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -2643,11 +2643,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MCube/ReportViewController.swift"
-            timestampString = "500562885.022512"
+            timestampString = "500794839.561882"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "292"
-            endingLineNumber = "292"
+            startingLineNumber = "288"
+            endingLineNumber = "288"
             landmarkName = "configurePlay(_:playbutton:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -2659,11 +2659,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MCube/ReportViewController.swift"
-            timestampString = "500562885.022512"
+            timestampString = "500794839.561882"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "247"
-            endingLineNumber = "247"
+            startingLineNumber = "243"
+            endingLineNumber = "243"
             landmarkName = "tableView(_:cellForRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -2675,11 +2675,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MCube/ExtensionsUtils.swift"
-            timestampString = "500571812.272159"
+            timestampString = "500794255.14424"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "166"
-            endingLineNumber = "166"
+            startingLineNumber = "177"
+            endingLineNumber = "177"
             landmarkName = "initializeViews()"
             landmarkType = "7">
          </BreakpointContent>
@@ -2691,11 +2691,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MCube/ReportViewController.swift"
-            timestampString = "500562885.022512"
+            timestampString = "500794839.561882"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "418"
-            endingLineNumber = "418"
+            startingLineNumber = "414"
+            endingLineNumber = "414"
             landmarkName = "prepare(for:sender:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -2707,11 +2707,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MCube/ReportViewController.swift"
-            timestampString = "500562885.022512"
+            timestampString = "500794839.561882"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "395"
-            endingLineNumber = "395"
+            startingLineNumber = "391"
+            endingLineNumber = "391"
             landmarkName = "prepare(for:sender:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -2723,11 +2723,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MCube/ReportViewController.swift"
-            timestampString = "500562885.022512"
+            timestampString = "500794839.561882"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "383"
-            endingLineNumber = "383"
+            startingLineNumber = "379"
+            endingLineNumber = "379"
             landmarkName = "ReportViewController"
             landmarkType = "3">
          </BreakpointContent>
@@ -2739,11 +2739,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MCube/ReportViewController.swift"
-            timestampString = "500562885.022512"
+            timestampString = "500794839.561882"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "293"
-            endingLineNumber = "293"
+            startingLineNumber = "289"
+            endingLineNumber = "289"
             landmarkName = "configurePlay(_:playbutton:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -2755,11 +2755,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MCube/ReportViewController.swift"
-            timestampString = "500562885.022512"
+            timestampString = "500794839.561882"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "381"
-            endingLineNumber = "381"
+            startingLineNumber = "377"
+            endingLineNumber = "377"
             landmarkName = "ReportViewController"
             landmarkType = "3">
          </BreakpointContent>
@@ -2771,11 +2771,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MCube/ReportViewController.swift"
-            timestampString = "500577380.889897"
+            timestampString = "500794839.561882"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "551"
-            endingLineNumber = "551">
+            startingLineNumber = "547"
+            endingLineNumber = "547">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2785,11 +2785,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MCube/ReportViewController.swift"
-            timestampString = "500577380.889897"
+            timestampString = "500794839.561882"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "550"
-            endingLineNumber = "550">
+            startingLineNumber = "546"
+            endingLineNumber = "546">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2799,11 +2799,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MCube/ReportViewController.swift"
-            timestampString = "500577380.889897"
+            timestampString = "500794839.561882"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "549"
-            endingLineNumber = "549">
+            startingLineNumber = "545"
+            endingLineNumber = "545">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2829,11 +2829,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MCube/ExtensionsUtils.swift"
-            timestampString = "500571812.272159"
+            timestampString = "500794255.14424"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "167"
-            endingLineNumber = "167"
+            startingLineNumber = "178"
+            endingLineNumber = "178"
             landmarkName = "initializeViews()"
             landmarkType = "7">
          </BreakpointContent>
@@ -2909,7 +2909,7 @@
                   moduleName = "MCube"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/mukesh/Documents/IOS-MCube/MCube/MapPin.swift"
-                  timestampString = "500581035.116885"
+                  timestampString = "500794689.123552"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "20"
@@ -2924,7 +2924,7 @@
                   moduleName = "MCube"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/mukesh/Documents/IOS-MCube/MCube/MapPin.swift"
-                  timestampString = "500581035.11942"
+                  timestampString = "500794689.126754"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "0"
@@ -2941,11 +2941,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MCube/ReportViewController.swift"
-            timestampString = "500562885.022512"
+            timestampString = "500794839.561882"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "411"
-            endingLineNumber = "411"
+            startingLineNumber = "407"
+            endingLineNumber = "407"
             landmarkName = "prepare(for:sender:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -2957,11 +2957,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MCube/ReportViewController.swift"
-            timestampString = "500562885.022512"
+            timestampString = "500794839.561882"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "411"
-            endingLineNumber = "411"
+            startingLineNumber = "407"
+            endingLineNumber = "407"
             landmarkName = "prepare(for:sender:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -3005,11 +3005,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MCube/ExtensionsUtils.swift"
-            timestampString = "500571812.272159"
+            timestampString = "500794255.14424"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "352"
-            endingLineNumber = "352"
+            startingLineNumber = "363"
+            endingLineNumber = "363"
             landmarkName = "getParams(_:type:postFollowup:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -3069,11 +3069,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MCube/ExtensionsUtils.swift"
-            timestampString = "500571812.272159"
+            timestampString = "500794255.14424"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "399"
-            endingLineNumber = "399"
+            startingLineNumber = "410"
+            endingLineNumber = "410"
             landmarkName = "getParams(_:type:postFollowup:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -3085,11 +3085,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MCube/ExtensionsUtils.swift"
-            timestampString = "500571812.272159"
+            timestampString = "500794255.14424"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "370"
-            endingLineNumber = "370"
+            startingLineNumber = "381"
+            endingLineNumber = "381"
             landmarkName = "getParams(_:type:postFollowup:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -3149,7 +3149,7 @@
                   moduleName = "MCube"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/mukesh/Documents/IOS-MCube/MCube/Report.swift"
-                  timestampString = "500581035.15614"
+                  timestampString = "500794689.165893"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "29"
@@ -3164,7 +3164,7 @@
                   moduleName = "MCube"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/mukesh/Documents/IOS-MCube/MCube/Report.swift"
-                  timestampString = "500581035.158282"
+                  timestampString = "500794689.168078"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "29"
@@ -3261,11 +3261,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MCube/ReportViewController.swift"
-            timestampString = "500562885.022512"
+            timestampString = "500794839.561882"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "396"
-            endingLineNumber = "396"
+            startingLineNumber = "392"
+            endingLineNumber = "392"
             landmarkName = "prepare(for:sender:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -3277,11 +3277,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MCube/ReportViewController.swift"
-            timestampString = "500577380.889897"
+            timestampString = "500794839.561882"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "474"
-            endingLineNumber = "474"
+            startingLineNumber = "470"
+            endingLineNumber = "470"
             landmarkName = "revealController(_:willMoveTo:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -3293,11 +3293,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MCube/ReportViewController.swift"
-            timestampString = "500577380.889897"
+            timestampString = "500794839.561882"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "472"
-            endingLineNumber = "472"
+            startingLineNumber = "468"
+            endingLineNumber = "468"
             landmarkName = "revealController(_:willMoveTo:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -3325,11 +3325,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MCube/ReportViewController.swift"
-            timestampString = "500562885.022512"
+            timestampString = "500794839.561882"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "388"
-            endingLineNumber = "388"
+            startingLineNumber = "384"
+            endingLineNumber = "384"
             landmarkName = "onFilterTapped(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -3341,11 +3341,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MCube/ReportViewController.swift"
-            timestampString = "500562885.022512"
+            timestampString = "500794839.561882"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "386"
-            endingLineNumber = "386"
+            startingLineNumber = "382"
+            endingLineNumber = "382"
             landmarkName = "onFilterTapped(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -3417,15 +3417,15 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MCube/ReportViewController.swift"
-            timestampString = "500562885.022512"
+            timestampString = "500794839.561882"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "256"
-            endingLineNumber = "256"
+            startingLineNumber = "252"
+            endingLineNumber = "252"
             landmarkName = "configurePlay(_:playbutton:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -3437,43 +3437,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MCube/ReportViewController.swift"
-            timestampString = "500562885.022512"
+            timestampString = "500794839.561882"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "255"
-            endingLineNumber = "255"
-            landmarkName = "configurePlay(_:playbutton:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "MCube/ReportViewController.swift"
-            timestampString = "500562885.022512"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "263"
-            endingLineNumber = "263"
-            landmarkName = "configurePlay(_:playbutton:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "MCube/ReportViewController.swift"
-            timestampString = "500562885.022512"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "262"
-            endingLineNumber = "262"
+            startingLineNumber = "251"
+            endingLineNumber = "251"
             landmarkName = "configurePlay(_:playbutton:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -3485,11 +3453,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MCube/ReportViewController.swift"
-            timestampString = "500562885.022512"
+            timestampString = "500794839.561882"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "262"
-            endingLineNumber = "262"
+            startingLineNumber = "259"
+            endingLineNumber = "259"
             landmarkName = "configurePlay(_:playbutton:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -3501,11 +3469,43 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MCube/ReportViewController.swift"
-            timestampString = "500562885.022512"
+            timestampString = "500794839.561882"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "196"
-            endingLineNumber = "196"
+            startingLineNumber = "258"
+            endingLineNumber = "258"
+            landmarkName = "configurePlay(_:playbutton:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MCube/ReportViewController.swift"
+            timestampString = "500794839.561882"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "258"
+            endingLineNumber = "258"
+            landmarkName = "configurePlay(_:playbutton:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MCube/ReportViewController.swift"
+            timestampString = "500794839.561882"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "195"
+            endingLineNumber = "195"
             landmarkName = "tableView(_:cellForRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -3555,6 +3555,22 @@
             startingLineNumber = "133"
             endingLineNumber = "133"
             landmarkName = "tableView(_:cellForRowAt:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MCube/DetailViewController.swift"
+            timestampString = "500794430.176327"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "396"
+            endingLineNumber = "396"
+            landmarkName = "moreButtonClicked(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

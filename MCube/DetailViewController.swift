@@ -11,7 +11,7 @@ import Alamofire
 import MessageUI
 import MBProgressHUD
 
-class DetailViewController: UIViewController,UITableViewDataSource,UIPopoverPresentationControllerDelegate, UITableViewDelegate,CustomCellDelegate,UITextFieldDelegate ,DetailDownload,MoreSelectedDelegate,MFMessageComposeViewControllerDelegate,MFMailComposeViewControllerDelegate{
+class DetailViewController: UIViewController,UITableViewDataSource,UIPopoverPresentationControllerDelegate, UITableViewDelegate,CustomCellDelegate,UITextFieldDelegate ,DetailDownload,MFMessageComposeViewControllerDelegate,MFMailComposeViewControllerDelegate{
 
     @IBOutlet weak var updatebtn: UIButton!
     @IBOutlet weak var addfollowup: UIButton!
@@ -302,32 +302,32 @@ class DetailViewController: UIViewController,UITableViewDataSource,UIPopoverPres
     
     
     
-    func moreSelected(_ position: Int) {
-        print(position);
-        switch position {
-        case 0  :
-           self.UpdateRecords()
-        case 1  :
-            self.performSegue(withIdentifier: ADD_FOLLOWUP, sender: self)
-        case 2  :
-            if let url = URL(string: "tel://\(self.currentData.callFrom)") {
-                UIApplication.shared.openURL(url)
-                print(url)
-            }
-        case 3  :
-            self.sendSms()
-        case 4  :
-            let mailComposeViewController = configuredMailComposeViewController()
-            if MFMailComposeViewController.canSendMail() {
-                self.present(mailComposeViewController, animated: true, completion: nil)
-            } else {
-                self.showSendMailErrorAlert()
-            }
-        default :
-            print("default")
-            
-    }
-}
+//    func moreSelected(_ position: Int) {
+//        print(position);
+//        switch position {
+//        case 0  :
+//           self.UpdateRecords()
+//        case 1  :
+//            self.performSegue(withIdentifier: ADD_FOLLOWUP, sender: self)
+//        case 2  :
+//            if let url = URL(string: "tel://\(self.currentData.callFrom)") {
+//                UIApplication.shared.openURL(url)
+//                print(url)
+//            }
+//        case 3  :
+//            self.sendSms()
+//        case 4  :
+//            let mailComposeViewController = configuredMailComposeViewController()
+//            if MFMailComposeViewController.canSendMail() {
+//                self.present(mailComposeViewController, animated: true, completion: nil)
+//            } else {
+//                self.showSendMailErrorAlert()
+//            }
+//        default :
+//            print("default")
+//            
+//    }
+//}
     
     func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
         //... handle sms screen actions
@@ -358,33 +358,87 @@ class DetailViewController: UIViewController,UITableViewDataSource,UIPopoverPres
     }
     
     func showSendMailErrorAlert() {
-       // let sendMailErrorAlert = UIAlertView(title: "Could Not Send Email", message: "Your device could not send e-mail.  Please check e-mail configuration and try again.", delegate: self, cancelButtonTitle: "OK")
-        
-        
-        let alertController = UIAlertController(title: "Destructive", message: "Your device could not send e-mail.  Please check e-mail configuration and try again.", preferredStyle: UIAlertControllerStyle.alert)
+       let alertController = UIAlertController(title: "Destructive", message: "Your device could not send e-mail.  Please check e-mail configuration and try again.", preferredStyle: UIAlertControllerStyle.alert)
         _ = UIAlertAction(title: "Destructive", style: UIAlertActionStyle.destructive) { (result : UIAlertAction) -> Void in
             print("Destructive")
         }
         let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) { (result : UIAlertAction) -> Void in
             print("OK")
         }
-       // alertController.addAction(DestructiveAction)
         alertController.addAction(okAction)
         self.present(alertController, animated: true, completion: nil)
-        
-        
-        
-        
-        
-        
-        
-       // sendMailErrorAlert.show()
     }
     
     // MARK: MFMailComposeViewControllerDelegate Method
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         controller.dismiss(animated: true, completion: nil)
     }
+    
+    
+    
+    func moreButtonClicked(_ sender:AnyObject) {
+        let optionMenu = UIAlertController(title: nil, message: "Choose Option", preferredStyle: .actionSheet)
+        let UpdateAction = UIAlertAction(title: "Update", style: .default, handler: {
+            (alert: UIAlertAction!) -> Void in
+            self.UpdateRecords()
+
+           
+        })
+        let AddFollowupAction = UIAlertAction(title: "Add Followup", style: .default, handler: {
+            (alert: UIAlertAction!) -> Void in
+            self.performSegue(withIdentifier: ADD_FOLLOWUP, sender: self)
+
+          
+        })
+        let CallAction = UIAlertAction(title: "Call", style: .default, handler: {
+            (alert: UIAlertAction!) -> Void in
+            
+            UIApplication.shared.openURL(NSURL(string: "tel://\(self.currentData.callFrom!)")! as URL)
+            
+        })
+        let SmsAction = UIAlertAction(title: "Sms", style: .default, handler: {
+            (alert: UIAlertAction!) -> Void in
+              self.sendSms()
+            
+        })
+        let EmailAction = UIAlertAction(title: "Email", style: .default, handler: {
+            (alert: UIAlertAction!) -> Void in
+            
+            let mailComposeViewController = self.configuredMailComposeViewController()
+            if MFMailComposeViewController.canSendMail() {
+                self.present(mailComposeViewController, animated: true, completion: nil)
+            } else {
+                self.showSendMailErrorAlert()
+            }
+
+           
+        })
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: {
+            (alert: UIAlertAction!) -> Void in
+            print("Cancelled")
+        })
+        
+        
+        optionMenu.addAction(UpdateAction)
+        optionMenu.addAction(AddFollowupAction)
+        optionMenu.addAction(CallAction)
+        optionMenu.addAction(SmsAction)
+        optionMenu.addAction(EmailAction)
+        optionMenu.addAction(cancelAction)
+        
+        // 5
+        self.present(optionMenu, animated: true, completion: nil)
+        
+    }
+    
+    
+    
+    
+    
+
+    
+    
     
 
 }
