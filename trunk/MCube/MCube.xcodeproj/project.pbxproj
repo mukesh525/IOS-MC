@@ -45,6 +45,7 @@
 		8BAD4E461D2769F300A64393 /* background_port.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8BAD4E451D2769F300A64393 /* background_port.jpg */; };
 		8BAD4E781D278C9B00A64393 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BAD4E771D278C9B00A64393 /* LoginViewController.swift */; };
 		8BB16D3B1D3510F80060B841 /* CheckBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB16D3A1D3510F80060B841 /* CheckBox.swift */; };
+		8BBAB9921DD9CDB30097A52A /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BBAB9911DD9CDB30097A52A /* MBProgressHUD.m */; };
 		8BBFE0B91D28D99C00435723 /* ReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBFE0B81D28D99C00435723 /* ReportViewController.swift */; };
 		8BBFE0BB1D28E25900435723 /* FollowupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBFE0BA1D28E25900435723 /* FollowupTableViewCell.swift */; };
 		8BD246D51D3CED2500480CFB /* ModelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD246D21D3CED2500480CFB /* ModelManager.swift */; };
@@ -56,7 +57,6 @@
 		8BD246E81D3CEFA700480CFB /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BD246E31D3CEFA700480CFB /* FMDatabaseAdditions.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		8BD246E91D3CEFA700480CFB /* fmdb.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8BD246E41D3CEFA700480CFB /* fmdb.txt */; };
 		8BD246EA1D3CEFA700480CFB /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BD246E61D3CEFA700480CFB /* FMResultSet.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		8BDEAE0E1DD5F9AA00721AB7 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BDEAE0D1DD5F9AA00721AB7 /* MBProgressHUD.m */; };
 		8BE38B171DD4444400CC430F /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BE38B161DD4444400CC430F /* UserNotifications.framework */; };
 		8BE66F741D2A7B950073CFE5 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE66F731D2A7B950073CFE5 /* Data.swift */; };
 		8BF82F401D37B99000E1BA8D /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF82F3F1D37B99000E1BA8D /* SettingsController.swift */; };
@@ -138,6 +138,8 @@
 		8BAD4E451D2769F300A64393 /* background_port.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = background_port.jpg; sourceTree = "<group>"; };
 		8BAD4E771D278C9B00A64393 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		8BB16D3A1D3510F80060B841 /* CheckBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckBox.swift; sourceTree = "<group>"; };
+		8BBAB9901DD9CDB30097A52A /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MBProgressHUD.h; path = ../../../Desktop/MBProgressHUD.h; sourceTree = "<group>"; };
+		8BBAB9911DD9CDB30097A52A /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MBProgressHUD.m; path = ../../../Desktop/MBProgressHUD.m; sourceTree = "<group>"; };
 		8BBFE0B81D28D99C00435723 /* ReportViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportViewController.swift; sourceTree = "<group>"; };
 		8BBFE0BA1D28E25900435723 /* FollowupTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowupTableViewCell.swift; sourceTree = "<group>"; };
 		8BD246D21D3CED2500480CFB /* ModelManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelManager.swift; sourceTree = "<group>"; };
@@ -152,8 +154,6 @@
 		8BD246E41D3CEFA700480CFB /* fmdb.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = fmdb.txt; sourceTree = "<group>"; };
 		8BD246E51D3CEFA700480CFB /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
 		8BD246E61D3CEFA700480CFB /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
-		8BDEAE0C1DD5F9AA00721AB7 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MBProgressHUD.h; path = "../../../Downloads/MBProgressHUD-master/MBProgressHUD.h"; sourceTree = "<group>"; };
-		8BDEAE0D1DD5F9AA00721AB7 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MBProgressHUD.m; path = "../../../Downloads/MBProgressHUD-master/MBProgressHUD.m"; sourceTree = "<group>"; };
 		8BE38B161DD4444400CC430F /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		8BE66F731D2A7B950073CFE5 /* Data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		8BF82F3F1D37B99000E1BA8D /* SettingsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
@@ -343,8 +343,8 @@
 		8BDEAE0F1DD5F9C200721AB7 /* MBProgressHUD */ = {
 			isa = PBXGroup;
 			children = (
-				8BDEAE0C1DD5F9AA00721AB7 /* MBProgressHUD.h */,
-				8BDEAE0D1DD5F9AA00721AB7 /* MBProgressHUD.m */,
+				8BBAB9901DD9CDB30097A52A /* MBProgressHUD.h */,
+				8BBAB9911DD9CDB30097A52A /* MBProgressHUD.m */,
 			);
 			name = MBProgressHUD;
 			sourceTree = "<group>";
@@ -681,10 +681,10 @@
 				8BBFE0BB1D28E25900435723 /* FollowupTableViewCell.swift in Sources */,
 				8B2DAFE41D7AB64D003AC452 /* MapPin.swift in Sources */,
 				8BABF47D1D8FC2B500ADEF53 /* Toast.swift in Sources */,
+				8BBAB9921DD9CDB30097A52A /* MBProgressHUD.m in Sources */,
 				8B71F48E1D49D94100761CD6 /* ParseJason.swift in Sources */,
 				8BF82F401D37B99000E1BA8D /* SettingsController.swift in Sources */,
 				8B59B2251D45E25700AE9269 /* ExtensionsUtils.swift in Sources */,
-				8BDEAE0E1DD5F9AA00721AB7 /* MBProgressHUD.m in Sources */,
 				8BD246E71D3CEFA700480CFB /* FMDatabase.m in Sources */,
 				8B326D661D39023A00022B33 /* DetailData.swift in Sources */,
 				8BD246EA1D3CEFA700480CFB /* FMResultSet.m in Sources */,
