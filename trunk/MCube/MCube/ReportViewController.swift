@@ -163,14 +163,13 @@ class ReportViewController: UITableViewController,UIPopoverPresentationControlle
             
         }
         cell.onMoreTapped={ (sender) -> Void in
-             //self.performSegueWithIdentifier("locate", sender: self)
             let popoverContent = (self.storyboard?.instantiateViewController(withIdentifier: OVERFLOW))! as! OverflowController
             popoverContent.modalPresentationStyle = .popover
             if let popover = popoverContent.popoverPresentationController {
                 let viewForSource = sender as! UIView
                 popover.sourceView = viewForSource
                 popover.sourceRect = viewForSource.bounds
-                if(self.type == MTRACKER){
+                if(self.type == MTRACKER && (self.result[(indexPath as NSIndexPath).row] as! Data).location != "0.0,0.0"){
                     popoverContent.preferredContentSize = CGSize(width: 140,height: 133)
                 } else{
                    popoverContent.preferredContentSize = CGSize(width: 140,height: 90)
@@ -193,13 +192,10 @@ class ReportViewController: UITableViewController,UIPopoverPresentationControlle
             data.groupName != nil){
             cell.playButton.isHidden=false
             cell.playButton.tag=(indexPath as NSIndexPath).row
-           //  print("tag get called \(indexPath.row)")
            if(self.playButtons.get((indexPath as NSIndexPath).row) != nil){
-               // print("tag get called \(indexPath.row)")
                 self.playButtons[(indexPath as NSIndexPath).row]=cell.playButton
                }else{
                 self.playButtons.append(cell.playButton)
-             //  print("append get called \(indexPath.row)")
                }
 
             
@@ -383,7 +379,7 @@ class ReportViewController: UITableViewController,UIPopoverPresentationControlle
     
     @IBAction func onFilterTapped(_ sender: Any) {
         
-        print("Filter Clicked")
+        //print("Filter Clicked")
         if(options.count>0){
         self.performSegue(withIdentifier: POPOVERSEGUE, sender: self)
         }

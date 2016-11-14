@@ -101,20 +101,31 @@ extension DetailViewController {
         present(alertView, animated: true, completion: nil)
     }
     
-    func moreButtonClicked(_ sender:AnyObject) {
-        let popoverContent = (self.storyboard?.instantiateViewController(withIdentifier: "more"))! as! MoreViewController
-        popoverContent.modalPresentationStyle = .popover
-        if let popover = popoverContent.popoverPresentationController {
-           let viewForSource = sender as! UIView
-            popover.sourceView = viewForSource
-            popover.sourceRect = viewForSource.bounds
-            popoverContent.preferredContentSize = CGSize(width: 150,height: 220)
-            popoverContent.delegate=self
-            popover.delegate = self
-        }
+ //   func moreButtonClicked(_ sender:AnyObject) {
+//        let popoverContent = (self.storyboard?.instantiateViewController(withIdentifier: "more"))! as! MoreViewController
+//        popoverContent.modalPresentationStyle = .popover
+//        if let popover = popoverContent.popoverPresentationController {
+//           let viewForSource = sender as! UIView
+//            popover.sourceView = viewForSource
+//            popover.sourceRect = viewForSource.bounds
+//            popoverContent.preferredContentSize = CGSize(width: 150,height: 220)
+//            popoverContent.delegate=self
+//            popover.delegate = self
+//        }
+//        
+//        self.present(popoverContent, animated: true, completion: nil)
         
-        self.present(popoverContent, animated: true, completion: nil)
-    }
+ //    }
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
     
     @objc(adaptivePresentationStyleForPresentationController:) func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
         return .none
