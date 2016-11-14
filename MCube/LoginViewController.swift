@@ -80,9 +80,9 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
     }
     
 
-    override var prefersStatusBarHidden : Bool {
-        return true
-    }
+//    override var prefersStatusBarHidden : Bool {
+//        return true
+//    }
     
     
     override func didReceiveMemoryWarning() {
@@ -169,7 +169,8 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
             {response in switch response.result {
                 
             case .success(let JSON):
-                self.loginClick.isEnabled=true
+               
+                self.loginClick.setTitle("Success..", for: UIControlState.disabled)
                 print("Success with JSON: \(JSON)")
                 let response = JSON as! NSDictionary
                 if((response.object(forKey: CODE)) != nil){
@@ -239,13 +240,15 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
                 }
                 if(self.code=="401"||self.code=="400"){
                     if(self.message != nil){
+                        self.loginClick.isEnabled=true
                         self.showActivityIndicator()
                         self.showAlert(self.message!)
                     }
                 }
                 if(self.code=="200"){
                     if(self.message != nil){
-                        self.showActivityIndicator()
+                        self.loginClick.setTitle("Success..", for: UIControlState.disabled)
+                        // self.showActivityIndicator()
                         UserDefaults.standard.set(self.empName, forKey: NAME)
                         UserDefaults.standard.set(self.empEmail, forKey: EMAIL)
                         UserDefaults.standard.set(self.authkey, forKey: AUTHKEY)
@@ -282,6 +285,7 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
                             }
                         }
                         
+                         self.loginClick.isEnabled=true
                         self.performSegue(withIdentifier: "login", sender: self)
                         
                     }
