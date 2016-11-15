@@ -1,21 +1,18 @@
 PODS:
   - Alamofire (4.0.0)
   - BEMCheckBox (1.2.1)
-  - MBProgressHUD (1.0.0)
   - TPKeyboardAvoiding (1.3)
 
 DEPENDENCIES:
   - Alamofire (~> 4.0)
   - BEMCheckBox
-  - MBProgressHUD
   - TPKeyboardAvoiding
 
 SPEC CHECKSUMS:
   Alamofire: fef59f00388f267e52d9b432aa5d93dc97190f14
   BEMCheckBox: 264b8b72aa92adbfefa265cc58a0cdb86b207b9f
-  MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
   TPKeyboardAvoiding: a5138f318c06fb3e151f886e18ce4a72695d9cbe
 
-PODFILE CHECKSUM: bca38fa6686a50bfbba58a790572c76db43676a6
+PODFILE CHECKSUM: 1ad6f27a2e0802c40e7e9e1718d63d7199248a84
 
 COCOAPODS: 1.1.0.rc.2
