@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0FC07413E5A68EE61CF6127D /* Pods_MCubeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FD2DC71E87A5DE1A2F739AB /* Pods_MCubeTests.framework */; };
+		23BBE165B90D26E40BB68515 /* Pods_MCubeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFB8DA109A458100DD2E6CCD /* Pods_MCubeTests.framework */; };
+		793911FCEDA8C6E17549C5EF /* Pods_MCube.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9188D9686CE25EB6C58C9BCF /* Pods_MCube.framework */; };
 		8B1A6D031D2CD0E600A9AFFD /* FilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1A6D021D2CD0E500A9AFFD /* FilterCell.swift */; };
 		8B1A6D0E1D2CD2C800A9AFFD /* OptionsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1A6D0D1D2CD2C800A9AFFD /* OptionsData.swift */; };
 		8B2DAFE01D7AB4C3003AC452 /* CustomSubView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B2DAFDF1D7AB4C3003AC452 /* CustomSubView.xib */; };
@@ -27,7 +28,6 @@
 		8B5910871D4876320045D6D2 /* TAG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5910861D4876320045D6D2 /* TAG.swift */; };
 		8B5910891D48BC0E0045D6D2 /* DetailDataTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5910881D48BC0E0045D6D2 /* DetailDataTask.swift */; };
 		8B59B2251D45E25700AE9269 /* ExtensionsUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B59B2241D45E25700AE9269 /* ExtensionsUtils.swift */; };
-		8B5C49A51DDADEAC009AAE3A /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B5C49A41DDADEAC009AAE3A /* MBProgressHUD.m */; };
 		8B6049AF1D76B46900DADD52 /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6049AE1D76B46900DADD52 /* Address.swift */; };
 		8B64868A1D3E019D0071C76D /* mcubeios.db in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8B6486891D3E018A0071C76D /* mcubeios.db */; };
 		8B6584BB1D4203DD007D2C2D /* AddFollowupController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6584BA1D4203DD007D2C2D /* AddFollowupController.swift */; };
@@ -57,10 +57,10 @@
 		8BD246E81D3CEFA700480CFB /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BD246E31D3CEFA700480CFB /* FMDatabaseAdditions.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		8BD246E91D3CEFA700480CFB /* fmdb.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8BD246E41D3CEFA700480CFB /* fmdb.txt */; };
 		8BD246EA1D3CEFA700480CFB /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BD246E61D3CEFA700480CFB /* FMResultSet.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		8BDDFDA61DDAE198004A27AB /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BDDFDA51DDAE198004A27AB /* MBProgressHUD.m */; };
 		8BE38B171DD4444400CC430F /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BE38B161DD4444400CC430F /* UserNotifications.framework */; };
 		8BE66F741D2A7B950073CFE5 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE66F731D2A7B950073CFE5 /* Data.swift */; };
 		8BF82F401D37B99000E1BA8D /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF82F3F1D37B99000E1BA8D /* SettingsController.swift */; };
-		A3644A6EAF7FB7FE61FC4FC1 /* Pods_MCube.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28D981093F9C7ECF6917F6AA /* Pods_MCube.framework */; };
 		F47029F61A7F27DB00E30A3C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47029F51A7F27DB00E30A3C /* AppDelegate.swift */; };
 		F47029FB1A7F27DB00E30A3C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F47029F91A7F27DB00E30A3C /* Main.storyboard */; };
 		F47029FD1A7F27DB00E30A3C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F47029FC1A7F27DB00E30A3C /* Images.xcassets */; };
@@ -94,10 +94,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		17CF1E19AE850B22FDD7A13F /* Pods-MCubeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MCubeTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MCubeTests/Pods-MCubeTests.release.xcconfig"; sourceTree = "<group>"; };
-		28D981093F9C7ECF6917F6AA /* Pods_MCube.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MCube.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		343F00C09A1E0BB317CDB94A /* Pods-MCube.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MCube.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MCube/Pods-MCube.debug.xcconfig"; sourceTree = "<group>"; };
-		6FD2DC71E87A5DE1A2F739AB /* Pods_MCubeTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MCubeTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7A798DA940F38DD5EEE70462 /* Pods-MCubeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MCubeTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MCubeTests/Pods-MCubeTests.release.xcconfig"; sourceTree = "<group>"; };
 		8B1A6D021D2CD0E500A9AFFD /* FilterCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterCell.swift; sourceTree = "<group>"; };
 		8B1A6D0D1D2CD2C800A9AFFD /* OptionsData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionsData.swift; sourceTree = "<group>"; };
 		8B2DAFDF1D7AB4C3003AC452 /* CustomSubView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomSubView.xib; sourceTree = "<group>"; };
@@ -117,8 +114,6 @@
 		8B5910861D4876320045D6D2 /* TAG.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TAG.swift; sourceTree = "<group>"; };
 		8B5910881D48BC0E0045D6D2 /* DetailDataTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailDataTask.swift; sourceTree = "<group>"; };
 		8B59B2241D45E25700AE9269 /* ExtensionsUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionsUtils.swift; sourceTree = "<group>"; };
-		8B5C49A31DDADEAC009AAE3A /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
-		8B5C49A41DDADEAC009AAE3A /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		8B6049AE1D76B46900DADD52 /* Address.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Address.swift; sourceTree = "<group>"; };
 		8B6486891D3E018A0071C76D /* mcubeios.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = mcubeios.db; sourceTree = "<group>"; };
 		8B6584BA1D4203DD007D2C2D /* AddFollowupController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddFollowupController.swift; sourceTree = "<group>"; };
@@ -154,11 +149,16 @@
 		8BD246E41D3CEFA700480CFB /* fmdb.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = fmdb.txt; sourceTree = "<group>"; };
 		8BD246E51D3CEFA700480CFB /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
 		8BD246E61D3CEFA700480CFB /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
+		8BDDFDA41DDAE198004A27AB /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		8BDDFDA51DDAE198004A27AB /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		8BE38B161DD4444400CC430F /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		8BE66F731D2A7B950073CFE5 /* Data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		8BF82F3F1D37B99000E1BA8D /* SettingsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
-		9970CCB6D39B095F49DF1288 /* Pods-MCube.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MCube.release.xcconfig"; path = "Pods/Target Support Files/Pods-MCube/Pods-MCube.release.xcconfig"; sourceTree = "<group>"; };
-		CE7C731050F8C0B11735D6BA /* Pods-MCubeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MCubeTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MCubeTests/Pods-MCubeTests.debug.xcconfig"; sourceTree = "<group>"; };
+		9188D9686CE25EB6C58C9BCF /* Pods_MCube.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MCube.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B2382932318B879F6E78D710 /* Pods-MCubeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MCubeTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MCubeTests/Pods-MCubeTests.debug.xcconfig"; sourceTree = "<group>"; };
+		B960D9E2C229D129F442985A /* Pods-MCube.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MCube.release.xcconfig"; path = "Pods/Target Support Files/Pods-MCube/Pods-MCube.release.xcconfig"; sourceTree = "<group>"; };
+		BFB8DA109A458100DD2E6CCD /* Pods_MCubeTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MCubeTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		ECF3142E01DFC1289DEF6677 /* Pods-MCube.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MCube.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MCube/Pods-MCube.debug.xcconfig"; sourceTree = "<group>"; };
 		F47029F01A7F27DB00E30A3C /* MCube.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MCube.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F47029F41A7F27DB00E30A3C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F47029F51A7F27DB00E30A3C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -181,7 +181,7 @@
 				8BD246DB1D3CEE5B00480CFB /* libsqlite3.0.tbd in Frameworks */,
 				8B8DB3641D36165A008A5EA6 /* AVFoundation.framework in Frameworks */,
 				F4702A161A7F342F00E30A3C /* MapKit.framework in Frameworks */,
-				A3644A6EAF7FB7FE61FC4FC1 /* Pods_MCube.framework in Frameworks */,
+				793911FCEDA8C6E17549C5EF /* Pods_MCube.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -189,20 +189,20 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0FC07413E5A68EE61CF6127D /* Pods_MCubeTests.framework in Frameworks */,
+				23BBE165B90D26E40BB68515 /* Pods_MCubeTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		5193642D4C5BBDFFCD8CD555 /* Pods */ = {
+		63AC56C66A03D3B299672085 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				343F00C09A1E0BB317CDB94A /* Pods-MCube.debug.xcconfig */,
-				9970CCB6D39B095F49DF1288 /* Pods-MCube.release.xcconfig */,
-				CE7C731050F8C0B11735D6BA /* Pods-MCubeTests.debug.xcconfig */,
-				17CF1E19AE850B22FDD7A13F /* Pods-MCubeTests.release.xcconfig */,
+				ECF3142E01DFC1289DEF6677 /* Pods-MCube.debug.xcconfig */,
+				B960D9E2C229D129F442985A /* Pods-MCube.release.xcconfig */,
+				B2382932318B879F6E78D710 /* Pods-MCubeTests.debug.xcconfig */,
+				7A798DA940F38DD5EEE70462 /* Pods-MCubeTests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -299,6 +299,8 @@
 		8BAD4E491D276ACD00A64393 /* Libs */ = {
 			isa = PBXGroup;
 			children = (
+				F4D750141BD38E56009E1003 /* SWRevealViewController */,
+				8BDEAE0F1DD5F9C200721AB7 /* MBProgressHUD */,
 				8B71F48F1D4A1C5A00761CD6 /* TPKeyboardAvoiding */,
 				8BD246DF1D3CEF9100480CFB /* FMDB */,
 			);
@@ -343,8 +345,8 @@
 		8BDEAE0F1DD5F9C200721AB7 /* MBProgressHUD */ = {
 			isa = PBXGroup;
 			children = (
-				8B5C49A31DDADEAC009AAE3A /* MBProgressHUD.h */,
-				8B5C49A41DDADEAC009AAE3A /* MBProgressHUD.m */,
+				8BDDFDA41DDAE198004A27AB /* MBProgressHUD.h */,
+				8BDDFDA51DDAE198004A27AB /* MBProgressHUD.m */,
 			);
 			name = MBProgressHUD;
 			sourceTree = "<group>";
@@ -356,8 +358,8 @@
 				F47029F21A7F27DB00E30A3C /* MCube */,
 				F4702A081A7F27DC00E30A3C /* MCubeTests */,
 				F47029F11A7F27DB00E30A3C /* Products */,
-				5193642D4C5BBDFFCD8CD555 /* Pods */,
 				F9A7F3D913E3376316710D12 /* Frameworks */,
+				63AC56C66A03D3B299672085 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -373,7 +375,6 @@
 		F47029F21A7F27DB00E30A3C /* MCube */ = {
 			isa = PBXGroup;
 			children = (
-				8BDEAE0F1DD5F9C200721AB7 /* MBProgressHUD */,
 				8B9D78B01DD35885007FD405 /* MCube.entitlements */,
 				8B68B0691D474BCB00250691 /* DownloadTask */,
 				8B59B2211D45E1ED00AE9269 /* Extensions */,
@@ -382,7 +383,6 @@
 				8BAD4E491D276ACD00A64393 /* Libs */,
 				8BAD4E481D276ABE00A64393 /* Models */,
 				8BAD4E471D276AB100A64393 /* Controllers */,
-				F4D750141BD38E56009E1003 /* SWRevealViewController */,
 				F47029F51A7F27DB00E30A3C /* AppDelegate.swift */,
 				F47029F91A7F27DB00E30A3C /* Main.storyboard */,
 				F47029FC1A7F27DB00E30A3C /* Images.xcassets */,
@@ -433,8 +433,8 @@
 				8BE38B161DD4444400CC430F /* UserNotifications.framework */,
 				8BD246DA1D3CEE5B00480CFB /* libsqlite3.0.tbd */,
 				8B8DB3631D361659008A5EA6 /* AVFoundation.framework */,
-				28D981093F9C7ECF6917F6AA /* Pods_MCube.framework */,
-				6FD2DC71E87A5DE1A2F739AB /* Pods_MCubeTests.framework */,
+				9188D9686CE25EB6C58C9BCF /* Pods_MCube.framework */,
+				BFB8DA109A458100DD2E6CCD /* Pods_MCubeTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -446,13 +446,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F4702A0F1A7F27DC00E30A3C /* Build configuration list for PBXNativeTarget "MCube" */;
 			buildPhases = (
-				31C20E032270F39BC7E18F09 /* [CP] Check Pods Manifest.lock */,
+				F9750AC91CDFC476E4607CC2 /* [CP] Check Pods Manifest.lock */,
 				F47029EC1A7F27DB00E30A3C /* Sources */,
 				F47029ED1A7F27DB00E30A3C /* Frameworks */,
 				F47029EE1A7F27DB00E30A3C /* Resources */,
-				5D53B97246A21055B7A219AA /* [CP] Embed Pods Frameworks */,
-				3E6B328FAD5D922C9605EAB8 /* [CP] Copy Pods Resources */,
 				8BD246EC1D3D017800480CFB /* CopyFiles */,
+				C67189CE9D20C6AAB5E68F37 /* [CP] Embed Pods Frameworks */,
+				F04C60063BD9867C4EA1BCA1 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -467,12 +467,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F4702A121A7F27DC00E30A3C /* Build configuration list for PBXNativeTarget "MCubeTests" */;
 			buildPhases = (
-				D79B894B8FDFF8F026062031 /* [CP] Check Pods Manifest.lock */,
+				8CE1DEDBE1E1E29EE0215167 /* [CP] Check Pods Manifest.lock */,
 				F4702A011A7F27DC00E30A3C /* Sources */,
 				F4702A021A7F27DC00E30A3C /* Frameworks */,
 				F4702A031A7F27DC00E30A3C /* Resources */,
-				02AF2609732995648D042BE9 /* [CP] Embed Pods Frameworks */,
-				6A8B3069E0A047D69D4218FE /* [CP] Copy Pods Resources */,
+				0E5C9047541506ADE367A5FA /* [CP] Embed Pods Frameworks */,
+				C6F8C5226E28A92FE7070287 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -562,7 +562,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		02AF2609732995648D042BE9 /* [CP] Embed Pods Frameworks */ = {
+		0E5C9047541506ADE367A5FA /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -577,7 +577,7 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MCubeTests/Pods-MCubeTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		31C20E032270F39BC7E18F09 /* [CP] Check Pods Manifest.lock */ = {
+		8CE1DEDBE1E1E29EE0215167 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -592,22 +592,7 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		3E6B328FAD5D922C9605EAB8 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MCube/Pods-MCube-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		5D53B97246A21055B7A219AA /* [CP] Embed Pods Frameworks */ = {
+		C67189CE9D20C6AAB5E68F37 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -622,7 +607,7 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MCube/Pods-MCube-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		6A8B3069E0A047D69D4218FE /* [CP] Copy Pods Resources */ = {
+		C6F8C5226E28A92FE7070287 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -637,7 +622,22 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MCubeTests/Pods-MCubeTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		D79B894B8FDFF8F026062031 /* [CP] Check Pods Manifest.lock */ = {
+		F04C60063BD9867C4EA1BCA1 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MCube/Pods-MCube-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F9750AC91CDFC476E4607CC2 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -681,7 +681,7 @@
 				8BBFE0BB1D28E25900435723 /* FollowupTableViewCell.swift in Sources */,
 				8B2DAFE41D7AB64D003AC452 /* MapPin.swift in Sources */,
 				8BABF47D1D8FC2B500ADEF53 /* Toast.swift in Sources */,
-				8B5C49A51DDADEAC009AAE3A /* MBProgressHUD.m in Sources */,
+				8BDDFDA61DDAE198004A27AB /* MBProgressHUD.m in Sources */,
 				8B71F48E1D49D94100761CD6 /* ParseJason.swift in Sources */,
 				8BF82F401D37B99000E1BA8D /* SettingsController.swift in Sources */,
 				8B59B2251D45E25700AE9269 /* ExtensionsUtils.swift in Sources */,
@@ -748,7 +748,7 @@
 		F4702A0D1A7F27DC00E30A3C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -768,7 +768,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_TESTABILITY = YES;
+				ENABLE_TESTABILITY = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -784,9 +784,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_SWIFT_FLAGS = "$(inherited)";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 2.3;
@@ -796,7 +797,7 @@
 		F4702A0E1A7F27DC00E30A3C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -817,6 +818,7 @@
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -825,7 +827,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -836,9 +838,9 @@
 		};
 		F4702A101A7F27DC00E30A3C /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 343F00C09A1E0BB317CDB94A /* Pods-MCube.debug.xcconfig */;
+			baseConfigurationReference = ECF3142E01DFC1289DEF6677 /* Pods-MCube.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = MCube/MCube.entitlements;
@@ -863,9 +865,9 @@
 		};
 		F4702A111A7F27DC00E30A3C /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9970CCB6D39B095F49DF1288 /* Pods-MCube.release.xcconfig */;
+			baseConfigurationReference = B960D9E2C229D129F442985A /* Pods-MCube.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = MCube/MCube.entitlements;
@@ -889,7 +891,7 @@
 		};
 		F4702A131A7F27DC00E30A3C /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CE7C731050F8C0B11735D6BA /* Pods-MCubeTests.debug.xcconfig */;
+			baseConfigurationReference = B2382932318B879F6E78D710 /* Pods-MCubeTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -910,7 +912,7 @@
 		};
 		F4702A141A7F27DC00E30A3C /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 17CF1E19AE850B22FDD7A13F /* Pods-MCubeTests.release.xcconfig */;
+			baseConfigurationReference = 7A798DA940F38DD5EEE70462 /* Pods-MCubeTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (

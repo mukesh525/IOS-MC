@@ -11,7 +11,7 @@ target 'MCube' do
   pod 'Alamofire', '~> 4.0'
   pod 'BEMCheckBox'
   pod 'TPKeyboardAvoiding'
-  pod 'MBProgressHUD'
+  #pod 'MBProgressHUD'
  
   
    target 'MCubeTests' do

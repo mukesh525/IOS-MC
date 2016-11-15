@@ -2,7 +2,6 @@
 //  Copyright © 2016 AppCoda. All rights reserved.
 
 import UIKit
-//import SwiftValidator
 import Alamofire
 import BEMCheckBox
 
