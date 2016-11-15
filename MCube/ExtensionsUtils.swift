@@ -191,7 +191,7 @@ extension ReportViewController{
                 
                 let param=Params(Limit: self.limit,gid:self.gid,offset:self.offset,type:self.type,isfilter:false,isMore: false,isSync:false,filterpos: self.SeletedFilterpos)
                 self.isDownloading=true;
-                self.showActivityIndicator()
+                self.showProgress();
                 Report(param: param, delegate: self).LoadData();
             }
             
@@ -285,7 +285,7 @@ extension ReportViewController{
                 UIAlertAction in
                 self.SeletedFilterpos=0;
                 self.gid="0";
-                self.showActivityIndicator()
+                self.showProgress()
                 let param=Params(Limit: self.limit,gid:self.gid,offset:self.offset,type:self.type,isfilter:false,isMore: false,isSync:false,filterpos: self.SeletedFilterpos)
                 self.isDownloading=true;
                 Report(param: param, delegate: self).LoadData();

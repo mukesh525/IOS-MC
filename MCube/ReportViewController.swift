@@ -57,11 +57,11 @@ class ReportViewController: UITableViewController,UIPopoverPresentationControlle
                 }
         
                 if(self.result.count == 0 && param.isfilter == true){
-                    self.showActivityIndicator()
+                    self.hideProgress()
                     self.filteralert()
                 }
                 else if(self.result.count == 0 && param.isfilter == false){
-                    self.showActivityIndicator()
+                    self.hideProgress()
                     self.NoDataAlert()
         
                 }
@@ -72,7 +72,7 @@ class ReportViewController: UITableViewController,UIPopoverPresentationControlle
         
                     else{
                         if(param.isMore==false){
-                        self.showActivityIndicator()
+                        self.hideProgress()
                         }
                     }
                     self.mytableview.reloadData()
@@ -93,7 +93,7 @@ class ReportViewController: UITableViewController,UIPopoverPresentationControlle
         if self.refreshControll.isRefreshing{
             self.refreshControll.endRefreshing()
         }else{
-            self.showActivityIndicator()
+            self.hideProgress()
         }
         //print("Request failed with error: \(error)")
         if (error.code == -1009) {
@@ -425,26 +425,26 @@ class ReportViewController: UITableViewController,UIPopoverPresentationControlle
         self.gid=option.id!;
         let param=Params(Limit: self.limit,gid:self.gid,offset:self.offset,type:self.type,isfilter:true,isMore: false,isSync:false,filterpos: self.SeletedFilterpos)
         self.isDownloading=true;
-        self.showActivityIndicator()
+        self.showProgress()
         Report(param: param, delegate: self).LoadData();
 
         
     }
     
    
-       func showActivityIndicator(){
-        if !self.showingActivity {
-            showProgress()
-           // self.navigationController?.view.makeToastActivity(.center)
-            self.navigationController?.view.isUserInteractionEnabled = false;
-        } else {
-            hideProgress()             // self.navigationController?.view.hideToastActivity()
-            self.navigationController?.view.isUserInteractionEnabled = true;
-        }
-        
-        self.showingActivity = !self.showingActivity
-        
-    }
+//       func showActivityIndicator(){
+//        if !self.showingActivity {
+//            showProgress()
+//           // self.navigationController?.view.makeToastActivity(.center)
+//           
+//        } else {
+//            hideProgress()             // self.navigationController?.view.hideToastActivity()
+//            
+//        }
+//        
+//        self.showingActivity = !self.showingActivity
+//        
+//    }
     
     
     func showProgress(){
@@ -453,6 +453,7 @@ class ReportViewController: UITableViewController,UIPopoverPresentationControlle
         spinnerActivity.contentColor=UIColor.black
         spinnerActivity.detailsLabel.text = "Please Wait!!";
         spinnerActivity.isUserInteractionEnabled = false;
+        self.navigationController?.view.isUserInteractionEnabled = false;
     
     
     }
@@ -460,6 +461,7 @@ class ReportViewController: UITableViewController,UIPopoverPresentationControlle
     
     func hideProgress(){
         MBProgressHUD.hideAllHUDs(for: self.view, animated: true);
+        self.navigationController?.view.isUserInteractionEnabled = true;
     }
     
     
@@ -468,10 +470,17 @@ class ReportViewController: UITableViewController,UIPopoverPresentationControlle
         if(position == FrontViewPosition.left) {
             self.mytableview.isUserInteractionEnabled = true
             sidebarMenuOpen = false
+            //change image menu
+            _ = UIImage(named: "menu")?.withRenderingMode(.alwaysTemplate)
+           // menubutton.setBackgroundImage(backimage, for: .normal, barMetrics: UIBarMetrics.default)
         } else {
             self.mytableview.isUserInteractionEnabled = false
             sidebarMenuOpen = true
-            
+            //change image arrow
+            _ = UIImage(named: "back")?.withRenderingMode(.alwaysTemplate)
+          //  menubutton.setBackgroundImage(backimage, for: .normal, barMetrics: UIBarMetrics.default)
+           
+          
             
             for currentbutton in self.playButtons{
                 if(currentbutton.tag == self.CurrentPlaying ){
@@ -491,9 +500,16 @@ class ReportViewController: UITableViewController,UIPopoverPresentationControlle
         if(position == FrontViewPosition.left) {
             self.mytableview.isUserInteractionEnabled = true
             sidebarMenuOpen = false
+            //back arrow
+            _ = UIImage(named: "menu")?.withRenderingMode(.alwaysTemplate)
+           // menubutton.setBackgroundImage(backimage, for: .normal, barMetrics: UIBarMetrics.default)
         } else {
             self.mytableview.isUserInteractionEnabled = false
-            sidebarMenuOpen = true
+          //  sidebarMenuOpen = true 
+            //menu image
+            _ = UIImage(named: "back")?.withRenderingMode(.alwaysTemplate)
+           // menubutton.setBackgroundImage(backimage, for: .normal, barMetrics: UIBarMetrics.default)
+            
         }
     }
     
